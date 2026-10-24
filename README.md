@@ -24,6 +24,7 @@ Baba Is You와 There Is No Game, Helltaker를 참고해 적은 규칙을 조합�
 | `src/story.js` | 프롤로그 컷과 혼잣말 |
 | `tools/verify.html` | 레벨마다 최소 행동 수를 탐색해 확인하는 검증 도구 |
 | `docs/design.md` | 규칙, 레벨, 시작 흐름, 확장 계획 |
+| `docs/playtest.md` | 다른 사람에게 해 보게 할 때 쓰는 플레이 테스트 기록지 |
 | `docs/workflow.md` | 사용자, Claude Code, Codex의 역할과 작업 순서, 두 컴퓨터에서 작업하는 방법 |
 | `docs/mockup/index.html` | 화면 배치와 프롤로그 목업 |
 | `docs/art-brief.md` | 그림 의뢰서 |
