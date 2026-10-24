@@ -15,8 +15,27 @@
   const GRID_LEFT = 190;
   const GRID_TOP = 138;
   const SIDE_FLOOR = 400;
-  const TOP_STRAW = { x: 156, y: 250 };
+  const TOP_STRAW = { x: 176, y: 412 };
   const SIDE_STRAW = { x: 178, y: 300 };
+
+  // 판 배경 그림이 없을 때 회색 상자로 그리는 배치. docs/art-brief.md의 배경 배치 표와 같다(1챕터 창가 바 좌석).
+  const BACKDROP_LAYOUT = {
+    top: [
+      { label: '창', tone: 'window', x: 0, y: 0, width: 960, height: 108 },
+      { label: '', tone: 'table', x: 40, y: 118, width: 900, height: 300 },
+      { label: '내 랩탑', tone: 'mine', x: 60, y: 150, width: 122, height: 150 },
+      { label: '내 음료', tone: 'light', x: 66, y: 312, width: 76, height: 70 },
+      { label: '상대 랩탑', tone: 'theirs', x: 826, y: 150, width: 106, height: 150 },
+      { label: '나', tone: 'mine', round: true, x: 40, y: 410, width: 200, height: 150 },
+      { label: '옆자리 사람', tone: 'theirs', round: true, x: 760, y: 410, width: 200, height: 150 },
+    ],
+    side: [
+      { label: '창', tone: 'window', x: 0, y: 0, width: 960, height: 398 },
+      { label: '', tone: 'table', x: 0, y: 400, width: 960, height: 48 },
+      { label: '숙인 나', tone: 'mine', round: true, x: 0, y: 236, width: 180, height: 180 },
+      { label: '옆자리 사람', tone: 'theirs', round: true, x: 836, y: 168, width: 120, height: 160 },
+    ],
+  };
   const INSERT_OFFSET = 14;
   const TOP_LIFT = 14;
 
@@ -39,7 +58,7 @@
     topView: byId('top-view'),
     sideView: byId('side-view'),
     board: byId('board'),
-    strip: byId('strip'),
+    divider: byId('divider'),
     aimBand: byId('aim-band'),
     aimPath: byId('aim-path'),
     fxLayer: byId('fx-layer'),
@@ -208,11 +227,19 @@
 
   // 시점과 판 그리기
 
-  function fillPlaced(container) {
-    for (const element of container.querySelectorAll('.placed')) {
-      element.innerHTML = Assets.html(element.dataset.asset);
+  // 판 배경. 그림이 있으면 한 장으로, 없으면 배치 표대로 회색 상자를 놓는다.
+  function buildBackdrop(container, key, layout) {
+    if (Assets.file(key)) {
+      container.innerHTML = `<div class="placed backdrop">${Assets.html(key)}</div>`;
+      return;
     }
+    container.innerHTML = layout.map((item) => {
+      const round = item.round ? ' gbox-round' : '';
+      const style = `left: ${item.x}px; top: ${item.y}px; width: ${item.width}px; height: ${item.height}px;`;
+      return `<div class="placed" style="${style}"><div class="gbox gbox-${item.tone}${round}"><span>${item.label}</span></div></div>`;
+    }).join('');
   }
+
 
   // 거품 그림이 등록돼 있으면 그 그림을, 없으면 CSS로 그린 거품을 쓴다.
   function bubbleHtml() {
@@ -237,18 +264,18 @@
     ui.aimBand.style.width = `${(level.width - 1) * CELL}px`;
     ui.aimBand.style.height = `${CELL}px`;
 
-    ui.strip.style.left = `${(level.width - 1) * CELL}px`;
-    ui.strip.innerHTML = '';
+    ui.divider.style.left = `${(level.width - 1) * CELL}px`;
+    ui.divider.innerHTML = '';
     const segments = isTop ? level.rows : level.height;
     for (let index = 0; index < segments; index++) {
       const row = isTop ? index : game.focusRow;
       const z = isTop ? 0 : level.height - 1 - index;
       const hasSocket = level.sockets.some((socket) => socket.row === row && socket.z === z);
       const segment = document.createElement('div');
-      segment.className = 'strip-segment';
+      segment.className = 'divider-segment';
       segment.style.top = `${index * CELL}px`;
-      segment.innerHTML = Assets.html(`${isTop ? 'top' : 'side'}-strip-${hasSocket ? 'socket' : 'plain'}`);
-      ui.strip.appendChild(segment);
+      segment.innerHTML = Assets.html(`divider-${isTop ? 'top' : 'side'}-${hasSocket ? 'socket' : 'plain'}`);
+      ui.divider.appendChild(segment);
     }
 
     for (const element of game.pieceElements.values()) element.remove();
@@ -257,7 +284,7 @@
       const element = document.createElement('div');
       element.className = 'piece';
       if (obj.mirror === '\\') element.classList.add('mirror-back');
-      const assetKey = `${isTop ? 'top' : 'side'}-${KIND_ASSET[obj.kind]}`;
+      const assetKey = `piece-${isTop ? 'top' : 'side'}-${KIND_ASSET[obj.kind]}`;
       element.innerHTML = `<div class="piece-shadow"></div><div class="piece-body">${Assets.html(assetKey)}</div>${bubbleHtml()}`;
       ui.board.appendChild(element);
       game.pieceElements.set(obj.id, element);
@@ -447,7 +474,11 @@
     pointFinger(target);
     const speech = line || (game.prologueIndex < 0 ? game.levelLine : null);
     ui.speech.hidden = !speech;
-    ui.speech.textContent = speech || '';
+    // Helltaker처럼 혼잣말 옆에 주인공 얼굴을 띄운다.
+    ui.speech.innerHTML = speech
+      ? `<span class="speech-portrait">${Assets.html('portrait-me')}</span><span class="speech-text"></span>`
+      : '';
+    if (speech) ui.speech.querySelector('.speech-text').textContent = speech;
   }
 
   // 연출
@@ -931,8 +962,8 @@
   }
 
   function init() {
-    fillPlaced(ui.topView);
-    fillPlaced(ui.sideView);
+    buildBackdrop(ui.topView, 'scene-top', BACKDROP_LAYOUT.top);
+    buildBackdrop(ui.sideView, 'scene-side', BACKDROP_LAYOUT.side);
     const finger = Assets.file('ui-finger') ? Assets.html('ui-finger') : '<div class="finger-default"></div>';
     ui.finger.querySelector('.finger-art').innerHTML = finger;
     bindEvents();

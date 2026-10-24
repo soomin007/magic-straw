@@ -221,6 +221,17 @@ button {
   position: absolute;
 }
 
+.placed.backdrop {
+  left: 0;
+  top: 0;
+  width: 960px;
+  height: 540px;
+}
+
+.placed.backdrop .asset {
+  object-fit: cover;
+}
+
 /* 그림 자리. 그림이 없으면 회색 상자가 대신 들어간다. */
 
 .asset {
@@ -254,14 +265,15 @@ button {
 .gbox-theirs { background: var(--brick); color: #fff; }
 .gbox-light { background: #f2e6cf; }
 .gbox-heavy { background: #8d9bb3; color: #fff; }
-.gbox-strip { background: #f6f4ef; border-radius: 6px; }
+.gbox-divider { background: #c99a63; border-radius: 6px; }
+.gbox-window { background: #2f3b52; color: #c9d3e6; border-radius: 0; }
 .gbox-table { background: #d9b88f; border-radius: 18px; color: transparent; }
 .gbox-plain { background: var(--gray); }
 
-/* 메뉴판 회색 상자는 얼음이 꺾이는 기울기가 보이도록 대각선을 그린다. */
+/* 메뉴판 회색 상자는 얼음이 꺾이는 기울기가 보이도록 대각선을 그린다. 기본은 "/" 모양이고, "\\" 메뉴판은 좌우를 뒤집는다. */
 .gbox-menu {
   background:
-    linear-gradient(45deg, transparent 43%, var(--ink) 43%, var(--ink) 57%, transparent 57%),
+    linear-gradient(-45deg, transparent 43%, var(--ink) 43%, var(--ink) 57%, transparent 57%),
     #f2e6cf;
   color: transparent;
 }
@@ -318,13 +330,13 @@ button {
   opacity: 1;
 }
 
-.strip {
+.divider {
   position: absolute;
   top: 0;
   z-index: 2;
 }
 
-.strip-segment {
+.divider-segment {
   position: absolute;
   left: 0;
   width: var(--cell);
@@ -362,10 +374,21 @@ button {
   opacity: 1;
 }
 
+/* 스티커: 판 위에서 움직이는 물건에만 흰 테두리와 약한 그림자를 코드로 붙인다(그림에는 그리지 않는다).
+   drop-shadow를 이어 붙이면 앞의 결과에 다시 그림자가 붙어서 테두리처럼 두꺼워진다. */
 .piece-body {
   position: absolute;
   inset: 6px;
   transition: transform 0.24s cubic-bezier(0.3, 0.8, 0.4, 1);
+  --sticker-edge: #fff;
+  filter:
+    drop-shadow(3px 0 0 var(--sticker-edge)) drop-shadow(-3px 0 0 var(--sticker-edge))
+    drop-shadow(0 3px 0 var(--sticker-edge)) drop-shadow(0 -3px 0 var(--sticker-edge))
+    drop-shadow(0 5px 3px rgba(0, 0, 0, 0.35));
+}
+
+.piece.targeted .piece-body {
+  --sticker-edge: #5aa9d6;
 }
 
 .piece-bubble {
@@ -391,14 +414,6 @@ button {
   animation: bob 1.4s ease-in-out infinite;
 }
 
-.piece.targeted .piece-body::after {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border: 4px solid var(--sky);
-  border-radius: 14px;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8);
-}
 
 @keyframes bob {
   0%, 100% { translate: 0 0; }
@@ -528,6 +543,25 @@ button {
   font-weight: 700;
   line-height: 1.4;
   box-shadow: 4px 4px 0 var(--ink);
+}
+
+.speech {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.speech-portrait {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  margin-top: -18px;
+  margin-bottom: -18px;
+  margin-left: -6px;
+}
+
+.speech-portrait .gbox {
+  font-size: 12px;
 }
 
 .toast {

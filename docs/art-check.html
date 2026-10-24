@@ -81,6 +81,14 @@
 
     .slot.flip img { transform: scaleX(-1); }
 
+    /* 게임과 같은 스티커 처리. 움직이는 물건에만 흰 테두리와 약한 그림자를 붙인다. */
+    .slot.sticker:not(.missing) {
+      filter:
+        drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff)
+        drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff)
+        drop-shadow(0 5px 3px rgba(0, 0, 0, 0.35));
+    }
+
     .grid-cards {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -128,7 +136,7 @@
     <p class="lead">assets/manifest.js에 등록된 그림을 실제 게임 크기로 한 장면에 모아 봅니다. 아직 없는 그림은 점선 회색 상자로 보입니다.
       모든 그림이 한 사람이 그린 것처럼 보이는지, 칸 크기에 맞는지 여기서 확인합니다.</p>
 
-    <h2>탑뷰 장면 (6번 판 "순서")</h2>
+    <h2>탑뷰 장면 (6번 판 "순서", 창가 바 좌석)</h2>
     <div class="stage" id="stage"><div class="scene" id="scene"></div></div>
 
     <h2 id="summary"></h2>
@@ -161,29 +169,43 @@
         slot.textContent = key;
       }
       scene.appendChild(slot);
+      return slot;
     }
+
+    // 1챕터 창가 바 배치. 판 배경 그림이 없으면 게임과 같은 자리에 이름 상자를 놓는다.
+    const BACKDROP = [
+      ['창', 0, 0, 960, 108], ['', 40, 118, 900, 300], ['내 랩탑', 60, 150, 122, 150], ['내 음료', 66, 312, 76, 70],
+      ['상대 랩탑', 826, 150, 106, 150], ['나', 40, 410, 200, 150], ['옆자리 사람', 760, 410, 200, 150],
+    ];
 
     function buildScene() {
       const level = Engine.parseLevel(LEVEL_DEFINITIONS.find((definition) => definition.id === 'order'));
       const state = Engine.initial(level, 5);
 
-      place('top-table', 110, 60, 760, 420);
-      place('top-me', 0, 170, 160, 160);
-      place('top-my-laptop', 86, 330, 100, 140);
-      place('top-neighbor', 816, 320, 144, 144);
-      place('top-their-laptop', 830, 76, 100, 140);
-
-      const stripX = GRID_LEFT + (level.width - 1) * CELL;
-      for (let row = 0; row < level.rows; row++) {
-        const hasSocket = level.sockets.some((socket) => socket.row === row && socket.z === 0);
-        place(hasSocket ? 'top-strip-socket' : 'top-strip-plain', stripX, GRID_TOP + row * CELL, CELL, CELL);
+      if (manifest['scene-top']) {
+        place('scene-top', 0, 0, 960, 540);
+      } else {
+        for (const [label, left, top, width, height] of BACKDROP) {
+          const slot = document.createElement('div');
+          slot.className = 'slot missing';
+          Object.assign(slot.style, { left: `${left}px`, top: `${top}px`, width: `${width}px`, height: `${height}px` });
+          slot.textContent = label || 'scene-top (창가 바)';
+          scene.appendChild(slot);
+        }
       }
 
-      const keyForKind = { myPlug: 'top-my-plug', theirPlug: 'top-their-plug', cup: 'top-cup', book: 'top-book', menu: 'top-menu' };
+      const dividerX = GRID_LEFT + (level.width - 1) * CELL;
+      for (let row = 0; row < level.rows; row++) {
+        const hasSocket = level.sockets.some((socket) => socket.row === row && socket.z === 0);
+        place(hasSocket ? 'divider-top-socket' : 'divider-top-plain', dividerX, GRID_TOP + row * CELL, CELL, CELL);
+      }
+
+      const keyForKind = { myPlug: 'piece-top-my-plug', theirPlug: 'piece-top-their-plug', cup: 'piece-top-cup', book: 'piece-top-book', menu: 'piece-top-menu' };
       for (const obj of state.objects) {
         const insertOffset = obj.inserted ? 14 : 0;
-        place(keyForKind[obj.kind], GRID_LEFT + obj.x * CELL + insertOffset, GRID_TOP + obj.row * CELL, CELL, CELL,
+        const slot = place(keyForKind[obj.kind], GRID_LEFT + obj.x * CELL + insertOffset + 6, GRID_TOP + obj.row * CELL + 6, CELL - 12, CELL - 12,
           { flip: obj.kind === 'menu' && obj.mirror === '\\' });
+        slot.classList.add('sticker');
       }
 
       place('ui-finger', GRID_LEFT + 10, GRID_TOP - 70, 64, 64);
@@ -193,7 +215,7 @@
       const done = window.ASSET_LIST.filter((asset) => manifest[asset.key]).length;
       document.getElementById('summary').textContent = `전체 그림 ${window.ASSET_LIST.length}장 중 ${done}장 등록됨`;
 
-      const batchNames = { 1: '1차: 탑뷰와 버튼', 2: '2차: 숙이기 시점', 3: '3차: 프롤로그 만화' };
+      const batchNames = { 1: '1차: 판 배경과 판 위 물건', 2: '2차: 숙이기 시점', 3: '3차: 인물 일러스트와 프롤로그' };
       const container = document.getElementById('batches');
       for (const batch of [1, 2, 3]) {
         const heading = document.createElement('h2');
