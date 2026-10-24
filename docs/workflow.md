@@ -44,7 +44,8 @@ Codex는 `assets/generation.json`에 그림마다 생성 지시문을 남기되,
 저장소의 기준은 GitHub(https://github.com/soomin007/magic-straw)이다. 한 컴퓨터에서 끝낸 작업은 반드시 push하고, 다른 컴퓨터에서는 시작하기 전에 받아 온다.
 OneDrive 같은 동기화 폴더에는 저장소를 두지 않는다. 동기화 프로그램이 `.git` 폴더를 건드리면 저장소가 깨질 수 있다.
 
-데스크탑에서 처음 작업할 때는 저장소를 한 번 복제한다. 데스크탑의 프로젝트 폴더는 `C:\Users\soomi\Dev\` 아래에 둔다.
+데스크탑에서 처음 작업할 때는 저장소를 한 번 복제한다. 데스크탑에서도 랩탑처럼 사용자 폴더 안의 `Dev` 폴더 아래에 둔다.
+데스크탑 복제는 2026-10-24에 마쳤고, 그 자리에서 검증 도구와 로컬 미리보기가 그대로 동작하는 것을 확인했다.
 
 ```bash
 git clone https://github.com/soomin007/magic-straw.git
@@ -76,7 +77,7 @@ git clone https://github.com/soomin007/magic-straw.git
 | Codex 첫 MVP 작업물 | 랩탑의 `Documents\Codex\2026-10-21\` | 참고용이고 저장소에는 없다 |
 | 로컬 미리보기 서버 설정 | `.claude/launch.json` | Python의 `http.server`를 쓴다. Python이 없는 컴퓨터에서는 아무 정적 서버나 써도 된다 |
 
-검증 도구는 Node.js가 있으면 `node tools/verify.js`로, 없으면 브라우저로 `tools/verify.html`을 열어 돌린다. 지금 랩탑에는 Node.js가 없다.
+검증 도구는 Node.js가 있으면 `node tools/verify.js`로, 없으면 브라우저로 `tools/verify.html`을 열어 돌린다. 데스크탑에는 Node.js가 있고, 랩탑에는 없다.
 
 ## 나중에 할 일: 게임 허브 등록
 
