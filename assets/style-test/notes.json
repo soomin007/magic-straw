@@ -74,6 +74,138 @@
       "height": 1024,
       "transparent": true,
       "prompt": "High-end 2D game illustration, painterly rendering with visible brush texture over thick ink outlines, dramatic warm and cool lighting, glowing rim light on edges, rich detail and material texture. Sophisticated professional game art, handcrafted painterly surfaces, warm amber light against deep cool blue-violet shadows.\n\nLate-night cafe interior mood, warm pendant light from the upper left. The player's things are mint green (#6cc3a0), the neighbor's things are brick red (#d9534a). No text, no letters, no logos. Original character and scene designs, use only the described visual qualities of polished commercial game art.\n\nAsset: one original protagonist bust illustration, square canvas 1024x1024, truly transparent background. Bust portrait facing slightly to the RIGHT, head and upper torso fully visible, with generous 5% transparent margin at top and sides. A young adult college student with tousled BLACK hair, expressive tired dark eyes and faint under-eye fatigue, wearing a MINT GREEN sweatshirt with an off-white shoulder stripe. A short cream drinking straw is held between the lips, pointing RIGHT. Quietly determined and clever expression, slightly lowered brows and a subtle confident mouth, calmly plotting how to reclaim their charger while cramming for an exam. Stylish angular face, adult proportions, lively original character design. Warm amber light from upper left shapes hair and cheek; shadow side still readable. No hands or held objects, no cup, no laptop, no scene, no speech bubble, no floor, no cast shadow outside the figure, no text. Rich polished shading, use thick black contours and a strong silhouette. Preserve real transparent alpha outside the bust."
+    },
+    {
+      "key": "r2-my-plug",
+      "file": "r2-my-plug.png",
+      "width": 512,
+      "height": 512,
+      "transparent": true,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nExtremely thick, very dark black outlines: the outer outline is 8-10% of the object's shortest side (40-50px at the final 512x512 size), at least twice as thick as the thickest attached reference. Use a continuous outer stroke about 46px thick at final512px size; when producing a larger image scale this stroke proportionally (92px at1024px). Inner lines are about half the outer width, 20-25px at512px. Line color is #111111 throughout. No gray or brown lines. No outer white border.\nSlightly tilted top-down view: seen from above, with a little of the front side visible. Not isometric. The sprite sits in a rectangular board cell.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green #6cc3a0, the neighbor's things are brick red #d9534a.\nThe attached pictures are references for style, viewing angle and line-weight comparison only. Do not copy any characters, animals, scenery or UI from them.\nSingle object, centered, transparent background, no ground shadow.\nSubject: A Korean 220V laptop charger's WALL PLUG. The mint-green plug head is ROUND and CYLINDRICAL, with a circular end face at the right viewed as an ellipse. Exactly TWO ROUND CYLINDRICAL METAL PINS run parallel horizontally to the RIGHT. Show the pins as two separated gray cylinders with rounded circular tips, NOT American flat blades, no holes punched through them. Behind the cylindrical head a THICK power cable runs LEFT and continues to be CUT OFF at the image's LEFT EDGE. Show the whole plug head and both pins with small clear margin on right, top and bottom. Use a large squat head about400px tall on the final512x512 canvas; whole plug including cord fills nearly all canvas width. Draw the BLACK outer stroke 40-50px thick on final512x512 image including around head and both pins, and 20-25px inner lines. The contour must be visibly several times thicker than the Castle Crashers reference. No extra props, no face on the plug, no raised platform.",
+      "references": [
+        "line-bugfables-1.jpg",
+        "view-cultofthelamb-1.jpg",
+        "line-castlecrashers-1.jpg"
+      ],
+      "refinementPrompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nImage1 is the EDIT TARGET. Images2-4 are style and line comparison references.\nKeep the same object and its orientation, colors, transparency, and current framing. CHANGE THE BLACK LINE WIDTH: the current outside line is only about17-18px when scaled to512px. This is MUCH too thin. Make the outside silhouette line 2.6 TIMES its current thickness. The outside stroke must be9% OF THE ENTIRE CANVAS WIDTH, not9% of a small part of the object. Required outer line is44-48px when final image is512x512, about110-118px on a1254x1254 source. This numerical requirement takes priority over the thinner lines seen in references. Use #111111 almost black. The inside strokes must be about22px at final512, about54px at1254. No white border.\nThe outside black band across the TOP CENTER of the object must visibly be around46px tall in the final512px image. Do not keep the existing thin line at the top. Add most of the width INWARD to preserve whole silhouette in the canvas, but keep enough colored body visible.\nPreserve Korean220V ROUND cylindrical head and exactlyTWO ROUND cylindrical silver pins facingRIGHT; preserve thick cable exitingLEFT and cropped at left edge. Both pins must remain separate and visible, enlarge their spacing if the heavier black strokes need room. No flat American blades.\nTransparent background, no ground shadow, no other objects, no text. Keep a slightly tilted top-down view, not isometric.",
+      "postProcessing": {
+        "scope": "사용자가 허용한 바깥 외곽선 보강과 출력 크기 정리",
+        "tool": "Python, Pillow, NumPy",
+        "color": "#111111",
+        "innerLines": "생성 원본을 유지하고 코드로 보강하지 않음",
+        "key": "r2-my-plug",
+        "size": [
+          512,
+          512
+        ],
+        "addedExteriorRadius": 22,
+        "sampledOuterBand": 44,
+        "sample": "vertical center, top"
+      }
+    },
+    {
+      "key": "r2-cup",
+      "file": "r2-cup.png",
+      "width": 512,
+      "height": 512,
+      "transparent": true,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nExtremely thick, very dark black outlines: the outer outline is 8-10% of the object's shortest side (40-50px at the final 512x512 size), at least twice as thick as the thickest attached reference. Use a continuous outer stroke about 46px thick at final512px size; when producing a larger image scale this stroke proportionally (92px at1024px). Inner lines are about half the outer width, 20-25px at512px. Line color is #111111 throughout. No gray or brown lines. No outer white border.\nSlightly tilted top-down view: seen from above, with a little of the front side visible. Not isometric. The sprite sits in a rectangular board cell.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green #6cc3a0, the neighbor's things are brick red #d9534a.\nThe attached pictures are references for style, viewing angle and line-weight comparison only. Do not copy any characters, animals, scenery or UI from them.\nSingle object, centered, transparent background, no ground shadow.\nSubject: A Korean cafe HOT-DRINK TAKEAWAY PAPER CUP, with a FLAT plastic lid on top and a plain brown PAPER HOLDER SLEEVE wrapped around the middle. Mint-green small unbranded color patch on the sleeve is allowed. From the slightly tilted top-down viewpoint BOTH the lid (an ellipse, viewed from above) AND the paper cup's FRONT SIDE are clearly visible. The paper body tapers toward a flat narrow base. A small drinking opening is visible on lid. One cup only, no handle, no saucer, no straw, no steam cloud, no writing or printed logos. Cup fills nearly all canvas height and most of its width, keep enough transparent margin that the BLACK40-50px outside contour is never cropped. The outer contour of lid, cup and base stays40-50px at final512px, sleeve and lid inside lines20-25px. No floor shadow.",
+      "references": [
+        "line-bugfables-1.jpg",
+        "view-cultofthelamb-1.jpg",
+        "line-castlecrashers-1.jpg"
+      ],
+      "refinementPrompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nImage1 is the EDIT TARGET. Images2-4 are style and line comparison references.\nKeep the same object and its orientation, colors, transparency, and current framing. CHANGE THE BLACK LINE WIDTH: the current outside line is only about17-18px when scaled to512px. This is MUCH too thin. Make the outside silhouette line 2.6 TIMES its current thickness. The outside stroke must be9% OF THE ENTIRE CANVAS WIDTH, not9% of a small part of the object. Required outer line is44-48px when final image is512x512, about110-118px on a1254x1254 source. This numerical requirement takes priority over the thinner lines seen in references. Use #111111 almost black. The inside strokes must be about22px at final512, about54px at1254. No white border.\nThe outside black band across the TOP CENTER of the object must visibly be around46px tall in the final512px image. Do not keep the existing thin line at the top. Add most of the width INWARD to preserve whole silhouette in the canvas, but keep enough colored body visible.\nPreserve one hot paper cup, lid AND paper side visible, brown paper sleeve, no straw, no logos. Do not crop the cup.\nTransparent background, no ground shadow, no other objects, no text. Keep a slightly tilted top-down view, not isometric.",
+      "postProcessing": {
+        "scope": "사용자가 허용한 바깥 외곽선 보강과 출력 크기 정리",
+        "tool": "Python, Pillow, NumPy",
+        "color": "#111111",
+        "innerLines": "생성 원본을 유지하고 코드로 보강하지 않음",
+        "key": "r2-cup",
+        "size": [
+          512,
+          512
+        ],
+        "addedExteriorRadius": 23,
+        "sampledOuterBand": 44,
+        "sample": "vertical center, top"
+      }
+    },
+    {
+      "key": "r2-portrait",
+      "file": "r2-portrait.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nThe outer silhouette ink must be #111111, with thickness8-10% of the ENTIRE canvas width: at final1024x1024 use80-100px outside contour, at a1254px source this means100-123px. This is the SAME relative line weight as40-50px on a512px prop. The inside lines are half the outside width. This numeric line width takes priority over thinner lines in the references. No gray or brown lines, no white exterior border.\nReferences are for art style and face/shape treatment only, do not copy their characters, animals, demons, horns, crowns, outfits, symbols or UI. Draw an original ordinary HUMAN college-age person.\nUpper-body illustration, from waist up, three-quarter FRONT view for dialogue, facing slightly toward the center of a game screen, square transparent canvas, whole head and shoulders inside frame. Single person with the described held object, centered, transparent background, no ground shadow.\nNo text, no letters, no logos, no brand marks.\nSubject: A human university student with TOUSLED BLACK HAIR, tired but expressive eyes, wearing a MINT GREEN HOODIE. The student's body and face point slightly RIGHT. Quietly determined expression while studying for an exam. The student holds ONE clear iced-coffee cup in a hand at chest height. A LONG COLORED MINT/GREEN BENT DRINKING STRAW runs CONTINUOUSLY from inside that cup all the way up to the student's MOUTH. The whole long straw and its two bends must be visible and clearly connect to the cup, NOT a short white stick, NOT a cigarette; no smoke. Cup includes brown coffee and a few ice pieces, no logo. Keep the scene limited to this character, hand, cup and attached straw, no laptop, table or background.",
+      "references": [
+        "portrait-helltaker-1.jpg",
+        "portrait-helltaker-2.jpg",
+        "portrait-helltaker-3.jpg",
+        "character-cultofthelamb-1.jpg"
+      ],
+      "postProcessing": {
+        "scope": "사용자가 허용한 바깥 외곽선 보강과 출력 크기 정리",
+        "tool": "Python, Pillow, NumPy",
+        "color": "#111111",
+        "innerLines": "생성 원본을 유지하고 코드로 보강하지 않음",
+        "key": "r2-portrait",
+        "size": [
+          1024,
+          1024
+        ],
+        "addedExteriorRadius": 77,
+        "sampledOuterBand": 87,
+        "sample": "vertical center, bottom"
+      }
+    },
+    {
+      "key": "r2-neighbor-portrait",
+      "file": "r2-neighbor-portrait.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nThe outer silhouette ink must be #111111, with thickness8-10% of the ENTIRE canvas width: at final1024x1024 use80-100px outside contour, at a1254px source this means100-123px. This is the SAME relative line weight as40-50px on a512px prop. The inside lines are half the outside width. This numeric line width takes priority over thinner lines in the references. No gray or brown lines, no white exterior border.\nReferences are for art style and face/shape treatment only, do not copy their characters, animals, demons, horns, crowns, outfits, symbols or UI. Draw an original ordinary HUMAN college-age person.\nUpper-body illustration, from waist up, three-quarter FRONT view for dialogue, facing slightly toward the center of a game screen, square transparent canvas, whole head and shoulders inside frame. Single person with the described held object, centered, transparent background, no ground shadow.\nNo text, no letters, no logos, no brand marks.\nSubject: The neighboring cafe customer, a human university-age person with BLACK HAIR and VERY LARGE WHITE OVER-EAR HEADPHONES, wearing a BRICK RED HOODIE. The customer faces slightly LEFT and looks down toward their own laptop screen with an oblivious indifferent expression. Keep the headphones fully visible including both ear cups and headband. No cup, no straw, no horns, no animal ears. No laptop is included in this transparent portrait; the gaze points down-left toward the screen outside frame. Keep the same outer contour thickness and character proportions as the mint-hoodie protagonist.",
+      "references": [
+        "portrait-helltaker-1.jpg",
+        "portrait-helltaker-2.jpg",
+        "portrait-helltaker-3.jpg",
+        "character-cultofthelamb-1.jpg"
+      ],
+      "postProcessing": {
+        "scope": "사용자가 허용한 바깥 외곽선 보강과 출력 크기 정리",
+        "tool": "Python, Pillow, NumPy",
+        "color": "#111111",
+        "innerLines": "생성 원본을 유지하고 코드로 보강하지 않음",
+        "key": "r2-neighbor-portrait",
+        "size": [
+          1024,
+          1024
+        ],
+        "addedExteriorRadius": 75,
+        "sampledOuterBand": 88,
+        "sample": "vertical center, bottom"
+      }
+    },
+    {
+      "key": "r2-scene",
+      "file": "r2-scene.png",
+      "width": 1920,
+      "height": 1080,
+      "transparent": false,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nOutlines thinner than the key objects so the puzzle pieces stand out.\nSlightly tilted top-down view, as in the references: look DOWN from above, with a little of front faces visible. NOT isometric. The table and future grid align to horizontal and vertical rectangular rows, not diamonds. Opaque landscape1920x1080 image.\nNo text, no letters, no logos, no brand marks, no menu writing, no store names, no siren icon.\nThe player's things are mint green #6cc3a0, the neighbor's things are brick red #d9534a.\nReferences are for viewing angle, artwork and atmosphere only. Do not copy their game characters, animals, buildings, scenery, symbols or UI.\nSubject: A COMMON MODERN SOUTH KOREAN CAFE FOR STUDYING at night. LIGHT WOOD long communal table, DARK GREEN accents on seating and wall trim, hanging PENDANT LIGHTS and DARK NIGHT GLASS WINDOWS visible along upper wall. A recognizable cafe interior rather than a home, forest, fantasy village or tavern. No logos. Do NOT place lights or decorations over the playable table area.\nUse these exact bounds as percentages of the full1920x1080 image. The light-wood tabletop occupiesx11%-91%, y11%-89%. Its broad surface stays clear. The puzzle zone x20%-84%, y26%-74% must contain ONLY EMPTY light wood, no cups, plugs, books, menus, cables, chairs, laptops, people or decoration. The future POWER-STRIP slot x75%-84%, y26%-74% is also EMPTY: do NOT draw a power strip or sockets. The student sits at x0%-17%, y31%-61%, black messy hair, mint hoodie, small overhead figure facingRIGHT; the student's open laptop occupiesx3%-18%, y62%-88% and must end beforex19%, never encroaching on puzzle area. Neighbor atx85%-100%,y59%-86%, black hair, largeWHITEheadphones, brick-redhoodie, facing own screen; their open laptop occupiesx86%-97%,y14%-40%, screen blank. Small people and laptops may be integrated in this static scene. Player and neighbor are ordinary humans. Show only heads and shoulders from overhead, not large face portraits. Around table edges show dark green seating, cafe window frames, pendant lamps and a little plain floor. Keep every moving puzzle object absent; those are separate sprites. Warm light comes from upper-left pendant fixture; outside windows is nighttime. Keep rectangular table aligned to screen and do not turn the board diagonally.",
+      "references": [
+        "view-cultofthelamb-1.jpg",
+        "view-dontstarve-1.jpg"
+      ],
+      "postProcessing": {
+        "scope": "출력 크기만 정리"
+      }
     }
-  ]
+  ],
+  "round2": {
+    "method": "built-in image_gen with local reference images; user-approved Python exterior outline reinforcement",
+    "status": "사용자 그림체 검토 대기",
+    "referencePolicy": "레퍼런스는 그림체와 시점에만 사용하고 파일 이름만 기록했다. 원본 레퍼런스 이미지는 커밋 대기 목록에 넣지 않는다."
+  }
 }
