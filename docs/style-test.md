@@ -18,7 +18,29 @@ Codex는 그림을 생성할 때마다 이 폴더의 이미지 중 맞는 것을
 레퍼런스는 그림체와 분위기를 맞추는 데만 쓰고, 그 안의 캐릭터, 동물, 장면을 베끼지 않는다.
 
 지시문에서 그림체는 "첨부한 레퍼런스 이미지의 그림체를 따른다" 한 줄로만 적는다. 그 밖에 그림체를 꾸미는 형용사(고급스러운, 정교한, 질감이 풍부한 등)는 쓰지 않는다.
-다만 "사실적인 묘사, 3D 렌더, 사진 같은 질감은 쓰지 않는다"는 한 줄은 넣는다.
+다만 "사실적인 묘사, 3D 렌더, 사진 같은 질감은 쓰지 않는다"는 한 줄과, 아래 "선 굵기" 기준은 넣는다.
+
+그림마다 넣을 레퍼런스는 아래처럼 짝짓는다. 파일 목록과 각 이미지에서 볼 점은 `references/README.md`에 있다.
+
+| 만들 그림 | 함께 넣을 레퍼런스 |
+|---|---|
+| 내 플러그, 컵 | `line-bugfables-1`, `view-cultofthelamb-1`, `line-castlecrashers-1`(선 굵기 비교 기준) |
+| 판 배경 | `view-cultofthelamb-1`, `view-dontstarve-1` |
+| 주인공 일러스트 | `portrait-helltaker-1`, `portrait-helltaker-2`, `portrait-helltaker-3`, `character-cultofthelamb-1` |
+
+## 선 굵기
+
+사용자는 레퍼런스 중 가장 굵은 Castle Crashers조차 원하는 두께의 절반도 안 된다고 했다. 그래서 키 에셋(플러그, 컵, 인물)의 선은 레퍼런스보다 훨씬 굵고 진하게 그린다.
+말로만 "굵게"라고 하면 생성기가 적당히 줄이므로 숫자로 정한다.
+
+| 항목 | 기준 |
+|---|---|
+| 바깥 외곽선 | 물건 짧은 변의 8~10%. 512 x 512 그림의 물건이면 40~50px이고, 게임의 88px 칸에서는 6~8px로 보인다. Castle Crashers 레퍼런스의 두 배 이상 |
+| 안쪽 선 | 바깥 외곽선의 절반 정도 |
+| 선 색 | 거의 순수한 검정(#111 정도). 회색이나 갈색 선은 쓰지 않는다 |
+| 흰 테두리 | 이번 시험에서는 넣지 않는다. 배경 위에서 잘 안 보이면 `outline-papermario-1`처럼 바깥에 흰 테두리를 두르는 방법을 따로 시험한다 |
+
+판 배경은 키 에셋보다 선을 가늘게 해도 된다. 배경의 선이 키 에셋보다 굵으면 퍼즐 조각이 배경에 묻힌다.
 
 ## 실제 사물 기준
 
@@ -60,6 +82,8 @@ Codex는 그림을 생성할 때마다 이 폴더의 이미지 중 맞는 것을
 ```text
 Follow the art style of the attached reference images exactly. Cartoon game asset.
 Do not use realistic rendering, 3D render, or photographic texture.
+Extremely thick, very dark black outlines: the outer outline is 8-10% of the object's shortest side
+(about 40-50px on a 512px image), at least twice as thick as the thickest attached reference. Inner lines about half that.
 Slightly tilted top-down view: seen from above, with a little of the front side visible (like Stardew Valley). Not isometric.
 No text, no letters, no logos, no brand marks.
 The player's things are mint green, the neighbor's things are brick red.
@@ -67,3 +91,4 @@ Subject: <위 사물 기준 표의 내용을 영어로>
 ```
 
 투명 배경 그림에는 "Single object, centered, transparent background, no ground shadow." 한 줄을 덧붙인다.
+판 배경을 만들 때는 굵은 선 문장을 "Outlines thinner than the key objects so the puzzle pieces stand out." 한 줄로 바꾼다.

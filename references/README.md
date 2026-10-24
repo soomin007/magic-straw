@@ -2,6 +2,25 @@
 
 그림 작업에 참고할 이미지를 이 폴더에 넣는다. 이 폴더의 이미지는 `.gitignore`로 막혀 있어서 GitHub에 올라가지 않는다.
 다른 게임의 스크린샷은 저작권이 있으므로 공개 저장소에 올리지 않고, 그림을 만드는 컴퓨터에만 둔다.
+그래서 다른 컴퓨터에서 그림을 만들 때는 이 표를 보고 같은 이미지를 다시 모아야 한다.
 
-파일 이름은 무엇을 참고하는지 알 수 있게 짓는다. 예를 들면 `style-character-1.png`, `style-item-1.png`, `view-angle-1.png`, `cafe-1.jpg`처럼 쓴다.
 레퍼런스는 그림체와 분위기를 맞추는 데만 쓰고, 그 안의 캐릭터나 장면을 그대로 베끼지 않는다.
+
+## 이름 규칙
+
+파일 이름의 앞부분이 용도다. `view-`는 시점과 배경, `line-`은 선의 굵기와 사물 그림체, `outline-`은 흰 테두리 처리,
+`portrait-`는 주인공 큰 일러스트, `character-`는 작은 인물 그림체에 쓴다.
+
+## 지금 있는 레퍼런스 (2026-10-24, 랩탑)
+
+| 파일 | 게임 | 무엇을 보나 |
+|---|---|---|
+| `view-cultofthelamb-1.jpg` | Cult of the Lamb (기지 화면) | 살짝 기울인 탑뷰, 굵은 외곽선의 사물(대나무, 꽃, 등불), 진한 색 |
+| `view-dontstarve-1.jpg` | Don't Starve | 살짝 기울인 탑뷰, 거칠게 긁은 잉크선, 바닥에 놓인 물건의 보이는 각도 |
+| `line-castlecrashers-1.jpg` | Castle Crashers | 굵고 둥근 검은 외곽선. 사용자 기준으로는 원하는 두께의 절반도 안 되므로 "이것보다 두 배 이상"의 기준선으로 쓴다 |
+| `line-bugfables-1.jpg` | Bug Fables | 단색 면 위의 굵은 검은 외곽선, 꽃과 돌 같은 사물의 단순한 형태 |
+| `outline-papermario-1.jpg` | Paper Mario: The Origami King | 인물 바깥의 굵은 흰 테두리. 복잡한 배경 위에서 또렷하게 보이게 하는 방법 |
+| `character-cultofthelamb-1.jpg` | Cult of the Lamb | 거친 외곽선의 작은 캐릭터. 크기가 작아(211 x 270) 선 질감은 잘 안 보인다 |
+| `portrait-helltaker-1.jpg` ~ `3.jpg` | Helltaker | 굵은 검은 선, 거의 단색인 면, 표정이 강한 인물 일러스트 |
+
+모든 이미지가 작다(가로 200~640px). 더 큰 이미지(가로 800px 이상)를 구하면 같은 이름 규칙으로 추가하거나 바꾼다.
