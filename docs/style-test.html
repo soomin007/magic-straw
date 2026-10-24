@@ -148,6 +148,40 @@
       width: 375px;
       max-width: 100%;
     }
+
+    /* 스티커: 상호작용하는 물건에만 코드로 흰 테두리와 약한 그림자를 붙인다.
+       drop-shadow를 이어 붙이면 앞의 결과에 다시 그림자가 붙어서 테두리처럼 두꺼워진다. */
+    .sticker {
+      filter:
+        drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff)
+        drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff)
+        drop-shadow(0 5px 3px rgba(0, 0, 0, 0.35));
+    }
+
+    .sticker.lifted {
+      transform: translateY(-12px) scale(1.06);
+      filter:
+        drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff)
+        drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff)
+        drop-shadow(0 18px 6px rgba(0, 0, 0, 0.28));
+    }
+
+    .sticker.targeted {
+      filter:
+        drop-shadow(3px 0 0 #5aa9d6) drop-shadow(-3px 0 0 #5aa9d6)
+        drop-shadow(0 3px 0 #5aa9d6) drop-shadow(0 -3px 0 #5aa9d6)
+        drop-shadow(0 5px 3px rgba(0, 0, 0, 0.35));
+    }
+
+    .state-label {
+      padding: 2px 8px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -155,6 +189,14 @@
     <h1>그림체 시험 비교</h1>
     <p class="lead">그림체를 고르기 위한 시험 그림입니다. 맨 앞이 지금 진행 중인 2차 시험이고, 뒤의 1차 A와 B는 비교용으로 남겨 두었습니다.
       아직 없는 그림은 "아직 없음"으로 보입니다. 의뢰 내용은 docs/style-test.md에 있습니다.</p>
+
+    <h2>스티커 시험 (2차 그림)</h2>
+    <p class="lead">상호작용하는 물건에만 코드로 흰 테두리와 그림자를 붙인 모습입니다. 왼쪽부터 스티커 없음, 보통, 거품으로 떠 있음, 조준됨입니다.
+      아래 휴대폰 폭에서도 테두리가 보이는지 확인합니다.</p>
+    <div class="columns">
+      <section class="column"><h3>게임 크기</h3><div id="sticker-wide"></div></section>
+      <section class="column"><h3>휴대폰 폭</h3><div id="sticker-phone" class="phone-size"></div></section>
+    </div>
 
     <h2>게임 크기로 보기</h2>
     <p class="lead">판 배경 위에 플러그와 컵을 실제 칸 크기로 놓고, 주인공 일러스트를 혼잣말과 함께 띄운 모습입니다. 격자는 확인용입니다.</p>
@@ -253,6 +295,44 @@
       box.appendChild(content);
       return box;
     }
+
+    // 2차 배경 위에 플러그와 컵을 네 가지 상태로 놓는다.
+    function stickerPreview() {
+      const game = document.createElement('div');
+      game.className = 'game';
+      const scene = document.createElement('div');
+      scene.className = 'game-scene';
+      game.appendChild(scene);
+      place(scene, 0, 0, 960, 540, image(file('r2', 'scene')));
+      const grid = place(scene, GRID_LEFT, GRID_TOP, CELL * 6, CELL * 3);
+      grid.className = 'grid-lines';
+
+      const states = [
+        { label: '스티커 없음', className: '' },
+        { label: '보통', className: 'sticker' },
+        { label: '떠 있음', className: 'sticker lifted' },
+        { label: '조준됨', className: 'sticker targeted' },
+      ];
+      states.forEach((state, index) => {
+        const column = 1 + index * 1.3;
+        const left = GRID_LEFT + CELL * column;
+        const label = place(scene, left - 6, GRID_TOP - 30, null, null);
+        label.innerHTML = `<span class="state-label">${state.label}</span>`;
+        for (const [row, name] of [[0, 'my-plug'], [2, 'cup']]) {
+          const piece = image(file('r2', name));
+          if (state.className) piece.className = state.className;
+          place(scene, left + 6, GRID_TOP + CELL * row + 6, CELL - 12, CELL - 12, piece);
+        }
+      });
+
+      new ResizeObserver(() => {
+        scene.style.transform = `scale(${game.clientWidth / 960})`;
+      }).observe(game);
+      return game;
+    }
+
+    document.getElementById('sticker-wide').appendChild(stickerPreview());
+    document.getElementById('sticker-phone').appendChild(stickerPreview());
 
     for (const style of STYLES) {
       document.getElementById('game-columns').appendChild(column(style, gamePreview(style.id)));

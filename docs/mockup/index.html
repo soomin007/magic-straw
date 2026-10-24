@@ -105,6 +105,8 @@
     .theirs { background: var(--theirs); border-color: #b0594d; }
     .table { background: var(--table); border-color: var(--box-dark); align-items: flex-start; justify-content: flex-start; padding: 8px; color: var(--muted); }
     .floating { box-shadow: 10px 14px 0 rgba(0, 0, 0, 0.18); transform: scale(1.12); border-style: dashed; border-color: var(--focus); }
+    /* 상호작용하는 물건은 스티커처럼 흰 테두리와 그림자를 두른다. */
+    .sticker-box { outline: 4px solid #fff; box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3); }
 
     .grid {
       position: absolute;
@@ -248,7 +250,7 @@
 <body>
   <main class="wrap">
     <h1>회색 상자 목업</h1>
-    <p class="lead">그림 없이 배치와 흐름만 확인하는 목업입니다. 실제 그림은 Helltaker 같은 굵은 선 코믹 카툰으로 따로 만듭니다.
+    <p class="lead">그림 없이 배치와 흐름만 확인하는 목업입니다. 2026-10-24에 1챕터 자리를 창가 바 좌석으로 바꿨습니다. 실제 그림은 Cult of the Lamb 느낌의 굵은 선 카툰으로 따로 만듭니다.
       아래 버튼으로 세 가지 시점을 오갈 수 있습니다.</p>
 
     <h2>판 화면</h2>
@@ -261,30 +263,30 @@
     <div class="stage" id="stage">
       <div class="scene" id="scene">
 
-        <!-- 탑뷰 -->
+        <!-- 탑뷰: 1챕터 창가 바 좌석. 나와 옆자리 사람이 바에 나란히 앉아 창을 본다. -->
         <section class="view active" data-view="top">
-          <div class="box table" style="left: 110px; top: 60px; width: 760px; height: 420px;">카페의 긴 테이블 (위에서 본 모습)</div>
-          <div class="grid" style="left: 190px; top: 96px; width: 616px; height: 352px;"></div>
-          <div class="row-focus" style="left: 186px; top: 184px; width: 536px; height: 88px;"></div>
+          <div class="box" style="left: 0; top: 0; width: 960px; height: 110px; border-radius: 0; align-items: flex-start; padding-top: 10px;">창 (밤 거리, 짙은 초록 창틀)</div>
+          <div class="box table" style="left: 40px; top: 118px; width: 900px; height: 300px;">창가 바 테이블 윗면 (좁고 긴 바)</div>
+          <div class="grid" style="left: 190px; top: 138px; width: 616px; height: 264px;"></div>
+          <div class="row-focus" style="left: 186px; top: 222px; width: 536px; height: 88px;"></div>
 
-          <div class="box round mine" style="left: 14px; top: 196px; width: 120px; height: 120px;">나 (머리와 어깨)</div>
-          <div class="line" style="left: 130px; top: 226px; width: 60px;"></div>
-          <div class="box mine" style="left: 116px; top: 330px; width: 68px; height: 110px;">내 랩탑</div>
-          <div class="box" style="left: 30px; top: 380px; width: 64px; height: 64px;">음료 컵들</div>
+          <div class="box mine" style="left: 60px; top: 150px; width: 120px; height: 150px;">내 랩탑</div>
+          <div class="box" style="left: 64px; top: 312px; width: 76px; height: 70px;">내 음료</div>
 
-          <div class="box mine" style="left: 290px; top: 200px; width: 70px; height: 56px;">내 플러그</div>
-          <div class="box floating" style="left: 466px; top: 196px; width: 70px; height: 64px;">컵 (거품으로 떠 있음)</div>
-          <div class="box" style="left: 554px; top: 108px; width: 76px; height: 76px;">책 더미</div>
-          <div class="box" style="left: 378px; top: 372px; width: 76px; height: 64px;">컵</div>
+          <div class="box mine sticker-box" style="left: 290px; top: 238px; width: 70px; height: 56px;">내 플러그</div>
+          <div class="box floating sticker-box" style="left: 466px; top: 234px; width: 70px; height: 64px;">컵 (거품으로 떠 있음)</div>
+          <div class="box sticker-box" style="left: 554px; top: 146px; width: 76px; height: 76px;">책 더미</div>
 
-          <div class="box" style="left: 718px; top: 96px; width: 88px; height: 352px; align-items: flex-start;">멀티탭 (옆으로 누움)</div>
-          <div class="box theirs" style="left: 642px; top: 200px; width: 70px; height: 56px;">상대 플러그</div>
-          <div class="box theirs" style="left: 642px; top: 376px; width: 70px; height: 56px;">상대 플러그</div>
+          <div class="box" style="left: 718px; top: 138px; width: 88px; height: 264px; align-items: flex-start;">멀티탭</div>
+          <div class="box theirs sticker-box" style="left: 642px; top: 238px; width: 70px; height: 56px;">상대 플러그</div>
+          <div class="box theirs" style="left: 822px; top: 150px; width: 110px; height: 150px;">상대 랩탑</div>
 
-          <div class="box round theirs" style="left: 826px; top: 330px; width: 120px; height: 120px;">옆자리 사람 (헤드폰)</div>
-          <div class="box theirs" style="left: 812px; top: 74px; width: 100px; height: 70px;">상대 랩탑 (멀리 있음)</div>
+          <div class="box round mine" style="left: 40px; top: 410px; width: 200px; height: 140px;">나 (뒤통수와 어깨, 빨대는 오른쪽 위로)</div>
+          <div class="line" style="left: 186px; top: 410px; width: 90px; transform: rotate(-58deg);"></div>
+          <div class="box round theirs" style="left: 760px; top: 410px; width: 200px; height: 140px;">옆자리 사람 (헤드폰, 뒤통수)</div>
 
-          <span class="label">탑뷰: 어느 줄로 뱉을지 고른다</span>
+          <div class="note" style="left: 300px; top: 440px;">두 사람은 바에 나란히 앉아 창을 본다. 멀티탭은 두 자리 사이, 상대 쪽에 있다</div>
+          <span class="label">탑뷰: 1챕터 창가 바 좌석</span>
         </section>
 
         <!-- 숙이기 -->
@@ -381,7 +383,7 @@
 
   <script>
     const explanations = {
-      top: '평소 시점입니다. 나는 테이블 왼쪽 끝에 앉아 있고, 빨대는 오른쪽을 향합니다. 줄을 고르면 그 줄을 따라 얼음이 날아가 처음 맞은 물건을 밀어냅니다. 소다 거품으로 뜬 물건은 조금 커지고 그림자가 떨어져 보여서, 위에서 봐도 떠 있다는 걸 알 수 있습니다. 멀티탭은 테이블 오른쪽 끝에 옆으로 눕혀 두었고, 줄마다 콘센트가 하나씩 있습니다.',
+      top: '1챕터의 평소 시점입니다. 창가 바 좌석에 나와 옆자리 사람이 나란히 앉아 창을 보고 있고, 화면 아래쪽에 두 사람의 뒤통수가 보입니다. 바 위가 퍼즐 판이고, 멀티탭은 두 자리 사이 상대 쪽에 있습니다. 빨대는 오른쪽(상대 쪽)을 향하고, 줄을 고르면 그 줄을 따라 얼음이 날아갑니다. 움직이는 물건(플러그, 컵, 책)만 흰 테두리와 그림자가 붙은 스티커로 보이고, 랩탑과 멀티탭과 사람은 배경의 일부입니다.',
       side: '숙이기를 누르면 지금 고른 줄 하나를 테이블 높이에서 옆으로 본 단면이 보입니다. 탑뷰에서는 짐작만 할 수 있던 높이가 정확히 보이고, 이 시점에서는 얼음을 어느 높이로 보낼지 고를 수 있습니다. 멀티탭 옆면의 높은 콘센트처럼 위에서는 안 보이던 것도 여기서 드러납니다. 다시 누르면 앉아서 보는 탑뷰로 돌아갑니다.',
       camera: '휴대폰 카메라는 멀리 있는 것을 확대해 정보를 얻는 도구입니다. 판을 직접 바꾸지는 않습니다. 예를 들어 옆자리 사람의 랩탑이 이미 100% 충전돼 있다는 걸 확인하면, 이야기 쪽으로는 플러그를 빼앗을 명분이 생기고 퍼즐 쪽으로는 힌트가 됩니다. 2챕터에서는 상대가 어디를 보고 있는지 확인하는 데에도 씁니다.',
     };
