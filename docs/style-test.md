@@ -1,81 +1,69 @@
-# 그림체 시험 의뢰서
+# 그림체 시험 의뢰서 (2차)
 
-1차 그림이 평면 벡터처럼 나와서, 게임 그림을 본격적으로 다시 만들기 전에 그림체를 먼저 고른다.
-같은 대상 네 가지를 두 그림체로 한 벌씩, 모두 여덟 장을 만든다. 사용자가 `docs/style-test.html`에서 두 벌을 나란히 보고 하나를 고른다.
-이번 시험 그림은 게임에 등록하지 않는다. `assets/manifest.js`와 `assets/asset-list.js`는 고치지 않는다.
+1차 시험(A와 B)은 둘 다 사실적인 일러스트로 나와서 사용자가 원하는 카툰과 거리가 멀었다. 원인은 지시문이 그림체를 말로 설명하면서
+사실적인 쪽으로 끄는 말만 썼기 때문이다(`known-issues.md` 8번). 이번에는 그림체를 말로 설명하지 않고 레퍼런스 이미지로 맞춘다.
 
-## 이번에 바뀐 점
+## 정해진 방향
 
-지난 의뢰서는 "단색 면, 그림자 한 단계, 그라데이션과 질감 금지"를 요구했다. 이번에는 그 조건을 모두 뺀다.
-이미지 생성이 잘하는 풍부한 명암, 질감, 조명을 그대로 살린다. 사용자가 원하는 수준은 Helltaker나 Hades 같은 완성도 높은 게임 일러스트다.
-작은 칸에서 읽히게 하는 일은 그림을 납작하게 만드는 대신 굵은 외곽선, 분명한 실루엣, 명암 대비, 테두리 빛으로 해결한다.
-
-## 두 그림체
-
-| 이름 | 방향 |
+| 항목 | 내용 |
 |---|---|
-| A (Helltaker 방향) | 깔끔하고 자신 있는 애니메이션풍 선화. 검은 선이 또렷하고, 셀 채색에 명암 두세 단계를 매끈하게 넣는다. 배경은 어둡고 대비가 강하며, 캐릭터는 세련되고 표정이 살아 있다. 화면이 정돈되고 그래픽 디자인처럼 깔끔하다 |
-| B (Hades 방향) | 굵은 잉크 외곽선 위에 붓 질감이 보이는 회화풍 채색. 따뜻한 조명과 차가운 그림자가 극적으로 대비되고, 물건 가장자리에 테두리 빛이 돈다. 디테일과 질감이 풍부하고, 화면 전체가 한 장의 그림처럼 꽉 차 보인다 |
+| 그림체 | Cult of the Lamb 느낌. `references/`의 레퍼런스 이미지를 생성할 때 함께 넣어 그림체를 맞춘다. 키 에셋(플러그, 컵, 인물)은 굵고 거친 선의 카툰이다. 배경은 조금 더 사실적이어도 된다 |
+| 시점 | 살짝 기울인 탑뷰. Stardew Valley처럼 위에서 내려다보되 물건의 앞면이 조금 보인다. 아이소메트릭은 아니고, 판의 칸은 그대로 직사각형이다 |
+| 장소 | 한국의 대중적인 카공 카페, 스타벅스를 떠올리게 하는 곳. 밝은 나무의 긴 공용 테이블, 짙은 초록 포인트, 펜던트 조명, 밤 유리창. 로고, 상표, 가게 이름, 사이렌 그림은 넣지 않는다 |
 
-두 그림체 모두 공통으로 지킨다. 내 물건은 민트색 계열, 옆자리 사람의 물건은 벽돌색 계열이라 색만 보고 누구 것인지 알 수 있어야 한다.
-배경은 새벽 카페 실내이고, 조명은 왼쪽 위의 펜던트 조명에서 따뜻하게 떨어진다. 그림에 글자를 넣지 않는다.
-특정 게임의 캐릭터나 장면을 베끼지 않고, 그 게임들이 가진 완성도와 분위기만 참고한다.
+## 레퍼런스 이미지
 
-## 만들 그림
+사용자가 `references/` 폴더에 레퍼런스 이미지를 넣는다. 이 폴더의 이미지는 GitHub에 올라가지 않는다.
+Codex는 그림을 생성할 때마다 이 폴더의 이미지 중 맞는 것을 참고 이미지로 함께 넣는다.
+레퍼런스는 그림체와 분위기를 맞추는 데만 쓰고, 그 안의 캐릭터, 동물, 장면을 베끼지 않는다.
 
-| 파일 | 크기 | 대상 |
-|---|---|---|
-| `assets/style-test/a-scene.png`, `b-scene.png` | 1920 x 1080 | 판 배경. 아래 "판 배경 배치"를 지킨다 |
-| `assets/style-test/a-my-plug.png`, `b-my-plug.png` | 512 x 512, 투명 배경 | 내 민트색 충전기 플러그를 바로 위에서 본 모습. 금속 핀 두 개가 오른쪽을 향하고, 왼쪽으로 짧은 선이 나간다 |
-| `assets/style-test/a-cup.png`, `b-cup.png` | 512 x 512, 투명 배경 | 뚜껑 덮인 종이 커피컵을 바로 위에서 본 모습 |
-| `assets/style-test/a-portrait.png`, `b-portrait.png` | 1024 x 1024, 투명 배경 | 주인공 상반신 일러스트. 대화 장면에서 혼잣말과 함께 화면 옆에 크게 뜨는 그림이다. 헝클어진 검은 머리, 민트색 옷, 입에 빨대를 문 채 조용히 결심한 표정 |
+지시문에서 그림체는 "첨부한 레퍼런스 이미지의 그림체를 따른다" 한 줄로만 적는다. 그 밖에 그림체를 꾸미는 형용사(고급스러운, 정교한, 질감이 풍부한 등)는 쓰지 않는다.
+다만 "사실적인 묘사, 3D 렌더, 사진 같은 질감은 쓰지 않는다"는 한 줄은 넣는다.
 
-플러그와 컵은 판에서 88px 칸 하나에 들어가고, 휴대폰에서는 30px 남짓까지 작아진다. 크게 그리되, 작게 줄여도 실루엣으로 알아볼 수 있어야 한다.
-투명 배경 그림에는 바닥 그림자를 넣지 않는다. 게임이 그림자를 따로 그린다.
+## 실제 사물 기준
 
-## 판 배경 배치
+지난번에는 사물을 막연하게 적어서 생성기가 미국식 기본값을 골랐다. 이번에는 아래 기준을 지시문에 그대로 옮긴다.
 
-판 배경은 탑뷰라서, 테이블을 바로 위에서 내려다본 평행 투영으로 그린다. 비스듬한 각도나 아이소메트릭으로 그리지 않는다.
-게임이 그 위에 플러그, 컵, 책, 메뉴판 같은 움직이는 조각과 멀티탭을 따로 올리므로, 퍼즐 칸이 놓일 자리는 비워 둔다.
-위치는 그림 전체 크기(1920 x 1080)에 대한 비율이다.
+| 사물 | 기준 |
+|---|---|
+| 내 플러그 | 한국 220V 노트북 충전기의 벽 플러그. 둥근 원통형 머리에 둥근 금속 핀 두 개가 나란히 오른쪽을 향한다(납작한 핀이 아니다). 머리 뒤로 굵은 전선이 이어져 그림 왼쪽 가장자리에서 잘린다. 몸통은 민트색 |
+| 컵 | 카페의 뜨거운 음료용 테이크아웃 종이컵. 납작한 플라스틱 뚜껑, 종이 홀더 슬리브가 끼워져 있다. 살짝 기울인 시점이라 뚜껑과 함께 컵 옆면이 보인다. 로고는 없다 |
+| 주인공 | 헝클어진 검은 머리의 대학생, 민트색 후드. 손에 아이스 음료 컵을 들고, 컵에서 이어진 길고 색 있는 빨대를 물고 있다. 빨대가 짧은 흰 막대처럼 보이면 담배로 오해받으므로 반드시 컵과 이어지게 그린다 |
+| 판 배경 | 위 장소 기준의 카페에서, 긴 공용 테이블을 살짝 기울인 탑뷰로 본 장면. 사람과 랩탑의 자리는 1차 의뢰서의 배치 표와 같다. 퍼즐 칸 자리(가로 20~84%, 세로 26~74%)와 멀티탭 자리는 비워 두고, 랩탑이 퍼즐 칸 자리를 넘어오지 않게 한다 |
 
-| 무엇 | 위치 (가로, 세로) | 설명 |
-|---|---|---|
-| 테이블 윗면 | 가로 11~91%, 세로 11~89% | 카페의 긴 나무 테이블. 물건이 놓이지 않은 넓은 면 |
-| 퍼즐 칸 자리 | 가로 20~84%, 세로 26~74% | 아무것도 그리지 않는다. 나뭇결과 조명만 있다 |
-| 멀티탭 자리 | 가로 75~84%, 세로 26~74% | 비워 둔다. 게임이 멀티탭을 따로 그린다 |
-| 나 | 가로 0~17%, 세로 31~61% | 테이블 왼쪽 끝에 앉은 대학생을 위에서 본 모습. 머리와 어깨, 오른쪽을 향한 빨대 |
-| 내 랩탑 | 가로 9~19%, 세로 61~87% | 열어 둔 랩탑, 민트색 스티커 |
-| 옆자리 사람 | 가로 85~100%, 세로 59~86% | 크고 하얀 헤드폰, 벽돌색 후드, 자기 화면을 보는 자세 |
-| 상대 랩탑 | 가로 86~97%, 세로 14~40% | 열어 둔 랩탑, 벽돌색 스티커, 화면은 밝게 빛나지만 글자는 없다 |
+판 배경의 사람과 물건 자리는 아래 비율을 따른다(그림 전체 1920 x 1080 기준).
 
-## 생성 지시문 틀
+| 무엇 | 위치 (가로, 세로) |
+|---|---|
+| 테이블 윗면 | 가로 11~91%, 세로 11~89% |
+| 퍼즐 칸 자리 (비움) | 가로 20~84%, 세로 26~74% |
+| 멀티탭 자리 (비움) | 가로 75~84%, 세로 26~74% |
+| 나 | 가로 0~17%, 세로 31~61% |
+| 내 랩탑 | 가로 3~18%, 세로 62~88% |
+| 옆자리 사람 | 가로 85~100%, 세로 59~86% |
+| 상대 랩탑 | 가로 86~97%, 세로 14~40% |
 
-두 그림체가 공정하게 비교되도록, 그림체 문장만 바꾸고 나머지는 같게 쓴다.
+## 순서
+
+이번에는 한 장으로 방향을 먼저 확인한다. 여러 장을 한꺼번에 만들지 않는다.
+
+1. `references/`에 레퍼런스 이미지가 있는지 확인한다. 없으면 사용자에게 넣어 달라고 하고 멈춘다.
+2. 내 플러그 한 장(`assets/style-test/r2-my-plug.png`, 512 x 512, 투명 배경)만 만든다.
+3. `docs/style-test.html`의 "2차 시험" 칸에서 확인한 뒤, 사용자에게 보여 주고 그림체가 맞는지 묻는다. 커밋하지 않고 기다린다.
+4. 사용자가 좋다고 하면 같은 방식으로 나머지 세 장을 만든다.
+   `r2-cup.png`(512 x 512, 투명 배경), `r2-portrait.png`(1024 x 1024, 투명 배경), `r2-scene.png`(1920 x 1080).
+5. `assets/style-test/notes.json`에 2차 지시문과, 어떤 레퍼런스 파일을 썼는지 파일 이름만 덧붙인다. 로컬 절대 경로는 적지 않는다.
+6. 세션 로그에 "커밋 대기" 목록을 남기고 멈춘다. 커밋은 하지 않는다. `references/` 안의 이미지는 커밋 대기 목록에 넣지 않는다.
+
+## 지시문 틀
 
 ```text
-<STYLE>
-Late-night cafe interior mood, warm pendant light from the upper left.
-The player's things are mint green (#6cc3a0), the neighbor's things are brick red (#d9534a).
-No text, no letters, no logos.
-<VIEW>
-Subject: ...
+Follow the art style of the attached reference images exactly. Cartoon game asset.
+Do not use realistic rendering, 3D render, or photographic texture.
+Slightly tilted top-down view: seen from above, with a little of the front side visible (like Stardew Valley). Not isometric.
+No text, no letters, no logos, no brand marks.
+The player's things are mint green, the neighbor's things are brick red.
+Subject: <위 사물 기준 표의 내용을 영어로>
 ```
 
-```text
-A: High-end 2D game illustration, clean confident anime line art with crisp black lines, polished cel shading
-   with two or three smooth tones, strong contrast, stylish and graphic composition.
-B: High-end 2D game illustration, painterly rendering with visible brush texture over thick ink outlines,
-   dramatic warm and cool lighting, glowing rim light on edges, rich detail and material texture.
-
-scene     : Strict top-down orthographic view of a long cafe table seen from directly above, no perspective. (위 배치 표를 영어로 함께 적는다)
-sprite    : Strict top-down orthographic view, single object, centered, transparent background, no ground shadow.
-portrait  : Bust portrait facing slightly to the right, transparent background, expressive face.
-```
-
-## 마칠 때
-
-1. 여덟 장을 `assets/style-test/`에 저장한다.
-2. `assets/style-test/notes.json`에 그림마다 쓴 지시문을 남긴다. 원본 이미지의 로컬 경로는 적지 않는다.
-3. 브라우저로 `docs/style-test.html`을 열어 두 벌이 나란히 보이는지, 게임 크기 미리보기에서 조각이 칸에 맞는지 확인한다.
-4. 세션 로그에 무엇을 만들었는지와 "커밋 대기" 목록을 남기고 멈춘다. 커밋은 하지 않는다.
+투명 배경 그림에는 "Single object, centered, transparent background, no ground shadow." 한 줄을 덧붙인다.
