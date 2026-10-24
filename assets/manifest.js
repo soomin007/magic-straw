@@ -4,4 +4,17 @@
 //
 // 예: 'piece-top-my-plug': 'assets/piece/top-my-plug.png',
 window.ASSET_MANIFEST = {
+  'scene-top': 'assets/scene/top.png',
+  'piece-top-my-plug': 'assets/piece/top-my-plug.png',
+  'piece-top-their-plug': 'assets/piece/top-their-plug.png',
+  'piece-top-cup': 'assets/piece/top-cup.png',
+  'piece-top-book': 'assets/piece/top-book.png',
+  'piece-top-menu': 'assets/piece/top-menu.png',
+  'divider-top-socket': 'assets/divider/top-socket.png',
+  'divider-top-plain': 'assets/divider/top-plain.png',
+  'fx-bubble': 'assets/fx/bubble.png',
+  'fx-ice': 'assets/fx/ice.png',
+  'ui-drink-ice': 'assets/ui/drink-ice.png',
+  'ui-drink-soda': 'assets/ui/drink-soda.png',
+  'ui-finger': 'assets/ui/finger.png',
 };

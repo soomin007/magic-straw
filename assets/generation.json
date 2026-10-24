@@ -1,0 +1,589 @@
+{
+  "date": "2026-10-24",
+  "batch": 1,
+  "tool": "built-in image_gen",
+  "sourceOfTruth": [
+    "AGENTS.md",
+    "docs/art-brief.md",
+    "assets/asset-list.js"
+  ],
+  "referencePolicy": "Each call includes the refs specified in asset-list.js plus approved r2 artwork. Object calls use three original reference images and two r2 object images; the scene uses two original reference images and r2 scene plus both portraits. The socket refinement uses the r2 cup and the generated matching plain divider.",
+  "processingPolicy": "Pillow and NumPy are used only for requested canvas sizing and placement, alpha-edge cleanup, and the explicitly authorized external black outline reinforcement. No blur is applied. Internal colors and linework are not redrawn. Character outlines inside the scene are not reinforced. New PNGs contain no text metadata.",
+  "lineMeasurementPolicy": "Widths are sampled along one documented raster scan at each object's outer boundary, relative to the alpha bounding box's short side. These samples do not certify every curve's normal width. The generated mint plug sample is 10.1%, within one raster pixel of the upper target, and was not thinned.",
+  "assets": [
+    {
+      "key": "scene-top",
+      "file": "assets/scene/top.png",
+      "width": 1920,
+      "height": 1080,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nOutlines thinner than the puzzle objects so the pieces stand out. Dark almost-black ink.\nSlightly tilted top-down view, seen from above with a little of the front side visible. Not isometric. Horizontal and vertical edges stay aligned to the canvas, no diamond-shaped table.\nNo text, no letters, no logos, no brand marks.\n1920x1080 opaque full-frame game background. A Korean late-night study cafe's WINDOW BAR seating: two students seated SIDE BY SIDE along the bottom edge, BOTH facing UP toward the long horizontal bar and the night window. Not opposite sides of a large table. Light pale-wood narrow long counter, deep green accents and window frames, pendant lamps, quiet night street outside. Match the mint hoodie student's messy black hair and the brick-red hoodie neighbor's large white headphones from the r2 character images. Use the old r2 scene for art style ONLY, completely replace its seating layout as specified below.\nPrecise normalized canvas layout, all percentages relative to full canvas:\n- Window/wall x=0-100%, y=0-20%, dark green frames, night street visible. Pendant lights remain in this top band.\n- Bar top x=4-98%, y=22-77%, a clean horizontal rectangle of light wood.\n- Puzzle area x=20-75%, y=26-74% MUST be empty pale wood with only quiet grain and lighting. No objects, no people, no shadow silhouettes, no grid lines.\n- Partition area x=75-84%, y=22-77% MUST also be empty pale wood. DO NOT DRAW ANY PARTITION, sockets or dividers; the game overlays them separately.\n- Player's open laptop strictly x=6-19%, y=28-56%, small mint sticker, no text. Keep wholly outside puzzle area. One iced drink x=7-15%, y=58-71%.\n- Neighbor's open laptop strictly x=86-97%, y=28-56%, small brick-red sticker, bright blank screen. Keep wholly outside partition area.\n- Player's head and shoulders x=4-25%, y=76-100%, rear view, messy black hair and mint hoodie. A visible GREEN bent straw points up-right. Crop body at bottom edge, don't overlap the empty puzzle region.\n- Neighbor's head and shoulders x=79-100%, y=76-100%, rear view, black hair, big WHITE headphones and brick-red hoodie, cropped at bottom edge.\nNo other people in the central play area. No props or illustration frames in the empty puzzle/partition zone.\nInputs 1-2: art-style and perspective references. Inputs 3-5: approved r2 background, player portrait and neighbor portrait for this same game's character identity and background art style. The new exact coordinates and SIDE-BY-SIDE seating override the old scene composition.",
+      "references": [
+        "references/view-cultofthelamb-1.jpg",
+        "references/view-dontstarve-1.jpg",
+        "assets/style-test/r2-scene.png",
+        "assets/style-test/r2-portrait.png",
+        "assets/style-test/r2-neighbor-portrait.png"
+      ],
+      "refinements": [
+        {
+          "prompt": "Edit this cafe game background, preserving its art style, character identities, night window, pale wood and deep green palette. The only goal is accurate placement for the game overlays. Keep both students seated side by side at the bottom, both facing up.\nUse exact canvas percentages: move and scale down the LEFT laptop so every part lies inside x=6-19%, y=28-56%. Move the left iced drink inside x=7-15%, y=58-71%. Move and scale the RIGHT laptop so every part lies inside x=86-97%, y=28-56%. Remove the extra right-hand hot drink. Both laptop screens blank, no letters or logos.\nLower and slightly reduce BOTH students so their heads start at y=76% and shoulders are cropped by the BOTTOM edge. Player entirely in x=4-25%, y=76-100%, mint hoodie, black hair, green straw pointing up-right. Neighbor entirely in x=79-100%, y=76-100%, brick-red hoodie, white headphones. No chairs or bodies above y=76%.\nThe horizontal bar top stays x=4-98%, y=22-77%. Thus the students are just in front of its lower edge. Fill x=20-84%, y=22-75% with EMPTY light wood. This entire rectangle must contain no character, hand, laptop, cable, drink, partition or socket. Keep the table edge horizontal and unbroken. No table legs or floor inside this rectangle. No grid, no text, no watermark. Crisp cartoon ink, not realistic, no 3D.",
+          "references": [
+            "previous generated candidate",
+            "references/view-cultofthelamb-1.jpg",
+            "references/view-dontstarve-1.jpg",
+            "assets/style-test/r2-portrait.png",
+            "assets/style-test/r2-neighbor-portrait.png"
+          ]
+        },
+        {
+          "prompt": "Edit this exact image, preserving all style and all background details. ONLY move the two foreground students LOWER: their highest hair pixels must start at 80% of the image height, not 71%. Enlarge the empty tabletop down to y=77%, place the thin table front edge at y=77%, and keep all heads, hands, headphones, hoodies, shoulders and chairs BELOW y=77%. The mint student remains at bottom left and the white-headphone brick-red student bottom right, both facing up, bodies cropped by bottom edge. Keep their character identities.\nThe entire rectangle x=20-84%, y=26-75% must be EMPTY light wood, completely free of character hair/hands and objects. Keep the center unobstructed. Move the left laptop very slightly right and up: entirely x=6-19%, y=28-56%. Move right laptop slightly up and right: entirely x=86-97%, y=28-56%. One iced cup left x=7-15%, y=58-71%. Add tiny plain mint and brick-red sticker rectangles to corresponding laptops. No text, no letters, no logo. Add a long GREEN bent straw near the left player's mouth pointing up-right but keep it below y=76%. No partition or socket, those are separate assets. No 3D or realistic textures. 1920x1080 16:9 landscape.",
+          "references": [
+            "previous generated candidate",
+            "references/view-cultofthelamb-1.jpg",
+            "references/view-dontstarve-1.jpg",
+            "assets/style-test/r2-portrait.png",
+            "assets/style-test/r2-neighbor-portrait.png"
+          ]
+        }
+      ],
+      "processing": {
+        "rawSize": [
+          1672,
+          941
+        ],
+        "resize": [
+          1920,
+          1080
+        ],
+        "externalInkRadius": 0
+      }
+    },
+    {
+      "key": "piece-top-my-plug",
+      "file": "assets/piece/top-my-plug.png",
+      "width": 512,
+      "height": 512,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nExtremely thick, very dark black (#111111) outlines: the outer outline is 8-10% of the object's shortest side, with a crisp outer edge, no blur, no glow. Inner lines about half that.\nSlightly tilted top-down view, seen from above with a little of the front side visible. Not isometric.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nSingle object, centered, transparent background, no ground shadow, no white border.\nInput images 1-3 are art-style and camera references only. Input images 4-5 are the approved r2 plug and cup from this same game: match their linework and colors. Do not reproduce the old background composition.\nSubject: The player's Korean 220V laptop charger wall plug. A round cylindrical mint-green plug head, exactly TWO parallel ROUND cylindrical metal pins extending horizontally to the RIGHT. Never flat American blades. A thick mint cable exits the body toward the LEFT and is cut by the left canvas edge. Keep both full pin tips visible and let the farthest tips touch the RIGHT canvas edge. The body's visible front and top match the r2 mint plug. Fill the canvas with a little margin above and below.",
+      "references": [
+        "references/line-bugfables-1.jpg",
+        "references/view-cultofthelamb-1.jpg",
+        "references/line-castlecrashers-1.jpg",
+        "assets/style-test/r2-my-plug.png",
+        "assets/style-test/r2-cup.png"
+      ],
+      "refinements": [],
+      "processing": {
+        "rawSize": [
+          1676,
+          939
+        ],
+        "sourceCrop": [
+          0,
+          68,
+          1676,
+          875
+        ],
+        "resize": [
+          512,
+          247
+        ],
+        "canvasPlacement": [
+          0,
+          132
+        ],
+        "externalInkRadius": 0,
+        "inkColor": "#111111",
+        "sampleAxis": "center-top",
+        "sampleWidth": 25,
+        "objectShortSide": 247,
+        "sampleRatio": 0.1012,
+        "alphaCleanup": "outside matte below 128 removed; no blur",
+        "internalLines": "unchanged generated linework"
+      }
+    },
+    {
+      "key": "piece-top-their-plug",
+      "file": "assets/piece/top-their-plug.png",
+      "width": 512,
+      "height": 512,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nExtremely thick, very dark black (#111111) outlines: the outer outline is 8-10% of the object's shortest side, with a crisp outer edge, no blur, no glow. Inner lines about half that.\nSlightly tilted top-down view, seen from above with a little of the front side visible. Not isometric.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nSingle object, centered, transparent background, no ground shadow, no white border.\nInput images 1-3 are art-style and camera references only. Input images 4-5 are the approved r2 plug and cup from this same game: match their linework and colors. Do not reproduce the old background composition.\nSubject: The neighbor's Korean 220V phone wall charger. A chunky rectangular BRICK RED power adapter block with exactly TWO parallel ROUND cylindrical metal pins extending horizontally to the RIGHT. A thin brick-red phone-charging cable exits the block toward the LEFT canvas edge. Never flat American pins. Keep both full pin tips visible, touching the RIGHT canvas edge. Match the approved mint r2 plug's view and same game art style, but unmistakably a rectangular phone adapter, not a cylinder.",
+      "references": [
+        "references/line-bugfables-1.jpg",
+        "references/view-cultofthelamb-1.jpg",
+        "references/line-castlecrashers-1.jpg",
+        "assets/style-test/r2-my-plug.png",
+        "assets/style-test/r2-cup.png"
+      ],
+      "refinements": [],
+      "processing": {
+        "rawSize": [
+          1675,
+          939
+        ],
+        "sourceCrop": [
+          0,
+          100,
+          1675,
+          829
+        ],
+        "resize": [
+          491,
+          214
+        ],
+        "canvasPlacement": [
+          10,
+          149
+        ],
+        "externalInkRadius": 11,
+        "inkColor": "#111111",
+        "sampleAxis": "center-top",
+        "sampleWidth": 20,
+        "objectShortSide": 234,
+        "sampleRatio": 0.0855,
+        "alphaCleanup": "outside matte below 128 removed; no blur",
+        "internalLines": "unchanged generated linework"
+      }
+    },
+    {
+      "key": "piece-top-cup",
+      "file": "assets/piece/top-cup.png",
+      "width": 512,
+      "height": 512,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nExtremely thick, very dark black (#111111) outlines: the outer outline is 8-10% of the object's shortest side, with a crisp outer edge, no blur, no glow. Inner lines about half that.\nSlightly tilted top-down view, seen from above with a little of the front side visible. Not isometric.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nSingle object, centered, transparent background, no ground shadow, no white border.\nInput images 1-3 are art-style and camera references only. Input images 4-5 are the approved r2 plug and cup from this same game: match their linework and colors. Do not reproduce the old background composition.\nSubject: One hot takeaway paper coffee cup matching the r2-cup reference: a flat cream plastic lid with drinking opening, a brown paper holder sleeve around the cream cup, a small plain mint rectangle on the sleeve, no logo. Show the lid AND a substantial front and side face of the cup, never only the top lid. Fill most of canvas, with a small transparent margin all around.",
+      "references": [
+        "references/line-bugfables-1.jpg",
+        "references/view-cultofthelamb-1.jpg",
+        "references/line-castlecrashers-1.jpg",
+        "assets/style-test/r2-my-plug.png",
+        "assets/style-test/r2-cup.png"
+      ],
+      "refinements": [],
+      "processing": {
+        "rawSize": [
+          1223,
+          1286
+        ],
+        "sourceCrop": [
+          124,
+          14,
+          1096,
+          1254
+        ],
+        "resize": [
+          336,
+          428
+        ],
+        "canvasPlacement": [
+          88,
+          42
+        ],
+        "externalInkRadius": 24,
+        "inkColor": "#111111",
+        "sampleAxis": "center-top",
+        "sampleWidth": 34,
+        "objectShortSide": 382,
+        "sampleRatio": 0.089,
+        "alphaCleanup": "outside matte below 128 removed; no blur",
+        "internalLines": "unchanged generated linework"
+      }
+    },
+    {
+      "key": "piece-top-book",
+      "file": "assets/piece/top-book.png",
+      "width": 512,
+      "height": 512,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nExtremely thick, very dark black (#111111) outlines: the outer outline is 8-10% of the object's shortest side, with a crisp outer edge, no blur, no glow. Inner lines about half that.\nSlightly tilted top-down view, seen from above with a little of the front side visible. Not isometric.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nSingle object, centered, transparent background, no ground shadow, no white border.\nInput images 1-3 are art-style and camera references only. Input images 4-5 are the approved r2 plug and cup from this same game: match their linework and colors. Do not reproduce the old background composition.\nSubject: A heavy stack of exactly THREE thick university textbooks, one on another. Deep green, muted ochre, and brick colored blank covers, no lettering or numbers. Uneven stacked silhouette, visible thick cream page blocks and dark spines. Fills most of a square puzzle cell. Match the cup and plug reference line weight and slightly top-down camera.",
+      "references": [
+        "references/line-bugfables-1.jpg",
+        "references/view-cultofthelamb-1.jpg",
+        "references/line-castlecrashers-1.jpg",
+        "assets/style-test/r2-my-plug.png",
+        "assets/style-test/r2-cup.png"
+      ],
+      "refinements": [],
+      "processing": {
+        "rawSize": [
+          1254,
+          1254
+        ],
+        "sourceCrop": [
+          46,
+          0,
+          1208,
+          1254
+        ],
+        "resize": [
+          393,
+          424
+        ],
+        "canvasPlacement": [
+          59,
+          44
+        ],
+        "externalInkRadius": 26,
+        "inkColor": "#111111",
+        "sampleAxis": "center-top",
+        "sampleWidth": 39,
+        "objectShortSide": 443,
+        "sampleRatio": 0.088,
+        "alphaCleanup": "outside matte below 128 removed; no blur",
+        "internalLines": "unchanged generated linework"
+      }
+    },
+    {
+      "key": "piece-top-menu",
+      "file": "assets/piece/top-menu.png",
+      "width": 512,
+      "height": 512,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nExtremely thick, very dark black (#111111) outlines: the outer outline is 8-10% of the object's shortest side, with a crisp outer edge, no blur, no glow. Inner lines about half that.\nSlightly tilted top-down view, seen from above with a little of the front side visible. Not isometric.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nSingle object, centered, transparent background, no ground shadow, no white border.\nInput images 1-3 are art-style and camera references only. Input images 4-5 are the approved r2 plug and cup from this same game: match their linework and colors. Do not reproduce the old background composition.\nOutput format: square 512x512 canvas.\nSubject: One triangular tent-shaped acrylic cafe table menu stand, with a blank cream insert and a small simple green cup pictogram only. Its long ground-contact/base axis runs diagonally from LOWER LEFT to UPPER RIGHT, like the slash /. The entire sign plane and base follow this / direction. Show its triangular side and front face. No words or prices. Crucial directional puzzle piece: do not use the opposite backslash direction.",
+      "references": [
+        "references/line-bugfables-1.jpg",
+        "references/view-cultofthelamb-1.jpg",
+        "references/line-castlecrashers-1.jpg",
+        "assets/style-test/r2-my-plug.png",
+        "assets/style-test/r2-cup.png"
+      ],
+      "refinements": [],
+      "processing": {
+        "rawSize": [
+          1254,
+          1254
+        ],
+        "sourceCrop": [
+          153,
+          78,
+          1147,
+          1176
+        ],
+        "resize": [
+          389,
+          430
+        ],
+        "canvasPlacement": [
+          61,
+          41
+        ],
+        "externalInkRadius": 23,
+        "inkColor": "#111111",
+        "sampleAxis": "center-top",
+        "sampleWidth": 41,
+        "objectShortSide": 433,
+        "sampleRatio": 0.0947,
+        "alphaCleanup": "outside matte below 128 removed; no blur",
+        "internalLines": "unchanged generated linework"
+      }
+    },
+    {
+      "key": "divider-top-plain",
+      "file": "assets/divider/top-plain.png",
+      "width": 256,
+      "height": 256,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nExtremely thick, very dark black (#111111) outlines: the outer outline is 8-10% of the object's shortest side, with a crisp outer edge, no blur, no glow. Inner lines about half that.\nSlightly tilted top-down view, seen from above with a little of the front side visible. Not isometric.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nSingle object, centered, transparent background, no ground shadow, no white border.\nInput images 1-3 are art-style and camera references only. Input images 4-5 are the approved r2 plug and cup from this same game: match their linework and colors. Do not reproduce the old background composition.\nSubject: A repeatable vertical middle segment of a LOW pale-wood partition separating adjacent cafe seats. Seen from above with the LEFT vertical face visible. A narrow dark green top cap. A straight long partition runs from the TOP canvas edge to the BOTTOM canvas edge with identical horizontal cross section at both edges, transparent margins on left and right. No end caps, no rounded top/bottom ends, no horizontal black strokes crossing the top and bottom edges, no base foot. Seamless vertical tiling. Occupy x=28% through 72% and full y=0% through 100%. NO socket on this plain segment.",
+      "references": [
+        "references/line-bugfables-1.jpg",
+        "references/view-cultofthelamb-1.jpg",
+        "references/line-castlecrashers-1.jpg",
+        "assets/style-test/r2-my-plug.png",
+        "assets/style-test/r2-cup.png"
+      ],
+      "refinements": [
+        {
+          "prompt": "Edit the attached low-wood cafe divider into a SEAMLESS VERTICALLY REPEATING SQUARE 256x256 tile. Keep the same wood color, dark green trim, and black outline art style. Other references are style only.\nThe divider is a VERTICAL STRIP across the tile's full height, occupying x=28-72%. Its silhouette is perfectly straight vertical at all y coordinates, NOT diagonal. Transparent on left and right. The visible left-facing pale wood side occupies x=30-62%. A narrow dark green TOP SURFACE appears as a VERTICAL STRIPE along x=62-70%, running through the ENTIRE height, not a cap at the top of the picture. The strip continues beyond BOTH the top and bottom canvas edges: no visible top or bottom END FACE, no diagonal end, no horizontal border across the tile. No furniture feet, no socket. The first pixel row and last pixel row must match exactly in silhouette and color so copies join vertically without gaps. No ground shadow, no blur, no white border, no lettering. Outer black lines along the sides are 8-10% of the strip's short width, crisp, #111. Slightly top-down camera, front LEFT face visible, no isometric angle.",
+          "references": [
+            "previous generated candidate",
+            "references/line-bugfables-1.jpg",
+            "references/view-cultofthelamb-1.jpg",
+            "references/line-castlecrashers-1.jpg",
+            "assets/style-test/r2-cup.png"
+          ]
+        }
+      ],
+      "processing": {
+        "rawSize": [
+          1254,
+          1254
+        ],
+        "sourceCrop": [
+          461,
+          0,
+          791,
+          1254
+        ],
+        "resize": [
+          67,
+          256
+        ],
+        "canvasPlacement": [
+          11,
+          0
+        ],
+        "externalInkRadius": 3,
+        "inkColor": "#111111",
+        "sampleAxis": "left at 20% height",
+        "sampleWidth": 6,
+        "objectShortSide": 71,
+        "sampleRatio": 0.0845,
+        "alphaCleanup": "outside matte below 128 removed; no blur",
+        "internalLines": "unchanged generated linework"
+      }
+    },
+    {
+      "key": "divider-top-socket",
+      "file": "assets/divider/top-socket.png",
+      "width": 256,
+      "height": 256,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nExtremely thick, very dark black (#111111) outlines: the outer outline is 8-10% of the object's shortest side, with a crisp outer edge, no blur, no glow. Inner lines about half that.\nSlightly tilted top-down view, seen from above with a little of the front side visible. Not isometric.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nSingle object, centered, transparent background, no ground shadow, no white border.\nInput images 1-3 are art-style and camera references only. Input image 4 is the approved r2 cup and input image 5 is the matching plain divider, which is the exact geometry and color to preserve. Do not reproduce the old background composition.\n\nOutput format: 256x256 SQUARE tile, not a tall illustration.\nSubject: The exact same repeatable low pale-wood partition segment as the matching plain divider. Vertically runs from TOP edge to BOTTOM edge, identical cross section at those edges, narrow dark green top cap, left-facing wood face visible, transparent left/right. One cream Korean 220V recessed round wall socket is attached to the LEFT face at mid-height; exactly two ROUND dark contact holes, not US slots. No extra sockets. Keep the complete top and bottom edge sections absolutely identical to the plain divider reference, no end caps or horizontal border across edges. The socket must face LEFT toward the arriving right-pointing plugs. Plain divider reference is appended as input image 5.\nKeep the entire strip straight vertical just like input 5. The green top surface is a continuous VERTICAL green stripe on the right, not an end cap at the top of the canvas. It is ONLY a middle section of a longer partition, no exposed end.",
+      "references": [
+        "references/line-bugfables-1.jpg",
+        "references/view-cultofthelamb-1.jpg",
+        "references/line-castlecrashers-1.jpg",
+        "assets/style-test/r2-cup.png",
+        "previous generated candidate"
+      ],
+      "refinements": [],
+      "processing": {
+        "rawSize": [
+          1254,
+          1254
+        ],
+        "sourceCrop": [
+          456,
+          0,
+          798,
+          1254
+        ],
+        "resize": [
+          70,
+          256
+        ],
+        "canvasPlacement": [
+          11,
+          0
+        ],
+        "externalInkRadius": 3,
+        "inkColor": "#111111",
+        "sampleAxis": "left at 20% height",
+        "sampleWidth": 6,
+        "objectShortSide": 74,
+        "sampleRatio": 0.0811,
+        "alphaCleanup": "outside matte below 128 removed; no blur",
+        "internalLines": "unchanged generated linework"
+      }
+    },
+    {
+      "key": "fx-bubble",
+      "file": "assets/fx/bubble.png",
+      "width": 512,
+      "height": 512,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nExtremely thick, very dark black (#111111) outlines: the outer outline is 8-10% of the object's shortest side, with a crisp outer edge, no blur, no glow. Inner lines about half that.\nSlightly tilted top-down view, seen from above with a little of the front side visible. Not isometric.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nSingle object, centered, transparent background, no ground shadow, no white border.\nInput images 1-3 are art-style and camera references only. Input images 4-5 are the approved r2 plug and cup from this same game: match their linework and colors. Do not reproduce the old background composition.\nOutput format: square 512x512 canvas.\nSubject: A single hollow translucent soda bubble ring that will surround a separate puzzle object. Large circular/oval bubble nearly filling the square, thick #111 outer contour, narrow pale mint translucent soap film on rim, a few crisp white specular highlights and tiny mint sparkle marks integrated into the rim. The middle must be COMPLETELY transparent and empty, no object inside. No background wash or halo. Clear silhouette.",
+      "references": [
+        "references/line-bugfables-1.jpg",
+        "references/view-cultofthelamb-1.jpg",
+        "references/line-castlecrashers-1.jpg",
+        "assets/style-test/r2-my-plug.png",
+        "assets/style-test/r2-cup.png"
+      ],
+      "refinements": [],
+      "processing": {
+        "rawSize": [
+          1254,
+          1254
+        ],
+        "sourceCrop": [
+          32,
+          49,
+          1225,
+          1210
+        ],
+        "resize": [
+          409,
+          398
+        ],
+        "canvasPlacement": [
+          51,
+          57
+        ],
+        "externalInkRadius": 33,
+        "inkColor": "#111111",
+        "sampleAxis": "center-top",
+        "sampleWidth": 40,
+        "objectShortSide": 462,
+        "sampleRatio": 0.0866,
+        "alphaCleanup": "external matte below 16 removed; original translucent rim and hollow center retained; no opaque backing inside the ring",
+        "internalLines": "unchanged generated linework"
+      }
+    },
+    {
+      "key": "fx-ice",
+      "file": "assets/fx/ice.png",
+      "width": 192,
+      "height": 192,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nExtremely thick, very dark black (#111111) outlines: the outer outline is 8-10% of the object's shortest side, with a crisp outer edge, no blur, no glow. Inner lines about half that.\nSlightly tilted top-down view, seen from above with a little of the front side visible. Not isometric.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nSingle object, centered, transparent background, no ground shadow, no white border.\nInput images 1-3 are art-style and camera references only. Input images 4-5 are the approved r2 plug and cup from this same game: match their linework and colors. Do not reproduce the old background composition.\nOutput format: square 192x192 canvas.\nSubject: Exactly one small flying ice cube. A chunky angular translucent pale blue ice piece with a mint-cyan edge and broad dark ink contour, visible front and top faces. No trail, no extra ice pieces, no snowflake, no ground shadow. It will be a tiny projectile, so keep the main shape simple and fill most of the canvas.",
+      "references": [
+        "references/line-bugfables-1.jpg",
+        "references/view-cultofthelamb-1.jpg",
+        "references/line-castlecrashers-1.jpg",
+        "assets/style-test/r2-my-plug.png",
+        "assets/style-test/r2-cup.png"
+      ],
+      "refinements": [],
+      "processing": {
+        "rawSize": [
+          1254,
+          1254
+        ],
+        "sourceCrop": [
+          96,
+          95,
+          1166,
+          1183
+        ],
+        "resize": [
+          159,
+          161
+        ],
+        "canvasPlacement": [
+          16,
+          15
+        ],
+        "externalInkRadius": 8,
+        "inkColor": "#111111",
+        "sampleAxis": "center-top",
+        "sampleWidth": 15,
+        "objectShortSide": 173,
+        "sampleRatio": 0.0867,
+        "alphaCleanup": "outside matte below 128 removed; no blur",
+        "internalLines": "unchanged generated linework"
+      }
+    },
+    {
+      "key": "ui-drink-ice",
+      "file": "assets/ui/drink-ice.png",
+      "width": 192,
+      "height": 192,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nExtremely thick, very dark black (#111111) outlines: the outer outline is 8-10% of the object's shortest side, with a crisp outer edge, no blur, no glow. Inner lines about half that.\nSlightly tilted top-down view, seen from above with a little of the front side visible. Not isometric.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nSingle object, centered, transparent background, no ground shadow, no white border.\nInput images 1-3 are art-style and camera references only. Input images 4-5 are the approved r2 plug and cup from this same game: match their linework and colors. Do not reproduce the old background composition.\nOutput format: square 192x192 canvas.\nSubject: One icon of a clear plastic cup of iced americano, with visible cream-brown angular ice cubes in dark coffee, clear flat lid and a LONG bent GREEN drinking straw visibly connecting into the drink. Match the drink held by the r2 protagonist. No sleeve or logo. Large simple icon filling most of the transparent square, to be used in an ability button.",
+      "references": [
+        "references/line-bugfables-1.jpg",
+        "references/view-cultofthelamb-1.jpg",
+        "references/line-castlecrashers-1.jpg",
+        "assets/style-test/r2-my-plug.png",
+        "assets/style-test/r2-cup.png"
+      ],
+      "refinements": [],
+      "processing": {
+        "rawSize": [
+          1254,
+          1254
+        ],
+        "sourceCrop": [
+          235,
+          24,
+          1086,
+          1234
+        ],
+        "resize": [
+          117,
+          167
+        ],
+        "canvasPlacement": [
+          37,
+          12
+        ],
+        "externalInkRadius": 5,
+        "inkColor": "#111111",
+        "sampleAxis": "center-left",
+        "sampleWidth": 12,
+        "objectShortSide": 125,
+        "sampleRatio": 0.096,
+        "alphaCleanup": "outside matte below 128 removed; no blur",
+        "internalLines": "unchanged generated linework"
+      }
+    },
+    {
+      "key": "ui-drink-soda",
+      "file": "assets/ui/drink-soda.png",
+      "width": 192,
+      "height": 192,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nExtremely thick, very dark black (#111111) outlines: the outer outline is 8-10% of the object's shortest side, with a crisp outer edge, no blur, no glow. Inner lines about half that.\nSlightly tilted top-down view, seen from above with a little of the front side visible. Not isometric.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nSingle object, centered, transparent background, no ground shadow, no white border.\nInput images 1-3 are art-style and camera references only. Input images 4-5 are the approved r2 plug and cup from this same game: match their linework and colors. Do not reproduce the old background composition.\nOutput format: square 192x192 canvas.\nSubject: One icon of a clear plastic cup of vivid GREEN soda, rising round fizzy bubbles inside the liquid, clear flat lid and a LONG bent GREEN drinking straw visibly connecting into the drink. Clearly distinct from the dark iced americano. Same cup silhouette and camera as the iced-coffee button icon. Large simple icon filling most of transparent square.",
+      "references": [
+        "references/line-bugfables-1.jpg",
+        "references/view-cultofthelamb-1.jpg",
+        "references/line-castlecrashers-1.jpg",
+        "assets/style-test/r2-my-plug.png",
+        "assets/style-test/r2-cup.png"
+      ],
+      "refinements": [],
+      "processing": {
+        "rawSize": [
+          1254,
+          1254
+        ],
+        "sourceCrop": [
+          210,
+          33,
+          1101,
+          1226
+        ],
+        "resize": [
+          121,
+          162
+        ],
+        "canvasPlacement": [
+          35,
+          15
+        ],
+        "externalInkRadius": 8,
+        "inkColor": "#111111",
+        "sampleAxis": "center-left",
+        "sampleWidth": 13,
+        "objectShortSide": 135,
+        "sampleRatio": 0.0963,
+        "alphaCleanup": "outside matte below 128 removed; no blur",
+        "internalLines": "unchanged generated linework"
+      }
+    },
+    {
+      "key": "ui-finger",
+      "file": "assets/ui/finger.png",
+      "width": 192,
+      "height": 192,
+      "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nExtremely thick, very dark black (#111111) outlines: the outer outline is 8-10% of the object's shortest side, with a crisp outer edge, no blur, no glow. Inner lines about half that.\nSlightly tilted top-down view, seen from above with a little of the front side visible. Not isometric.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nSingle object, centered, transparent background, no ground shadow, no white border.\nInput images 1-3 are art-style and camera references only. Input images 4-5 are the approved r2 plug and cup from this same game: match their linework and colors. Do not reproduce the old background composition.\nOutput format: square 192x192 canvas.\nSubject: A single cartoon human hand pointing straight DOWN. One long extended index finger points to the BOTTOM center, other three fingers folded, thumb visible at the side. Pale skin, small mint-green cuff. Thick dark outline, compact readable silhouette; no cursor arrow, no extra hand, no ground shadow. This is a tutorial pointer.",
+      "references": [
+        "references/line-bugfables-1.jpg",
+        "references/view-cultofthelamb-1.jpg",
+        "references/line-castlecrashers-1.jpg",
+        "assets/style-test/r2-my-plug.png",
+        "assets/style-test/r2-cup.png"
+      ],
+      "refinements": [],
+      "processing": {
+        "rawSize": [
+          1254,
+          1254
+        ],
+        "sourceCrop": [
+          301,
+          69,
+          966,
+          1169
+        ],
+        "resize": [
+          104,
+          172
+        ],
+        "canvasPlacement": [
+          44,
+          10
+        ],
+        "externalInkRadius": 3,
+        "inkColor": "#111111",
+        "sampleAxis": "center-top",
+        "sampleWidth": 9,
+        "objectShortSide": 108,
+        "sampleRatio": 0.0833,
+        "alphaCleanup": "outside matte below 128 removed; no blur",
+        "internalLines": "unchanged generated linework"
+      }
+    }
+  ]
+}
