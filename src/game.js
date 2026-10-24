@@ -22,10 +22,12 @@
   const TOP_STRAW = LAYOUT.top.straw;
   const SIDE_STRAW = LAYOUT.side.straw;
 
-  // 콘센트 기둥은 줄마다 바 높이(z = 0)와 그 위(z = 1)에 콘센트가 고정돼 있다. 그보다 위는 기둥 윗면이다.
+  // 콘센트 칸막이는 줄마다 바 높이(z = 0)와 그 위(z = 1)에 콘센트가 고정돼 있다. 그보다 위는 칸막이 윗면이다.
   // 레벨에서 콘센트가 없는 자리는 옆자리 사람이 꽂아 둔 다른 기기(배경 그림, 건드릴 수 없음)로 그린다.
   const OUTLET_LEVELS = 2;
 
+  // 꽂힌 플러그는 칸막이 바로 왼쪽 칸에 있다. 칸막이 칸의 왼쪽 29px(4cm)이 칸막이 판이고 콘센트는 그 왼쪽 면에 붙어 있어서,
+  // 플러그를 오른쪽으로 14px 밀어 핀 끝이 콘센트에 박히게 놓는다.
   const INSERT_OFFSET = 14;
   const TOP_LIFT = 26;
 
@@ -37,6 +39,8 @@
 
   const DRINK_ORDER = ['ice', 'soda'];
   const DRINK_LABELS = { ice: '아이스 아메리카노', soda: '소다' };
+  // 음료 버튼에 붙이는 효과 기호. 글을 몰라도 얼음은 밀고, 소다는 띄운다는 것을 알 수 있게 한다.
+  const DRINK_EFFECT = { ice: '→', soda: '↑' };
   const KIND_ASSET = { myPlug: 'my-plug', theirPlug: 'their-plug', cup: 'cup', book: 'book', menu: 'menu' };
 
   const byId = (id) => document.getElementById(id);
@@ -51,6 +55,7 @@
     divider: byId('divider'),
     aimBand: byId('aim-band'),
     aimPath: byId('aim-path'),
+    aimHints: byId('aim-hints'),
     fxLayer: byId('fx-layer'),
     sideBar: byId('side-bar'),
     sideLabel: byId('side-label'),
@@ -115,7 +120,7 @@
 
   // 진행 저장. 저장소를 쓸 수 없는 환경에서도 게임은 그대로 돌아가야 한다.
   function loadProgress() {
-    const fallback = { current: 0, unlocked: 0, cleared: [], difficulty: 'relaxed', seenPrologue: false };
+    const fallback = { current: 0, unlocked: 0, cleared: [], difficulty: 'relaxed', seenPrologue: false, demosSeen: [] };
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
       return saved ? { ...fallback, ...saved } : fallback;
@@ -160,11 +165,27 @@
   }
 
   // 장면 좌표를 창 본문(window-body) 기준 화면 좌표로 바꾼다. 손가락 안내를 놓을 때 쓴다.
+  // 화면 좌표(getBoundingClientRect)를 쓰지 않고 배치 좌표(offsetLeft 등)로 계산한다.
+  // 휴대폰 세로 화면에서는 게임 전체를 90도 돌려 보여 주는데, 화면 좌표는 그 회전 때문에 어긋나기 때문이다.
   function scenePointToBody(point) {
-    const sceneBox = ui.scene.getBoundingClientRect();
-    const bodyBox = ui.body.getBoundingClientRect();
-    const scale = sceneBox.width / SCENE_WIDTH;
-    return { x: sceneBox.left - bodyBox.left + point.x * scale, y: sceneBox.top - bodyBox.top + point.y * scale };
+    const fit = game.sceneFit || { scale: 1, offsetX: 0, offsetY: 0 };
+    return {
+      x: ui.stage.offsetLeft + fit.offsetX + point.x * fit.scale,
+      y: ui.stage.offsetTop + fit.offsetY + point.y * fit.scale,
+    };
+  }
+
+  // 요소의 위치를 창 본문(window-body) 기준 배치 좌표로 구한다.
+  function offsetWithinBody(element) {
+    let x = 0;
+    let y = 0;
+    let current = element;
+    while (current && current !== ui.body) {
+      x += current.offsetLeft;
+      y += current.offsetTop;
+      current = current.offsetParent;
+    }
+    return { x, y };
   }
 
   // 레벨 시작
@@ -202,7 +223,7 @@
       button.dataset.drink = drink;
       const key = DRINK_ORDER.indexOf(drink) + 1;
       button.title = `단축키 ${key}`;
-      button.innerHTML = `<span class="drink-icon">${Assets.html(`ui-drink-${drink}`)}</span>`
+      button.innerHTML = `<span class="drink-icon">${Assets.html(`ui-drink-${drink}`)}<span class="effect" aria-hidden="true">${DRINK_EFFECT[drink]}</span></span>`
         + `<span>${DRINK_LABELS[drink]}</span><kbd class="key">${key}</kbd>`;
       button.addEventListener('click', () => selectDrink(drink));
       ui.drinks.appendChild(button);
@@ -217,6 +238,7 @@
     game.selectedDrink = game.selectedDrink === drink ? null : drink;
     clearAim();
     updateControls();
+    if (game.selectedDrink && !(progress.demosSeen || []).includes(drink)) playDemo(drink);
   }
 
   // 시점과 판 그리기
@@ -339,12 +361,24 @@
     else image.addEventListener('load', apply, { once: true });
   }
 
-  // 콘센트 기둥 한 칸의 그림 이름. 레벨에 콘센트가 있으면 빈 콘센트(상대 플러그가 꽂혀 있을 수도 있다),
-  // 없으면 옆자리 사람의 다른 기기가 꽂힌 콘센트, 콘센트 높이보다 위는 기둥 윗면이다.
+  // 콘센트 칸막이 한 칸의 그림 이름. 레벨에 콘센트가 있으면 빈 콘센트(상대 플러그가 꽂혀 있을 수도 있다),
+  // 없으면 옆자리 사람의 다른 기기가 꽂힌 콘센트, 콘센트 높이보다 위는 칸막이 윗면이다.
   function outletKey(view, row, z) {
     if (z >= OUTLET_LEVELS) return `outlet-${view}-cap`;
     const free = game.level.sockets.some((socket) => socket.row === row && socket.z === z);
     return `outlet-${view}-${free ? 'free' : 'taken'}`;
+  }
+
+  // 탑뷰에서 물건 하나를 놓는다.
+  // 물건 그림(CELL x CELL)은 줄보다 키가 커서, 아래 끝을 줄 아래 끝에 맞추고 위로 솟게 둔다.
+  // 앞줄(창 쪽, row가 큰 줄)이 뒷줄을 가리도록 앞줄일수록 위에 그린다.
+  function applyTopTransform(element, obj) {
+    const body = element.querySelector('.piece-body');
+    const offsetX = obj.x * CELL + (obj.inserted ? INSERT_OFFSET : 0);
+    element.style.transform = `translate(${offsetX}px, ${(obj.row + 1) * ROW_HEIGHT - CELL}px)`;
+    element.style.zIndex = String(10 + obj.row * 3 + obj.z);
+    body.style.transform = obj.z > 0 ? `translate(0, ${-obj.z * TOP_LIFT}px) scale(${1 + obj.z * 0.08})` : '';
+    element.classList.toggle('lifted', obj.z > 0);
   }
 
   function render(snapshot, animate) {
@@ -359,12 +393,7 @@
       if (isTop) {
         element.hidden = false;
         element.classList.remove('ghost');
-        // 물건 그림(CELL x CELL)은 줄보다 키가 커서, 아래 끝을 줄 아래 끝에 맞추고 위로 솟게 둔다.
-        // 앞줄(창 쪽, row가 큰 줄)이 뒷줄을 가리도록 앞줄일수록 위에 그린다.
-        element.style.transform = `translate(${offsetX}px, ${(obj.row + 1) * ROW_HEIGHT - CELL}px)`;
-        element.style.zIndex = String(10 + obj.row * 3 + obj.z);
-        body.style.transform = obj.z > 0 ? `translate(0, ${-obj.z * TOP_LIFT}px) scale(${1 + obj.z * 0.08})` : '';
-        element.classList.toggle('lifted', obj.z > 0);
+        applyTopTransform(element, obj);
       } else {
         // 보고 있는 줄이 아닌 물건도 흐리게 보여 주어, 숙였을 때 판이 텅 빈 것처럼 보이지 않게 한다.
         element.hidden = false;
@@ -391,6 +420,7 @@
     const offsetX = (width - SCENE_WIDTH * scale) / 2;
     const offsetY = (height - SCENE_HEIGHT * scale) / 2;
     ui.scene.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+    game.sceneFit = { scale, offsetX, offsetY };
     updateTutorial();
   }
 
@@ -421,7 +451,94 @@
     }
     ui.board.classList.toggle('aim-ice', game.selectedDrink === 'ice');
     ui.board.classList.toggle('aim-soda', game.selectedDrink === 'soda');
+    updateHints();
     updateTutorial();
+  }
+
+  // 음료를 고르면 마우스를 올리지 않아도 쓸 수 있는 곳을 흐리게 보여 준다.
+  // 얼음은 줄마다 날아갈 경로를, 소다는 띄울 수 있는 물건의 거품 테두리를 보여 준다.
+  function clearHints() {
+    ui.aimHints.innerHTML = '';
+    for (const element of game.pieceElements.values()) element.classList.remove('can-lift');
+  }
+
+  function updateHints() {
+    clearHints();
+    if (!game.level || game.busy || game.state.status !== 'playing' || !game.selectedDrink) return;
+    if (game.selectedDrink === 'ice') {
+      const lines = game.view === 'top' ? game.level.rows : game.level.height;
+      for (let line = 0; line < lines; line++) {
+        const action = game.view === 'top'
+          ? { drink: 'ice', row: line, z: 0 }
+          : { drink: 'ice', row: game.focusRow, z: line };
+        const preview = Engine.step(game.level, game.state, action);
+        if (!preview.ok) continue;
+        const hint = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+        hint.setAttribute('class', 'aim-hint');
+        hint.setAttribute('points', icePathPoints(preview.effect).map((point) => `${point.x},${point.y}`).join(' '));
+        ui.aimHints.appendChild(hint);
+      }
+      return;
+    }
+    for (const obj of game.state.objects) {
+      const element = game.pieceElements.get(obj.id);
+      if (element.classList.contains('ghost')) continue;
+      if (Engine.check(game.level, game.state, { drink: 'soda', target: obj.id }).ok) element.classList.add('can-lift');
+    }
+  }
+
+  // 음료를 처음 고를 때 한 번, 반투명한 유령 연출로 그 음료가 무엇을 하는지 보여 준다. 배터리는 쓰지 않는다.
+  async function playDemo(drink) {
+    progress.demosSeen = [...(progress.demosSeen || []), drink];
+    saveProgress();
+    if (game.view !== 'top') return;
+
+    const myPlug = game.state.objects.find((obj) => obj.kind === 'myPlug');
+    let demo = null;
+    if (drink === 'ice') {
+      const rows = [...Array(game.level.rows).keys()].sort((a, b) => (a === myPlug.row ? -1 : b === myPlug.row ? 1 : 0));
+      for (const row of rows) {
+        const preview = Engine.step(game.level, game.state, { drink: 'ice', row, z: 0 });
+        if (!preview.ok || !preview.effect.hitId) continue;
+        const before = Engine.findObject(game.state, preview.effect.hitId);
+        const after = Engine.findObject(preview.frames[0], preview.effect.hitId);
+        if (before.x !== after.x || before.row !== after.row) {
+          demo = { preview, id: preview.effect.hitId, after };
+          break;
+        }
+      }
+    } else {
+      const canLift = (obj) => Engine.check(game.level, game.state, { drink: 'soda', target: obj.id }).ok;
+      const target = game.state.objects.find((obj) => obj.kind !== 'myPlug' && canLift(obj))
+        || game.state.objects.find(canLift);
+      if (target) demo = { id: target.id, after: { ...target, z: target.z + 1, bubble: 2 } };
+    }
+    if (!demo) return;
+
+    game.busy = true;
+    clearHints();
+    updateTutorial();
+    const source = game.pieceElements.get(demo.id);
+    const ghost = source.cloneNode(true);
+    ghost.classList.add('demo-ghost');
+    ghost.classList.remove('targeted', 'can-lift');
+    ui.board.appendChild(ghost);
+    await wait(250);
+    if (drink === 'ice') {
+      await shootIce(demo.preview.effect, true);
+    } else {
+      await shootBubble(demo.id, true);
+      ghost.classList.add('floating');
+    }
+    ghost.style.transition = 'transform 0.45s cubic-bezier(0.3, 0.8, 0.4, 1)';
+    ghost.querySelector('.piece-body').style.transition = 'transform 0.45s cubic-bezier(0.3, 0.8, 0.4, 1)';
+    applyTopTransform(ghost, demo.after);
+    await wait(900);
+    ghost.animate([{ opacity: 0.55 }, { opacity: 0 }], { duration: 300, fill: 'forwards' });
+    await wait(320);
+    ghost.remove();
+    game.busy = false;
+    updateControls();
   }
 
   function updateHud() {
@@ -485,9 +602,8 @@
     }
     let point;
     if (target instanceof Element) {
-      const box = target.getBoundingClientRect();
-      const bodyBox = ui.body.getBoundingClientRect();
-      point = { x: box.left - bodyBox.left + box.width / 2, y: box.top - bodyBox.top };
+      const offset = offsetWithinBody(target);
+      point = { x: offset.x + target.offsetWidth / 2, y: offset.y };
     } else {
       point = scenePointToBody(target);
     }
@@ -590,9 +706,9 @@
     return { frames, total };
   }
 
-  async function shootIce(effect) {
+  async function shootIce(effect, ghost = false) {
     const shot = document.createElement('div');
-    shot.className = 'ice-shot';
+    shot.className = ghost ? 'ice-shot demo-ghost' : 'ice-shot';
     if (Assets.file('fx-ice')) shot.innerHTML = Assets.html('fx-ice');
     ui.fxLayer.appendChild(shot);
     const { frames, total } = travelKeyframes(icePathPoints(effect));
@@ -603,10 +719,10 @@
     setTimeout(() => shot.remove(), 200);
   }
 
-  async function shootBubble(targetId) {
+  async function shootBubble(targetId, ghost = false) {
     const target = Engine.findObject(game.state, targetId);
     const shot = document.createElement('div');
-    shot.className = 'bubble-shot';
+    shot.className = ghost ? 'bubble-shot demo-ghost' : 'bubble-shot';
     if (Assets.file('fx-bubble')) {
       shot.classList.add('has-art');
       shot.innerHTML = Assets.html('fx-bubble');
@@ -627,12 +743,23 @@
 
   // 조준과 입력
 
+  // 판 안의 위치는 판 자신의 좌표(offsetX, offsetY)로 구한다. 판에 확대, 축소, 회전이 걸려 있어도 맞는다.
+  // 판 위의 물건과 장식은 pointer-events: none이라 이벤트는 항상 판에서 받는다.
   function cellFromPointer(event) {
-    const box = ui.board.getBoundingClientRect();
     const { width } = game.level;
     const rows = game.view === 'top' ? game.level.rows : game.level.height;
-    const column = Math.floor(((event.clientX - box.left) / box.width) * width);
-    const line = Math.floor(((event.clientY - box.top) / box.height) * rows);
+    let fractionX;
+    let fractionY;
+    if (event.target === ui.board) {
+      fractionX = event.offsetX / ui.board.offsetWidth;
+      fractionY = event.offsetY / ui.board.offsetHeight;
+    } else {
+      const box = ui.board.getBoundingClientRect();
+      fractionX = (event.clientX - box.left) / box.width;
+      fractionY = (event.clientY - box.top) / box.height;
+    }
+    const column = Math.floor(fractionX * width);
+    const line = Math.floor(fractionY * rows);
     if (column < 0 || column >= width || line < 0 || line >= rows) return null;
     if (game.view === 'top') return { x: column, row: line };
     return { x: column, z: rows - 1 - line };
@@ -754,6 +881,7 @@
 
     game.busy = true;
     clearAim();
+    clearHints();
     updateTutorial();
     if (action.drink === 'ice') await shootIce(result.effect);
     else await shootBubble(result.effect.targetId);

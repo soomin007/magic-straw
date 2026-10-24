@@ -24,9 +24,10 @@ TONES = {
     'theirs': (217, 83, 74),
     'light': (242, 230, 207),
     'laptop': (160, 163, 170),
+    'partition': (207, 216, 211),
 }
 EMPTY_PUZZLE = (255, 0, 200)   # 퍼즐 칸 자리: 아무것도 그리지 않는다
-EMPTY_OUTLET = (0, 200, 255)   # 콘센트 기둥 자리: 아무것도 그리지 않는다
+EMPTY_OUTLET = (0, 200, 255)   # 칸막이 칸 자리: 아무것도 그리지 않는다
 GRID_LINE = (60, 40, 30)
 
 
@@ -114,7 +115,7 @@ def main():
     out = root / 'docs' / 'layout-guide'
     out.mkdir(parents=True, exist_ok=True)
 
-    # 탑뷰: 7열(퍼즐 6칸과 콘센트 기둥 1칸), 3줄
+    # 탑뷰: 7열(퍼즐 6칸과 칸막이 1칸), 3줄
     top = np.zeros((540 * SCALE, 960 * SCALE, 3), dtype=np.uint8)
     draw_boxes(top, layout['top']['boxes'])
     draw_board(top, layout['top']['gridLeft'], layout['top']['gridTop'], 7, 3, scale['cellWidthPx'], scale['rowHeightPx'])

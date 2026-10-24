@@ -13,7 +13,7 @@
   const ASSET_LIST = [
     // 1차: 살짝 기울인 탑뷰로 1~6번 판을 플레이하는 데 필요한 그림
     { batch: 1, key: 'scene-top', path: 'assets/scene/top.png', width: 1920, height: 1080, refs: SCENE_REFS,
-      subject: '1챕터 판 배경. 스타벅스를 떠올리게 하는 카공 카페의 창가 바 좌석을 창 밖에서 들여다본 장면. 두 사람은 바 건너편에서 얼굴이 보이고, 창틀은 화면 아래 앞쪽에 있다. 배치와 크기는 docs/art-brief.md의 "실제 크기 기준"과 "판 배경 배치" 표, 구도는 docs/layout-guide/scene-top.png를 따른다' },
+      subject: '1챕터 판 배경. 스타벅스를 떠올리게 하는 카공 카페의 창가 바 좌석을 창 밖에서 들여다본 장면. 두 사람은 바 건너편에서 얼굴이 보이고, 창틀은 화면 아래 앞쪽에 있다. 주인공은 오른손에 아이스 음료 컵을 들고 보통 길이의 빨대 하나를 물고 있다(바 위에 컵을 두지 않는다). 두 자리 사이 칸막이 중 퍼즐 판 뒤쪽 부분(바 뒤쪽 22cm)만 배경에 그리고, 판 옆 부분은 비워 둔다. 배치와 크기는 docs/art-brief.md의 "실제 크기 기준"과 "판 배경 배치" 표, 구도는 docs/layout-guide/scene-top.png를 따른다' },
     { batch: 1, key: 'piece-top-my-plug', path: 'assets/piece/top-my-plug.png', width: 512, height: 512, refs: PIECE_REFS,
       subject: '내 노트북 충전기의 한국 220V 벽 플러그. 둥근 원통형 민트색 머리, 둥근 금속 핀 두 개가 오른쪽을 향하고, 굵은 전선이 왼쪽 가장자리에서 잘린다' },
     { batch: 1, key: 'piece-top-their-plug', path: 'assets/piece/top-their-plug.png', width: 512, height: 512, refs: PIECE_REFS,
@@ -25,9 +25,11 @@
     { batch: 1, key: 'piece-top-menu', path: 'assets/piece/top-menu.png', width: 512, height: 512, refs: PIECE_REFS,
       subject: '카페 테이블에 세워 두는 삼각 메뉴판(아크릴 스탠드). 왼쪽 아래에서 오른쪽 위로 비스듬히 놓여 있다. 반대 방향은 게임이 좌우를 뒤집어 쓴다. 글자 없음' },
     { batch: 1, key: 'outlet-top-free', path: 'assets/outlet/top-free.png', width: 264, height: 180, refs: PIECE_REFS,
-      subject: '두 자리 사이 콘센트 기둥의 한 칸(바 위 한 줄 깊이)을 살짝 기울인 탑뷰로 본 모습. 내 쪽(왼쪽) 면에 빈 콘센트 하나. 위아래로 이어 붙여 기둥 하나가 된다' },
+      subject: '두 자리 사이 낮은 칸막이의 한 칸(바 위 한 줄 깊이 12cm)을 살짝 기울인 탑뷰로 본 모습. 그림 오른쪽 25%가 두께 3cm의 밝은 회녹색 칸막이 판이고, '
+        + '그 왼쪽 면에 한국식 둥근 콘센트 판(지름이 그림 높이의 60~65%, 둥근 구멍 두 개의 지름은 각각 그림 높이의 12% 이상)이 내 쪽을 향해 붙어 있다. 위아래로 이어 붙여 칸막이 하나가 된다' },
     { batch: 1, key: 'outlet-top-taken', path: 'assets/outlet/top-taken.png', width: 264, height: 180, refs: PIECE_REFS,
-      subject: '같은 기둥 칸인데, 내 쪽 콘센트에 옆자리 사람의 다른 기기 선(태블릿 충전기나 이어폰 케이스 선)이 꽂혀 있다. 흐린 벽돌색으로, 판 위 물건처럼 굵게 강조하지 않는다' },
+      subject: '같은 칸막이 칸인데, 콘센트에 옆자리 사람의 다른 기기 플러그(태블릿 충전기나 보조배터리 선)가 꽂혀 있다. 기기는 회색과 흰색 계열(벽돌색과 민트색 금지)이고, '
+        + '판 위 물건보다 얇은 선으로 그려 배경처럼 보이게 한다. 상대 플러그(벽돌색 네모 어댑터)와 모양과 색이 모두 달라야 한다' },
     { batch: 1, key: 'fx-bubble', path: 'assets/fx/bubble.png', width: 512, height: 512, refs: PIECE_REFS,
       subject: '물건 하나를 감싸는 반투명 탄산 거품 방울. 가운데는 비어 있고 굵은 테두리와 반짝임만 있다' },
     { batch: 1, key: 'fx-ice', path: 'assets/fx/ice.png', width: 192, height: 192, refs: PIECE_REFS,
@@ -53,15 +55,15 @@
     { batch: 2, key: 'piece-side-menu', path: 'assets/piece/side-menu.png', width: 512, height: 512, refs: PIECE_REFS,
       subject: '삼각 메뉴판을 바 높이에서 정면으로 본 모습. 칸의 아래쪽 한 칸 높이만 차지한다' },
     { batch: 2, key: 'outlet-side-free', path: 'assets/outlet/side-free.png', width: 256, height: 256, refs: PIECE_REFS,
-      subject: '콘센트 기둥을 바 높이에서 정면으로 본 한 칸. 왼쪽을 향한 빈 콘센트 하나. 위아래로 이어 붙인다' },
+      subject: '칸막이를 바 높이에서 정면으로 본 한 칸(높이 12cm). 그림 오른쪽 25%가 칸막이 판의 앞쪽 끝이고, 그 왼쪽 면에 왼쪽을 향한 큰 콘센트 판(지름이 그림 높이의 60~65%)이 붙어 있다. 위아래로 이어 붙인다' },
     { batch: 2, key: 'outlet-side-taken', path: 'assets/outlet/side-taken.png', width: 256, height: 256, refs: PIECE_REFS,
-      subject: '같은 기둥 칸에 옆자리 사람의 다른 기기 선이 꽂혀 있다. 흐린 벽돌색, 강조하지 않는다' },
+      subject: '같은 칸막이 칸에 옆자리 사람의 회색 기기 플러그가 꽂혀 있다. 벽돌색과 민트색은 쓰지 않고, 강조하지 않는다' },
     { batch: 2, key: 'outlet-side-cap', path: 'assets/outlet/side-cap.png', width: 256, height: 256, refs: PIECE_REFS,
-      subject: '콘센트 기둥의 맨 위 칸. 콘센트가 없고 기둥 윗면이 보인다' },
+      subject: '칸막이의 맨 위 칸(바 위 24~36cm). 콘센트가 없고, 그림 오른쪽 25%의 칸막이 판과 그 윗면 가장자리만 보인다. 왼쪽 75%는 투명하다' },
 
     // 3차: 인물 일러스트와 프롤로그. 프롤로그는 글자 없이 그림과 기호만으로 읽혀야 한다.
     { batch: 3, key: 'portrait-me', path: 'assets/portrait/me.png', width: 1024, height: 1024, refs: PORTRAIT_REFS,
-      subject: '주인공 상반신. 헝클어진 검은 머리, 민트색 후드, 아이스 음료 컵에서 이어진 초록 빨대를 물고 있다. 지친 얼굴' },
+      subject: '주인공 상반신. 헝클어진 검은 머리, 민트색 후드, 오른손에 든 아이스 음료 컵의 초록 빨대를 물고 있다. 지친 얼굴' },
     { batch: 3, key: 'portrait-me-determined', path: 'assets/portrait/me-determined.png', width: 1024, height: 1024, refs: PORTRAIT_REFS,
       subject: '같은 주인공이 빨대를 문 채 눈을 가늘게 뜨고 조용히 결심한 표정' },
     { batch: 3, key: 'portrait-neighbor', path: 'assets/portrait/neighbor.png', width: 1024, height: 1024, refs: PORTRAIT_REFS,
@@ -76,6 +78,8 @@
       subject: src('story-4') },
     { batch: 3, key: 'story-5', path: 'assets/story/5.png', width: 1600, height: 1200, refs: PORTRAIT_REFS,
       subject: src('story-5') },
+    { batch: 3, key: 'story-6', path: 'assets/story/6.png', width: 1600, height: 1200, refs: PORTRAIT_REFS,
+      subject: src('story-6') },
   ];
 
   // 프롤로그 컷 내용은 src/story.js가 기준이다. 여기서는 그쪽을 가리키기만 한다.

@@ -106,6 +106,37 @@
         expect(doc.documentElement.scrollWidth <= 375, `375px 폭: 가로 넘침이 없다 (scrollWidth ${doc.documentElement.scrollWidth})`);
       }
 
+      // 5. 음료 버튼의 효과 기호와, 마우스를 올리지 않아도 보이는 안내
+      {
+        const win = await openGame({ current: 1, demosSeen: ['ice', 'soda'] });
+        const doc = win.document;
+        const effects = [...doc.querySelectorAll('.drink .effect')].map((element) => element.textContent);
+        expect(effects.join(' ') === '→ ↑', `음료 버튼에 효과 기호가 있다 (${effects.join(' ')})`);
+        doc.querySelector('.drink[data-drink="ice"]').click();
+        await sleep(200);
+        expect(doc.querySelectorAll('.aim-hint').length > 0, `얼음을 고르면 올려 보지 않아도 경로 ${doc.querySelectorAll('.aim-hint').length}개가 흐리게 보인다`);
+        doc.querySelector('.drink[data-drink="soda"]').click();
+        await sleep(200);
+        expect(doc.querySelectorAll('.aim-hint').length === 0 && doc.querySelectorAll('.piece.can-lift').length > 0,
+          `소다를 고르면 띄울 수 있는 물건 ${doc.querySelectorAll('.piece.can-lift').length}개에 거품 테두리가 보인다`);
+      }
+
+      // 6. 음료를 처음 고르면 한 번 시연하고, 시연은 판을 바꾸지 않는다
+      {
+        const win = await openGame({ current: 0, demosSeen: [] });
+        const doc = win.document;
+        const before = doc.querySelector('.piece-kind-myPlug').style.transform;
+        const battery = doc.getElementById('battery-text').textContent;
+        doc.querySelector('.drink[data-drink="ice"]').click();
+        await sleep(500);
+        expect(doc.querySelectorAll('.piece.demo-ghost').length === 1, '얼음을 처음 고르면 반투명 시연이 나온다');
+        await sleep(3000);
+        const saved = JSON.parse(win.localStorage.getItem(STORAGE_KEY));
+        expect(doc.querySelectorAll('.demo-ghost').length === 0 && doc.querySelector('.piece-kind-myPlug').style.transform === before,
+          '시연이 끝나면 유령이 사라지고 판은 그대로다');
+        expect(saved.demosSeen.includes('ice') && doc.getElementById('battery-text').textContent === battery, '시연은 저장되고 배터리를 쓰지 않는다');
+      }
+
       localStorage.removeItem(STORAGE_KEY);
       const summary = document.getElementById('summary');
       summary.textContent = failures === 0 ? '모든 화면 검사 통과' : `실패 ${failures}개`;
