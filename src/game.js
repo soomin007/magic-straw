@@ -117,6 +117,9 @@
     lowPopupShown: false,
     prologueIndex: -1,
     levelLine: null,
+    pendingAction: null,
+    lastPointerType: 'mouse',
+    touchHintShown: false,
     pieceElements: new Map(),
   };
 
@@ -605,21 +608,17 @@
     ui.aimBand.classList.remove('visible');
     ui.aimPath.setAttribute('points', '');
     for (const element of game.pieceElements.values()) element.classList.remove('targeted');
+    game.pendingAction = null;
   }
 
-  function onBoardMove(event) {
-    if (game.busy || game.state.status !== 'playing') return;
+  // 같은 행동인지 비교한다. 터치 화면에서 "같은 곳을 다시 눌렀는지" 판단할 때 쓴다.
+  function sameAction(a, b) {
+    return Boolean(a && b) && a.drink === b.drink && a.row === b.row && a.z === b.z && a.target === b.target;
+  }
+
+  // 행동을 실행하지 않고 미리 보여 준다. 얼음은 날아갈 경로와 맞을 물건을, 소다는 거품을 붙일 물건을 표시한다.
+  function showAim(action) {
     clearAim();
-    const cell = cellFromPointer(event);
-    if (!cell) return;
-    if (game.view === 'top' && game.focusRow !== cell.row) {
-      game.focusRow = cell.row;
-      updateTutorial();
-    }
-
-    const action = actionForCell(cell);
-    if (!action) return;
-
     if (action.drink === 'ice') {
       const bandLine = game.view === 'top' ? action.row : game.level.height - 1 - action.z;
       ui.aimBand.style.top = `${bandLine * CELL}px`;
@@ -634,6 +633,23 @@
     }
   }
 
+  // 마우스는 올려 두기만 해도 미리보기를 보여 준다. 터치에는 올려 두기가 없으므로 onBoardClick에서 다룬다.
+  function onBoardMove(event) {
+    if (event.pointerType === 'touch' || event.pointerType === 'pen') return;
+    if (game.busy || game.state.status !== 'playing') return;
+    clearAim();
+    const cell = cellFromPointer(event);
+    if (!cell) return;
+    if (game.view === 'top' && game.focusRow !== cell.row) {
+      game.focusRow = cell.row;
+      updateTutorial();
+    }
+    const action = actionForCell(cell);
+    if (action) showAim(action);
+  }
+
+  // 마우스는 한 번 클릭하면 바로 뱉는다. 터치 화면은 한 번 누르면 미리보기, 같은 곳을 다시 누르면 뱉는다.
+  // 행동마다 배터리를 쓰는 퍼즐이라, 미리보기 없이 잘못 눌러 배터리를 날리지 않게 하려는 것이다.
   function onBoardClick(event) {
     if (game.busy || game.state.status !== 'playing') return;
     const cell = cellFromPointer(event);
@@ -647,7 +663,29 @@
       showToast('거품은 물건에 붙여야 합니다');
       return;
     }
-    perform(action);
+
+    if (game.lastPointerType !== 'touch' && game.lastPointerType !== 'pen') {
+      perform(action);
+      return;
+    }
+
+    if (sameAction(game.pendingAction, action)) {
+      perform(action);
+      return;
+    }
+    const verdict = Engine.check(game.level, game.state, action);
+    if (!verdict.ok) {
+      showToast(verdict.reason);
+      shakeBoard();
+      return;
+    }
+    if (game.view === 'top') game.focusRow = cell.row;
+    showAim(action);
+    game.pendingAction = action;
+    if (!game.touchHintShown) {
+      game.touchHintShown = true;
+      showToast('같은 곳을 한 번 더 누르면 뱉습니다');
+    }
   }
 
   async function perform(action) {
@@ -734,6 +772,7 @@
   function undo() {
     if (game.busy || game.history.length === 0) return;
     game.state = game.history.pop();
+    clearAim();
     hideOverlays();
     render(game.state, true);
     updateHud();
@@ -927,8 +966,15 @@
 
   function bindEvents() {
     ui.board.addEventListener('pointermove', onBoardMove);
-    ui.board.addEventListener('pointerleave', clearAim);
+    ui.board.addEventListener('pointerleave', (event) => {
+      // 터치는 손을 뗄 때마다 pointerleave가 와서, 그때 지우면 두 번 누르기 미리보기가 사라진다.
+      if (event.pointerType === 'mouse') clearAim();
+    });
     ui.board.addEventListener('click', onBoardClick);
+    // click 이벤트만으로는 터치인지 알 수 없는 브라우저가 있어서, 누르기 시작할 때의 입력 종류를 기억해 둔다.
+    ui.board.addEventListener('pointerdown', (event) => {
+      game.lastPointerType = event.pointerType;
+    });
     ui.undoButton.addEventListener('click', undo);
     ui.restartButton.addEventListener('click', restart);
     ui.difficultyButton.addEventListener('click', cycleDifficulty);
