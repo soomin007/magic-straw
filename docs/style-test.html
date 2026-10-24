@@ -212,7 +212,10 @@
 
     function place(scene, left, top, width, height, child) {
       const slot = document.createElement('div');
-      Object.assign(slot.style, { left: `${left}px`, top: `${top}px`, width: `${width}px`, height: `${height}px` });
+      Object.assign(slot.style, { left: `${left}px`, top: `${top}px` });
+      // 크기를 주지 않으면 내용 크기에 맞춘다 (말풍선처럼 글 길이에 따라 늘어나는 것).
+      if (width !== null) slot.style.width = `${width}px`;
+      if (height !== null) slot.style.height = `${height}px`;
       if (child) slot.appendChild(child);
       scene.appendChild(slot);
       return slot;
@@ -231,7 +234,7 @@
       place(scene, GRID_LEFT + CELL * 1 + 6, GRID_TOP + CELL * 1 + 6, CELL - 12, CELL - 12, image(file(style, 'my-plug')));
       place(scene, GRID_LEFT + CELL * 3 + 6, GRID_TOP + CELL * 1 + 6, CELL - 12, CELL - 12, image(file(style, 'cup')));
       place(scene, 4, 300, 230, 230, image(file(style, 'portrait')));
-      const speech = place(scene, 200, 470, 0, 0);
+      const speech = place(scene, 200, 470, null, null);
       speech.innerHTML = '<div class="speech" style="white-space: nowrap;">조용히, 아무도 모르게.</div>';
 
       new ResizeObserver(() => {
