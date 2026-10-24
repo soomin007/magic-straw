@@ -24,7 +24,8 @@ Claude Code용 규칙은 `CLAUDE.md`에 있고, 내용은 같은 원칙을 따�
 
 ## 그림 작업을 맡았을 때
 
-그림 작업은 `docs/art-brief.md`를 따른다. 그림 파일을 만들고 `assets/manifest.js`에 등록하는 것까지가 범위이고,
+그림 작업은 `docs/art-brief.md`를 따르고, 만들 그림의 목록은 `assets/asset-list.js`가 기준이다.
+그림 파일을 만들고 `assets/manifest.js`에 등록한 뒤 `docs/art-check.html`로 확인하는 것까지가 범위이고,
 `src/` 안의 게임 코드는 고치지 않는다. 그림 때문에 코드를 바꿔야 할 것 같으면 고치지 말고 세션 로그에 이유를 남긴다.
 
 ## 글쓰기 규칙

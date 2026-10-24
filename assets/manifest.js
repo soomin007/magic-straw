@@ -1,6 +1,7 @@
-// 그림 파일 목록. 여기 적힌 이름은 SVG 대신 그림 파일로 그린다.
-// 비어 있는 항목은 src/art.js의 SVG가 대신 쓰인다. 각 그림의 크기와 그림체는 docs/art-brief.md를 따른다.
+// 만들어 둔 그림 파일 목록. 그림을 만들면 assets/asset-list.js의 key와 path를 그대로 여기 한 줄씩 적는다.
+// 등록하지 않은 그림은 게임이 회색 상자나 코드로 그린 그림으로 대신한다.
+// 그림 확인은 docs/art-check.html에서 한다.
 //
-// 예: myPlug: 'assets/objects/my-plug.png',
+// 예: 'top-my-plug': 'assets/top/my-plug.png',
 window.ASSET_MANIFEST = {
 };

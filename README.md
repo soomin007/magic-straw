@@ -6,20 +6,21 @@
 시리어스 게임 강의 실습으로 만드는 퍼즐 게임이다. 주어진 동사는 "빼앗다"와 "뱉다"이고,
 Baba Is You와 There Is No Game, Helltaker를 참고해 적은 규칙을 조합해서 한 차례씩 푸는 퍼즐을 목표로 한다.
 
-지금은 1챕터 여섯 판을 플레이할 수 있다. 화면 전체가 내 랩탑 바탕화면이고, 작업 표시줄의 배터리가 남은 행동 수다.
-음료를 고른 다음 테이블을 누르면 빨대로 뱉는다. 단축키는 1과 2가 음료, Z가 되돌리기, R이 처음부터다.
+지금은 테이블을 위에서 내려다보는 탑뷰 시점과 굵은 선 코믹 그림체로 다시 만드는 중이다.
+규칙과 1챕터 여덟 판의 설계와 검증은 끝났고, 그림이 준비되면 플레이 화면을 다시 올린다.
 
-플레이 주소: https://soomin007.github.io/magic-straw/
+주소: https://soomin007.github.io/magic-straw/
 
 ## 파일 안내
 
 | 파일 | 내용 |
 |---|---|
-| `index.html` | 게임 화면 |
 | `src/engine.js` | 게임 규칙. 화면 코드와 분리되어 있다 |
-| `src/levels.js` | 레벨 지도 |
-| `src/game.js`, `src/style.css`, `src/art.js` | 화면, 입력, 연출, 코드로 그린 그림 |
-| `assets/manifest.js` | 그림 파일 목록. 등록한 그림이 SVG를 대신한다 |
+| `src/levels.js` | 1챕터 레벨 지도 |
 | `tools/verify.html` | 레벨마다 최소 행동 수를 탐색해 확인하는 검증 도구 |
-| `docs/design.md` | 규칙, 레벨, 확장 계획 |
+| `docs/design.md` | 규칙, 레벨, 시작 흐름, 확장 계획 |
+| `docs/mockup/index.html` | 화면 배치와 프롤로그 목업 |
 | `docs/art-brief.md` | 그림 의뢰서 |
+| `assets/asset-list.js` | 만들 그림 목록 |
+| `assets/manifest.js` | 만들어 둔 그림 목록 |
+| `docs/art-check.html` | 그림을 실제 크기로 모아 보는 확인 페이지 |

@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>그림 확인</title>
+  <style>
+    :root {
+      --bg: #e9e7e3;
+      --ink: #2b2b2b;
+      --muted: #6d6a66;
+      --box: #c9c6c0;
+      --box-dark: #9d9993;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 60px;
+    }
+
+    h1 { font-size: 24px; margin-bottom: 4px; }
+    h2 { font-size: 19px; margin-top: 36px; }
+    .lead { color: var(--muted); margin-top: 0; }
+
+    .stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f4f3f1;
+    }
+
+    .scene {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 960px;
+      height: 540px;
+      transform-origin: 0 0;
+    }
+
+    .slot {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+
+    .slot.missing {
+      border: 2px dashed var(--box-dark);
+      border-radius: 8px;
+      background: rgba(201, 198, 192, 0.7);
+    }
+
+    .slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .slot.flip img { transform: scaleX(-1); }
+
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      border: 2px solid var(--box-dark);
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .card.done { border-color: #4f8f73; }
+
+    .preview {
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      background-image:
+        linear-gradient(45deg, #eee 25%, transparent 25%),
+        linear-gradient(-45deg, #eee 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #eee 75%),
+        linear-gradient(-45deg, transparent 75%, #eee 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    }
+
+    .preview img { max-width: 90%; max-height: 150px; display: block; }
+    .preview .none { color: var(--muted); font-size: 13px; }
+
+    .card-body { padding: 10px 12px; font-size: 13px; }
+    .card-key { font-weight: 800; font-size: 14px; }
+    .card-status { float: right; font-weight: 700; }
+    .card-status.ok { color: #2f7a57; }
+    .card-status.no { color: #a14b3f; }
+    .card-meta { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>그림 확인</h1>
+    <p class="lead">assets/manifest.js에 등록된 그림을 실제 게임 크기로 한 장면에 모아 봅니다. 아직 없는 그림은 점선 회색 상자로 보입니다.
+      모든 그림이 한 사람이 그린 것처럼 보이는지, 칸 크기에 맞는지 여기서 확인합니다.</p>
+
+    <h2>탑뷰 장면 (6번 판 "순서")</h2>
+    <div class="stage" id="stage"><div class="scene" id="scene"></div></div>
+
+    <h2 id="summary"></h2>
+    <div id="batches"></div>
+  </main>
+
+  <script src="../src/engine.js"></script>
+  <script src="../src/levels.js"></script>
+  <script src="../assets/asset-list.js"></script>
+  <script src="../assets/manifest.js"></script>
+  <script>
+    const CELL = 88;
+    const GRID_LEFT = 190;
+    const GRID_TOP = 138;
+    const manifest = window.ASSET_MANIFEST || {};
+    const assetsByKey = Object.fromEntries(window.ASSET_LIST.map((asset) => [asset.key, asset]));
+    const scene = document.getElementById('scene');
+
+    // 그림이 등록돼 있으면 그림을, 없으면 이름이 적힌 회색 상자를 놓는다.
+    function place(key, left, top, width, height, options = {}) {
+      const slot = document.createElement('div');
+      slot.className = 'slot';
+      if (options.flip) slot.classList.add('flip');
+      Object.assign(slot.style, { left: `${left}px`, top: `${top}px`, width: `${width}px`, height: `${height}px` });
+      const file = manifest[key];
+      if (file) {
+        slot.innerHTML = `<img src="../${file}" alt="">`;
+      } else {
+        slot.classList.add('missing');
+        slot.textContent = key;
+      }
+      scene.appendChild(slot);
+    }
+
+    function buildScene() {
+      const level = Engine.parseLevel(LEVEL_DEFINITIONS.find((definition) => definition.id === 'order'));
+      const state = Engine.initial(level, 5);
+
+      place('top-table', 110, 60, 760, 420);
+      place('top-me', 0, 170, 160, 160);
+      place('top-my-laptop', 86, 330, 100, 140);
+      place('top-neighbor', 816, 320, 144, 144);
+      place('top-their-laptop', 830, 76, 100, 140);
+
+      const stripX = GRID_LEFT + (level.width - 1) * CELL;
+      for (let row = 0; row < level.rows; row++) {
+        const hasSocket = level.sockets.some((socket) => socket.row === row && socket.z === 0);
+        place(hasSocket ? 'top-strip-socket' : 'top-strip-plain', stripX, GRID_TOP + row * CELL, CELL, CELL);
+      }
+
+      const keyForKind = { myPlug: 'top-my-plug', theirPlug: 'top-their-plug', cup: 'top-cup', book: 'top-book', menu: 'top-menu' };
+      for (const obj of state.objects) {
+        const insertOffset = obj.inserted ? 14 : 0;
+        place(keyForKind[obj.kind], GRID_LEFT + obj.x * CELL + insertOffset, GRID_TOP + obj.row * CELL, CELL, CELL,
+          { flip: obj.kind === 'menu' && obj.mirror === '\\' });
+      }
+
+      place('ui-finger', GRID_LEFT + 10, GRID_TOP - 70, 64, 64);
+    }
+
+    function buildCards() {
+      const done = window.ASSET_LIST.filter((asset) => manifest[asset.key]).length;
+      document.getElementById('summary').textContent = `전체 그림 ${window.ASSET_LIST.length}장 중 ${done}장 등록됨`;
+
+      const batchNames = { 1: '1차: 탑뷰와 버튼', 2: '2차: 숙이기 시점', 3: '3차: 프롤로그 만화' };
+      const container = document.getElementById('batches');
+      for (const batch of [1, 2, 3]) {
+        const heading = document.createElement('h2');
+        heading.textContent = batchNames[batch];
+        container.appendChild(heading);
+        const grid = document.createElement('div');
+        grid.className = 'grid-cards';
+        for (const asset of window.ASSET_LIST.filter((item) => item.batch === batch)) {
+          const file = manifest[asset.key];
+          const card = document.createElement('article');
+          card.className = `card${file ? ' done' : ''}`;
+          card.innerHTML = `
+            <div class="preview">${file ? `<img src="../${file}" alt="">` : '<span class="none">아직 없음</span>'}</div>
+            <div class="card-body">
+              <span class="card-status ${file ? 'ok' : 'no'}">${file ? '등록됨' : '없음'}</span>
+              <div class="card-key">${asset.key}</div>
+              <div class="card-meta">${asset.path}, ${asset.width} x ${asset.height}</div>
+              <div>${asset.subject}</div>
+            </div>`;
+          grid.appendChild(card);
+        }
+        container.appendChild(grid);
+      }
+    }
+
+    const stage = document.getElementById('stage');
+    new ResizeObserver(() => {
+      scene.style.transform = `scale(${stage.clientWidth / 960})`;
+    }).observe(stage);
+
+    buildScene();
+    buildCards();
+  </script>
+</body>
+</html>
