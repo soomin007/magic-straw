@@ -3,26 +3,33 @@
 (function (root) {
   'use strict';
 
+  // bubble은 컷 안의 말풍선 자리다. x, y, width는 컷 크기에 대한 퍼센트이고, tail은 꼬리 방향(left, right, none)이다.
+  // 프롤로그 그림을 그릴 때는 이 자리를 비워 두어야 한다. notice는 컷 안의 노트북 화면에 뜨는 경고 알림이다.
   const prologue = [
     {
       key: 'story-1',
       scene: '새벽 카페. 노트북 앞에 전공책을 펴 놓은 주인공. 창밖은 깜깜하다.',
       line: '시험은 내일 아침 9시. 3단원까지만 오늘 끝내자.',
+      bubble: { x: 50, y: 6, width: 44, tail: 'left' },
     },
     {
       key: 'story-2',
       scene: '충전기를 멀티탭에 꽂아 둔 채 자리에서 일어나는 뒷모습.',
       line: '잠깐 화장실만.',
+      bubble: { x: 6, y: 8, width: 30, tail: 'right' },
     },
     {
       key: 'story-3',
       scene: '돌아와서 본 테이블. 내 플러그는 뽑혀 굴러 있고, 멀티탭은 헤드폰 낀 옆자리 사람의 플러그가 전부 차지했다.',
       line: '……어?',
+      bubble: { x: 64, y: 8, width: 20, tail: 'left' },
     },
     {
       key: 'story-4',
       scene: '말을 걸려고 손을 들다가 멈춘 주인공. 노트북 화면 구석에 경고 알림이 떠 있다.',
       line: '따지면 길어진다. 나한테는 그럴 시간이 없다.',
+      bubble: { x: 5, y: 6, width: 46, tail: 'right' },
+      noticeAt: { x: 60, y: 58 },
       // 판마다, 난이도마다 시작 배터리가 달라서 숫자를 적지 않는다.
       notice: '배터리 부족, 곧 꺼집니다',
     },
@@ -30,6 +37,7 @@
       key: 'story-5',
       scene: '음료 컵에 꽂힌 빨대가 은은하게 빛난다.',
       line: '조용히, 아무도 모르게 되찾는다.',
+      bubble: { x: 28, y: 72, width: 44, tail: 'none' },
     },
   ];
 

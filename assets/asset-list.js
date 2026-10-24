@@ -36,7 +36,8 @@
     { batch: 2, key: 'side-me', path: 'assets/side/me.png', width: 600, height: 600, subject: '테이블 높이로 몸을 숙여 오른쪽을 엿보는 대학생. 눈과 머리 윗부분만 테이블 위로 나오고, 빨대를 물고 있다' },
     { batch: 2, key: 'side-neighbor', path: 'assets/side/neighbor.png', width: 450, height: 600, subject: '헤드폰을 쓰고 자기 화면만 보는 옆자리 사람을 옆에서 본 모습. 왼쪽을 향해 앉아 있다' },
 
-    // 3차: 프롤로그 만화 다섯 컷. 대사와 글자는 게임이 그 위에 얹으므로 그림에는 글자를 넣지 않는다.
+    // 3차: 프롤로그 만화 다섯 컷. 대사는 게임이 컷 안에 만화 말풍선으로 얹으므로 그림에는 글자를 넣지 않는다.
+    // 말풍선이 놓일 자리(src/story.js의 bubble, noticeAt 위치)는 인물 얼굴이나 중요한 물건이 가리지 않게 비워 둔다.
     { batch: 3, key: 'story-1', path: 'assets/story/1.png', width: 1600, height: 1200, subject: '새벽 카페. 노트북 앞에 전공책을 펴 놓고 지친 얼굴로 공부하는 대학생. 창밖은 깜깜하다' },
     { batch: 3, key: 'story-2', path: 'assets/story/2.png', width: 1600, height: 1200, subject: '충전기를 멀티탭에 꽂아 둔 채 자리에서 일어나 화장실 쪽으로 가는 대학생의 뒷모습' },
     { batch: 3, key: 'story-3', path: 'assets/story/3.png', width: 1600, height: 1200, subject: '돌아와서 본 테이블. 민트색 플러그는 뽑혀서 테이블 위에 굴러 있고, 멀티탭은 헤드폰 쓴 옆자리 사람의 벽돌색 플러그가 전부 차지했다. 대학생은 얼어붙은 표정' },

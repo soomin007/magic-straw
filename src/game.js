@@ -74,9 +74,11 @@
     popupLowBar: byId('popup-low-bar'),
     helpPanel: byId('help-panel'),
     prologue: byId('prologue'),
+    prologueStage: byId('prologue-stage'),
+    prologuePanel: byId('prologue-panel'),
     prologueArt: byId('prologue-art'),
+    prologueBubble: byId('prologue-bubble'),
     prologueNotice: byId('prologue-notice'),
-    prologueLine: byId('prologue-line'),
     prologueCount: byId('prologue-count'),
     prologueNext: byId('prologue-next'),
   };
@@ -788,28 +790,50 @@
     showProloguePanel();
   }
 
+  // 컷을 4:3 비율로 창 안에 가장 크게 맞춘다. 말풍선 글자 크기도 컷 너비를 따라간다.
+  function fitPrologue() {
+    const width = ui.prologueStage.clientWidth - 32;
+    const height = ui.prologueStage.clientHeight - 24;
+    const panelWidth = Math.max(0, Math.min(width, (height * 4) / 3));
+    ui.prologuePanel.style.width = `${panelWidth}px`;
+    ui.prologuePanel.style.height = `${(panelWidth * 3) / 4}px`;
+  }
+
+  function placeInPanel(element, position) {
+    element.style.left = `${position.x}%`;
+    element.style.top = `${position.y}%`;
+    element.style.width = position.width ? `${position.width}%` : '';
+  }
+
   function showProloguePanel() {
     const panels = Story.prologue;
     const index = game.prologueIndex;
-    ui.prologueArt.classList.remove('enter');
-    void ui.prologueArt.offsetWidth;
-    ui.prologueArt.classList.add('enter');
+    ui.prologuePanel.classList.remove('enter');
+    void ui.prologuePanel.offsetWidth;
+    ui.prologuePanel.classList.add('enter');
 
     if (index < panels.length) {
       const panel = panels[index];
+      ui.prologuePanel.classList.remove('title');
       ui.prologueArt.innerHTML = Assets.html(panel.key, panel.scene);
-      ui.prologueLine.textContent = `"${panel.line}"`;
+      ui.prologueBubble.textContent = panel.line;
+      ui.prologueBubble.dataset.tail = panel.bubble.tail;
+      placeInPanel(ui.prologueBubble, panel.bubble);
+      ui.prologueBubble.hidden = false;
       ui.prologueNotice.hidden = !panel.notice;
       ui.prologueNotice.textContent = panel.notice || '';
+      if (panel.notice) placeInPanel(ui.prologueNotice, panel.noticeAt);
       ui.prologueCount.textContent = `${index + 1} / ${panels.length}`;
       ui.prologueNext.textContent = '다음';
     } else {
+      ui.prologuePanel.classList.add('title');
       ui.prologueArt.innerHTML = '<div class="title-card"><h1>내 자리, 내 충전기</h1><p>빨대 하나로 콘센트를 되찾는 퍼즐</p></div>';
-      ui.prologueLine.textContent = '';
+      ui.prologueBubble.hidden = true;
       ui.prologueNotice.hidden = true;
       ui.prologueCount.textContent = '';
       ui.prologueNext.textContent = '시작하기';
     }
+    fitPrologue();
   }
 
   function nextProloguePanel() {
@@ -897,10 +921,11 @@
     });
     ui.prologueNext.addEventListener('click', nextProloguePanel);
     byId('prologue-skip').addEventListener('click', closePrologue);
-    ui.prologueArt.addEventListener('click', nextProloguePanel);
+    ui.prologuePanel.addEventListener('click', nextProloguePanel);
     enablePopupDrag();
     document.addEventListener('keydown', onKey);
     new ResizeObserver(fitScene).observe(ui.stage);
+    new ResizeObserver(fitPrologue).observe(ui.prologueStage);
   }
 
   function init() {
