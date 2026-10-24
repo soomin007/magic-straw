@@ -162,6 +162,11 @@
       expect(after.rejected !== undefined, '끝난 판에서는 더 행동할 수 없음');
     }
     {
+      const level = byId.under;
+      const verdict = Engine.check(level, Engine.initial(level, 3), ice(1, 1));
+      expect(!verdict.ok, '숙이기를 쓸 수 없는 판에서는 높이를 골라 쏠 수 없음');
+    }
+    {
       const level = byId.sip;
       const verdict = Engine.check(level, Engine.initial(level, 3), soda('myPlug-0'));
       expect(!verdict.ok, '첫 판에는 소다가 없음');

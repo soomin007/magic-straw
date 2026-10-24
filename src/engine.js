@@ -200,7 +200,12 @@
     if (action.drink === 'ice') {
       const validRow = Number.isInteger(action.row) && action.row >= 0 && action.row < level.rows;
       const validZ = Number.isInteger(action.z) && action.z >= 0 && action.z < level.height;
-      return validRow && validZ ? { ok: true } : { ok: false, reason: '그쪽으로는 뱉을 수 없습니다' };
+      if (!validRow || !validZ) return { ok: false, reason: '그쪽으로는 뱉을 수 없습니다' };
+      // 높이를 골라 쏘려면 숙여야 하고, 숙이기는 그 판에서 쓸 수 있을 때만 된다.
+      if (action.z > 0 && !(level.tools || []).includes('duck')) {
+        return { ok: false, reason: '숙여야 높이를 골라 쏠 수 있습니다' };
+      }
+      return { ok: true };
     }
 
     if (action.drink === 'soda') {
