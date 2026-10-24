@@ -1,0 +1,6 @@
+# 랩탑과 데스크탑에서 줄바꿈이 섞이지 않도록, 저장소 안의 텍스트 파일은 항상 LF로 둔다.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.webp binary
