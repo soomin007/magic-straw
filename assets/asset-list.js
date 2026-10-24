@@ -13,7 +13,7 @@
   const ASSET_LIST = [
     // 1차: 살짝 기울인 탑뷰로 1~6번 판을 플레이하는 데 필요한 그림
     { batch: 1, key: 'scene-top', path: 'assets/scene/top.png', width: 1920, height: 1080, refs: SCENE_REFS,
-      subject: '1챕터 판 배경. 스타벅스를 떠올리게 하는 카공 카페의 창가 바 좌석을 살짝 기울인 탑뷰로 본 장면. 배치는 docs/art-brief.md의 "판 배경 배치" 표를 따른다' },
+      subject: '1챕터 판 배경. 스타벅스를 떠올리게 하는 카공 카페의 창가 바 좌석을 창 밖에서 들여다본 장면. 두 사람은 바 건너편에서 얼굴이 보이고, 창틀은 화면 아래 앞쪽에 있다. 배치는 docs/art-brief.md의 "판 배경 배치" 표를 따른다' },
     { batch: 1, key: 'piece-top-my-plug', path: 'assets/piece/top-my-plug.png', width: 512, height: 512, refs: PIECE_REFS,
       subject: '내 노트북 충전기의 한국 220V 벽 플러그. 둥근 원통형 민트색 머리, 둥근 금속 핀 두 개가 오른쪽을 향하고, 굵은 전선이 왼쪽 가장자리에서 잘린다' },
     { batch: 1, key: 'piece-top-their-plug', path: 'assets/piece/top-their-plug.png', width: 512, height: 512, refs: PIECE_REFS,
@@ -24,10 +24,10 @@
       subject: '두꺼운 전공책 세 권을 쌓은 더미. 무거워 보이고, 칸을 거의 꽉 채운다' },
     { batch: 1, key: 'piece-top-menu', path: 'assets/piece/top-menu.png', width: 512, height: 512, refs: PIECE_REFS,
       subject: '카페 테이블에 세워 두는 삼각 메뉴판(아크릴 스탠드). 왼쪽 아래에서 오른쪽 위로 비스듬히 놓여 있다. 반대 방향은 게임이 좌우를 뒤집어 쓴다. 글자 없음' },
-    { batch: 1, key: 'divider-top-socket', path: 'assets/divider/top-socket.png', width: 256, height: 256, refs: PIECE_REFS,
-      subject: '두 자리 사이 낮은 나무 칸막이의 한 구간을 살짝 기울인 탑뷰로 본 모습. 왼쪽 면(내 쪽)에 콘센트 하나가 붙어 있다. 위아래로 이어 붙인다' },
-    { batch: 1, key: 'divider-top-plain', path: 'assets/divider/top-plain.png', width: 256, height: 256, refs: PIECE_REFS,
-      subject: '같은 칸막이의 콘센트가 없는 구간. 위아래로 이어 붙는다' },
+    { batch: 1, key: 'outlet-top-free', path: 'assets/outlet/top-free.png', width: 264, height: 180, refs: PIECE_REFS,
+      subject: '두 자리 사이 콘센트 기둥의 한 칸(바 위 한 줄 깊이)을 살짝 기울인 탑뷰로 본 모습. 내 쪽(왼쪽) 면에 빈 콘센트 하나. 위아래로 이어 붙여 기둥 하나가 된다' },
+    { batch: 1, key: 'outlet-top-taken', path: 'assets/outlet/top-taken.png', width: 264, height: 180, refs: PIECE_REFS,
+      subject: '같은 기둥 칸인데, 내 쪽 콘센트에 옆자리 사람의 다른 기기 선(태블릿 충전기나 이어폰 케이스 선)이 꽂혀 있다. 흐린 벽돌색으로, 판 위 물건처럼 굵게 강조하지 않는다' },
     { batch: 1, key: 'fx-bubble', path: 'assets/fx/bubble.png', width: 512, height: 512, refs: PIECE_REFS,
       subject: '물건 하나를 감싸는 반투명 탄산 거품 방울. 가운데는 비어 있고 굵은 테두리와 반짝임만 있다' },
     { batch: 1, key: 'fx-ice', path: 'assets/fx/ice.png', width: 192, height: 192, refs: PIECE_REFS,
@@ -41,7 +41,7 @@
 
     // 2차: 숙이기(바 높이에서 앞으로 본 단면) 시점. 7, 8번 판에 쓴다.
     { batch: 2, key: 'scene-side', path: 'assets/scene/side.png', width: 1920, height: 1080, refs: SCENE_REFS,
-      subject: '숙여서 바 높이에서 본 장면. 아래쪽에 바의 앞 가장자리, 그 너머로 창과 밤거리. 배치는 docs/art-brief.md의 "숙이기 배경 배치" 표를 따른다' },
+      subject: '바 높이로 숙여서 본 장면. 바 앞 가장자리가 눈높이에 걸리고, 그 너머로 카페 안쪽과 앉아 있는 옆자리 사람이 보인다. 창틀은 화면 아래 앞쪽. 배치는 docs/art-brief.md의 "숙이기 배경 배치" 표를 따른다' },
     { batch: 2, key: 'piece-side-my-plug', path: 'assets/piece/side-my-plug.png', width: 512, height: 512, refs: PIECE_REFS,
       subject: '내 민트색 플러그를 바 높이에서 정면으로 본 모습. 핀이 오른쪽을 향하고, 그림 아래쪽에 바닥에 닿게 놓인다' },
     { batch: 2, key: 'piece-side-their-plug', path: 'assets/piece/side-their-plug.png', width: 512, height: 512, refs: PIECE_REFS,
@@ -52,10 +52,12 @@
       subject: '책 세 권 더미를 바 높이에서 정면으로 본 모습. 칸을 꽉 채워 위에 물건을 올릴 수 있어 보인다' },
     { batch: 2, key: 'piece-side-menu', path: 'assets/piece/side-menu.png', width: 512, height: 512, refs: PIECE_REFS,
       subject: '삼각 메뉴판을 바 높이에서 정면으로 본 모습. 칸의 아래쪽 한 칸 높이만 차지한다' },
-    { batch: 2, key: 'divider-side-socket', path: 'assets/divider/side-socket.png', width: 256, height: 256, refs: PIECE_REFS,
-      subject: '칸막이를 바 높이에서 본 한 구간. 콘센트 하나가 왼쪽을 향해 붙어 있다. 위아래로 이어 붙인다' },
-    { batch: 2, key: 'divider-side-plain', path: 'assets/divider/side-plain.png', width: 256, height: 256, refs: PIECE_REFS,
-      subject: '같은 칸막이의 콘센트 없는 구간' },
+    { batch: 2, key: 'outlet-side-free', path: 'assets/outlet/side-free.png', width: 256, height: 256, refs: PIECE_REFS,
+      subject: '콘센트 기둥을 바 높이에서 정면으로 본 한 칸. 왼쪽을 향한 빈 콘센트 하나. 위아래로 이어 붙인다' },
+    { batch: 2, key: 'outlet-side-taken', path: 'assets/outlet/side-taken.png', width: 256, height: 256, refs: PIECE_REFS,
+      subject: '같은 기둥 칸에 옆자리 사람의 다른 기기 선이 꽂혀 있다. 흐린 벽돌색, 강조하지 않는다' },
+    { batch: 2, key: 'outlet-side-cap', path: 'assets/outlet/side-cap.png', width: 256, height: 256, refs: PIECE_REFS,
+      subject: '콘센트 기둥의 맨 위 칸. 콘센트가 없고 기둥 윗면이 보인다' },
 
     // 3차: 인물 일러스트와 프롤로그. 프롤로그는 글자 없이 그림과 기호만으로 읽혀야 한다.
     { batch: 3, key: 'portrait-me', path: 'assets/portrait/me.png', width: 1024, height: 1024, refs: PORTRAIT_REFS,

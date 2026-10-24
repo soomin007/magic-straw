@@ -11,29 +11,39 @@
   // 장면 좌표 (960 x 540 기준)
   const SCENE_WIDTH = 960;
   const SCENE_HEIGHT = 540;
+  // 칸 크기. 탑뷰는 살짝 기울여 본 시점이라 한 줄의 깊이(ROW_HEIGHT)가 칸 너비(CELL)보다 짧다.
+  // 숙인 시점에서는 칸이 정사각형(CELL x CELL)이다.
   const CELL = 88;
+  const ROW_HEIGHT = 60;
   const GRID_LEFT = 190;
-  const GRID_TOP = 138;
+  const GRID_TOP = 200;
   const SIDE_FLOOR = 400;
-  const TOP_STRAW = { x: 176, y: 412 };
-  const SIDE_STRAW = { x: 178, y: 300 };
+  const TOP_STRAW = { x: 214, y: 132 };
+  const SIDE_STRAW = { x: 178, y: 350 };
 
-  // 판 배경 그림이 없을 때 회색 상자로 그리는 배치. docs/art-brief.md의 배경 배치 표와 같다(1챕터 창가 바 좌석).
+  // 콘센트 기둥은 줄마다 바 높이(z = 0)와 그 위(z = 1)에 콘센트가 고정돼 있다. 그보다 위는 기둥 윗면이다.
+  // 레벨에서 콘센트가 없는 자리는 옆자리 사람이 꽂아 둔 다른 기기(배경 그림, 건드릴 수 없음)로 그린다.
+  const OUTLET_LEVELS = 2;
+
+  // 판 배경 그림이 없을 때 회색 상자로 그리는 배치. docs/art-brief.md의 배경 배치 표와 같다.
+  // 1챕터 창가 바 좌석을 창 밖에서 들여다보는 구도라, 두 사람은 바 건너편에서 얼굴이 보이고 창틀은 화면 아래 앞쪽에 있다.
   const BACKDROP_LAYOUT = {
     top: [
-      { label: '창', tone: 'window', x: 0, y: 0, width: 960, height: 108 },
-      { label: '', tone: 'table', x: 40, y: 118, width: 900, height: 300 },
-      { label: '내 랩탑', tone: 'mine', x: 60, y: 150, width: 122, height: 150 },
-      { label: '내 음료', tone: 'light', x: 66, y: 312, width: 76, height: 70 },
-      { label: '상대 랩탑', tone: 'theirs', x: 826, y: 150, width: 106, height: 150 },
-      { label: '나', tone: 'mine', round: true, x: 40, y: 410, width: 200, height: 150 },
-      { label: '옆자리 사람', tone: 'theirs', round: true, x: 760, y: 410, width: 200, height: 150 },
+      { label: '카페 안쪽', tone: 'window', x: 0, y: 0, width: 960, height: 175 },
+      { label: '나 (얼굴이 보인다)', tone: 'mine', round: true, x: 30, y: 6, width: 220, height: 190 },
+      { label: '옆자리 사람 (헤드폰)', tone: 'theirs', round: true, x: 720, y: 6, width: 230, height: 190 },
+      { label: '', tone: 'table', x: 0, y: 170, width: 960, height: 232 },
+      { label: '내 랩탑 (뒷면)', tone: 'mine', x: 66, y: 150, width: 118, height: 100 },
+      { label: '상대 랩탑 (뒷면)', tone: 'theirs', x: 830, y: 150, width: 112, height: 100 },
+      { label: '내 음료', tone: 'light', x: 86, y: 286, width: 70, height: 72 },
+      { label: '창틀 (앞쪽)', tone: 'window', x: 0, y: 410, width: 960, height: 130 },
     ],
     side: [
-      { label: '창', tone: 'window', x: 0, y: 0, width: 960, height: 398 },
-      { label: '', tone: 'table', x: 0, y: 400, width: 960, height: 48 },
-      { label: '숙인 나', tone: 'mine', round: true, x: 0, y: 236, width: 180, height: 180 },
-      { label: '옆자리 사람', tone: 'theirs', round: true, x: 836, y: 168, width: 120, height: 160 },
+      { label: '카페 안쪽', tone: 'window', x: 0, y: 0, width: 960, height: 398 },
+      { label: '숙인 나', tone: 'mine', round: true, x: 0, y: 290, width: 180, height: 130 },
+      { label: '옆자리 사람', tone: 'theirs', round: true, x: 826, y: 150, width: 134, height: 250 },
+      { label: '', tone: 'table', x: 0, y: 400, width: 960, height: 50 },
+      { label: '창틀 (앞쪽)', tone: 'window', x: 0, y: 450, width: 960, height: 90 },
     ],
   };
   const INSERT_OFFSET = 14;
@@ -158,7 +168,7 @@
   // 좌표 변환
 
   function topCellCenter(x, row) {
-    return { x: GRID_LEFT + x * CELL + CELL / 2, y: GRID_TOP + row * CELL + CELL / 2 };
+    return { x: GRID_LEFT + x * CELL + CELL / 2, y: GRID_TOP + row * ROW_HEIGHT + ROW_HEIGHT / 2 };
   }
 
   function sideCellCenter(x, z) {
@@ -259,13 +269,15 @@
     ui.sideBar.hidden = isTop;
     ui.board.classList.toggle('ducking', !isTop);
 
-    const boardHeight = isTop ? level.rows * CELL : level.height * CELL;
+    const lineHeight = isTop ? ROW_HEIGHT : CELL;
+    const boardHeight = isTop ? level.rows * ROW_HEIGHT : level.height * CELL;
     ui.board.style.left = `${GRID_LEFT}px`;
     ui.board.style.top = `${isTop ? GRID_TOP : sideBoardTop()}px`;
     ui.board.style.width = `${level.width * CELL}px`;
     ui.board.style.height = `${boardHeight}px`;
+    ui.board.style.setProperty('--line-height', `${lineHeight}px`);
     ui.aimBand.style.width = `${(level.width - 1) * CELL}px`;
-    ui.aimBand.style.height = `${CELL}px`;
+    ui.aimBand.style.height = `${lineHeight}px`;
 
     ui.divider.style.left = `${(level.width - 1) * CELL}px`;
     ui.divider.innerHTML = '';
@@ -273,11 +285,11 @@
     for (let index = 0; index < segments; index++) {
       const row = isTop ? index : game.focusRow;
       const z = isTop ? 0 : level.height - 1 - index;
-      const hasSocket = level.sockets.some((socket) => socket.row === row && socket.z === z);
       const segment = document.createElement('div');
       segment.className = 'divider-segment';
-      segment.style.top = `${index * CELL}px`;
-      segment.innerHTML = Assets.html(`divider-${isTop ? 'top' : 'side'}-${hasSocket ? 'socket' : 'plain'}`);
+      segment.style.top = `${index * lineHeight}px`;
+      segment.style.height = `${lineHeight}px`;
+      segment.innerHTML = Assets.html(outletKey(isTop ? 'top' : 'side', row, z));
       ui.divider.appendChild(segment);
     }
 
@@ -293,13 +305,21 @@
       game.pieceElements.set(obj.id, element);
     }
 
-    ui.sideLabel.textContent = `${game.focusRow + 1}번 줄을 옆에서 보는 중`;
+    ui.sideLabel.textContent = `${game.focusRow + 1}번 줄을 바 높이에서 보는 중`;
     ui.rowUp.disabled = game.focusRow === 0;
     ui.rowDown.disabled = game.focusRow === level.rows - 1;
     ui.duckButton.setAttribute('aria-pressed', String(!isTop));
 
     clearAim();
     render(game.state, false);
+  }
+
+  // 콘센트 기둥 한 칸의 그림 이름. 레벨에 콘센트가 있으면 빈 콘센트(상대 플러그가 꽂혀 있을 수도 있다),
+  // 없으면 옆자리 사람의 다른 기기가 꽂힌 콘센트, 콘센트 높이보다 위는 기둥 윗면이다.
+  function outletKey(view, row, z) {
+    if (z >= OUTLET_LEVELS) return `outlet-${view}-cap`;
+    const free = game.level.sockets.some((socket) => socket.row === row && socket.z === z);
+    return `outlet-${view}-${free ? 'free' : 'taken'}`;
   }
 
   function render(snapshot, animate) {
@@ -313,8 +333,10 @@
 
       if (isTop) {
         element.hidden = false;
-        element.style.transform = `translate(${offsetX}px, ${obj.row * CELL}px)`;
-        element.style.zIndex = String(10 + obj.z);
+        // 물건 그림(CELL x CELL)은 줄보다 키가 커서, 아래 끝을 줄 아래 끝에 맞추고 위로 솟게 둔다.
+        // 앞줄(창 쪽, row가 큰 줄)이 뒷줄을 가리도록 앞줄일수록 위에 그린다.
+        element.style.transform = `translate(${offsetX}px, ${(obj.row + 1) * ROW_HEIGHT - CELL}px)`;
+        element.style.zIndex = String(10 + obj.row * 3 + obj.z);
         body.style.transform = obj.z > 0 ? `translate(0, ${-obj.z * TOP_LIFT}px) scale(${1 + obj.z * 0.08})` : '';
         element.classList.toggle('lifted', obj.z > 0);
       } else {
@@ -459,7 +481,7 @@
         // 마우스가 있는 줄이 아니라 내 플러그가 있는 줄을 짚어야 첫 판에서 헷갈리지 않는다.
         const myPlug = state.objects.find((obj) => obj.kind === 'myPlug');
         const center = topCellCenter(0, myPlug.row);
-        target = { x: center.x, y: center.y - CELL / 2 };
+        target = { x: center.x, y: center.y - ROW_HEIGHT / 2 };
         line = lines.pickRow;
       }
     } else if (playing && fresh && game.level.tutorial === 'drink' && game.selectedDrink !== 'soda') {
@@ -621,7 +643,7 @@
     clearAim();
     if (action.drink === 'ice') {
       const bandLine = game.view === 'top' ? action.row : game.level.height - 1 - action.z;
-      ui.aimBand.style.top = `${bandLine * CELL}px`;
+      ui.aimBand.style.top = `${bandLine * (game.view === 'top' ? ROW_HEIGHT : CELL)}px`;
       ui.aimBand.classList.add('visible');
       const preview = Engine.step(game.level, game.state, action);
       if (!preview.ok) return;

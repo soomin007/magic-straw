@@ -1,10 +1,10 @@
 // 게임 규칙. 화면 코드와 분리해서 브라우저와 Node 양쪽에서 검증할 수 있게 한다.
 //
 // 판은 작은 3차원 격자다.
-//   x    왼쪽(내 자리)에서 오른쪽(옆자리)으로 커진다. 맨 오른쪽 열(x = width - 1)은 두 자리 사이 칸막이다.
+//   x    왼쪽(내 자리)에서 오른쪽(옆자리)으로 커진다. 맨 오른쪽 열(x = width - 1)은 두 자리 사이 콘센트 기둥이다.
 //   row  탑뷰 화면의 위에서 아래로 커진다.
 //   z    테이블 면(0)에서 위로 커진다. 탑뷰에서는 z = 0 높이로만 조준할 수 있고, 숙이기를 해야 더 높이 조준할 수 있다.
-// 콘센트는 (row, z) 자리마다 있거나 없다. 플러그는 칸막이 바로 왼쪽 칸에 있을 때 꽂힌 것으로 본다.
+// 콘센트는 (row, z) 자리마다 있거나 없다. 플러그는 콘센트 기둥 바로 왼쪽 칸에 있을 때 꽂힌 것으로 본다.
 (function (root) {
   'use strict';
 
@@ -34,7 +34,7 @@
     menu: { pushable: false, liftable: false, plug: false, deflects: true },
   };
 
-  // 탑뷰 지도에 쓰는 글자 (테이블 면, z = 0). 맨 오른쪽 열은 칸막이라 '#'(콘센트 없음)과 'S'(콘센트)만 쓴다.
+  // 탑뷰 지도에 쓰는 글자 (테이블 면, z = 0). 맨 오른쪽 열은 콘센트 기둥이라 '#'(다른 기기로 막힌 콘센트)과 'S'(쓸 수 있는 콘센트)만 쓴다.
   // 메뉴판 '/'와 '\'는 비스듬히 세워 둔 삼각 메뉴판이고, 그 모양대로 얼음을 90도 꺾는다.
   const MAP_LEGEND = { P: 'myPlug', N: 'theirPlug', c: 'cup', B: 'book', '/': 'menu', '\\': 'menu' };
 
@@ -64,7 +64,7 @@
       [...line].forEach((char, x) => {
         if (x === width - 1) {
           if (char === 'S') sockets.push({ row, z: 0 });
-          else if (char !== '#') throw new Error(`${definition.id}: 칸막이 열에는 # 또는 S만 씁니다`);
+          else if (char !== '#') throw new Error(`${definition.id}: 콘센트 기둥 열에는 # 또는 S만 씁니다`);
           return;
         }
         const kind = MAP_LEGEND[char];
@@ -102,7 +102,7 @@
     return state.objects.find((obj) => obj.id === id) || null;
   }
 
-  // 칸막이 열을 뺀 테이블 위 공간 안인지
+  // 콘센트 기둥 열을 뺀 테이블 위 공간 안인지
   function isInside(level, x, row, z) {
     return x >= 0 && x < level.width - 1 && row >= 0 && row < level.rows && z >= 0 && z < level.height;
   }
@@ -139,7 +139,7 @@
 
   // 얼음에 맞은 물건은 얼음이 날아가던 방향으로, 막힐 때까지 미끄러진다.
   // 테이블 가장자리, 다른 물건, 메뉴판에 막히면 멈춘다. 떠 있지 않은 물건은 받침이 없는 칸에 들어서면 떨어지고 거기서 멈춘다.
-  // 플러그가 오른쪽으로 미끄러져 칸막이에 닿으면, 그 자리의 콘센트가 비어 있을 때 꽂힌다.
+  // 플러그가 오른쪽으로 미끄러져 콘센트 기둥에 닿으면, 그 자리의 콘센트가 비어 있을 때 꽂힌다.
   function slide(level, state, obj, direction) {
     for (;;) {
       const nextX = obj.x + direction.dx;

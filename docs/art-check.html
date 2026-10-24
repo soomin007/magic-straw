@@ -136,7 +136,7 @@
     <p class="lead">assets/manifest.js에 등록된 그림을 실제 게임 크기로 한 장면에 모아 봅니다. 아직 없는 그림은 점선 회색 상자로 보입니다.
       모든 그림이 한 사람이 그린 것처럼 보이는지, 칸 크기에 맞는지 여기서 확인합니다.</p>
 
-    <h2>탑뷰 장면 (6번 판 "순서", 창가 바 좌석)</h2>
+    <h2>탑뷰 장면 (6번 판 "순서", 창가 바 좌석을 창 밖에서 본 구도)</h2>
     <div class="stage" id="stage"><div class="scene" id="scene"></div></div>
 
     <h2 id="summary"></h2>
@@ -150,7 +150,8 @@
   <script>
     const CELL = 88;
     const GRID_LEFT = 190;
-    const GRID_TOP = 138;
+    const GRID_TOP = 200;
+    const ROW_HEIGHT = 60;
     const manifest = window.ASSET_MANIFEST || {};
     const assetsByKey = Object.fromEntries(window.ASSET_LIST.map((asset) => [asset.key, asset]));
     const scene = document.getElementById('scene');
@@ -174,8 +175,8 @@
 
     // 1챕터 창가 바 배치. 판 배경 그림이 없으면 게임과 같은 자리에 이름 상자를 놓는다.
     const BACKDROP = [
-      ['창', 0, 0, 960, 108], ['', 40, 118, 900, 300], ['내 랩탑', 60, 150, 122, 150], ['내 음료', 66, 312, 76, 70],
-      ['상대 랩탑', 826, 150, 106, 150], ['나', 40, 410, 200, 150], ['옆자리 사람', 760, 410, 200, 150],
+      ['카페 안쪽', 0, 0, 960, 175], ['나 (얼굴)', 30, 6, 220, 190], ['옆자리 사람 (얼굴)', 720, 6, 230, 190], ['', 0, 170, 960, 232],
+      ['내 랩탑', 66, 150, 118, 100], ['상대 랩탑', 830, 150, 112, 100], ['내 음료', 86, 286, 70, 72], ['창틀 (앞쪽)', 0, 410, 960, 130],
     ];
 
     function buildScene() {
@@ -197,18 +198,19 @@
       const dividerX = GRID_LEFT + (level.width - 1) * CELL;
       for (let row = 0; row < level.rows; row++) {
         const hasSocket = level.sockets.some((socket) => socket.row === row && socket.z === 0);
-        place(hasSocket ? 'divider-top-socket' : 'divider-top-plain', dividerX, GRID_TOP + row * CELL, CELL, CELL);
+        place(hasSocket ? 'outlet-top-free' : 'outlet-top-taken', dividerX, GRID_TOP + row * ROW_HEIGHT, CELL, ROW_HEIGHT);
       }
 
       const keyForKind = { myPlug: 'piece-top-my-plug', theirPlug: 'piece-top-their-plug', cup: 'piece-top-cup', book: 'piece-top-book', menu: 'piece-top-menu' };
       for (const obj of state.objects) {
         const insertOffset = obj.inserted ? 14 : 0;
-        const slot = place(keyForKind[obj.kind], GRID_LEFT + obj.x * CELL + insertOffset + 6, GRID_TOP + obj.row * CELL + 6, CELL - 12, CELL - 12,
+        // 물건은 줄보다 키가 커서 아래 끝을 줄 아래 끝에 맞춘다(게임과 같다).
+        const slot = place(keyForKind[obj.kind], GRID_LEFT + obj.x * CELL + insertOffset + 6, GRID_TOP + (obj.row + 1) * ROW_HEIGHT - CELL + 6, CELL - 12, CELL - 12,
           { flip: obj.kind === 'menu' && obj.mirror === '\\' });
         slot.classList.add('sticker');
       }
 
-      place('ui-finger', GRID_LEFT + 10, GRID_TOP - 70, 64, 64);
+      place('ui-finger', GRID_LEFT + 10, GRID_TOP + ROW_HEIGHT - 70, 64, 64);
     }
 
     function buildCards() {
