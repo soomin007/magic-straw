@@ -12,7 +12,7 @@ window.SCENE_LAYOUT = {
   "top": {
     "gridLeft": 190,
     "gridTop": 300,
-    "straw": { "x": 232, "y": 168 },
+    "straw": { "x": 279, "y": 133 },
     "boxes": [
       { "label": "카페 안쪽", "tone": "window", "shape": "rect", "x": 0, "y": 0, "width": 960, "height": 232 },
       { "label": "", "tone": "table", "shape": "rect", "x": 0, "y": 230, "width": 960, "height": 252 },
@@ -31,7 +31,7 @@ window.SCENE_LAYOUT = {
   },
   "side": {
     "floor": 400,
-    "straw": { "x": 178, "y": 352 },
+    "straw": { "x": 228, "y": 390 },
     "boxes": [
       { "label": "카페 안쪽", "tone": "window", "shape": "rect", "x": 0, "y": 0, "width": 960, "height": 400 },
       { "label": "옆자리 (상반신)", "tone": "theirs", "shape": "round", "x": 760, "y": 222, "width": 260, "height": 178 },

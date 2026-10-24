@@ -585,5 +585,2310 @@
         "internalLines": "unchanged generated linework"
       }
     }
+  ],
+  "subsequentRuns": [
+    {
+      "date": "2026-10-24",
+      "name": "front-facing-outlet-column-and-rejected-background",
+      "tool": "built-in image_gen",
+      "status": "Two outlet-top tiles retained. Oversized-bar background was rejected by the user and not registered. Session23 documents the interruption.",
+      "recordRecovery": "This run was reconstructed from preserved in-memory prompt/reference/processing records after a UTF-8 write error during session25. The committed baseline was recovered read-only from HEAD. The new record was UTF-8 encoded before writing.",
+      "referenceSheets": {
+        "piece-reference-sheet.png": [
+          "assets/piece/top-my-plug.png",
+          "assets/piece/top-their-plug.png",
+          "assets/piece/top-cup.png",
+          "assets/piece/top-book.png",
+          "assets/piece/top-menu.png"
+        ],
+        "r2-character-reference-sheet.png": [
+          "assets/style-test/r2-portrait.png",
+          "assets/style-test/r2-neighbor-portrait.png"
+        ],
+        "portrait-source-reference-sheet.png": [
+          "references/portrait-helltaker-1.jpg",
+          "references/portrait-helltaker-2.jpg",
+          "references/portrait-helltaker-3.jpg",
+          "references/character-cultofthelamb-1.jpg"
+        ],
+        "piece-source-reference-sheet.png": [
+          "references/line-bugfables-1.jpg",
+          "references/view-cultofthelamb-1.jpg",
+          "references/line-castlecrashers-1.jpg"
+        ],
+        "scene-source-reference-sheet.png": [
+          "references/view-cultofthelamb-1.jpg",
+          "references/view-dontstarve-1.jpg"
+        ],
+        "final-character-reference-sheet.png": [
+          "assets/portrait/me.png",
+          "assets/portrait/neighbor.png"
+        ]
+      },
+      "assets": [
+        {
+          "key": "outlet-top-free",
+          "file": "assets/outlet/top-free.png",
+          "width": 264,
+          "height": 180,
+          "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nExtremely thick, very dark black (#111) outlines, 8-10% of the object's shortest side, crisp edge, no blur or glow.\nSlightly tilted top-down view with a little LEFT/front face visible. Not isometric.\nOne transparent 264x180 landscape tile of a modern CAFE POWER OUTLET COLUMN. This is a freestanding narrow cream-painted metal or light-wood rectangular post, with deep green trim on its right edge, NOT a divider wall. The column runs perfectly VERTICALLY through the full image from y0 to y100% and continues beyond BOTH the top and bottom image edges. Never draw a top/bottom end cap or horizontal border at those edges. The top and bottom cross-sections match to tile vertically.\nThe column strip occupies x3-36% of canvas, leaving the RIGHT two thirds transparent. One recessed round Korean 220V socket on the LEFT-facing cream face at x8-24%, y33-67%, with exactly TWO round dark contact holes, never US slots. The socket's visual center is around x16%, y50%, so a right-pointing plug coming from the left can reach it. Only one EMPTY socket. No cable, no plug, no ground shadow, no white border.\nReferences 1-3 are style references, reference 4 is the existing puzzle-object sheet, reference 5 contains the two r2 game characters for style consistency. Render only the column segment.",
+          "inputs": [
+            {
+              "input": 1,
+              "file": "references/line-bugfables-1.jpg"
+            },
+            {
+              "input": 2,
+              "file": "references/view-cultofthelamb-1.jpg"
+            },
+            {
+              "input": 3,
+              "file": "references/line-castlecrashers-1.jpg"
+            },
+            {
+              "input": 4,
+              "files": [
+                "assets/piece/top-my-plug.png",
+                "assets/piece/top-their-plug.png",
+                "assets/piece/top-cup.png",
+                "assets/piece/top-book.png",
+                "assets/piece/top-menu.png"
+              ]
+            },
+            {
+              "input": 5,
+              "files": [
+                "assets/style-test/r2-portrait.png",
+                "assets/style-test/r2-neighbor-portrait.png"
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              264,
+              180
+            ],
+            "canvasShiftX": -30,
+            "columnWidth": 64,
+            "externalInkRadius": 2,
+            "inkColor": "#111111",
+            "alphaCleanup": "external matte removed with crisp edge, no blur"
+          }
+        },
+        {
+          "key": "outlet-top-taken",
+          "file": "assets/outlet/top-taken.png",
+          "width": 264,
+          "height": 180,
+          "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nEdit the first image to create the occupied version of this exact vertical cafe outlet-column tile. The column's shape, straight vertical silhouette, cream face and deep green right stripe must remain identical, as must its top and bottom row cross sections. Transparent background. 264x180 landscape tile.\nPlug a SMALL MUTED BRICK-RED charger into the single left-facing Korean round 220V socket at mid-height. Connect a thin muted brick-red cable to a small plain dark-red EARPHONE CHARGING CASE at x55-76%, y62-84% of canvas. This is another device owned by the neighbor. It is fixed background equipment, visually subdued: no white sticker outline, no drop shadow, no bright highlights or glow. Keep the socket in precisely its original position, never add or remove sockets. No text, logos or US flat pin outlet. No top or bottom end cap; the post continues vertically through both edges. Match the original post's black ink, crisp outside outline 8-10% of the post's short width. References 2-4 are original style source sheet, same-game puzzle object sheet, and r2 character sheet.",
+          "inputs": [
+            {
+              "input": 1,
+              "candidate": "outlet-top-free"
+            },
+            {
+              "input": 2,
+              "files": [
+                "references/line-bugfables-1.jpg",
+                "references/view-cultofthelamb-1.jpg",
+                "references/line-castlecrashers-1.jpg"
+              ]
+            },
+            {
+              "input": 3,
+              "files": [
+                "assets/piece/top-my-plug.png",
+                "assets/piece/top-their-plug.png",
+                "assets/piece/top-cup.png",
+                "assets/piece/top-book.png",
+                "assets/piece/top-menu.png"
+              ]
+            },
+            {
+              "input": 4,
+              "files": [
+                "assets/style-test/r2-portrait.png",
+                "assets/style-test/r2-neighbor-portrait.png"
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              264,
+              180
+            ],
+            "canvasShiftX": -32,
+            "columnWidth": 65,
+            "externalInkRadius": 2,
+            "inkColor": "#111111",
+            "alphaCleanup": "external matte removed with crisp edge, no blur"
+          }
+        }
+      ],
+      "rejectedBackgroundCandidates": [
+        {
+          "candidate": "scene-top",
+          "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nOutlines thinner than the puzzle objects so the pieces stand out.\nInput 1-2: art style and top-down camera references only. Input 3 is a sheet of the five already-made puzzle objects, for same-game art consistency. Inputs 4-5 are the exact player and neighbor identities.\nBoth characters have an UPRIGHT back and relaxed LOW shoulders with clearly visible NECK and shoulder lines. A clear gap separates the jaw/chin from the hoodie collar. Do not shrug, hunch, hide the neck, or push the head down between shoulders. Use the attached r2 portraits for hair, face and clothing identity, but correct their posture. Do not copy the r2 images' added heavy black halo; keep the natural ink line weight for humans.\nOne opaque 1920x1080 16:9 full-frame cafe game backdrop. NEW COMPOSITION: the viewer is OUTSIDE the street window looking INTO a Korean study cafe, slightly downward across the narrow light-wood window BAR. Both students sit on the FAR side of the bar at the TOP of the image, FACING the viewer, so their FACES and upper bodies are visible. Their laptop LID BACKS face the viewer. Do not show laptop keyboards or screens. Do not show the backs of the students' heads. Not isometric; the table edges stay horizontal and the puzzle region stays rectangular. The bar has shallow front-to-back depth, not an enormous dining table.\nStrict normalized full-image positions:\nCafe interior with deep green accents and pendant lamps fills x0-100%, y0-32%. Behind the people are indoor cafe walls, not the outside night sky.\nPLAYER entirely within x3-26%, y1-36%, messy black hair, mint hoodie, tired focused face, green bent drinking straw in mouth. Seated upright, forearms on bar. Both shoulders and neck visible.\nNEIGHBOR entirely within x75-99%, y1-36%, black hair, large WHITE headphones, brick-red hoodie, indifferent downward gaze at own laptop. Upright, not hunched, both shoulders and neck visible.\nBAR TOP is x0-100%, y31-74%, pale wood. EMPTY PUZZLE rectangle x20-75%, y37-70% contains ONLY subtle wood grain and illumination. EMPTY OUTLET COLUMN rectangle x75-84%, y31-74% contains ONLY plain wood too. No column, no sockets, no cables or hands in those two rectangles. These will be added by the game.\nPlayer laptop strictly x7-19%, y28-46%, BACK of dark lid with plain mint rectangle sticker, facing viewer. Neighbor laptop strictly x86-98%, y28-46%, BACK of lid with plain brick-red rectangle sticker. Keep both laptops out of the puzzle and column rectangles.\nOne iced coffee cup with green straw at x9-16%, y53-66%. Keep it left of x19%.\nFOREGROUND window frame and transparent glass fill x0-100%, y76-100%, deep green horizontal sill with faint reflected night lights. This foreground frame is BELOW the bar, not behind the students. No frame line through the puzzle rectangle. Warm interior, nighttime reflections only on bottom foreground glass.\nNo other objects or people inside the empty game rectangles.",
+          "inputs": [
+            {
+              "input": 1,
+              "file": "references/view-cultofthelamb-1.jpg"
+            },
+            {
+              "input": 2,
+              "file": "references/view-dontstarve-1.jpg"
+            },
+            {
+              "input": 3,
+              "files": [
+                "assets/piece/top-my-plug.png",
+                "assets/piece/top-their-plug.png",
+                "assets/piece/top-cup.png",
+                "assets/piece/top-book.png",
+                "assets/piece/top-menu.png"
+              ]
+            },
+            {
+              "input": 4,
+              "file": "assets/style-test/r2-portrait.png"
+            },
+            {
+              "input": 5,
+              "file": "assets/style-test/r2-neighbor-portrait.png"
+            }
+          ],
+          "status": "not registered; rejected composition superseded by physical scale guide run"
+        },
+        {
+          "candidate": "scene-top-refine",
+          "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nBoth characters have an UPRIGHT back and relaxed LOW shoulders with clearly visible NECK and shoulder lines. A clear gap separates the jaw/chin from the hoodie collar. Do not shrug, hunch, hide the neck, or push the head down between shoulders. Use the attached r2 portraits for hair, face and clothing identity, but correct their posture. Do not copy the r2 images' added heavy black halo; keep the natural ink line weight for humans.\nEdit the first image only, preserving these exact people, cafe atmosphere and foreground window. References 2-3 are art-style references, 4 is the same-game object sheet, 5 is both r2 character identities.\nCRUCIAL LAYOUT CORRECTION: The EMPTY WOOD COUNTERTOP must begin at y=31% across the CENTER, not y=48%. Replace the chairs and background below y31% with light wood. The tabletop spans y31-74%. Its back edge is a horizontal line at y31%, front edge at y74%. Foreground green window sill and glass are BELOW y76%.\nShrink and reposition the mint student so the complete head, neck, shoulders and forearms fit inside x3-26%, y1-36%. Shrink and reposition the red/headphone student inside x75-99%, y1-36%. Both remain upright, facing viewer, low shoulders, visible necks and jaw-to-collar gap. Their forearms rest on the table's far edge. No person can extend into x20-75%, y37-70%.\nShrink and move mint-sticker laptop so its entire back-facing lid fits inside x7-19%, y28-46%. Red-sticker laptop inside x86-98%, y28-46%. No keyboard or screen toward viewer. Place the iced cup strictly x9-16%, y53-66%, one continuous long GREEN bent straw connects the mint student's mouth to this cup.\nKeep x20-75%, y37-70% and x75-84%, y31-74% COMPLETELY EMPTY WOOD. No chairs, person, elbow, laptop or shadow silhouette in these rectangles. No outlet post because that is a separate overlay. No text, no letters, no 3D. 16:9 landscape.",
+          "inputs": [
+            {
+              "input": 1,
+              "candidate": "scene-top"
+            },
+            {
+              "input": 2,
+              "file": "references/view-cultofthelamb-1.jpg"
+            },
+            {
+              "input": 3,
+              "file": "references/view-dontstarve-1.jpg"
+            },
+            {
+              "input": 4,
+              "files": [
+                "assets/piece/top-my-plug.png",
+                "assets/piece/top-their-plug.png",
+                "assets/piece/top-cup.png",
+                "assets/piece/top-book.png",
+                "assets/piece/top-menu.png"
+              ]
+            },
+            {
+              "input": 5,
+              "files": [
+                "assets/style-test/r2-portrait.png",
+                "assets/style-test/r2-neighbor-portrait.png"
+              ]
+            }
+          ],
+          "status": "not registered; rejected composition superseded by physical scale guide run"
+        },
+        {
+          "candidate": "scene-top-refine2",
+          "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset.\nDo not use realistic rendering, 3D render, or photographic texture.\nNo text, no letters, no logos, no brand marks.\nThe player's things are mint green, the neighbor's things are brick red.\nEdit the first image. Keep all drawing style, clothing, faces, visible necks and front-view composition. This is a precise translation of elements UPWARD, not another shrink anchored at their old bottom position.\nThe input is about 1672x941. Move BOTH students upward by about 75 pixels (8% of full height), including their complete heads, necks, shoulders and forearms. Their hair should now start near y=10px, not y=80px; the bottom of their forearms should be y=320px, not y=400px. Both faces remain visible and necks fully extended, not crouched. Keep them at left and right ends.\nMove the horizontal BACK EDGE of the bar up by about 100 pixels: from y=395px to y=292px (31% height). Extend the EMPTY pale wood upward to meet this edge. Remove the brown background/furniture area at x20-84%, y31-42% and replace that entire strip with pale wood continuous with the tabletop below. Keep FRONT bar edge at 74% height. The counter is now a continuous pale-wood rectangle from y31% to y74%.\nMove BOTH laptops up by 90 pixels and reduce each laptop's width by 15%. Left laptop must fit x7-19%, y28-46%. Right x86-98%, y28-46%. Keep their lid BACKS and colored stickers toward viewer. The left student's body and elbow must NOT extend right of x20% below y36%. Right student's body must NOT extend left of x84% below y31%.\nKeep iced cup where it is, x9-16%,y53-66%, and join the green flexible straw continuously to player's moved mouth. Preserve foreground window sill below y76%. The complete rectangles x20-75%,y37-70% and x75-84%,y31-74% must contain ONLY WOOD, never cafe wall, furniture or human limbs. Reference images 2-3 are source art style, 4 same-game objects, 5 r2 identities. Do not add text.",
+          "inputs": [
+            {
+              "input": 1,
+              "candidate": "scene-top-refine"
+            },
+            {
+              "input": 2,
+              "file": "references/view-cultofthelamb-1.jpg"
+            },
+            {
+              "input": 3,
+              "file": "references/view-dontstarve-1.jpg"
+            },
+            {
+              "input": 4,
+              "files": [
+                "assets/piece/top-my-plug.png",
+                "assets/piece/top-their-plug.png",
+                "assets/piece/top-cup.png",
+                "assets/piece/top-book.png",
+                "assets/piece/top-menu.png"
+              ]
+            },
+            {
+              "input": 5,
+              "files": [
+                "assets/style-test/r2-portrait.png",
+                "assets/style-test/r2-neighbor-portrait.png"
+              ]
+            }
+          ],
+          "status": "not registered; rejected composition superseded by physical scale guide run"
+        },
+        {
+          "candidate": "scene-top-straw-fix",
+          "prompt": "Edit only the drink and straw in the first image. Preserve the cafe, both faces, upright necks and shoulders, laptops, empty wood rectangle and window exactly.\nMove the iced drink down on the LEFT side so it occupies x9-16%,y53-66%. Remove BOTH existing disconnected straw fragments. Draw exactly ONE continuous LONG GREEN bent drinking straw: start at player's mouth around x18%,y18%, slope down-right to a bend at x22%,y28%, then slope down-left continuously to the drink lid at x11%,y54%. Every segment visibly joins the next. This is ONE unbroken green tube from mouth to cup, never two separate open-ended rods. It may cross in front of the left laptop lid. Keep all of this left of x20% below y37% so the puzzle stays empty. No other changes, no new objects, no text or letters. Keep attached cartoon art style and thin natural character line weight. Inputs 2-3 are source style, 4 existing game objects, 5 the two r2 identities.",
+          "inputs": [
+            {
+              "input": 1,
+              "candidate": "scene-top-refine2"
+            },
+            {
+              "input": 2,
+              "file": "references/view-cultofthelamb-1.jpg"
+            },
+            {
+              "input": 3,
+              "file": "references/view-dontstarve-1.jpg"
+            },
+            {
+              "input": 4,
+              "files": [
+                "assets/piece/top-my-plug.png",
+                "assets/piece/top-their-plug.png",
+                "assets/piece/top-cup.png",
+                "assets/piece/top-book.png",
+                "assets/piece/top-menu.png"
+              ]
+            },
+            {
+              "input": 5,
+              "files": [
+                "assets/style-test/r2-portrait.png",
+                "assets/style-test/r2-neighbor-portrait.png"
+              ]
+            }
+          ],
+          "status": "not registered; rejected composition superseded by physical scale guide run"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-24",
+      "name": "physical-scale-layout-guides-remaining-assets",
+      "tool": "built-in image_gen",
+      "baseCommit": "67350c0",
+      "assetCount": 18,
+      "sourceOfTruth": [
+        "AGENTS.md",
+        "docs/art-brief.md",
+        "docs/layout-guide/scene-top.png",
+        "docs/layout-guide/scene-side.png",
+        "src/layout.js",
+        "assets/asset-list.js",
+        "src/story.js"
+      ],
+      "physicalScaleTargets": {
+        "cellCm": 12,
+        "sceneCellPx": [
+          88,
+          60
+        ],
+        "fullArtCellPx": [
+          176,
+          120
+        ],
+        "shoulderCm": 44,
+        "shoulderFullArtPx": 646,
+        "laptopCm": 31,
+        "laptopFullArtPx": 454,
+        "barDepthCm": 58,
+        "projectedBarDepthFullArtPx": 580,
+        "sideCellScenePx": [
+          88,
+          88
+        ]
+      },
+      "referencePolicy": "Every original refs image is included directly or via an unaltered contact sheet, together with existing top pieces and both approved r2 character images. Sheets only organize inputs to satisfy the five-reference limit. They are not output game assets. Layout guides are included in both background initial generations and every background refinement. Public records list repository-relative source filenames only.",
+      "referenceSheets": {
+        "piece-reference-sheet.png": [
+          "assets/piece/top-my-plug.png",
+          "assets/piece/top-their-plug.png",
+          "assets/piece/top-cup.png",
+          "assets/piece/top-book.png",
+          "assets/piece/top-menu.png"
+        ],
+        "r2-character-reference-sheet.png": [
+          "assets/style-test/r2-portrait.png",
+          "assets/style-test/r2-neighbor-portrait.png"
+        ],
+        "portrait-source-reference-sheet.png": [
+          "references/portrait-helltaker-1.jpg",
+          "references/portrait-helltaker-2.jpg",
+          "references/portrait-helltaker-3.jpg",
+          "references/character-cultofthelamb-1.jpg"
+        ],
+        "piece-source-reference-sheet.png": [
+          "references/line-bugfables-1.jpg",
+          "references/view-cultofthelamb-1.jpg",
+          "references/line-castlecrashers-1.jpg"
+        ],
+        "scene-source-reference-sheet.png": [
+          "references/view-cultofthelamb-1.jpg",
+          "references/view-dontstarve-1.jpg"
+        ],
+        "final-character-reference-sheet.png": [
+          "assets/portrait/me.png",
+          "assets/portrait/neighbor.png"
+        ]
+      },
+      "processingPolicy": "Pillow/NumPy only: strip PNG text metadata, resize complete scene/story canvases to requested export size, proportional trim/fit of transparent assets, crisp black exterior reinforcement for pieces/outlets. No background character/object was resized or repositioned separately by code. Portrait and story linework is unmodified. No drawn white sticker rim or ground shadow; the game adds those to movable pieces.",
+      "lineMeasurementPolicy": "Piece line samples follow one vertical scan at alpha bounding-box midpoint and are divided by the alpha bounding-box short side. Column samples are taken at y128 on the left edge and divided by the column body width, excluding the cable/device. Samples do not certify all curves. Taken column sample7/68=10.29% is at integer-pixel rounding of the10% upper target; it was not thinned or painted over internally.",
+      "outlineSamples": [
+        {
+          "key": "piece-side-my-plug",
+          "scanAxis": "vertical at alpha bounding-box midpoint",
+          "samplePixels": 23,
+          "shortSide": 262,
+          "ratio": 0.0878
+        },
+        {
+          "key": "piece-side-their-plug",
+          "scanAxis": "vertical at alpha bounding-box midpoint",
+          "samplePixels": 18,
+          "shortSide": 208,
+          "ratio": 0.0865
+        },
+        {
+          "key": "piece-side-cup",
+          "scanAxis": "vertical at alpha bounding-box midpoint",
+          "samplePixels": 37,
+          "shortSide": 420,
+          "ratio": 0.0881
+        },
+        {
+          "key": "piece-side-book",
+          "scanAxis": "vertical at alpha bounding-box midpoint",
+          "samplePixels": 40,
+          "shortSide": 452,
+          "ratio": 0.0885,
+          "finalBounds": [
+            6,
+            53,
+            505,
+            505
+          ]
+        },
+        {
+          "key": "piece-side-menu",
+          "scanAxis": "vertical at alpha bounding-box midpoint",
+          "samplePixels": 31,
+          "shortSide": 343,
+          "ratio": 0.0904
+        },
+        {
+          "key": "outlet-side-free",
+          "y": 128,
+          "side": "left",
+          "samplePixels": 6,
+          "columnShortSide": 69,
+          "ratio": 0.087
+        },
+        {
+          "key": "outlet-side-taken",
+          "y": 128,
+          "side": "left",
+          "samplePixels": 7,
+          "columnShortSide": 68,
+          "ratio": 0.1029
+        },
+        {
+          "key": "outlet-side-cap",
+          "y": 128,
+          "side": "left",
+          "samplePixels": 6,
+          "columnShortSide": 72,
+          "ratio": 0.0833
+        }
+      ],
+      "existingTopOutletValidation": {
+        "sizePx": [
+          264,
+          180
+        ],
+        "targetRatio": [
+          88,
+          60
+        ],
+        "exactCanvasRatio": true,
+        "edgeSpans": {
+          "free": [
+            [
+              17,
+              82
+            ],
+            [
+              17,
+              82
+            ]
+          ],
+          "taken": [
+            [
+              17,
+              83
+            ],
+            [
+              17,
+              83
+            ]
+          ]
+        },
+        "unchangedFromStart": true,
+        "gameInspection": "Both top tiles were inspected at the new88x60 cell size and tile vertically; movable pins meet the socket face."
+      },
+      "assets": [
+        {
+          "key": "scene-top",
+          "file": "assets/scene/top.png",
+          "batch": 1,
+          "width": 1920,
+          "height": 1080,
+          "requiredRefs": [
+            "view-cultofthelamb-1",
+            "view-dontstarve-1"
+          ],
+          "selectedCandidate": "scene-top-bands",
+          "generationSteps": [
+            {
+              "candidate": "scene-top",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nINPUT ROLES: Image 1 is the EXACT mandatory composition and scale guide at 1920x1080. Render over its geometry, preserving every region's size and position. Image 2 contains the two original art-style references. Image 3 contains the existing five puzzle objects, for the same game's drawing style and colors. Images 4-5 are the exact r2 player and neighbor identities, not composition references.\nCreate a finished opaque 1920x1080 landscape game BACKGROUND matching image 1. The viewer is outside a Korean study cafe's window, looking in slightly downward at a shallow pale-wood window bar. Both people's faces are on the FAR side of the bar at the top. Laptop LID BACKS face viewer. Do not show laptop screens or keyboards. Dark green cafe accents and pendants behind them, thin foreground window sill at the bottom. Not isometric.\nBoth people sit with a straight back, low relaxed shoulders, visibly separate neck and shoulder lines, and a gap from chin to hoodie collar. Do not shrug or hunch. Keep natural human ink line weight, no added thick black outer halo. Use the r2 images for exact faces, messy black hair, mint hoodie and white headphones with brick-red hoodie.\nPHYSICAL SCALE IS FIXED: One cell is 12cm = 176px horizontal in this image. Player shoulder width 44cm =646px. Head width16cm=232px and head height23cm=288px. Laptop width31cm=454px. Bar physical depth58cm projects to580px; the game puzzle is six columns by three rows, 72x36cm =1056x360px. The two seat centers are 1400px apart, so the neighbor is cropped by the RIGHT edge. NEVER shrink either person or laptop to make room. Crop the rightmost body and laptop exactly as the guide does. Laptop top edges must remain below the face so eyes, chin and neck are visible.\nEXACT 1920x1080 coordinates from guide: Player head x284-516,y86-374; player shoulders/torso x76-724,y340-604. Mint hoodie, tired attentive face. Neighbor head x1684-1916,y86-374, white headphones, torso x1476-2124,y340-604 cropped at right. Back-facing player laptop x180-634,y376-580, plain mint rectangle sticker; neighbor laptop x1580-2034,y376-580, brick-red sticker, cropped right.\nOne iced coffee cup x660-760,y444-600. ONE GREEN flexible straw goes directly from this cup's single lid hole to the player's lips, at most one elbow. Turn player's face slightly right so lips are near x480,y330. The single tube goes from lips to cup lid near x700,y450, about20cm exposed length. No extra mouth straw, no Y joint, no branching, no second straw in the cup, no second drink. Both endpoints visibly meet.\nThe bar starts y460 and front edge is y960-1012. Foreground dark green window sill y1012-1080. Area x380-1436,y600-960 (magenta hatched guide) must be EMPTY PALE WOOD, only unobtrusive grain and lighting. Area x1436-1612,y600-960 (cyan hatch) is also EMPTY WOOD; do not draw an outlet column because the game adds it. Leave these rectangles completely free of laptops, bodies, hands, drinks, shadows, symbols and furniture. REMOVE all guide hatching, borders, grids, block colors and markers. Use thinner scene outlines than the puzzle objects. No extra things on the bar.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "repository reference",
+                  "file": "docs/layout-guide/scene-top.png"
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/view-dontstarve-1.jpg"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-portrait.png"
+                },
+                {
+                  "input": 5,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-neighbor-portrait.png"
+                }
+              ]
+            },
+            {
+              "candidate": "scene-top-bands",
+              "prompt": "Edit image1 only. Image2 is the mandatory geometry guide, image3 the original source style sheet, image4 existing game pieces, image5 the two r2 character identities. Preserve ALL people and laptop sizes and positions, facial details, shoulders, necks, colors, and the single continuous cup-to-mouth green straw. Do NOT enlarge, shrink or move any person or laptop.\nOnly correct the BAR SURFACE AND FOREGROUND BANDS so the game grid fits. The guide's entire rectangle x20-84%,y56-89% must be uninterrupted EMPTY PALE WOOD, with only subtle grain and lighting. Currently the dark window frame begins around84% height and intrudes into that rectangle. Extend the wood tabletop DOWN to y89%; draw the narrow dark-wood front edge only between y89-94%; draw the dark green window sill only in the bottom y94-100% band. Remove foreground plants that overlap the wood or puzzle rectangle. No frame, leaf, glow reflection, line or object may cross the empty x20-84%,y56-89% rectangle. The tabletop BACK edge in the center should be y43%, replacing the short strip of chair/background below that with wood. Keep the cafe background above43% and the existing figures in front of it. No post or sockets, the game adds them. No hatching, grid lines, guide block colors, text, letters or logos. Cartoon style unchanged, not realistic or3D. Full1920x1080 16:9.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "previous generated candidate",
+                  "candidate": "scene-top"
+                },
+                {
+                  "input": 2,
+                  "kind": "repository reference",
+                  "file": "docs/layout-guide/scene-top.png"
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/view-dontstarve-1.jpg"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 5,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              1920,
+              1080
+            ],
+            "externalInkRadius": 0
+          }
+        },
+        {
+          "key": "scene-side",
+          "file": "assets/scene/side.png",
+          "batch": 2,
+          "width": 1920,
+          "height": 1080,
+          "requiredRefs": [
+            "view-cultofthelamb-1",
+            "view-dontstarve-1"
+          ],
+          "selectedCandidate": "scene-side-floor",
+          "generationSteps": [
+            {
+              "candidate": "scene-side",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nINPUT ROLES: Image1 is the EXACT mandatory eye-level composition guide, 1920x1080. Preserve every region. Image2 contains the original art style references; image3 the existing puzzle objects; images4-5 the two r2 identities.\nCreate an opaque 1920x1080 full game backdrop at BAR HEIGHT, looking into the SAME Korean study cafe from outside its window. Orthographic front view, not top-down and not isometric. Cafe indoors above the bar, warm pendants and dark green accents. Scene lines thinner than objects. Use the guide's shallow eye-level bar edge and keep all overlay spaces empty.\nPhysical scale:12cm square side-view cells =176x176 pixels at this full resolution. A 36cm-high puzzle region occupies1056x528px. Human head width16cm=232px, height23cm=288px. Neighbor shoulders44cm=646px total, mostly CROPPED at right rather than shrunk. Do NOT shrink people to fit. No laptop in front of a face.\nExact coordinates from guide: Empty puzzle rectangle x380-1436,y272-800 must contain quiet uncluttered cafe wall/interior air with no object, person, furniture edge, symbol or window frame. Empty column rectangle x1436-1612,y272-800 is also unobstructed; draw NO post or sockets. Use only low-contrast background wall there, no solid furniture silhouettes.\nPlayer deliberately DUCKS behind the bar at far left: head x100-340,y570-870 with only hair, eyes and upper face visible ABOVE the bar edge at y800. Mint hoodie identity, green straw points RIGHT from near mouth under the bar edge, one single straw only. This intentional ducking is the only crouch, not a generic hunched neck posture.\nNeighbor face with WHITE headphones x1684-1916,y156-444. Neighbor brick-red torso x1520-2040,y444-800, cropped at RIGHT. Spine upright, low shoulders, clear neck between jaw and hoodie collar. The part of torso behind the cyan column zone must stay BEHIND the reserved zone, with no bright details there; do not lean into the puzzle.\nThe bar's front edge is a horizontal pale-wood/dark-wood band y800-900 across the full image. Foreground dark green window frame y900-1080. Nothing sticks upward into the empty central rectangle. Remove ALL magenta and cyan hatching and grid markings from guide; they are invisible reserved overlay regions. No letters or symbols.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "repository reference",
+                  "file": "docs/layout-guide/scene-side.png"
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/view-dontstarve-1.jpg"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-portrait.png"
+                },
+                {
+                  "input": 5,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-neighbor-portrait.png"
+                }
+              ]
+            },
+            {
+              "candidate": "scene-side-refine",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nEdit reference1, preserving art style and the r2 character identities. Reference2 is the EXACT layout guide. References3-5 are original source style sheet, existing object sheet and r2 identity sheet. Do NOT scale any existing character or object to force a fit.\nCorrect ONLY the reserved space and bar/window boundaries. The horizontal bar's TOP front edge is exactly y74% of full image height, not y64%. Draw its wood front face only in y74-83%; dark green foreground window sill only y83-100%. Remove the extra foreground plants. The game's floor is the horizontal line at74%, so there must be NO bar edge, frame or furniture higher than that across the center.\nMake x20-84%,y25-74% quiet blank warm cafe wall with soft lighting ONLY. Remove all wall pictures, chair backs, plant pots, stems, shelf edges, curtains and dark furniture silhouettes from that rectangle. Keep pendants and cafe details above25% or outside the rectangle. Do not draw any post or sockets there. No hatching/grid.\nKeep the neighbor at the far RIGHT, upright with visible neck, face not covered. Player is intentionally ducking at LEFT, not sitting fully upright: lower the mint player's existing head (without changing its size) so the hair and eyes peek over the bar at y74%, with the lower face concealed by the bar. Do not allow hair or a straw into x20-84%. A single green straw points right at the far-left area. Do not add a cup or second straw. No other changes. Full1920x1080.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "previous generated candidate",
+                  "candidate": "scene-side"
+                },
+                {
+                  "input": 2,
+                  "kind": "repository reference",
+                  "file": "docs/layout-guide/scene-side.png"
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/view-dontstarve-1.jpg"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 5,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "candidate": "scene-side-floor",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nEdit target reference 1. Reference 2 is the mandatory authoritative layout guide. References 3-5 are style and character references. Preserve the same drawing and character identities.\nMake one geometric correction: translate the horizontal bar and foreground sill downward, without enlarging any shape. In a full 1920x1080 image, the TOP edge of the wood bar front MUST be y800 (74.07% height), not the current y714 (66%). The wood front occupies y800-900. Window sill occupies y900-1080. Extend the blank cafe wall into the vacated band y714-800. No visible tabletop from this eye level.\nTranslate the mint player's peeking head down by the same 86 pixels so the eyes sit just above y800 and the mouth stays hidden behind the bar. Keep head size unchanged. Keep the neighbor on the far right and continue the lower brick-red torso to y800 with upright neck and shoulders.\nAbsolutely no objects, frames, chairs, plants, pictures, cables, sockets, panels or linework in the game's reserved central rectangle x380-1612,y272-800: only a softly lit blank warm wall there. No text, no grid. Maintain 16:9 output and unchanged character scale.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "previous generated candidate",
+                  "candidate": "scene-side-refine"
+                },
+                {
+                  "input": 2,
+                  "kind": "repository reference",
+                  "file": "docs/layout-guide/scene-side.png"
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/view-dontstarve-1.jpg"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 5,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              1920,
+              1080
+            ],
+            "externalInkRadius": 0
+          }
+        },
+        {
+          "key": "piece-side-my-plug",
+          "file": "assets/piece/side-my-plug.png",
+          "batch": 2,
+          "width": 512,
+          "height": 512,
+          "requiredRefs": [
+            "line-bugfables-1",
+            "view-cultofthelamb-1",
+            "line-castlecrashers-1"
+          ],
+          "selectedCandidate": "piece-side-my-plug",
+          "generationSteps": [
+            {
+              "candidate": "piece-side-my-plug",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nExtremely thick, very dark black #111 outlines, outer contour 8-10% of object's shortest side with crisp edge, no blur or glow. Inner lines about half. Eye-level front view at bar-counter height, ORTHOGRAPHIC. This is the SIDE view of exactly the object on the corresponding attached top-view asset; preserve its identity, palette and construction but change the camera. No elevated top-down or isometric view. Single object on a genuinely transparent background, no white border, no ground shadow. Object is bottom aligned with its lowest visible outline near the bottom canvas edge. 512x512 square.\nReference1 is a sheet containing all original piece refs, reference2 the five already-made game pieces, references3-4 are the r2 character identities, reference5 is the matching top-view object. Match the established game style.\nSubject: The player's mint-green round cylindrical Korean220V laptop plug with exactly TWO ROUND cylindrical metal pins pointing horizontally RIGHT. Thick mint cable exits LEFT edge. Show side/front contour at eye height, not a view down on the top. Pins are parallel straight rods, not US blades. Both pin tips visible and the farthest pin tip touches RIGHT edge. The whole plug lies on the implied bar floor at bottom of image; transparent above.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-portrait.png"
+                },
+                {
+                  "input": 4,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-neighbor-portrait.png"
+                },
+                {
+                  "input": 5,
+                  "kind": "repository reference",
+                  "file": "assets/piece/top-my-plug.png"
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "sourceCrop": [
+              0,
+              474,
+              1254,
+              1091
+            ],
+            "resize": [
+              478,
+              235
+            ],
+            "canvasPlacement": [
+              17,
+              260
+            ],
+            "externalInkRadius": 11,
+            "inkColor": "#111111",
+            "finalBounds": [
+              0,
+              244,
+              512,
+              506
+            ],
+            "internalLines": "unchanged"
+          }
+        },
+        {
+          "key": "piece-side-their-plug",
+          "file": "assets/piece/side-their-plug.png",
+          "batch": 2,
+          "width": 512,
+          "height": 512,
+          "requiredRefs": [
+            "line-bugfables-1",
+            "view-cultofthelamb-1",
+            "line-castlecrashers-1"
+          ],
+          "selectedCandidate": "piece-side-their-plug",
+          "generationSteps": [
+            {
+              "candidate": "piece-side-their-plug",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nExtremely thick, very dark black #111 outlines, outer contour 8-10% of object's shortest side with crisp edge, no blur or glow. Inner lines about half. Eye-level front view at bar-counter height, ORTHOGRAPHIC. This is the SIDE view of exactly the object on the corresponding attached top-view asset; preserve its identity, palette and construction but change the camera. No elevated top-down or isometric view. Single object on a genuinely transparent background, no white border, no ground shadow. Object is bottom aligned with its lowest visible outline near the bottom canvas edge. 512x512 square.\nReference1 is a sheet containing all original piece refs, reference2 the five already-made game pieces, references3-4 are the r2 character identities, reference5 is the matching top-view object. Match the established game style.\nSubject: The neighbor's BRICK-RED rectangular Korean220V phone charging adapter, exactly TWO ROUND metal pins horizontally RIGHT and cable exiting LEFT edge. Same box shape and color as the top-view reference. Eye-level side/front silhouette, not a cylinder or US flat-pin plug. Pin tips reach RIGHT edge. Object rests at bottom, transparent above.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-portrait.png"
+                },
+                {
+                  "input": 4,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-neighbor-portrait.png"
+                },
+                {
+                  "input": 5,
+                  "kind": "repository reference",
+                  "file": "assets/piece/top-their-plug.png"
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "sourceCrop": [
+              16,
+              623,
+              1244,
+              1105
+            ],
+            "resize": [
+              488,
+              192
+            ],
+            "canvasPlacement": [
+              12,
+              308
+            ],
+            "externalInkRadius": 6,
+            "inkColor": "#111111",
+            "finalBounds": [
+              0,
+              298,
+              512,
+              506
+            ],
+            "internalLines": "unchanged"
+          }
+        },
+        {
+          "key": "piece-side-cup",
+          "file": "assets/piece/side-cup.png",
+          "batch": 2,
+          "width": 512,
+          "height": 512,
+          "requiredRefs": [
+            "line-bugfables-1",
+            "view-cultofthelamb-1",
+            "line-castlecrashers-1"
+          ],
+          "selectedCandidate": "piece-side-cup",
+          "generationSteps": [
+            {
+              "candidate": "piece-side-cup",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nExtremely thick, very dark black #111 outlines, outer contour 8-10% of object's shortest side with crisp edge, no blur or glow. Inner lines about half. Eye-level front view at bar-counter height, ORTHOGRAPHIC. This is the SIDE view of exactly the object on the corresponding attached top-view asset; preserve its identity, palette and construction but change the camera. No elevated top-down or isometric view. Single object on a genuinely transparent background, no white border, no ground shadow. Object is bottom aligned with its lowest visible outline near the bottom canvas edge. 512x512 square.\nReference1 is a sheet containing all original piece refs, reference2 the five already-made game pieces, references3-4 are the r2 character identities, reference5 is the matching top-view object. Match the established game style.\nSubject: The same cream hot takeaway paper cup with brown sleeve, mint blank rectangle, flat cream plastic lid and a dark drinking hole as the reference. Eye-level straight-on side, cup side dominates and lid is only a shallow thin ellipse, not an overhead view. The base rests at bottom. One cup only, no lettering, no extra saucer or straw.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-portrait.png"
+                },
+                {
+                  "input": 4,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-neighbor-portrait.png"
+                },
+                {
+                  "input": 5,
+                  "kind": "repository reference",
+                  "file": "assets/piece/top-cup.png"
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "sourceCrop": [
+              194,
+              120,
+              1058,
+              1164
+            ],
+            "resize": [
+              376,
+              455
+            ],
+            "canvasPlacement": [
+              68,
+              28
+            ],
+            "externalInkRadius": 23,
+            "inkColor": "#111111",
+            "finalBounds": [
+              46,
+              6,
+              466,
+              505
+            ],
+            "internalLines": "unchanged"
+          }
+        },
+        {
+          "key": "piece-side-book",
+          "file": "assets/piece/side-book.png",
+          "batch": 2,
+          "width": 512,
+          "height": 512,
+          "requiredRefs": [
+            "line-bugfables-1",
+            "view-cultofthelamb-1",
+            "line-castlecrashers-1"
+          ],
+          "selectedCandidate": "piece-side-book-tall",
+          "generationSteps": [
+            {
+              "candidate": "piece-side-book",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nExtremely thick, very dark black #111 outlines, outer contour 8-10% of object's shortest side with crisp edge, no blur or glow. Inner lines about half. Eye-level front view at bar-counter height, ORTHOGRAPHIC. This is the SIDE view of exactly the object on the corresponding attached top-view asset; preserve its identity, palette and construction but change the camera. No elevated top-down or isometric view. Single object on a genuinely transparent background, no white border, no ground shadow. Object is bottom aligned with its lowest visible outline near the bottom canvas edge. 512x512 square.\nReference1 is a sheet containing all original piece refs, reference2 the five already-made game pieces, references3-4 are the r2 character identities, reference5 is the matching top-view object. Match the established game style.\nSubject: The same stack of exactly THREE heavy textbooks, deep green top, ochre middle and brick-red bottom, cream page blocks, no lettering. Eye-level straight-on front view; wide rectangular stack with a FLAT top supporting another object. Heavy stack fills most of the square, base bottom aligned. No sloping overhead cover view.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-portrait.png"
+                },
+                {
+                  "input": 4,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-neighbor-portrait.png"
+                },
+                {
+                  "input": 5,
+                  "kind": "repository reference",
+                  "file": "assets/piece/top-book.png"
+                }
+              ]
+            },
+            {
+              "candidate": "piece-side-book-tall",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nUse case: illustration-story. Edit target reference1, the current three-book game sprite. Reference2 contains ALL three original object style sources, reference3 the five current puzzle pieces, references4-5 the two approved r2 characters. Preserve the same palette, clean natural material details and book order: green on top, ochre yellow middle, brick red bottom.\nCRITICAL gameplay geometry: the three books are a SOLID SUPPORT PLATFORM of one square game cell. Draw the complete stack with its OUTER BOUNDING BOX EXACTLY AS TALL AS IT IS WIDE, 1:1, not the current wide low stack. Make all THREE VOLUMES individually VERY THICK, each about one third of total stack height. The three wide cream page blocks together occupy most height. Front eye-level view at bar height, horizontal top and bottom, vertical edges, NO view from above, NO top-cover plane, NO perspective convergence.\nFill nearly all the square canvas from x5-95%,y5-95%. Three volumes exactly, one coherent stack with no gap, top surface nearly flat. Keep page edges on the right and rounded spines to left. This sprite's top is where another item rests, so its top edge must be near the top of the image, not at y30%. No extra pedestal. Extremely thick very dark black crisp exterior outline,8-10% of stack's shortest side. Transparent background, no ground shadow, no white sticker rim, no words or letters. Preserve1024x1024 square output.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "repository reference",
+                  "file": "assets/piece/side-book.png"
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-portrait.png"
+                },
+                {
+                  "input": 5,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-neighbor-portrait.png"
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "sourceCrop": [
+              15,
+              63,
+              1242,
+              1161
+            ],
+            "resize": [
+              441,
+              394
+            ],
+            "canvasPlacement": [
+              35,
+              82
+            ],
+            "externalInkRadius": 30,
+            "inkColor": "#111111",
+            "finalBounds": [
+              6,
+              53,
+              505,
+              505
+            ],
+            "internalLines": "unchanged"
+          }
+        },
+        {
+          "key": "piece-side-menu",
+          "file": "assets/piece/side-menu.png",
+          "batch": 2,
+          "width": 512,
+          "height": 512,
+          "requiredRefs": [
+            "line-bugfables-1",
+            "view-cultofthelamb-1",
+            "line-castlecrashers-1"
+          ],
+          "selectedCandidate": "piece-side-menu",
+          "generationSteps": [
+            {
+              "candidate": "piece-side-menu",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nExtremely thick, very dark black #111 outlines, outer contour 8-10% of object's shortest side with crisp edge, no blur or glow. Inner lines about half. Eye-level front view at bar-counter height, ORTHOGRAPHIC. This is the SIDE view of exactly the object on the corresponding attached top-view asset; preserve its identity, palette and construction but change the camera. No elevated top-down or isometric view. Single object on a genuinely transparent background, no white border, no ground shadow. Object is bottom aligned with its lowest visible outline near the bottom canvas edge. 512x512 square.\nReference1 is a sheet containing all original piece refs, reference2 the five already-made game pieces, references3-4 are the r2 character identities, reference5 is the matching top-view object. Match the established game style.\nSubject: The same triangular acrylic cafe menu tent with a cream insert and simple mint cup pictogram, no words. Eye-level at the bar so the triangular side and front panel remain recognizable. One small low triangular stand, bottom aligned, standing only one cell high; no tall pedestal, no text, no extra object. Match the existing acrylic rim and black outline.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-portrait.png"
+                },
+                {
+                  "input": 4,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-neighbor-portrait.png"
+                },
+                {
+                  "input": 5,
+                  "kind": "repository reference",
+                  "file": "assets/piece/top-menu.png"
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "sourceCrop": [
+              60,
+              439,
+              1199,
+              1204
+            ],
+            "resize": [
+              475,
+              319
+            ],
+            "canvasPlacement": [
+              18,
+              174
+            ],
+            "externalInkRadius": 13,
+            "inkColor": "#111111",
+            "finalBounds": [
+              6,
+              162,
+              505,
+              505
+            ],
+            "internalLines": "unchanged"
+          }
+        },
+        {
+          "key": "outlet-side-free",
+          "file": "assets/outlet/side-free.png",
+          "batch": 2,
+          "width": 256,
+          "height": 256,
+          "requiredRefs": [
+            "line-bugfables-1",
+            "view-cultofthelamb-1",
+            "line-castlecrashers-1"
+          ],
+          "selectedCandidate": "outlet-side-free",
+          "generationSteps": [
+            {
+              "candidate": "outlet-side-free",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nExtremely thick crisp #111 outside ink, 8-10% of column's short width. No blur, glow, shadow or white border. Transparent256x256 square tile. Eye-level orthographic FRONT view at bar height, not top-down. Draw the SAME narrow cream cafe power-outlet POST with deep green trim on right as reference5, only viewed at eye level.\nOne EMPTY round recessed Korean220V socket, exactly two round contact holes on the post's LEFT-facing front face, near x16%,y50%. The post occupies x7-33% of canvas and goes straight VERTICALLY from TOP edge to BOTTOM edge, with matching cross section at both edges. No diagonal end, no foot, no top/bottom endcap. Right two thirds transparent. It will be tiled vertically into a taller power post. The socket is large enough to read at88px in game. No plug or cable.\nReferences1-4 contain original piece style sources, existing object sheet and the two r2 character identities; reference5 is the already-made top-free power post to match.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-portrait.png"
+                },
+                {
+                  "input": 4,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-neighbor-portrait.png"
+                },
+                {
+                  "input": 5,
+                  "kind": "repository reference",
+                  "file": "assets/outlet/top-free.png"
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              256,
+              256
+            ],
+            "canvasShiftX": -7,
+            "columnWidth": 67,
+            "externalInkRadius": 1,
+            "inkColor": "#111111",
+            "alphaCleanup": "external matte removed with crisp edge, no blur",
+            "finalPassExternalInkRadius": 1.5
+          }
+        },
+        {
+          "key": "outlet-side-taken",
+          "file": "assets/outlet/side-taken.png",
+          "batch": 2,
+          "width": 256,
+          "height": 256,
+          "requiredRefs": [
+            "line-bugfables-1",
+            "view-cultofthelamb-1",
+            "line-castlecrashers-1"
+          ],
+          "selectedCandidate": "outlet-side-taken",
+          "generationSteps": [
+            {
+              "candidate": "outlet-side-taken",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nEdit reference1, the completed empty SIDE-VIEW outlet column, preserving its exact post shape, position, cream face, dark green right stripe and matched top/bottom edge cross sections. Transparent256x256 square tile. Eye-level orthographic camera, NOT top-down.\nThe same socket is now occupied by a SMALL MUTED BRICK-RED charger and a thin muted red cable leading RIGHT to a tiny earphone charging case in the transparent right half. This is fixed neighbor equipment, not movable: no white sticker edge, no ground shadow, no bright glow or emphasized saturation. Keep the one original socket at exactly its current height. No extra sockets or caps. The vertical post continues through TOP and BOTTOM edges, no horizontal end lines. Maintain existing crisp #111 contour8-10% of short width. References2-4 contain all original piece style sources, existing game pieces and r2 identities.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "previous generated candidate",
+                  "candidate": "outlet-side-free"
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              256,
+              256
+            ],
+            "canvasShiftX": -12,
+            "columnWidth": 68,
+            "externalInkRadius": 0,
+            "inkColor": "#111111",
+            "alphaCleanup": "external matte removed with crisp edge, no blur"
+          }
+        },
+        {
+          "key": "outlet-side-cap",
+          "file": "assets/outlet/side-cap.png",
+          "batch": 2,
+          "width": 256,
+          "height": 256,
+          "requiredRefs": [
+            "line-bugfables-1",
+            "view-cultofthelamb-1",
+            "line-castlecrashers-1"
+          ],
+          "selectedCandidate": "outlet-side-cap",
+          "generationSteps": [
+            {
+              "candidate": "outlet-side-cap",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nReference1 is the completed SIDE-VIEW outlet column, preserve its exact column width and left alignment, cream face and dark green right stripe. Transparent256x256 square tile at eye-level orthographic front view. This is the TOPMOST cap cell of that same power-outlet POST. NO socket, NO plug, NO cable, NO case.\nThe cream vertical post enters from the BOTTOM canvas edge with exactly the same cross section as the reference. Near the TOP of this image the post ENDS with a small visible rounded/beveled cream top face and dark green trim. The top end is not tall or domed; a simple shallow cap. Leave the right two thirds transparent. Strong crisp #111 outside contour8-10% of post short width, no blur, no white border or ground shadow. Reference2-4 are original piece source sheet, existing objects and r2 identity sheet.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "previous generated candidate",
+                  "candidate": "outlet-side-free"
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              256,
+              256
+            ],
+            "canvasShiftX": 0,
+            "columnWidth": 64,
+            "externalInkRadius": 0,
+            "inkColor": "#111111",
+            "alphaCleanup": "external matte removed with crisp edge, no blur",
+            "finalPassExternalInkRadius": 1.5
+          }
+        },
+        {
+          "key": "portrait-me",
+          "file": "assets/portrait/me.png",
+          "batch": 3,
+          "width": 1024,
+          "height": 1024,
+          "requiredRefs": [
+            "portrait-helltaker-1",
+            "portrait-helltaker-2",
+            "portrait-helltaker-3",
+            "character-cultofthelamb-1"
+          ],
+          "selectedCandidate": "portrait-me",
+          "generationSteps": [
+            {
+              "candidate": "portrait-me",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nUse case: illustration-story. Bust portrait, transparent background, 1024x1024 square. Reference1 contains ALL four original portrait style sources. Reference2 shows existing puzzle-object palette and style. Reference3 is the exact player identity, reference4 exact neighbor identity. Follow attached reference images for style. Keep generated natural line weight; do not add an extra exterior outline. Single bust, centered, no ground shadow, no white border.\nUpright straight back with shoulders relaxed and lowered. A clearly visible neck and gap between chin and hoodie collar, full shoulder line, not hunched and not chin buried into hoodie.\nSubject: the tired young adult student PLAYER from reference3. Messy black hair, mint green hoodie, tired half-lidded eyes. Holds one iced drink plastic cup in one hand at lower chest. Exactly ONE continuous green straw goes from inside the cup through its lid straight to the player's lips. It can bend once but remains one unbroken straw. Do not add any other stick or pipe in the mouth, no disconnected straw, no Y junction. Plain blank cup sleeve, no writing, no laptop. No frame or background.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-portrait.png"
+                },
+                {
+                  "input": 4,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-neighbor-portrait.png"
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              772,
+              960
+            ],
+            "externalInkRadius": 0,
+            "characterLinework": "generated natural lines, no added exterior outline"
+          }
+        },
+        {
+          "key": "portrait-me-determined",
+          "file": "assets/portrait/me-determined.png",
+          "batch": 3,
+          "width": 1024,
+          "height": 1024,
+          "requiredRefs": [
+            "portrait-helltaker-1",
+            "portrait-helltaker-2",
+            "portrait-helltaker-3",
+            "character-cultofthelamb-1"
+          ],
+          "selectedCandidate": "portrait-me-determined",
+          "generationSteps": [
+            {
+              "candidate": "portrait-me-determined",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nEdit target reference1, the finished tired player bust. Supporting references2-5 contain all original portrait style sources, existing puzzle objects and both r2 characters. Change ONLY the eyes and eyebrows to a quietly determined focused expression: narrow both eyes, lower the eyebrows slightly, a calm shrewd stare. Keep the mouth holding the exact same continuous green straw, cup, hand, messy hair, mint hoodie, exposed neck, lowered shoulders, framing, transparent background and generated line weight unchanged. No new outlines. Preserve 1024x1024 square bust composition. No text, no extra pipes, no second straw, no background.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "previous generated candidate",
+                  "candidate": "portrait-me"
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-portrait.png"
+                },
+                {
+                  "input": 5,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-neighbor-portrait.png"
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              780,
+              960
+            ],
+            "externalInkRadius": 0,
+            "characterLinework": "generated natural lines, no added exterior outline"
+          }
+        },
+        {
+          "key": "portrait-neighbor",
+          "file": "assets/portrait/neighbor.png",
+          "batch": 3,
+          "width": 1024,
+          "height": 1024,
+          "requiredRefs": [
+            "portrait-helltaker-1",
+            "portrait-helltaker-2",
+            "portrait-helltaker-3",
+            "character-cultofthelamb-1"
+          ],
+          "selectedCandidate": "portrait-neighbor",
+          "generationSteps": [
+            {
+              "candidate": "portrait-neighbor",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nUse case: illustration-story. Bust portrait, transparent background, 1024x1024 square. Reference1 contains ALL four original portrait style sources. Reference2 shows existing puzzle-object palette and style. Reference3 is the exact player identity, reference4 exact neighbor identity. Follow attached reference images for style. Keep generated natural line weight; do not add an extra exterior outline. Single bust, centered, no ground shadow, no white border.\nUpright straight back with shoulders relaxed and lowered. A clearly visible neck and gap between chin and hoodie collar, full shoulder line, not hunched and not chin buried into hoodie.\nSubject: NEIGHBOR from reference4. Messy black hair, large WHITE over-ear headphones, brick-red hoodie. Indifferent half-lidded eyes looking slightly down at their own unseen screen. Upright relaxed posture, defined neck and shoulders, both shoulders fit within square crop. No laptop, no cup, no words, no symbols, no background.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-portrait.png"
+                },
+                {
+                  "input": 4,
+                  "kind": "repository reference",
+                  "file": "assets/style-test/r2-neighbor-portrait.png"
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              893,
+              960
+            ],
+            "externalInkRadius": 0,
+            "characterLinework": "generated natural lines, no added exterior outline"
+          }
+        },
+        {
+          "key": "story-1",
+          "file": "assets/story/1.png",
+          "batch": 3,
+          "width": 1600,
+          "height": 1200,
+          "requiredRefs": [
+            "portrait-helltaker-1",
+            "portrait-helltaker-2",
+            "portrait-helltaker-3",
+            "character-cultofthelamb-1"
+          ],
+          "selectedCandidate": "story-1-socket",
+          "generationSteps": [
+            {
+              "candidate": "story-1",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nUse case: illustration-story. Full wordless comic panel, opaque 4:3 landscape, 1600x1200. Reference1 contains all four original portrait/comic style references. Reference2 is the existing game puzzle object sheet. Reference3 is the two approved r2 identities. Reference4 is the final player and neighbor busts, use these for exact faces, hoodies, necks and white headphones. Reference5 is the current cafe scene, keep its narrow window bar, dark green frames, warm pendant lights and materials.\nFollow src/story.js STORY1: late at night, a mint-hoodie young adult studies an OPEN TEXTBOOK in front of their laptop at a narrow cafe window bar. The clock on the wall shows TWO O'CLOCK with one hand at2 and one at12, plain twelve tick marks, NO NUMERALS. Outside window is dark nighttime. The headphone-wearing brick-red neighbor is seated at right, focused on their own laptop. Player and neighbor both have straight backs, clearly visible neck and shoulder lines, no hunched neck. Show both faces, laptops do not obscure eyes or faces. Laptop width31cm, human shoulder width44cm, bar depth58cm: small ordinary two-person cafe bar, not a huge dining table. A slim cream outlet column between them, plugged mint charger visible. Player's iced drink has exactly one green straw that can continue to their lips, no extra mouth straw.\nWHITE comic bubble at x52%,y8%,width26%, tail pointing LEFT, containing ONLY a small ALARM CLOCK pictogram and a STACK OF BOOKS pictogram, matching the source symbol ⏰📚. Bubble stays above faces. No written language, no letters, no numbers anywhere including books, clock and screens. Keep generated natural linework, no added thick outline. Frame the scene to show the open textbook and late-night mood clearly.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/portrait/me.png",
+                    "assets/portrait/neighbor.png"
+                  ]
+                },
+                {
+                  "input": 5,
+                  "kind": "repository reference",
+                  "file": "assets/scene/top.png"
+                }
+              ]
+            },
+            {
+              "candidate": "story-1-clean",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nEdit ONLY reference1 (the first comic panel). References2-5 are all original portrait style sources, existing piece sheet, approved r2 identities and finished character identities. Remove the loose short green stick by the player's lips and hand, it resembles a cigarette. The player is studying, NOT drinking, so the lips are empty and the hand simply rests at the chin. Leave the existing cup on the LEFT with its ONE green straw inside. Do not create another straw or connect the far-away cup to the mouth. Preserve every other part of the composition, artwork, bubble and clock, laptops, open book, bar size and palette. If any socket opening is visible, it is Korean220V round holes, not US vertical slots. No words. Keep opaque4:3.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "previous generated candidate",
+                  "candidate": "story-1"
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                {
+                  "input": 5,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/portrait/me.png",
+                    "assets/portrait/neighbor.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "candidate": "story-1-socket",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nEdit target reference1. References2-5 contain the original portrait source images, existing puzzle object sheet, approved r2 identities and final portrait identities. Preserve natural linework and opaque4:3 framing. Preserve the characters' identity, cafe and every unmentioned part. No written language.\nCorrect only the exposed socket on the central cream column: remove any US-style vertical flat slots and draw the Korean220V round recessed two-hole socket. The mint charger remains plugged into it. Keep the player's mouth EMPTY with no green stick, cup's one straw at far left. All other composition and clock/book bubble unchanged.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "previous generated candidate",
+                  "candidate": "story-1-clean"
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                {
+                  "input": 5,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/portrait/me.png",
+                    "assets/portrait/neighbor.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              1600,
+              1200
+            ],
+            "externalInkRadius": 0
+          }
+        },
+        {
+          "key": "story-2",
+          "file": "assets/story/2.png",
+          "batch": 3,
+          "width": 1600,
+          "height": 1200,
+          "requiredRefs": [
+            "portrait-helltaker-1",
+            "portrait-helltaker-2",
+            "portrait-helltaker-3",
+            "character-cultofthelamb-1"
+          ],
+          "selectedCandidate": "story-2",
+          "generationSteps": [
+            {
+              "candidate": "story-2",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nUse case: illustration-story. Full wordless comic panel with background, opaque 4:3 landscape,1600x1200. Reference1 contains all four original portrait/comic style references. Reference2 contains existing game puzzle objects, match their palette and forms. Reference3 is the approved r2 player and neighbor, reference4 the final portraits, reference5 the first comic panel: maintain the same identities, cafe, materials and color scheme. The mint player and brick-red neighbor are DIFFERENT people.\nKeep natural generated line weight, no extra thick exterior outline. Use an ordinary NARROW cafe window bar of58cm depth. Human shoulders44cm wide, laptops31cm wide, cup12cm. People must be large enough for the furniture, not tiny behind a huge table. Upright straight backs and visible neck and shoulder lines unless explicitly walking away. Laptops never cover faces.\nOne narrow cream Korean outlet column, sockets use TWO ROUND 220V holes, no vertical flat US slots. Player mint charger, neighbor brick-red phone charger. Blank square laptop stickers identify ownership.\nNo writing, lettering, logos or numbers anywhere on books, screens, clothing or signs. Only the requested pictograms/punctuation. IMPORTANT: do NOT put a loose green stick, pen, cigarette or short separate straw in the player's mouth. The single straw stays in the drink cup; mouth stays empty unless one uninterrupted straw visibly connects all the way from cup to lips.\nSTORY2 from src/story.js: The mint-hoodie player has risen from the LEFT seat and is now WALKING AWAY toward a restroom doorway/sign on the left-rear, seen from BEHIND. Show the hoodie back and back of messy black hair, a natural walking pose. Their mint-sticker laptop remains on the bar, and its MINT CHARGER IS STILL PLUGGED INTO THE COLUMN. Make the connected mint charger unmistakable in foreground, cable leading to the mint laptop. The white-headphone neighbor remains seated on right, ignoring the player. No red plug is in that socket yet. Cup stays on bar, its one straw stays in cup; no straw in anyone's mouth.\nA WHITE comic speech bubble at x8%,y10%,width16%, tail points RIGHT, containing ONLY the simple male/female RESTROOM PICTOGRAM (two human silhouettes separated by vertical bar), no word or letter. The physical doorway can carry the same pictogram. Keep bubble clear and inside frame. No extra bubbles. Nighttime visible beyond window.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/portrait/me.png",
+                    "assets/portrait/neighbor.png"
+                  ]
+                },
+                {
+                  "input": 5,
+                  "kind": "previous generated candidate",
+                  "candidate": "story-1"
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              1600,
+              1200
+            ],
+            "externalInkRadius": 0
+          }
+        },
+        {
+          "key": "story-3",
+          "file": "assets/story/3.png",
+          "batch": 3,
+          "width": 1600,
+          "height": 1200,
+          "requiredRefs": [
+            "portrait-helltaker-1",
+            "portrait-helltaker-2",
+            "portrait-helltaker-3",
+            "character-cultofthelamb-1"
+          ],
+          "selectedCandidate": "story-3-bubble",
+          "generationSteps": [
+            {
+              "candidate": "story-3",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nUse case: illustration-story. Full wordless comic panel with background, opaque 4:3 landscape,1600x1200. Reference1 contains all four original portrait/comic style references. Reference2 contains existing game puzzle objects, match their palette and forms. Reference3 is the approved r2 player and neighbor, reference4 the final portraits, reference5 the first comic panel: maintain the same identities, cafe, materials and color scheme. The mint player and brick-red neighbor are DIFFERENT people.\nKeep natural generated line weight, no extra thick exterior outline. Use an ordinary NARROW cafe window bar of58cm depth. Human shoulders44cm wide, laptops31cm wide, cup12cm. People must be large enough for the furniture, not tiny behind a huge table. Upright straight backs and visible neck and shoulder lines unless explicitly walking away. Laptops never cover faces.\nOne narrow cream Korean outlet column, sockets use TWO ROUND 220V holes, no vertical flat US slots. Player mint charger, neighbor brick-red phone charger. Blank square laptop stickers identify ownership.\nNo writing, lettering, logos or numbers anywhere on books, screens, clothing or signs. Only the requested pictograms/punctuation. IMPORTANT: do NOT put a loose green stick, pen, cigarette or short separate straw in the player's mouth. The single straw stays in the drink cup; mouth stays empty unless one uninterrupted straw visibly connects all the way from cup to lips.\nSTORY3 from src/story.js: The mint player has returned from bathroom and stops at the LEFT seat, looking in surprise at the outlet. Their MINT PLUG has been UNPLUGGED and is LYING LOOSE ON THE BAR in a clear foreground close view, with its two Korean220V round pins pointing RIGHT, not connected to anything. In the SAME SOCKET of the slim cream column, a BRICK-RED PHONE CHARGER is now inserted, and its brick-red cable leads visibly to the NEIGHBOR'S PHONE on the right. The neighbor wears white headphones, brick-red hoodie, indifferent and unaware. Both identities match refs, necks visible, faces not blocked by laptop. The central visual evidence must clearly be the loose mint plug versus connected red charger and phone. Cup stays on bar, no object in player's mouth.\nWHITE speech bubble at x64%,y8%,width16%,tail LEFT, containing exactly the punctuation symbols ?! in large black strokes. These punctuation symbols are allowed, no letters or words. No extra bubbles or motion marks covering plugs.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/portrait/me.png",
+                    "assets/portrait/neighbor.png"
+                  ]
+                },
+                {
+                  "input": 5,
+                  "kind": "previous generated candidate",
+                  "candidate": "story-1"
+                }
+              ]
+            },
+            {
+              "candidate": "story-3-bubble",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nEdit target reference1. References2-5 contain the original portrait source images, existing puzzle object sheet, approved r2 identities and final portrait identities. Preserve natural linework and opaque4:3 framing. Preserve the characters' identity, cafe and every unmentioned part. No written language.\nMove the WHITE ?! speech bubble to the source-specified position: LEFT EDGE x64% of panel, TOP EDGE y8%, WIDTH16%, tail pointingLEFT. Its maximum right edge is80%. Remove the old bubble and restore the wall behind it. Keep the ?! punctuation and its simple thick strokes. Do not move or scale people, laptops, plugs or bar. In particular the mint220Vplug remains loose on bar and brick-red phone charger remains connected. No other changes.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "previous generated candidate",
+                  "candidate": "story-3"
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                {
+                  "input": 5,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/portrait/me.png",
+                    "assets/portrait/neighbor.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              1600,
+              1200
+            ],
+            "externalInkRadius": 0
+          }
+        },
+        {
+          "key": "story-4",
+          "file": "assets/story/4.png",
+          "batch": 3,
+          "width": 1600,
+          "height": 1200,
+          "requiredRefs": [
+            "portrait-helltaker-1",
+            "portrait-helltaker-2",
+            "portrait-helltaker-3",
+            "character-cultofthelamb-1"
+          ],
+          "selectedCandidate": "story-4-screen",
+          "generationSteps": [
+            {
+              "candidate": "story-4",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nUse case: illustration-story. Full wordless comic panel with background, opaque 4:3 landscape,1600x1200. Reference1 contains all four original portrait/comic style references. Reference2 contains existing game puzzle objects, match their palette and forms. Reference3 is the approved r2 player and neighbor, reference4 the final portraits, reference5 the first comic panel: maintain the same identities, cafe, materials and color scheme. The mint player and brick-red neighbor are DIFFERENT people.\nKeep natural generated line weight, no extra thick exterior outline. Use an ordinary NARROW cafe window bar of58cm depth. Human shoulders44cm wide, laptops31cm wide, cup12cm. People must be large enough for the furniture, not tiny behind a huge table. Upright straight backs and visible neck and shoulder lines unless explicitly walking away. Laptops never cover faces.\nOne narrow cream Korean outlet column, sockets use TWO ROUND 220V holes, no vertical flat US slots. Player mint charger, neighbor brick-red phone charger. Blank square laptop stickers identify ownership.\nNo writing, lettering, logos or numbers anywhere on books, screens, clothing or signs. Only the requested pictograms/punctuation. IMPORTANT: do NOT put a loose green stick, pen, cigarette or short separate straw in the player's mouth. The single straw stays in the drink cup; mouth stays empty unless one uninterrupted straw visibly connects all the way from cup to lips.\nSTORY4 from src/story.js: The mint player at LEFT STARTS TO RAISE ONE HAND toward the neighbor to speak, but pauses and holds back, resigned irritation. Neighbor RIGHT, large white headphones on, completely unaware, looking at their screen. Upright visible necks, faces clear. The player's laptop screen is turned enough toward viewer to show a RED EMPTY BATTERY WARNING pictogram centered approximately x62%,y56% of the panel. Screen shows ONLY a red outline empty battery with one tiny red sliver and warning triangle, NO text or percentage. Keep its other identity mint sticker/color.\nA WHITE bubble at x8%,y8%,width22%,tailRIGHT containing only a RED ANGER BURST pictogram and THREE BLACK ELLIPSIS DOTS. No words or additional bubble. The single cup straw stays in cup, there is no loose straw at the lips. Narrow bar, slim column, red charger still occupying the socket, mint plug loose on bar.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/portrait/me.png",
+                    "assets/portrait/neighbor.png"
+                  ]
+                },
+                {
+                  "input": 5,
+                  "kind": "previous generated candidate",
+                  "candidate": "story-1"
+                }
+              ]
+            },
+            {
+              "candidate": "story-4-screen",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nEdit target reference1. References2-5 contain the original portrait source images, existing puzzle object sheet, approved r2 identities and final portrait identities. Preserve natural linework and opaque4:3 framing. Preserve the characters' identity, cafe and every unmentioned part. No written language.\nFix the PLAYER'S LAPTOP only. The current drawing mistakenly combines a back lid and a screen facing the same way. Replace that hybrid with ONE physically coherent laptop seen from its SCREEN SIDE, with one dark flat display panel, a single lower hinge, and the keyboard base foreshortened behind it. Remove the gray back-lid wedge and mint square sticker currently beside the screen. The entire visible screen faces the viewer so the EMPTY RED BATTERY warning pictogram is clear, and a small red warning triangle. ONE laptop, no second overlapping lid. Player still raises their hand then stops; neighbor remains unaware with white headphones.\nPosition the anger/three-dot WHITE bubble at leftedge8%,top8%,width22%,tailRIGHT. Keep only the red anger pictogram and3black dots. Preserve narrow bar, loose mintplug, connected redcharger. No letters or percentage, no loose straw in mouth.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "previous generated candidate",
+                  "candidate": "story-4"
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                {
+                  "input": 5,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/portrait/me.png",
+                    "assets/portrait/neighbor.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              1600,
+              1200
+            ],
+            "externalInkRadius": 0
+          }
+        },
+        {
+          "key": "story-5",
+          "file": "assets/story/5.png",
+          "batch": 3,
+          "width": 1600,
+          "height": 1200,
+          "requiredRefs": [
+            "portrait-helltaker-1",
+            "portrait-helltaker-2",
+            "portrait-helltaker-3",
+            "character-cultofthelamb-1"
+          ],
+          "selectedCandidate": "story-5-continuity",
+          "generationSteps": [
+            {
+              "candidate": "story-5",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nUse case: illustration-story. Full wordless comic panel with background, opaque 4:3 landscape,1600x1200. Reference1 contains all four original portrait/comic style references. Reference2 contains existing game puzzle objects, match their palette and forms. Reference3 is the approved r2 player and neighbor, reference4 the final portraits, reference5 the first comic panel: maintain the same identities, cafe, materials and color scheme. The mint player and brick-red neighbor are DIFFERENT people.\nKeep natural generated line weight, no extra thick exterior outline. Use an ordinary NARROW cafe window bar of58cm depth. Human shoulders44cm wide, laptops31cm wide, cup12cm. People must be large enough for the furniture, not tiny behind a huge table. Upright straight backs and visible neck and shoulder lines unless explicitly walking away. Laptops never cover faces.\nOne narrow cream Korean outlet column, sockets use TWO ROUND 220V holes, no vertical flat US slots. Player mint charger, neighbor brick-red phone charger. Blank square laptop stickers identify ownership.\nNo writing, lettering, logos or numbers anywhere on books, screens, clothing or signs. Only the requested pictograms/punctuation. IMPORTANT: do NOT put a loose green stick, pen, cigarette or short separate straw in the player's mouth. The single straw stays in the drink cup; mouth stays empty unless one uninterrupted straw visibly connects all the way from cup to lips.\nSTORY5 from src/story.js: Close dramatic yet quiet view of the PLAYER'S ICED CUP in the foreground. Exactly ONE green bendy STRAW is inserted through its lid, its upper length glowing gently mint green. Behind that cup, the mint player's DETERMINED NARROWED EYES and focused face are visible and recognizable, upright neck and shoulders visible. Player is NOT sipping in this panel: mouth is empty, no stick at mouth, no second straw anywhere. The only straw is physically inside this one cup. Do not draw a pipe or Y junction. The neighbor can be out of focus at far right but not a duplicate player. The narrow wood bar and dark green cafe frames establish same place.\nWHITE bubble at x40%,y8%,width16%,NO TAIL, containing a simple face with ONE FINGER held vertically to its lips, the universal SHUSH pictogram. No letters, not even 'shh', no exclamation text. Keep bubble above character and separate from the glowing straw, natural generated line weight.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/portrait/me.png",
+                    "assets/portrait/neighbor.png"
+                  ]
+                },
+                {
+                  "input": 5,
+                  "kind": "previous generated candidate",
+                  "candidate": "story-1"
+                }
+              ]
+            },
+            {
+              "candidate": "story-5-continuity",
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, logos or brand marks.\nEdit target reference1. References2-5 contain the original portrait source images, existing puzzle object sheet, approved r2 identities and final portrait identities. Preserve natural linework and opaque4:3 framing. Preserve the characters' identity, cafe and every unmentioned part. No written language.\nFix two small continuity details only. The mint charger is UNPLUGGED in the previous panel, so REMOVE the mint charger and all mint cable from the cream outlet column. Leave just ONE brick-red PHONE CHARGER inserted directly into the Korean220V round socket with its red wire leading toward the neighbor. No adapter stacked into another charger, no green block behind redplug.\nMove the WHITE SHUSH pictogram bubble to leftedge40%,topedge8%,width16% of the full panel, NOtail, restoring old bubble area to the cafe wall. Keep the same finger-to-lips pictogram, NO words. Keep exactly one glowinggreenstraw inserted in foreground cup. The player's lips remain empty and determined eyes remain visible. Keep the same cup scale, face, neck and shoulders, bar and laptops unchanged.",
+              "inputs": [
+                {
+                  "input": 1,
+                  "kind": "previous generated candidate",
+                  "candidate": "story-5"
+                },
+                {
+                  "input": 2,
+                  "kind": "reference sheet",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "input": 3,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "input": 4,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                {
+                  "input": 5,
+                  "kind": "reference sheet",
+                  "files": [
+                    "assets/portrait/me.png",
+                    "assets/portrait/neighbor.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "resize": [
+              1600,
+              1200
+            ],
+            "externalInkRadius": 0
+          }
+        }
+      ],
+      "layoutDeviations": [
+        {
+          "key": "scene-top",
+          "measurement": "approximate visual read of the final1920x1080 raster, not a physical size certification",
+          "target": {
+            "playerHeadBox": [
+              284,
+              86,
+              232,
+              288
+            ],
+            "playerLaptopWidth": 454,
+            "woodRearY": 460,
+            "woodFrontY": 960,
+            "sillY": 1012,
+            "projectileOrigin": [
+              464,
+              336
+            ]
+          },
+          "observed": {
+            "playerHeadIncludingHair": {
+              "left": 320,
+              "top": 15,
+              "width": 350,
+              "height": 290
+            },
+            "playerLaptop": {
+              "left": 156,
+              "top": 382,
+              "width": 488,
+              "height": 200
+            },
+            "woodRearY": 481,
+            "woodFrontY": 936,
+            "sillY": 989,
+            "strawAtMouth": [
+              558,
+              266
+            ]
+          },
+          "handoff": "Hair-inclusive head silhouette is wider and higher than the face box. Laptop is about34px wider. Background straw and engine origin differ by about94px horizontally and70px vertically. Claude Code should review these before approval; no individual element was resized or repositioned in code."
+        },
+        {
+          "key": "scene-side",
+          "measurement": "approximate visual read of final raster",
+          "target": {
+            "floorY": 800,
+            "sillY": 900,
+            "playerHeadRight": 340,
+            "reservedRegionLeft": 380
+          },
+          "observed": {
+            "floorY": 790,
+            "sillY": 874,
+            "playerHeadIncludingHairRight": 450
+          },
+          "handoff": "Wood edge is about10px above guide. Player hair extends roughly70px into left edge of reserved central space. Neighbor head/shoulders also extend left of guide boxes. No code changes or character rescaling was applied."
+        },
+        {
+          "key": "story-1",
+          "targetBubble": {
+            "x": 52,
+            "y": 8,
+            "width": 26
+          },
+          "observedBubbleApprox": {
+            "x": 42,
+            "y": 5,
+            "width": 31
+          }
+        },
+        {
+          "key": "story-2",
+          "targetBubble": {
+            "x": 8,
+            "y": 10,
+            "width": 16
+          },
+          "observedBubbleApprox": {
+            "x": 4.5,
+            "y": 6,
+            "width": 16
+          }
+        },
+        {
+          "key": "story-3",
+          "targetBubble": {
+            "x": 64,
+            "y": 8,
+            "width": 16
+          },
+          "observedBubbleApprox": {
+            "x": 55,
+            "y": 3.5,
+            "width": 19
+          }
+        },
+        {
+          "key": "story-4",
+          "targetBubble": {
+            "x": 8,
+            "y": 8,
+            "width": 22
+          },
+          "observedBubbleApprox": {
+            "x": 3.5,
+            "y": 6.5,
+            "width": 24
+          },
+          "targetBatteryWarning": {
+            "x": 62,
+            "y": 56
+          },
+          "observedBatteryWarningApprox": {
+            "x": 26,
+            "y": 65
+          },
+          "handoff": "Screen warning is legible but does not match noticeAt. Keep source unchanged for Claude review."
+        },
+        {
+          "key": "story-5",
+          "targetBubble": {
+            "x": 40,
+            "y": 8,
+            "width": 16
+          },
+          "observedBubbleApprox": {
+            "x": 3.5,
+            "y": 4.5,
+            "width": 15
+          },
+          "handoff": "Generator retained left-positioned shush bubble despite targeted position edit. Symbol is correct. This is a visible layout deviation, not certified as matching the source coordinates."
+        },
+        {
+          "key": "piece-side-book",
+          "target": "Fill a square side-view cell so an upper plug visibly rests on books.",
+          "observed": {
+            "alphaBounds": [
+              6,
+              53,
+              505,
+              505
+            ],
+            "canvas": [
+              512,
+              512
+            ],
+            "approximateGapIn960ScenePx": 21
+          },
+          "handoff": "Regeneration increased stack height from355px to452px and reduced the gap in level8, but the upper plug still appears separated from the books. Claude Code should review the final art fit and support baseline before approval. No game code was changed."
+        }
+      ],
+      "verification": {
+        "manifestMatchesAssetList": 30,
+        "missingFiles": 0,
+        "dimensions": "All30 files match asset-list dimensions.",
+        "pngTextMetadata": "None on all30 files.",
+        "protectedSourceAndExistingAssets": "SHA-256 unchanged from task start.",
+        "browser": {
+          "artCheck": "30/30 registered;38 images loaded, no broken image.",
+          "game": "Top, ducked view and all5 prologue panels inspected; no console warnings/errors observed.",
+          "responsive": "375px art-check and game top/side/prologue inspected with no horizontal overflow and no broken image."
+        },
+        "status": "Generated and registered for user/Claude review. Numeric layout deviations remain listed above. No commit or push."
+      }
+    }
   ]
 }

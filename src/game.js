@@ -277,12 +277,16 @@
     game.pieceElements.clear();
     for (const obj of game.state.objects) {
       const element = document.createElement('div');
-      element.className = 'piece';
+      element.className = `piece piece-kind-${obj.kind}`;
       if (obj.mirror === '\\') element.classList.add('mirror-back');
       const assetKey = `piece-${isTop ? 'top' : 'side'}-${KIND_ASSET[obj.kind]}`;
       element.innerHTML = `<div class="piece-shadow"></div><div class="piece-body">${Assets.html(assetKey)}</div>${bubbleHtml()}`;
       ui.board.appendChild(element);
       game.pieceElements.set(obj.id, element);
+    }
+
+    if (!isTop) {
+      for (const image of ui.board.querySelectorAll('.piece-body .asset')) alignToFloor(image);
     }
 
     ui.sideLabel.textContent = `${game.focusRow + 1}번 줄을 바 높이에서 보는 중`;
@@ -292,6 +296,45 @@
 
     clearAim();
     render(game.state, false);
+  }
+
+  // 숙인 시점에서는 물건이 칸 바닥(바 윗면이나 아래 물건의 윗면)에 닿아 보여야 한다.
+  // 그림마다 아래쪽 투명 여백이 달라서, 그림을 불러온 뒤 실제로 그려진 아래 끝을 재서 그만큼 내린다.
+  const floorOffsetCache = new Map();
+
+  function measureBottomGap(image) {
+    if (floorOffsetCache.has(image.src)) return floorOffsetCache.get(image.src);
+    let gap = 0;
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
+      const context = canvas.getContext('2d');
+      context.drawImage(image, 0, 0);
+      const { data, width, height } = context.getImageData(0, 0, canvas.width, canvas.height);
+      let lowest = height - 1;
+      search: for (; lowest >= 0; lowest--) {
+        for (let x = 0; x < width; x++) {
+          if (data[(lowest * width + x) * 4 + 3] > 24) break search;
+        }
+      }
+      gap = (height - 1 - lowest) / height;
+    } catch (error) {
+      // 파일을 직접 연 경우처럼 그림 픽셀을 읽을 수 없으면 맞추지 않고 그대로 둔다.
+      gap = 0;
+    }
+    floorOffsetCache.set(image.src, gap);
+    return gap;
+  }
+
+  function alignToFloor(image) {
+    if (image.closest('.piece-kind-book')) return;
+    const apply = () => {
+      const gap = measureBottomGap(image);
+      image.style.transform = `translateY(${gap * image.clientHeight + 6}px)`;
+    };
+    if (image.complete && image.naturalWidth) apply();
+    else image.addEventListener('load', apply, { once: true });
   }
 
   // 콘센트 기둥 한 칸의 그림 이름. 레벨에 콘센트가 있으면 빈 콘센트(상대 플러그가 꽂혀 있을 수도 있다),

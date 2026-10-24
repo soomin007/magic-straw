@@ -391,6 +391,16 @@ button {
     drop-shadow(0 5px 3px rgba(0, 0, 0, 0.35));
 }
 
+/* 숙인 시점의 책 더미 그림은 위쪽에 투명한 여백이 있어서, 그대로 그리면 책 위에 올린 물건이 떠 보인다.
+   책만 칸 위쪽 끝까지 늘려 그려 위에 놓인 물건과 맞닿게 한다. */
+.board.ducking .piece-kind-book .piece-body {
+  inset: -14px 0 0 0;
+}
+
+.board.ducking .piece-kind-book .asset {
+  object-fit: fill;
+}
+
 .piece.targeted .piece-body {
   --sticker-edge: #5aa9d6;
 }
