@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>규칙 검증</title>
+  <style>
+    body { margin: 0; padding: 20px; font: 14px/1.6 ui-monospace, Consolas, monospace; background: #1d1b19; color: #eee; }
+    #summary { font-weight: bold; margin-bottom: 12px; }
+    .fail { color: #ff8a80; }
+  </style>
+</head>
+<body>
+  <div id="summary">검증 중...</div>
+  <pre id="log"></pre>
+  <script src="../src/engine.js"></script>
+  <script src="../src/levels.js"></script>
+  <script src="verify.js"></script>
+  <script>
+    const { failures, lines } = Verify.runAll();
+    const summary = document.getElementById('summary');
+    summary.textContent = failures === 0 ? '모든 검증 통과' : `실패 ${failures}개`;
+    summary.className = failures === 0 ? '' : 'fail';
+    document.getElementById('log').textContent = lines.join('\n');
+  </script>
+</body>
+</html>
