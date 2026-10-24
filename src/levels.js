@@ -8,6 +8,7 @@
 // highSockets는 멀티탭 옆면의 높은 콘센트이고, above는 테이블 면보다 높이 놓인 물건이다.
 // 지도에서 '\'는 자바스크립트 문자열이라 '\\'로 적는다. 화면에서는 한 칸이다.
 // needsDuck이 true인 판은 숙이기로 높이를 조준해야만 풀린다. tutorial은 손가락 안내를 어디까지 보여 줄지 정한다.
+// tools는 그 판에서 쓸 수 있는 보기 도구(휴대폰 카메라, 숙이기)다. 도구는 처음 필요한 판부터 하나씩 늘어난다.
 // optimal은 최소 행동 수다. tools/verify.js가 실제 탐색 결과와 같은지 확인한다.
 (function (root) {
   'use strict';
@@ -51,6 +52,7 @@
     {
       id: 'take',
       title: '빼앗기',
+      tools: ['camera'],
       drinks: ['ice', 'soda'],
       optimal: 2,
       floor: [
@@ -62,6 +64,7 @@
     {
       id: 'sideways',
       title: '옆 줄로',
+      tools: ['camera'],
       drinks: ['ice', 'soda'],
       optimal: 2,
       floor: [
@@ -73,6 +76,7 @@
     {
       id: 'order',
       title: '순서',
+      tools: ['camera'],
       drinks: ['ice', 'soda'],
       optimal: 3,
       floor: [
@@ -84,6 +88,7 @@
     {
       id: 'duck',
       title: '숙여서 보기',
+      tools: ['camera', 'duck'],
       drinks: ['ice', 'soda'],
       optimal: 2,
       needsDuck: true,
@@ -98,6 +103,7 @@
     {
       id: 'ledge',
       title: '발판',
+      tools: ['camera', 'duck'],
       drinks: ['ice', 'soda'],
       optimal: 4,
       needsDuck: true,

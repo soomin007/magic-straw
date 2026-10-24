@@ -1,0 +1,1165 @@
+:root {
+  --ink: #2b2623;
+  --paper: #fffaf1;
+  --cream: #f4ede1;
+  --mint: #6cc3a0;
+  --mint-dark: #3f8c6c;
+  --brick: #d9534a;
+  --brick-dark: #a2372f;
+  --sky: #5aa9d6;
+  --gray: #c9c6c0;
+  --gray-dark: #8f8a83;
+  --os-bar: #1f2229;
+  --os-text: #e9ebf0;
+  --wallpaper-top: #3d4a6b;
+  --wallpaper-bottom: #8e7187;
+  --taskbar-height: 44px;
+  --cell: 88px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--os-bar);
+  color: var(--ink);
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* 랩탑 바탕화면 */
+
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(160deg, var(--wallpaper-top), var(--wallpaper-bottom));
+}
+
+.desktop {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.window {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--cream);
+  box-shadow: 0 18px 50px rgba(10, 12, 20, 0.45);
+}
+
+.titlebar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  padding-right: 8px;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+}
+
+.title-left,
+.title-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.app-icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--mint);
+  border: 2px solid var(--ink);
+  flex-shrink: 0;
+}
+
+.app-title {
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.level-name {
+  color: #7d7268;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.level-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.level-dot {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid #cbbfae;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 700;
+  color: #a39684;
+}
+
+.level-dot.cleared {
+  background: var(--mint);
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.level-dot.current {
+  border-color: var(--ink);
+  color: var(--ink);
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--sky);
+}
+
+.level-dot:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.title-btn {
+  min-width: 32px;
+  height: 32px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 8px;
+  border: 2px solid var(--ink);
+  background: #fff;
+  white-space: nowrap;
+}
+
+.title-btn.icon {
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 17px;
+}
+
+.title-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.window-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 장면. 960 x 540 좌표로 그리고 창 크기에 맞춰 줄인다. */
+
+.stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: #ebe4d6;
+  transition: filter 0.8s ease;
+}
+
+.window.power-saver .stage {
+  filter: grayscale(0.85) brightness(0.78);
+}
+
+.scene {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 960px;
+  height: 540px;
+  transform-origin: 0 0;
+  user-select: none;
+}
+
+.view {
+  position: absolute;
+  inset: 0;
+}
+
+.side-view {
+  background: linear-gradient(180deg, #e7dccb 0%, #efe7d9 74%);
+}
+
+.placed {
+  position: absolute;
+}
+
+/* 그림 자리. 그림이 없으면 회색 상자가 대신 들어간다. */
+
+.asset {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+.gbox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  background: var(--gray);
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.gbox-round { border-radius: 50%; }
+.gbox-mine { background: var(--mint); }
+.gbox-theirs { background: var(--brick); color: #fff; }
+.gbox-light { background: #f2e6cf; }
+.gbox-heavy { background: #8d9bb3; color: #fff; }
+.gbox-strip { background: #f6f4ef; border-radius: 6px; }
+.gbox-table { background: #d9b88f; border-radius: 18px; color: transparent; }
+.gbox-plain { background: var(--gray); }
+
+/* 메뉴판 회색 상자는 얼음이 꺾이는 기울기가 보이도록 대각선을 그린다. */
+.gbox-menu {
+  background:
+    linear-gradient(45deg, transparent 43%, var(--ink) 43%, var(--ink) 57%, transparent 57%),
+    #f2e6cf;
+  color: transparent;
+}
+
+.piece.mirror-back .gbox-menu,
+.piece.mirror-back .asset {
+  transform: scaleX(-1);
+}
+
+/* 퍼즐 판 */
+
+.board {
+  position: absolute;
+}
+
+.board.aim-ice,
+.board.aim-soda {
+  cursor: crosshair;
+}
+
+.board::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: var(--cell);
+  background-image:
+    linear-gradient(90deg, rgba(43, 38, 35, 0.16) 2px, transparent 2px),
+    linear-gradient(180deg, rgba(43, 38, 35, 0.16) 2px, transparent 2px);
+  background-size: var(--cell) var(--cell);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.board.aim-ice::before,
+.board.aim-soda::before,
+.board.ducking::before {
+  opacity: 1;
+}
+
+.aim-band {
+  position: absolute;
+  left: 0;
+  border-radius: 12px;
+  background: rgba(90, 169, 214, 0.18);
+  border: 3px dashed rgba(60, 130, 175, 0.7);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.aim-band.visible {
+  opacity: 1;
+}
+
+.strip {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+}
+
+.strip-segment {
+  position: absolute;
+  left: 0;
+  width: var(--cell);
+  height: var(--cell);
+}
+
+.piece {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--cell);
+  height: var(--cell);
+  transition: transform 0.24s cubic-bezier(0.3, 0.8, 0.4, 1);
+  pointer-events: none;
+}
+
+.board.instant .piece,
+.board.instant .piece-body {
+  transition: none;
+}
+
+.piece-shadow {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 18px;
+  bottom: 10px;
+  border-radius: 50%;
+  background: rgba(43, 38, 35, 0.28);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.piece.lifted .piece-shadow {
+  opacity: 1;
+}
+
+.piece-body {
+  position: absolute;
+  inset: 6px;
+  transition: transform 0.24s cubic-bezier(0.3, 0.8, 0.4, 1);
+}
+
+.piece-bubble {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 3px solid var(--sky);
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.85) 0 8%, rgba(160, 215, 240, 0.25) 9%);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.piece.floating .piece-bubble {
+  opacity: 1;
+  transform: scale(1);
+  animation: bob 1.4s ease-in-out infinite;
+}
+
+.piece.targeted .piece-body::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 4px solid var(--sky);
+  border-radius: 14px;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes bob {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -4px; }
+}
+
+.aim-layer {
+  position: absolute;
+  inset: 0;
+  width: 960px;
+  height: 540px;
+  pointer-events: none;
+}
+
+.aim-path {
+  fill: none;
+  stroke: var(--sky);
+  stroke-width: 5;
+  stroke-dasharray: 2 12;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.9;
+}
+
+.fx-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ice-shot,
+.bubble-shot {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.ice-shot {
+  width: 26px;
+  height: 26px;
+  margin-left: -13px;
+  margin-top: -13px;
+  border-radius: 5px;
+  border: 3px solid var(--ink);
+  background: #fff;
+  box-shadow: inset -5px -5px 0 #cfeaf6;
+}
+
+.bubble-shot {
+  width: 30px;
+  height: 30px;
+  margin-left: -15px;
+  margin-top: -15px;
+  border-radius: 50%;
+  border: 3px solid var(--sky);
+  background: rgba(190, 228, 245, 0.6);
+}
+
+.ice-shot .asset,
+.bubble-shot .asset {
+  width: 100%;
+  height: 100%;
+}
+
+.board.shake {
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  25% { translate: -6px 0; }
+  75% { translate: 6px 0; }
+}
+
+/* 숙이기 시점의 줄 바꾸기 */
+
+.side-bar {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 12px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.side-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 2px solid var(--ink);
+  background: #fff;
+}
+
+.side-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.side-label {
+  font-weight: 800;
+}
+
+/* 혼잣말과 알림 */
+
+.speech {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 6;
+  max-width: min(360px, calc(100% - 24px));
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 14px;
+  padding-right: 14px;
+  border-radius: 14px;
+  border: 3px solid var(--ink);
+  background: #fff;
+  font-weight: 700;
+  line-height: 1.4;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.toast {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  z-index: 6;
+  max-width: calc(100% - 40px);
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 14px;
+  padding-right: 14px;
+  border-radius: 10px;
+  background: rgba(43, 38, 35, 0.92);
+  color: var(--paper);
+  font-size: 14px;
+  transform: translate(-50%, 8px);
+  opacity: 0;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+}
+
+.toast.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* 튜토리얼 손가락 */
+
+.finger {
+  position: absolute;
+  z-index: 12;
+  width: 56px;
+  height: 56px;
+  margin-left: -28px;
+  margin-top: -64px;
+  pointer-events: none;
+  animation: point 0.9s ease-in-out infinite;
+}
+
+.finger-art {
+  width: 100%;
+  height: 100%;
+}
+
+.finger-art .gbox,
+.finger-default {
+  width: 100%;
+  height: 100%;
+}
+
+.finger-default {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50% 50% 50% 0;
+  border: 3px solid var(--ink);
+  background: #ffd36b;
+  transform: rotate(-45deg);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+@keyframes point {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 8px; }
+}
+
+/* 음료와 도구 쟁반 */
+
+.tray {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 12px;
+  padding-right: 12px;
+  background: #e2cba7;
+  border-top: 3px solid var(--ink);
+}
+
+.drinks,
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.drink,
+.tool {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 6px;
+  padding-right: 12px;
+  border-radius: 14px;
+  border: 3px solid var(--ink);
+  background: var(--paper);
+  font-weight: 800;
+  white-space: nowrap;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.tool {
+  padding-left: 12px;
+}
+
+.drink-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.drink-icon .gbox {
+  border-width: 2px;
+  font-size: 11px;
+  border-radius: 8px;
+}
+
+.key {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7d7268;
+}
+
+.drink[aria-pressed="true"],
+.tool[aria-pressed="true"] {
+  background: #d6ecf5;
+  transform: translateY(-3px);
+  box-shadow: 0 3px 0 var(--ink);
+}
+
+/* 겹쳐 뜨는 창 */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+}
+
+.screen-off {
+  background: #050506;
+  color: #9aa0ab;
+  animation: power-off 0.5s ease;
+}
+
+@keyframes power-off {
+  0% { clip-path: inset(0 0 0 0); background: #fff; }
+  40% { clip-path: inset(49% 0 49% 0); background: #fff; }
+  100% { clip-path: inset(0 0 0 0); background: #050506; }
+}
+
+.won {
+  background: rgba(244, 237, 225, 0.9);
+}
+
+.overlay-title {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.screen-off .overlay-title {
+  color: #e9ebf0;
+}
+
+.overlay-text {
+  margin-top: 0;
+  margin-bottom: 18px;
+  max-width: 420px;
+  line-height: 1.6;
+}
+
+.overlay-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn {
+  min-height: 42px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 10px;
+  border: 3px solid var(--ink);
+  background: var(--mint);
+  font-weight: 800;
+}
+
+.btn.ghost {
+  background: #fff;
+}
+
+.screen-off .btn {
+  border-color: #c7ccd6;
+  background: #2a2d35;
+  color: #e9ebf0;
+}
+
+.os-popup {
+  position: absolute;
+  z-index: 15;
+  left: 50%;
+  top: 30%;
+  width: 300px;
+  max-width: calc(100% - 40px);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fbfbfd;
+  color: #222;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+  transform: translate(-50%, 0);
+}
+
+.os-popup-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  padding-right: 6px;
+  background: #d8434a;
+  color: #fff;
+  font-weight: 700;
+  cursor: grab;
+  touch-action: none;
+}
+
+.os-popup-close {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 20px;
+}
+
+.os-popup p {
+  margin: 0;
+  padding-top: 14px;
+  padding-bottom: 16px;
+  padding-left: 14px;
+  padding-right: 14px;
+  line-height: 1.5;
+}
+
+.help-panel {
+  position: absolute;
+  z-index: 25;
+  right: 12px;
+  top: 12px;
+  width: 360px;
+  max-width: calc(100% - 24px);
+  max-height: calc(100% - 24px);
+  overflow-y: auto;
+  padding-top: 4px;
+  padding-bottom: 16px;
+  padding-left: 18px;
+  padding-right: 18px;
+  border-radius: 12px;
+  border: 3px solid var(--ink);
+  background: var(--paper);
+  line-height: 1.6;
+}
+
+.help-title {
+  font-weight: 900;
+}
+
+/* 휴대폰 카메라 */
+
+.camera-overlay {
+  background: rgba(20, 20, 24, 0.6);
+}
+
+.phone {
+  width: 300px;
+  max-width: 100%;
+  padding-top: 26px;
+  padding-bottom: 18px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 34px;
+  border: 8px solid #17171a;
+  background: #2d2d33;
+  color: #eee;
+}
+
+.phone-screen {
+  padding-top: 14px;
+  padding-bottom: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 10px;
+  border: 2px dashed rgba(255, 255, 255, 0.7);
+  background: #f4f1ea;
+  color: var(--ink);
+}
+
+.camera-art {
+  width: 120px;
+  height: 120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.camera-title {
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-weight: 900;
+}
+
+.camera-lines {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.camera-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.camera-thought {
+  margin-top: 14px;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+/* 프롤로그 */
+
+.prologue {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  background: #111;
+}
+
+.prologue-art {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.prologue-art .asset {
+  max-height: 100%;
+}
+
+.prologue-art .gbox {
+  max-width: 640px;
+  max-height: 100%;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.6;
+  background: #d8d4cc;
+}
+
+.prologue-art.enter {
+  animation: panel-in 0.4s ease;
+}
+
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.prologue-text {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: var(--paper);
+  border-top: 3px solid var(--ink);
+}
+
+.prologue-notice {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 8px;
+  background: #d8434a;
+  color: #fff;
+  font-weight: 800;
+}
+
+.prologue-line {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.prologue-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.prologue-count {
+  margin-right: auto;
+  color: #7d7268;
+  font-size: 14px;
+}
+
+.title-card {
+  text-align: center;
+  color: var(--paper);
+}
+
+.title-card h1 {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.title-card p {
+  margin-top: 8px;
+  color: #b9b2a6;
+}
+
+/* 작업 표시줄 */
+
+.taskbar {
+  height: var(--taskbar-height);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
+  background: var(--os-bar);
+  color: var(--os-text);
+  font-size: 13px;
+}
+
+.start-button {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background:
+    linear-gradient(90deg, transparent 45%, var(--os-bar) 45% 55%, transparent 55%),
+    linear-gradient(180deg, transparent 45%, var(--os-bar) 45% 55%, transparent 55%),
+    #8fb4ff;
+}
+
+.task-app {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid #8fb4ff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.system-tray {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.battery {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.battery-icon {
+  position: relative;
+  width: 28px;
+  height: 14px;
+  padding: 2px;
+  border: 2px solid currentColor;
+  border-radius: 4px;
+}
+
+.battery-icon::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 3px;
+  width: 3px;
+  height: 4px;
+  border-radius: 0 2px 2px 0;
+  background: currentColor;
+}
+
+.battery-fill {
+  display: block;
+  height: 100%;
+  border-radius: 1px;
+  background: #7ee08f;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.battery.low {
+  color: #ff8a80;
+}
+
+.battery.low .battery-fill {
+  background: #ff6b5e;
+}
+
+.battery.charging .battery-text::after {
+  content: " 충전 중";
+  font-weight: 400;
+}
+
+.os-notify {
+  position: fixed;
+  right: 16px;
+  bottom: calc(var(--taskbar-height) + 12px);
+  z-index: 40;
+  max-width: calc(100% - 32px);
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 10px;
+  background: #2b2f3a;
+  color: var(--os-text);
+  font-size: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transform: translateY(16px);
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.os-notify.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 좁은 화면 */
+
+.rotate-hint {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .desktop {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .app-title {
+    font-size: 15px;
+  }
+
+  .task-app,
+  .dday,
+  .label-long,
+  .key {
+    display: none;
+  }
+
+  .title-right {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .level-dots {
+    gap: 3px;
+  }
+
+  .level-dot {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .title-btn {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .drink,
+  .tool {
+    min-height: 46px;
+    padding-right: 10px;
+  }
+
+  .prologue-line {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 640px) and (orientation: portrait) {
+  .rotate-hint {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 16px;
+    margin: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #7d7268;
+  }
+}
