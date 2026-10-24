@@ -4,35 +4,116 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>내 자리, 내 충전기</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: #f6f1e7;
-      color: #2d2a26;
-      font-family: system-ui, sans-serif;
-    }
-    .wrap {
-      padding-left: 20px;
-      padding-right: 20px;
-      text-align: center;
-    }
-    h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
-    p {
-      margin-top: 0;
-      color: #6b645b;
-    }
-  </style>
+  <meta name="description" content="카페에서 빼앗긴 콘센트를 마법 빨대로 조용히 되찾는 퍼즐 게임">
+  <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
-  <main class="wrap">
-    <h1>내 자리, 내 충전기</h1>
-    <p>첫 프로토타입을 준비하고 있습니다.</p>
-  </main>
+  <div class="screen">
+    <div class="desktop">
+      <section id="window" class="window" aria-label="게임 창">
+        <header class="titlebar">
+          <div class="title-left">
+            <span class="app-icon" aria-hidden="true"></span>
+            <span class="app-title">내 자리, 내 충전기</span>
+            <span id="level-name" class="level-name"></span>
+          </div>
+          <div class="title-right">
+            <nav id="level-dots" class="level-dots" aria-label="레벨"></nav>
+            <button id="btn-difficulty" class="title-btn" type="button"></button>
+            <button id="btn-undo" class="title-btn icon" type="button" title="되돌리기 (Z)" aria-label="되돌리기">↶</button>
+            <button id="btn-restart" class="title-btn icon" type="button" title="처음부터 (R)" aria-label="처음부터">↻</button>
+            <button id="btn-help" class="title-btn icon" type="button" title="도움말" aria-label="도움말">?</button>
+          </div>
+        </header>
+
+        <div class="window-body">
+          <div id="stage" class="stage">
+            <div id="scene" class="scene">
+              <div class="wall">
+                <div class="cafe-window"></div>
+                <div class="lamp"></div>
+              </div>
+              <div class="neighbor"></div>
+              <div class="table"></div>
+              <div class="player"></div>
+              <svg id="cable-layer" class="cable-layer" viewBox="0 0 960 540" aria-hidden="true">
+                <path id="my-cable" class="my-cable" d=""></path>
+              </svg>
+              <div id="board" class="board">
+                <div id="row-highlight" class="row-highlight"></div>
+                <div id="strip" class="strip"></div>
+              </div>
+              <div id="fx-layer" class="fx-layer"></div>
+            </div>
+            <div id="toast" class="toast" role="status" aria-live="polite"></div>
+            <p class="rotate-hint">화면을 가로로 돌리면 더 크게 보입니다</p>
+          </div>
+
+          <footer class="tray">
+            <div id="drinks" class="drinks"></div>
+            <p id="tray-hint" class="tray-hint"></p>
+          </footer>
+
+          <div id="overlay-dead" class="overlay screen-off" hidden>
+            <p class="overlay-title">배터리가 모두 닳았습니다</p>
+            <p class="overlay-text">화면이 꺼졌습니다. 마지막 행동을 되돌리거나 처음부터 다시 할 수 있습니다.</p>
+            <div class="overlay-actions">
+              <button id="dead-undo" class="btn" type="button">되돌리기 (Z)</button>
+              <button id="dead-restart" class="btn" type="button">처음부터 (R)</button>
+              <button id="dead-skip" class="btn ghost" type="button" hidden>이 판 건너뛰기</button>
+            </div>
+          </div>
+
+          <div id="overlay-won" class="overlay won" hidden>
+            <p class="overlay-title">충전기를 되찾았습니다</p>
+            <p id="won-text" class="overlay-text"></p>
+            <div class="overlay-actions">
+              <button id="won-next" class="btn" type="button">다음 판</button>
+              <button id="won-undo" class="btn ghost" type="button">되돌려 보기</button>
+            </div>
+          </div>
+
+          <div id="popup-low" class="os-popup" hidden>
+            <div id="popup-low-bar" class="os-popup-bar">
+              <span>배터리 부족</span>
+              <button id="popup-low-close" class="os-popup-close" type="button" aria-label="닫기">×</button>
+            </div>
+            <p>배터리가 1% 남았습니다. 지금 바로 충전기를 연결하세요.</p>
+          </div>
+
+          <div id="help-panel" class="help-panel" hidden>
+            <p class="help-title">도움말</p>
+            <p>음료를 고른 다음 테이블을 누르면 빨대로 뱉습니다. 뱉을 때마다 배터리가 1% 줄어듭니다.
+              음료를 고르거나 살펴보는 데는 배터리가 들지 않습니다.</p>
+            <p>얼음은 고른 높이로 날아가 처음 맞은 물건을 막힐 때까지 밀어냅니다.
+              소다 거품은 물건을 한 칸 띄우고, 다음 행동이 끝나면 터집니다.</p>
+            <p>단축키는 1과 2가 음료, Z가 되돌리기, R이 처음부터입니다.</p>
+            <button id="help-close" class="btn" type="button">닫기</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="taskbar">
+      <span class="start-button" aria-hidden="true"></span>
+      <span class="task-app">내 자리, 내 충전기</span>
+      <div class="system-tray">
+        <span class="dday">시험 D-1</span>
+        <span id="battery" class="battery" aria-label="배터리">
+          <span class="battery-icon"><span id="battery-fill" class="battery-fill"></span></span>
+          <span id="battery-text" class="battery-text"></span>
+        </span>
+        <span class="clock">새벽 2:13</span>
+      </div>
+    </footer>
+
+    <div id="notify" class="os-notify" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="src/engine.js"></script>
+  <script src="src/levels.js"></script>
+  <script src="assets/manifest.js"></script>
+  <script src="src/art.js"></script>
+  <script src="src/game.js"></script>
 </body>
 </html>
