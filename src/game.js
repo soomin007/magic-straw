@@ -11,41 +11,21 @@
   // 장면 좌표 (960 x 540 기준)
   const SCENE_WIDTH = 960;
   const SCENE_HEIGHT = 540;
-  // 칸 크기. 탑뷰는 살짝 기울여 본 시점이라 한 줄의 깊이(ROW_HEIGHT)가 칸 너비(CELL)보다 짧다.
-  // 숙인 시점에서는 칸이 정사각형(CELL x CELL)이다.
-  const CELL = 88;
-  const ROW_HEIGHT = 60;
-  const GRID_LEFT = 190;
-  const GRID_TOP = 200;
-  const SIDE_FLOOR = 400;
-  const TOP_STRAW = { x: 214, y: 132 };
-  const SIDE_STRAW = { x: 178, y: 350 };
+  // 칸 크기와 장면 배치는 src/layout.js가 유일한 기준이다(실제 크기 기준도 거기 적혀 있다).
+  // 탑뷰는 살짝 기울여 본 시점이라 한 줄의 깊이(ROW_HEIGHT)가 칸 너비(CELL)보다 짧다. 숙인 시점의 칸은 정사각형(CELL x CELL)이다.
+  const LAYOUT = window.SCENE_LAYOUT;
+  const CELL = LAYOUT.scale.cellWidthPx;
+  const ROW_HEIGHT = LAYOUT.scale.rowHeightPx;
+  const GRID_LEFT = LAYOUT.top.gridLeft;
+  const GRID_TOP = LAYOUT.top.gridTop;
+  const SIDE_FLOOR = LAYOUT.side.floor;
+  const TOP_STRAW = LAYOUT.top.straw;
+  const SIDE_STRAW = LAYOUT.side.straw;
 
   // 콘센트 기둥은 줄마다 바 높이(z = 0)와 그 위(z = 1)에 콘센트가 고정돼 있다. 그보다 위는 기둥 윗면이다.
   // 레벨에서 콘센트가 없는 자리는 옆자리 사람이 꽂아 둔 다른 기기(배경 그림, 건드릴 수 없음)로 그린다.
   const OUTLET_LEVELS = 2;
 
-  // 판 배경 그림이 없을 때 회색 상자로 그리는 배치. docs/art-brief.md의 배경 배치 표와 같다.
-  // 1챕터 창가 바 좌석을 창 밖에서 들여다보는 구도라, 두 사람은 바 건너편에서 얼굴이 보이고 창틀은 화면 아래 앞쪽에 있다.
-  const BACKDROP_LAYOUT = {
-    top: [
-      { label: '카페 안쪽', tone: 'window', x: 0, y: 0, width: 960, height: 175 },
-      { label: '나 (얼굴이 보인다)', tone: 'mine', round: true, x: 30, y: 6, width: 220, height: 190 },
-      { label: '옆자리 사람 (헤드폰)', tone: 'theirs', round: true, x: 720, y: 6, width: 230, height: 190 },
-      { label: '', tone: 'table', x: 0, y: 170, width: 960, height: 232 },
-      { label: '내 랩탑 (뒷면)', tone: 'mine', x: 66, y: 150, width: 118, height: 100 },
-      { label: '상대 랩탑 (뒷면)', tone: 'theirs', x: 830, y: 150, width: 112, height: 100 },
-      { label: '내 음료', tone: 'light', x: 86, y: 286, width: 70, height: 72 },
-      { label: '창틀 (앞쪽)', tone: 'window', x: 0, y: 410, width: 960, height: 130 },
-    ],
-    side: [
-      { label: '카페 안쪽', tone: 'window', x: 0, y: 0, width: 960, height: 398 },
-      { label: '숙인 나', tone: 'mine', round: true, x: 0, y: 290, width: 180, height: 130 },
-      { label: '옆자리 사람', tone: 'theirs', round: true, x: 826, y: 150, width: 134, height: 250 },
-      { label: '', tone: 'table', x: 0, y: 400, width: 960, height: 50 },
-      { label: '창틀 (앞쪽)', tone: 'window', x: 0, y: 450, width: 960, height: 90 },
-    ],
-  };
   const INSERT_OFFSET = 14;
   const TOP_LIFT = 14;
 
@@ -247,7 +227,7 @@
       return;
     }
     container.innerHTML = layout.map((item) => {
-      const round = item.round ? ' gbox-round' : '';
+      const round = item.shape === 'rect' ? '' : ' gbox-round';
       const style = `left: ${item.x}px; top: ${item.y}px; width: ${item.width}px; height: ${item.height}px;`;
       return `<div class="placed" style="${style}"><div class="gbox gbox-${item.tone}${round}"><span>${item.label}</span></div></div>`;
     }).join('');
@@ -1030,8 +1010,8 @@
   }
 
   function init() {
-    buildBackdrop(ui.topView, 'scene-top', BACKDROP_LAYOUT.top);
-    buildBackdrop(ui.sideView, 'scene-side', BACKDROP_LAYOUT.side);
+    buildBackdrop(ui.topView, 'scene-top', LAYOUT.top.boxes);
+    buildBackdrop(ui.sideView, 'scene-side', LAYOUT.side.boxes);
     const finger = Assets.file('ui-finger') ? Assets.html('ui-finger') : '<div class="finger-default"></div>';
     ui.finger.querySelector('.finger-art').innerHTML = finger;
     bindEvents();

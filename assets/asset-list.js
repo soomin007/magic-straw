@@ -13,7 +13,7 @@
   const ASSET_LIST = [
     // 1차: 살짝 기울인 탑뷰로 1~6번 판을 플레이하는 데 필요한 그림
     { batch: 1, key: 'scene-top', path: 'assets/scene/top.png', width: 1920, height: 1080, refs: SCENE_REFS,
-      subject: '1챕터 판 배경. 스타벅스를 떠올리게 하는 카공 카페의 창가 바 좌석을 창 밖에서 들여다본 장면. 두 사람은 바 건너편에서 얼굴이 보이고, 창틀은 화면 아래 앞쪽에 있다. 배치는 docs/art-brief.md의 "판 배경 배치" 표를 따른다' },
+      subject: '1챕터 판 배경. 스타벅스를 떠올리게 하는 카공 카페의 창가 바 좌석을 창 밖에서 들여다본 장면. 두 사람은 바 건너편에서 얼굴이 보이고, 창틀은 화면 아래 앞쪽에 있다. 배치와 크기는 docs/art-brief.md의 "실제 크기 기준"과 "판 배경 배치" 표, 구도는 docs/layout-guide/scene-top.png를 따른다' },
     { batch: 1, key: 'piece-top-my-plug', path: 'assets/piece/top-my-plug.png', width: 512, height: 512, refs: PIECE_REFS,
       subject: '내 노트북 충전기의 한국 220V 벽 플러그. 둥근 원통형 민트색 머리, 둥근 금속 핀 두 개가 오른쪽을 향하고, 굵은 전선이 왼쪽 가장자리에서 잘린다' },
     { batch: 1, key: 'piece-top-their-plug', path: 'assets/piece/top-their-plug.png', width: 512, height: 512, refs: PIECE_REFS,
@@ -41,7 +41,7 @@
 
     // 2차: 숙이기(바 높이에서 앞으로 본 단면) 시점. 7, 8번 판에 쓴다.
     { batch: 2, key: 'scene-side', path: 'assets/scene/side.png', width: 1920, height: 1080, refs: SCENE_REFS,
-      subject: '바 높이로 숙여서 본 장면. 바 앞 가장자리가 눈높이에 걸리고, 그 너머로 카페 안쪽과 앉아 있는 옆자리 사람이 보인다. 창틀은 화면 아래 앞쪽. 배치는 docs/art-brief.md의 "숙이기 배경 배치" 표를 따른다' },
+      subject: '바 높이로 숙여서 본 장면. 바 앞 가장자리가 눈높이에 걸리고, 그 너머로 카페 안쪽과 앉아 있는 옆자리 사람이 보인다. 창틀은 화면 아래 앞쪽. 배치와 크기는 docs/art-brief.md의 "실제 크기 기준"과 "숙이기 배경 배치" 표, 구도는 docs/layout-guide/scene-side.png를 따른다' },
     { batch: 2, key: 'piece-side-my-plug', path: 'assets/piece/side-my-plug.png', width: 512, height: 512, refs: PIECE_REFS,
       subject: '내 민트색 플러그를 바 높이에서 정면으로 본 모습. 핀이 오른쪽을 향하고, 그림 아래쪽에 바닥에 닿게 놓인다' },
     { batch: 2, key: 'piece-side-their-plug', path: 'assets/piece/side-their-plug.png', width: 512, height: 512, refs: PIECE_REFS,

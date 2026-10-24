@@ -143,15 +143,16 @@
     <div id="batches"></div>
   </main>
 
+  <script src="../src/layout.js"></script>
   <script src="../src/engine.js"></script>
   <script src="../src/levels.js"></script>
   <script src="../assets/asset-list.js"></script>
   <script src="../assets/manifest.js"></script>
   <script>
-    const CELL = 88;
-    const GRID_LEFT = 190;
-    const GRID_TOP = 200;
-    const ROW_HEIGHT = 60;
+    const CELL = window.SCENE_LAYOUT.scale.cellWidthPx;
+    const GRID_LEFT = window.SCENE_LAYOUT.top.gridLeft;
+    const GRID_TOP = window.SCENE_LAYOUT.top.gridTop;
+    const ROW_HEIGHT = window.SCENE_LAYOUT.scale.rowHeightPx;
     const manifest = window.ASSET_MANIFEST || {};
     const assetsByKey = Object.fromEntries(window.ASSET_LIST.map((asset) => [asset.key, asset]));
     const scene = document.getElementById('scene');
@@ -174,10 +175,8 @@
     }
 
     // 1챕터 창가 바 배치. 판 배경 그림이 없으면 게임과 같은 자리에 이름 상자를 놓는다.
-    const BACKDROP = [
-      ['카페 안쪽', 0, 0, 960, 175], ['나 (얼굴)', 30, 6, 220, 190], ['옆자리 사람 (얼굴)', 720, 6, 230, 190], ['', 0, 170, 960, 232],
-      ['내 랩탑', 66, 150, 118, 100], ['상대 랩탑', 830, 150, 112, 100], ['내 음료', 86, 286, 70, 72], ['창틀 (앞쪽)', 0, 410, 960, 130],
-    ];
+    // 배치는 게임과 같은 src/layout.js를 쓴다.
+    const BACKDROP = window.SCENE_LAYOUT.top.boxes.map((box) => [box.label, box.x, box.y, box.width, box.height]);
 
     function buildScene() {
       const level = Engine.parseLevel(LEVEL_DEFINITIONS.find((definition) => definition.id === 'order'));

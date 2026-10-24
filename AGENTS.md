@@ -26,6 +26,8 @@ Claude Code가 그 파일들을 검토하고, 공개해도 되는 것만 골라 
 그림체는 2차 그림체 시험(`docs/style-test.md`, `assets/style-test/r2-*`)으로 정해졌다. 본 그림 작업은 `docs/art-brief.md`를 따르고,
 만들 그림의 목록과 그림마다 넣을 레퍼런스는 `assets/asset-list.js`가 기준이다. `assets/asset-list.js`는 고치지 않는다.
 판 위 물건에 흰 스티커 테두리나 바닥 그림자를 그리지 않는다. 게임 코드가 붙인다.
+배경을 그릴 때는 `docs/art-brief.md`의 "실제 크기 기준" 표와 `docs/layout-guide/`의 배치 안내 그림을 반드시 함께 쓴다.
+크기나 위치가 숫자와 다르게 나오면 그림을 키우거나 줄여 맞추지 말고, 어떤 숫자와 어떻게 다른지 세션 로그에 적어 Claude Code에게 넘긴다.
 범위는 그림 파일 만들기, `assets/manifest.js`에 등록하기, `docs/art-check.html`로 확인하기, `assets/generation.json`에 생성 지시문 남기기까지다.
 `generation.json`에는 원본 이미지의 로컬 경로(`C:\Users\...`)를 적지 않는다. 이 저장소는 공개 저장소다.
 그림 때문에 코드를 바꿔야 할 것 같으면 고치지 말고, 이유를 세션 로그에 남겨 Claude Code에게 넘긴다.
