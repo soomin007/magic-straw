@@ -29,6 +29,7 @@
   // 꽂힌 플러그는 칸막이 바로 왼쪽 칸에 있다. 칸막이 칸의 왼쪽 29px(4cm)이 칸막이 판이고 콘센트는 그 왼쪽 면에 붙어 있어서,
   // 플러그를 오른쪽으로 14px 밀어 핀 끝이 콘센트에 박히게 놓는다.
   const INSERT_OFFSET = 14;
+  const PARTITION_BRIDGE = 10;
   const TOP_LIFT = 26;
 
   const PIECE_MOVE_MS = 260;
@@ -294,6 +295,18 @@
       segment.style.height = `${lineHeight}px`;
       segment.innerHTML = Assets.html(outletKey(isTop ? 'top' : 'side', row, z));
       ui.divider.appendChild(segment);
+    }
+    // 판 배경의 칸막이(퍼즐 판 뒤쪽 부분)는 퍼즐 판 위 끝보다 약 10px 위에서 끝난다(2026-10-25 그림 실측).
+    // 첫 칸 그림의 윗부분을 그 틈에 이어 붙여 칸막이가 끊기지 않게 한다. 칸 그림은 위아래로 이어지게 그려져 있다.
+    const bridgeArt = isTop && Assets.file(outletKey('top', 0, 0));
+    if (bridgeArt) {
+      const bridge = document.createElement('div');
+      bridge.className = 'divider-bridge';
+      bridge.style.top = `${-PARTITION_BRIDGE}px`;
+      bridge.style.height = `${PARTITION_BRIDGE}px`;
+      bridge.style.backgroundImage = `url("${bridgeArt}")`;
+      bridge.style.backgroundSize = `${CELL}px ${ROW_HEIGHT}px`;
+      ui.divider.appendChild(bridge);
     }
 
     for (const element of game.pieceElements.values()) element.remove();

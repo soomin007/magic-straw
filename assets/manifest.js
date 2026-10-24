@@ -5,6 +5,11 @@
 //
 // 예: 'piece-top-my-plug': 'assets/piece/top-my-plug.png',
 window.ASSET_MANIFEST = {
+  'outlet-side-free': 'assets/outlet/side-free.png',
+  'outlet-side-taken': 'assets/outlet/side-taken.png',
+  'outlet-side-cap': 'assets/outlet/side-cap.png',
+  'outlet-top-free': 'assets/outlet/top-free.png',
+  'outlet-top-taken': 'assets/outlet/top-taken.png',
   'portrait-me': 'assets/portrait/me.png',
   'portrait-me-determined': 'assets/portrait/me-determined.png',
   'portrait-neighbor': 'assets/portrait/neighbor.png',
@@ -13,6 +18,7 @@ window.ASSET_MANIFEST = {
   'story-3': 'assets/story/3.png',
   'story-4': 'assets/story/4.png',
   'story-5': 'assets/story/5.png',
+  'story-6': 'assets/story/6.png',
   'scene-side': 'assets/scene/side.png',
   'piece-side-my-plug': 'assets/piece/side-my-plug.png',
   'piece-side-their-plug': 'assets/piece/side-their-plug.png',

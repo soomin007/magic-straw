@@ -2889,6 +2889,1200 @@
         },
         "status": "Generated and registered for user/Claude review. Numeric layout deviations remain listed above. No commit or push."
       }
+    },
+    {
+      "date": "2026-10-25",
+      "tool": "built-in image_gen",
+      "scope": "Requested feedback redraw of ten assets, nine replacements and new story-6. No source or asset-list edits. No commit.",
+      "sourceOfTruth": [
+        "AGENTS.md",
+        "docs/art-brief.md",
+        "docs/layout-guide/scene-top.png",
+        "docs/layout-guide/scene-side.png",
+        "src/story.js"
+      ],
+      "priorityResolution": "Latest user request and art brief override stale asset-list outlet subjects that still specify right 25 percent and 3 cm. Divider is left 33 percent and 4 cm thick.",
+      "processingPolicy": "Only whole-canvas export resize, PNG text metadata removal, alpha-edge cleanup, and previously authorized exterior outline reinforcement on the divider silhouette. No individual background element moved, rescaled, or redrawn with code.",
+      "assets": [
+        {
+          "key": "scene-top",
+          "file": "assets/scene/top.png",
+          "width": 1920,
+          "height": 1080,
+          "selectedCandidate": "scene-top-join",
+          "processing": {
+            "exportSize": [
+              1920,
+              1080
+            ],
+            "individualElementTransform": false,
+            "externalInkRadius": 0
+          },
+          "generationSteps": [
+            {
+              "candidate": "scene-top",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nUse case: illustration-story. Opaque1920x1080 game background,16:9. Image1 is the AUTHORITATIVE NEW LAYOUT GUIDE. Replace its colored blocks with finished art at the same sizes and positions, erase all hatching/grid. Image2 is the two original scene style sources; image3 the existing puzzle objects; image4 the approved r2 character pair; image5 the previous cafe artwork for STYLE AND IDENTITY ONLY, not old straw, cup or positions.\nCamera outside a Korean cafe window looking inward over a narrow light-wood bar, slightly tilted top-down, not isometric. Faces look toward us, laptop LID BACKS toward us. Deep-green foreground window sill and pendant lights. Natural thinner outlines than puzzle objects, no extra heavy halo on people.\nWHY the new layout matters: Player must look like an ordinary student HOLDING a drink and sipping through ONE SHORT STRAIGHT straw. The cup must be clearly visible beside the laptop, NOT hidden by it. Divider is a LOW PANEL marking the shared boundary between two adjacent seats, not the neighbor's private power post.\nFollow guide exactly, full-art pixels:\nPlayer shoulder44cm=646px, head16x23cm=232x288px. Head in x284-516,y86-374. Mint hoodie torso x76-724,y340-604, upright straight back, relaxed low shoulders, neck and shoulder line clearly visible. Tired ordinary adult student with the same black messy hair.\nPlayer laptop31cm=454px wide, at x60-514,y376-580, plain mint square sticker. Keep face clear.\nPlayer holds ONE iced-coffee plastic CUP in their RIGHT HAND beside the laptop on SCREEN-RIGHT, box x540-660,y384-548. Cup8cmwide/15cmtall,120x164px in this projection; clear lid, plain sleeve, NO writing. Hand visibly wraps around the cup, wrist lifted, cup bottom above the bar so it cannot read as resting on wood. Arm can reach gently across body. Exactly ONE STRAIGHT ordinary green straw emerges8cm above lid, roughly80-90px visible, tilting directly up-left from cup to lips near x524,y300. NO bends, elbows, zigzags, extension tubes, extra sticks or disconnected mouth straw. No cup sits anywhere on the tabletop.\nNeighbor head x1732-1964,y86-374; torso x1524-2172,y340-604, cropped by RIGHT edge, black hair and white headphones, brick-red hoodie. Keep neighbor entirely RIGHT of divider, upright with visible neck. Their laptop back x1628-2082,y376-580, brick-red square sticker, cropped right.\nDraw only the REAR22cm portion of a low PALE GRAY-GREEN divider in x1436-1494,y380-600, exactly58px thick (4cm), its long direction runs front-to-back down the bar. A thin flat panel, not a square pillar, no dark green post trim. No sockets in this rear segment. Leave lower boundary open for game tiles to continue from y600.\nWood tabletop y460-960, front wood band y960-1012, dark-green window sill y1012-1080. Keep the guide's empty puzzle rectangle x380-1436,y600-960 EMPTY WOOD with quiet grain only. Keep x1436-1612,y600-960 also EMPTY WOOD: game adds front divider tiles separately. NO fixed cups, cables, books, hands, furniture silhouettes or outlets in either empty rectangle. Do not enlarge the bar or shrink humans to make extra space. Real scale: cell12cm=176pxwide,bar58cmdepth.",
+              "references": [
+                "docs/layout-guide/scene-top.png",
+                {
+                  "contactSheet": "scene-source-reference-sheet.png",
+                  "files": [
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/view-dontstarve-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                "assets/scene/top.png"
+              ]
+            },
+            {
+              "candidate": "scene-top-straight",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nEdit target image1. Image2 is the authoritative NEW layout guide, images3-5 original scene source sheet, current game pieces and approved r2 identities. Keep the same art, faces, clothing, light and empty puzzle space. Correct the drinking pose ONLY: ERASE every existing green straw segment. Hold the cup slightly HIGHER and closer to the mouth, so a SINGLE SHORT COMPLETELY STRAIGHT green straw travels diagonally in one direct line from the cup lid to the lips. It must have NO angle joint, no elbow, no accordion bend and no curved segment. Exactly one straight rigid drinking tube, ordinary8cm above lid, not an extension pipe. Player clearly grips the cup in their RIGHT HAND; cup sits on SCREEN-RIGHT of laptop, with its base lifted visibly above wood. Put cup at guide x28-34%,y36-51%, lips near27%,y28%. Keep a clear neck and relaxed shoulders. Leave no cup on the table. Do not hide cup behind laptop.\nThe back divider panel should continue down to exactly y55.56% (600px in1080 image), matching the empty game's divider zone below, with NO horizontal border sealing that join. Keep the thin pale gray-green panel leftedge74.8%,rightedge77.8%. It is a rear section of a low shared divider, not a pillar. Do not add any divider in y55.56-89%. No other changes.",
+              "references": [
+                {
+                  "generatedCandidate": "scene-top"
+                },
+                "docs/layout-guide/scene-top.png",
+                {
+                  "contactSheet": "scene-source-reference-sheet.png",
+                  "files": [
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/view-dontstarve-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "candidate": "scene-top-cup-fit",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nEdit target1, preserving the straight-straw drinking pose and everything else. Image2is the authoritative layoutguide;3originalscenerefs;4existingpieces;5r2identities.\nCorrect ONLY the player's cup/hand placement and rear divider join. Keep exactlyONE straight green straw, no bend. Lower the held cup so its LID isatfullimagey35.6% (384pxin1080) and its BOTTOMy50.7%(548px). Cup spansx28.1-34.4% (540-660pxof1920). The right hand grips the cup naturally in that place. The short straight ordinary straw continues directly from lidtoalreadyexistinglips with nojoint. Visibleportionis8cm,roughly85-95pxon1080height. Cup stays fullyonSCREEN-RIGHToflaptop,notbehindit,andclearlyoffthewood. Donotmoveorrescaleheadorbody. This ordinary drink mustbevisible.\nExtend the lower edge of the rear palegray-green divider fromitscurrent54% toEXACTLY55.56%imageheight (600px),onx74.8-77.8%, maintainingthe same58pxwidth. No blackhorizontalendlineatthejoin. Nootherchanges.",
+              "references": [
+                {
+                  "generatedCandidate": "scene-top-straight"
+                },
+                "docs/layout-guide/scene-top.png",
+                {
+                  "contactSheet": "scene-source-reference-sheet.png",
+                  "files": [
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/view-dontstarve-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "candidate": "scene-top-join",
+              "selected": true,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nPrecise object edit of image1 ONLY, a1920x1080cafe backdrop. Image2 exactlayoutguide,image3 screenshotofgameintegrationforDIAGNOSISONLY,image4originalsceneartrefs,image5r2characterpair. Do NOT draw screenshotUI or gamepieces into the background.\nThere is a VISIBLE GAP between the rear divider in this background and the front divider tiles shown in screenshot3. Fix only that gap by extending the BOTTOM END of the existing palegray-greenrear divider DOWN about19pixels, fromy581toEXACTLYy600 in image1's1920x1080coordinates. Keep its left/rightedgesfixednearx1436and1494, same58pxwidth, samecolorsandtopedge. The extended segment is part of the SAME continuous flat divider, not a new post or base. Remove horizontalblackendlineaty581. Atnewbottomy600,theleftandrightsideedgescontinueoffthisrearsegment; do notdrawanendcaporhorizontalbottomline. Image2'srear gray-green rectangle endsat theupperedgeofthebluegame-tilezone, exactlyy600. Matchthatjoin.\nDo not change cup, hand, straightstraw, faces,laptops,barboundaries,woodtexture,scaleoranythingelse. Leave ALL ofx1436-1612,y600-960 emptywood becausegameoverlaysfronttiles. Purpose:oneunbrokenlowseatboundaryacrossthebar,not twoseparatepowerposts.",
+              "references": [
+                "assets/scene/top.png",
+                "docs/layout-guide/scene-top.png",
+                {
+                  "diagnosticReference": "index.html screenshot showing the background and foreground divider join"
+                },
+                {
+                  "contactSheet": "scene-source-reference-sheet.png",
+                  "files": [
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/view-dontstarve-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "verification": {
+            "size": [
+              1920,
+              1080
+            ],
+            "mode": "RGB",
+            "textMetadata": []
+          }
+        },
+        {
+          "key": "outlet-top-free",
+          "file": "assets/outlet/top-free.png",
+          "width": 264,
+          "height": 180,
+          "selectedCandidate": "outlet-top-guide-fit",
+          "processing": {
+            "exportSize": [
+              264,
+              180
+            ],
+            "individualElementTransform": false,
+            "bodyBefore": [
+              0,
+              84
+            ],
+            "nativeBorderSample": 6,
+            "externalInkRadius": 2,
+            "inkColor": "#111111",
+            "onlyDividerSilhouetteReinforced": true,
+            "edgeSpans": [
+              [
+                0,
+                85
+              ],
+              [
+                0,
+                85
+              ]
+            ]
+          },
+          "generationSteps": [
+            {
+              "candidate": "outlet-top-free",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nUse case: illustration-story. ONE transparent264x180 LANDSCAPE tile for a LOW SHARED SEAT DIVIDER, slightly tilted top-down with LEFT face visible. Input1 contains all3 original object style references, input2 existing puzzle objects, input3 approved r2 character pair. Match them.\nNOT a narrow power post, NOT a freestanding pillar: this tile is a short12cm-depth slice of a continuous36cm-high pale GRAY-GREEN flat divider panel running front-to-back across a58cm-deep bar. The game tiles3 copies vertically to form the boundary between seats. Canvas top/bottom cross-sections MUST match seamlessly, so no top or bottom end cap, base, horizontal framing or ground shadow.\nCritical normalized layout: panel fills only x0-33% of full canvas, y0-100%; remaining x33-100% is FULLY TRANSPARENT. Plate and ALL socket parts also stay in x0-33%. At264x180 this means panel x0-87px. No left margin: panel's left ink edge touches x0. Keep panel at constant width through first/last rows. Near-black crisp exterior ink8-10% of PANEL BODY's87px width, about7-9px, not8% of whole canvas. No white sticker border.\nMake a LARGE clearly recognizable KOREAN220V recessed outlet plate on the LEFT-facing panel surface. It is a vertical elongated white/ivory OVAL due to viewing angle, centered at x42px,y90px, width about56px,height113px (62.5% of tile180px, allowed108-117px). Exactly TWO round DARK HOLES, each diameterat least22px (12%tileheight), vertically separated enough to read as a plug target. No US slots, no flat pins, no power symbols or letters. White recessed bowl and two black circular holes must be legible at the actual88x60 game size.\nWHY: the player should immediately see \"plug here\". Moving plug tips enter14 gamepixels into this tile, landing near x42px in export, so socket must remain on the LEFT, never drift to right. Plain empty socket, no plug or cable. No tabletop, no ground shadow, no frame around the tile.",
+              "references": [
+                {
+                  "contactSheet": "piece-source-reference-sheet.png",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "candidate": "outlet-top-single",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nEdit target image1. References2-4 are the original object source sheet, existing puzzle objects and approved r2 character pair. Keep the pale GRAY-GREEN PANEL at exactly x0-33% of the264x180 LANDSCAPE canvas, y0-100%. Remaining right67% transparent. This is a TILE cut from a continuing low divider, not a complete power strip.\nThe current candidate incorrectly has TWO sockets and FOUR black holes. Replace the ENTIRE white double-socket plate with exactly ONE OVAL SOCKET PLATE, ONE recessed oval cavity and exactly TWO black circular holes TOTAL. No duplicate cavity, no double socket, no USB slot. Plate at full-canvas x5-27%,y18-82%: center x16%,y50%, width22%,height64% (115px). It faces LEFT toward incoming plug and stays wholly within left33% panel. The TWO holes are each22-24px diameter and their centers can be at x16%,y40% andx16%,y60%, vertically aligned. No other black circles. It must be immediately recognizable as one Korean220V outlet at88x60 game size.\nRemove the diagonal TOP END CAP entirely. The panel continues past BOTH top and bottom crop, same width and cross-section in first and last pixel rows; no visible top or bottom edge in this tile. Flat vertical panel strip with thin black side edge, not standing product photo. Use near-black exterior stroke7-9px on264px export, crisp not blurred. No white sticker outline, no shadow, no background.",
+              "references": [
+                {
+                  "generatedCandidate": "outlet-top-free"
+                },
+                {
+                  "contactSheet": "piece-source-reference-sheet.png",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "candidate": "outlet-top-guide-fit",
+              "selected": true,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nDraw a finished transparent264x180 LANDSCAPE game tile. Input1 is an exact GEOMETRY GUIDE ONLY: panel left33%,singleplateheight64%,two holes each12.4%canvasheight. Keep these proportions and positions exactly, but replace plain geometry with the art style from images2-5. Image2 is the current socket artwork for material style only;3 all original object references;4 existing puzzle pieces;5 approved r2 pair.\nThe previous art's socket plate is too tall and holes too small. Redraw it to match guide1: ONE pale gray-green flat divider strip touchesLEFTedge andcontinuesoffTOP/BOTTOM, x0-33%. Right67% truly transparent. ONE ivory recessed Korean220V socket plate centeredatx16%,y50%,width22%,height64%ofTOTALcanvas. ExactlyTWO large very dark round holes, vertically aligned, eachdiameter12.4%oftotalimageheight, centersat40%and60%height. TwoholesTOTAL,onecavity. Do notaddanotheroutletorUSslots. Natural cartoon shading and ink matchrefs, notphotographic,not3D. Crisp#111outerborder8-10%ofpanel'swidth. Noendcaps,nohorizontaltop/bottomborders,matchingtop/bottomcrosssection. No plug,cable,table,groundshadow or white sticker rim.\nPurpose: a clear large shared outlet target, whose left-positionedholes meet the inserted plug tips.",
+              "references": [
+                {
+                  "geometryReference": "outlet-top-guide.png",
+                  "description": "Mechanical diagram for left 33 percent divider and plate dimensions."
+                },
+                {
+                  "generatedCandidate": "outlet-top-single"
+                },
+                {
+                  "contactSheet": "piece-source-reference-sheet.png",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "verification": {
+            "size": [
+              264,
+              180
+            ],
+            "mode": "RGBA",
+            "textMetadata": []
+          }
+        },
+        {
+          "key": "outlet-top-taken",
+          "file": "assets/outlet/top-taken.png",
+          "width": 264,
+          "height": 180,
+          "selectedCandidate": "outlet-top-two-pin",
+          "processing": {
+            "exportSize": [
+              264,
+              180
+            ],
+            "individualElementTransform": false,
+            "bodyBefore": [
+              0,
+              84
+            ],
+            "nativeBorderSample": 6,
+            "externalInkRadius": 2,
+            "inkColor": "#111111",
+            "onlyDividerSilhouetteReinforced": true,
+            "edgeSpans": [
+              [
+                0,
+                85
+              ],
+              [
+                0,
+                85
+              ]
+            ]
+          },
+          "generationSteps": [
+            {
+              "candidate": "outlet-top-taken",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nEdit target1 to produce the OCCUPIED version of this exact low-divider tile. Reference2 is geometry guide,3 all original object refs,4 currentgamepieces,5r2pair. Keep panel, left33% placement, large ONE220Voval socket, ink style and top/bottom continuation identical.264x180transparentlandscape.\nAdd one SMALL LOW-PROFILE NEUTRALGRAY ROUND CONNECTOR plugged into this socket, a thin GRAY cable exiting RIGHT to one small flat WHITE/GRAY POWER BANK atx55-85%,y65-90%canvas. The powerbank is a slim rounded slab, NOT a chunky square phone adapter. Draw its details with thinner lines than movable puzzlepieces. Other devices may be gray, white and black ONLY: absolutely NO brickred, mint, green, colored LEDs, logos or text. Keep the connector and bank visually subdued against the large white socket target.\nPurpose: the white/gray connected device is FIXED background equipment, visually different from the player's movable mint plug and the one movable brick-red phone charger. It must not be mistaken for that red puzzle plug. No white sticker rim, no ground shadow, no table. Keep column/panel top and bottom rows exactly the same as target1; no endcap.",
+              "references": [
+                {
+                  "generatedCandidate": "outlet-top-guide-fit"
+                },
+                {
+                  "geometryReference": "outlet-top-guide.png",
+                  "description": "Mechanical diagram for left 33 percent divider and plate dimensions."
+                },
+                {
+                  "contactSheet": "piece-source-reference-sheet.png",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "candidate": "outlet-top-two-pin",
+              "selected": true,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nEdit ONLY the gray connector in target1. Image2geometryguide;3originalobjectrefs;4gamepieces;5r2identities. Keep the palegray-green panel, white socket plate, bank, cable route, dimensions, alpha and all other drawing unchanged.\nThe connector is incorrectly inserted into only ONE socket hole, leaving the other hole exposed. A Korean220V plug has TWO pins, so redraw the neutralgray plug as ONE ROUND/OVAL PLUG BASE centered on the WHOLE socket atx16%,y50%. It covers BOTH contact holes simultaneously. The visible base spans roughlyy30-70% oftileheight and x8-26% oftilewidth, large enough that NO black contact hole remains exposed beneath it. A short neutralgray body protrudesright and graycablecontinuesfromitscenter to the samewhitepowerbank. No separate connector ineachhole, no one-pinplug, no exposed lowerhole. Retain white socket rim visible above/below so it still reads as occupied220Vsocket.\nOnly gray,white,black onplug/cable/powerbank, thinlineworkasfixedbackground, nobrickredormint. No text, no white sticker rim, transparent264x180landscape.",
+              "references": [
+                {
+                  "generatedCandidate": "outlet-top-taken"
+                },
+                {
+                  "geometryReference": "outlet-top-guide.png",
+                  "description": "Mechanical diagram for left 33 percent divider and plate dimensions."
+                },
+                {
+                  "contactSheet": "piece-source-reference-sheet.png",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "verification": {
+            "size": [
+              264,
+              180
+            ],
+            "mode": "RGBA",
+            "textMetadata": []
+          }
+        },
+        {
+          "key": "scene-side",
+          "file": "assets/scene/side.png",
+          "width": 1920,
+          "height": 1080,
+          "selectedCandidate": "scene-side-bands",
+          "processing": {
+            "exportSize": [
+              1920,
+              1080
+            ],
+            "individualElementTransform": false,
+            "externalInkRadius": 0
+          },
+          "generationSteps": [
+            {
+              "candidate": "scene-side",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nUse case: illustration-story. Opaque1920x1080 landscape game background. Image1 is the AUTHORITATIVE NEW SIDE LAYOUT GUIDE; replace its colored blocks at the same position and size with finished art, removehatchingandgrid. Image2 originalsceneartreferences,3existingpuzzlepieces,4approvedr2pair,5the NEW TOPSCENE for exact cafe and identity continuity.\nCamera outside the cafe window DUCKED to bar height, orthographicfrontview, nottopdown. Do NOT draw the tabletop plane: horizontal wood bar FRONT starts EXACTLYy800/1080=74.07% of entireimage. Wood front face y800-900, foregrounddarkgreenwindowsill y900-1080. Keep these boundaries fixed; most of the image above iswall, nothugetable. Samewarm Koreanstudy cafe withdarkgreenpendants.\nReserve the entire central rectangle x380-1612,y272-800 as QUIET EMPTY warm wall with soft illumination only. No shelves,chairs,pictures,plants,tableprops,cables,post,partitionoroutlet in this rectangle. Gameoverlaysobjectsandfrontdivider. No drawn grid.\nDuck the mintPLAYER at farLEFT: allhairandhead stay x100-340,y570-800, maxhairright<360. Only hairandEYES peek overthebar, mouth andcuphiddenbelowthebar'stopedge. Do NOT enlargehairinto firstpuzzlecell startingx380. Player still holds thecupbelow sight, not ontable. A shortSTRAIGHT green strawtip pointsRIGHT justabovebar aroundx456,y780; no bends,no disconnectedextrapipe. Singlecontinuousstrawvanishesbehindthebar towardtheheldcup.\nNEIGHBOR at FAR RIGHTofdivider: headx1732-1964,y156-444 andtorsox1568-2088,y444-800, croppedright. Sameblackhair/largewhiteheadphones/brickredhoodie, straightbackandvisibleneckandshoulderline. Do not move neighbor leftintoplayer'sreservedspace. The divider is the shared seatboundary, not the neighbor'spost. DO NOT DRAW the dividerinthissidebackground, tileartwilldrawit. Backgroundoutsidecentralemptyarea cancontainpendantlampsabove25% andcafedetailsnearouteredges. Facesreadclearly, naturalhumanlineweight, thinnerthanpuzzlepieces. Nootherobjects.",
+              "references": [
+                "docs/layout-guide/scene-side.png",
+                {
+                  "contactSheet": "scene-source-reference-sheet.png",
+                  "files": [
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/view-dontstarve-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                "assets/scene/top.png"
+              ]
+            },
+            {
+              "candidate": "scene-side-floor",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nEdit reference1, keepingartstyleandidentities. Reference2isEXACTlayoutguide,3originalsceneartrefs,4gamepiecepalette,5r2characters. Correct bar height and side seating.\nThe current horizontal wood edge is at64% imageheight, but it MUST be at74.07% (y800in1080). Move bar front DOWN by10% ofthefullimageheight. Only the wood FRONT FACE isvisible,y800-900. Darkgreenwindowsill y900-1080. Replace vacatedband y64-74%withblankwarmcafewall, notwood. No tabletop plane atall fromthiseye-levelview.\nLower duckedPLAYER'shead bythe same10% so justhairandeyespeekabovey800. Keep face recognizable. Hair shouldstayLEFT ofx380; ifneededredrawitsoutertuftscompactlywithinguideboxx100-340. Cup remainsheld BELOWbarandHIDDEN. Replace visiblebendygreenstrawfragment withoneSTRAIGHTshortgreenstrawtip pointingrightjustabovethebar, vanishingbehindthebar nearplayer. No detachedextraobject.\nShift the ENTIRE NEIGHBOR RIGHT byabout100pxof1920(5.2%width), withoutshrinking. Theirtorso'sleftedgeaboutx1568andhair/headnearx1732infullart. ThepersonmustbeentirelyRIGHT ofthedividerlineatx1494. Croprightedgeasneeded, donot shrinktosqueezein. Keep neighborheadatcurrentheight,extendbrickhoodietorsodowntonewbarheight, uprightvisibleNECKandshoulderline.\nCentralx380-1612,y272-800blankwallONLY. Remove bookshelfedge,leaf,chairoranyframeenteringthere; onlysofthouselighting. No post,outlets,partition,gridorprops inbackground. Nootherchanges.",
+              "references": [
+                {
+                  "generatedCandidate": "scene-side"
+                },
+                "docs/layout-guide/scene-side.png",
+                {
+                  "contactSheet": "scene-source-reference-sheet.png",
+                  "files": [
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/view-dontstarve-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "candidate": "scene-side-bands",
+              "selected": true,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nEdit ONLY the horizontal foreground bands in target1 and lower the ducked player's head with the bar. Input2is mandatory exactlayoutguide;3originalscenerefs;4existingpieces;5r2characters. Keepthe sameart,pendantsandneighboridentity, no rescalingofpeople.\nThe target1source is1672x941. Use these EXACT SOURCE PIXEL BOUNDARIES:\n- blankwarmwallcontinues down to y697 (74.07%imageheight)\n- ONLYTHINWOODBARFRONT fromy697to784 (74.07-83.33%).\n- DARKGREENWINDOWSILL/FRAME fromy784to941(83.33-100%).\nCurrentwoodstartsaty666andextendsdowntoy859,whichiswrongandtoodeep. Move its TOPboundaryDOWN31sourcepixels to697, and its BOTTOMboundaryUP75sourcepixels to784. Thuswoodbandbecomes87pixelstall,NOT193pixelstall. ItisVERTICALBARFRONT,notatabletopview,soavoiddepthgrainorperspectivecastshadows. Fillvacatedupperstripy666-697withblankwall,andlowery784-859withdarkgreenwindowsill.\nLower the duckedmintplayerheadandstraightstrawby31sourcepixelssoeyesstillpeekabovenewy697edge,mouthandheldcuphidden. Keep headsize, donotdrawcupontable. KeeponeSTRAIGHTshortgreenstrawtip,nobend.\nNeighbor shouldremainrightoftheshareddividerline. Croprightedgeasneeded; donotextendnewbodypartsleftofx82%imagewidth. Keepupperneckvisible,andextendtorsoonlydowntonewbarline.\nOutputfull1920x108016:9. Nootherchanges,noobjectsinthecentralwallspace,nohatchingorgrid.",
+              "references": [
+                {
+                  "generatedCandidate": "scene-side-floor"
+                },
+                "docs/layout-guide/scene-side.png",
+                {
+                  "contactSheet": "scene-source-reference-sheet.png",
+                  "files": [
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/view-dontstarve-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "verification": {
+            "size": [
+              1920,
+              1080
+            ],
+            "mode": "RGB",
+            "textMetadata": []
+          }
+        },
+        {
+          "key": "outlet-side-free",
+          "file": "assets/outlet/side-free.png",
+          "width": 256,
+          "height": 256,
+          "selectedCandidate": "outlet-side-free",
+          "processing": {
+            "exportSize": [
+              256,
+              256
+            ],
+            "individualElementTransform": false,
+            "bodyBefore": [
+              3,
+              80
+            ],
+            "nativeBorderSample": 4,
+            "externalInkRadius": 3.5,
+            "inkColor": "#111111",
+            "onlyDividerSilhouetteReinforced": true,
+            "edgeSpans": [
+              [
+                0,
+                83
+              ],
+              [
+                0,
+                83
+              ]
+            ]
+          },
+          "generationSteps": [
+            {
+              "candidate": "outlet-side-free",
+              "selected": true,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nDraw ONE transparent256x256 SQUARE tile, EYE-LEVEL FRONT VIEW atbarheight. Image1 is exact geometryguide, NOTstyle: panelleft33%,ONEplateheight64%,TWOholesdiameter12.4%canvasheight. Image2 is finishedtopviewfreeoutlet forsamematerials,3alloriginalobjectrefs,4existinggamepieces,5approvedr2pair.\nSubject: a12cm-high slice of a36cm-high LOW PALE GRAY-GREEN SHARED SEAT DIVIDER. Itis a continuousflatpanel spanningthefullbar depth, NOTa narrowpowerpost. Inthissideview itsendprofileoccupies x0-33%,y0-100%; theRIGHT67%isfullyTRANSPARENT. Panel touchesleftcanvasedgeandcontinuesbeyondtop/bottomcrop with IDENTICALfirst/lastpixelrowcrosssection. Noendcaps,no horizontalbottom/toprim,nofootorbase.\nONE LARGE WHITE/IVORY OVAL KOREAN220Vsocketplate on LEFT-facingpanelsurface. Centerx16%,y50%,width22%ofcanvas,height64% (164px,allowed154-166px). ONErecessedcavity,exactlyTWO ROUND BLACKholes total, verticallyaligned. Eachhole is32pxdiameter, centersy40%and60%,x16%. NevertwosocketsorUSslots. Targetingholesmustbeobviousat88x88gamesize. Allsocketpartsremaininleft33%; nothingcanmoveright.\nCrispnearblackexterioroutline8-10%ofPANELBODYwidth85px,about7-8px at256export. Shadingmatchesrefsnot3Drender. No white sticker rim, no shadow, no tabletop, no plug,cable,lettersornumbers. Purpose: immediatelyreadable shared outlet targetthat meetsplugpinsfromtheleft.",
+              "references": [
+                {
+                  "geometryReference": "outlet-side-guide.png",
+                  "description": "Mechanical diagram for left 33 percent divider and plate dimensions."
+                },
+                "assets/outlet/top-free.png",
+                {
+                  "contactSheet": "piece-source-reference-sheet.png",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "verification": {
+            "size": [
+              256,
+              256
+            ],
+            "mode": "RGBA",
+            "textMetadata": []
+          }
+        },
+        {
+          "key": "outlet-side-taken",
+          "file": "assets/outlet/side-taken.png",
+          "width": 256,
+          "height": 256,
+          "selectedCandidate": "outlet-side-taken",
+          "processing": {
+            "exportSize": [
+              256,
+              256
+            ],
+            "individualElementTransform": false,
+            "bodyBefore": [
+              3,
+              80
+            ],
+            "nativeBorderSample": 4,
+            "externalInkRadius": 3.5,
+            "inkColor": "#111111",
+            "onlyDividerSilhouetteReinforced": true,
+            "edgeSpans": [
+              [
+                0,
+                83
+              ],
+              [
+                0,
+                83
+              ]
+            ]
+          },
+          "generationSteps": [
+            {
+              "candidate": "outlet-side-taken",
+              "selected": true,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nEdit target1 to occupied version of the EXACT SAME transparent256x256low shared-divider tile. Reference2 is geometryguide,3originalobjectrefs,4gamepieces,5r2pair.\nKeep panel left0-33%,largeONEwhiteKorean220Vplate,height60-65%ofthecanvas,artstyleandtop/bottomcrosssection identical. Add ONE ROUND OVAL NEUTRALGRAY TWO-PINPLUG BASE centeredoverWHOLEsocketatx16%,y50%, coveringBOTHblackholes simultaneously. Neverinsertintojustonehole, no exposedlowerhole. Baseabouty30-70%,x8-26%, whiteplatestillvisibleabove/below. A shortgrayconnectorbodyexitstoRIGHT;thingraycableleadstoSMALLWHITE/GRAYFLATPOWERBANK atx55-85%,y65-90%. Samefixedgraywhitepowerbankasfinishedtop tile, thinlinework,nobrightcolors.\nDevice,cableandconnector GRAY/WHITE/BLACKONLY. Absolutelyno brickred,mint,green,redLEDsortext. Purpose:fixedotherdeviceclearlydifferentfrommovablebrick-redsquarecharger. Noprotrudingpins,nofloatingdisconnectedwire,nogroundshadow,nowhitestickerrim,nosurfacebackground. Do notdrawcompletepillarorbase;dividercontinuespasttop/bottomcrop.",
+              "references": [
+                {
+                  "generatedCandidate": "outlet-side-free"
+                },
+                {
+                  "geometryReference": "outlet-side-guide.png",
+                  "description": "Mechanical diagram for left 33 percent divider and plate dimensions."
+                },
+                {
+                  "contactSheet": "piece-source-reference-sheet.png",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "verification": {
+            "size": [
+              256,
+              256
+            ],
+            "mode": "RGBA",
+            "textMetadata": []
+          }
+        },
+        {
+          "key": "outlet-side-cap",
+          "file": "assets/outlet/side-cap.png",
+          "width": 256,
+          "height": 256,
+          "selectedCandidate": "outlet-side-cap",
+          "processing": {
+            "exportSize": [
+              256,
+              256
+            ],
+            "individualElementTransform": false,
+            "bodyBefore": [
+              2,
+              85
+            ],
+            "nativeBorderSample": 5,
+            "externalInkRadius": 3,
+            "inkColor": "#111111",
+            "onlyDividerSilhouetteReinforced": true,
+            "edgeSpans": [
+              null,
+              [
+                0,
+                87
+              ]
+            ]
+          },
+          "generationSteps": [
+            {
+              "candidate": "outlet-side-cap",
+              "selected": true,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nEdit target1 to the TOP CAP TILE of the SAME LOW FLAT PALE GRAY-GREEN SEAT DIVIDER.256x256transparent. Reference2geometryguide(forleft33%bodyposition),3originalobjectrefs,4gamepieces,5r2pair.\nREMOVE the entire white socketplate,cavityandallblackholes, leavingplainuninterruptedgray-greenpanel. Nooutlet,noplug,nocable,nobank. Panelstilloccupiesx0-33%,theRIGHT67%mustbeEMPTYTRANSPARENT. Thepanel'sloweredgecontinuesoffbottomwithsamewidthandcrosssectionastarget1. Show the thin4cm-thick upperedgeofthisflatdividernear y8-15% ofcanvas;abovetopedgeistransparent. Itis theupperendofa36cm-highlowdeskdivider, NOTa tallpost,NOTroundcap,NOTthickdecorativecornice. Eye-levelfrontviewwithjustasmallglimpseoftopedge,notisometric.\nKeepsamepaletteandcrispdarkexterior8-10%ofpanelbodywidth. No white sticker border,nodropshadow,notabletop,nootherobject. Thiscapwillstackdirectlyabovetwo sockettileswithitsbottommatchingtheirsides.",
+              "references": [
+                {
+                  "generatedCandidate": "outlet-side-free"
+                },
+                {
+                  "geometryReference": "outlet-side-guide.png",
+                  "description": "Mechanical diagram for left 33 percent divider and plate dimensions."
+                },
+                {
+                  "contactSheet": "piece-source-reference-sheet.png",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "verification": {
+            "size": [
+              256,
+              256
+            ],
+            "mode": "RGBA",
+            "textMetadata": []
+          }
+        },
+        {
+          "key": "story-4",
+          "file": "assets/story/4.png",
+          "width": 1600,
+          "height": 1200,
+          "selectedCandidate": "story-4",
+          "processing": {
+            "exportSize": [
+              1600,
+              1200
+            ],
+            "individualElementTransform": false,
+            "externalInkRadius": 0
+          },
+          "generationSteps": [
+            {
+              "candidate": "story-4",
+              "selected": true,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nUse case: illustration-story. Edit target1, keepthewordlesscomicart,faces,clothing,cafe,raisedhandandredemptybatterywarning. References2-5 are all4originalportraitstyles,existingpieces,approvedr2pair,andnewtopbackground.\nPRIMARY CORRECTION: the WALLCLOCK atupperRIGHT mustclearlyshowTWO O'CLOCK atnight. ONE LONG MINUTEHAND pointsSTRAIGHTUP to12. ONE SHORT HOURHAND pointsUP-RIGHT at60degreesclockwise from12 to2. Onlytwohands. NO handpointingleft,to9,orhorizontally. No numeralsorlettersontheclockface,onlytickmarks. Keepnightwindowdark. Purpose: exam-eve urgencyat2AM,not9PM.\nSECOND consistencycorrection: replaceoldcreamPOWERPOSTbetweenpeoplewithaLOWPALEGRAY-GREENFLATSEATDIVIDER runningfront-to-backacrossnarrowbar, about4cmthickand36cmhigh, notatallcolumnreachingceiling. VisiblelargeKorean220VsocketonitsLEFTface,onebrick-redmovablePHONECHARGERstilloccupiesthesocket,wiretoneighborphone. ThemintplugstillliesUNPLUGGEDonbar. Noextra red fixeddevice. Divider mustreadassharedseatboundary.\nPreservePLAYER startingtoraisehandthensilentlystopping,neighborunawarewearingwhiteheadphones. BothvisibleNECKS,relaxedshoulders. KeepONEcoherentlaptopscreenwiththeREDemptybatterywarningandtriangle,withoutwordsorpercentage. TheangerburstplusTHREEDOTSbubble remains nearx8%,y8%,width22%,tailRIGHT. No otherchanges requiredtothenarrative. Naturalgeneratedlineweight,noextrathickhalo. Opaque4:3landscape1600x1200.",
+              "references": [
+                "assets/story/4.png",
+                {
+                  "contactSheet": "portrait-source-reference-sheet.png",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                "assets/scene/top.png"
+              ]
+            }
+          ],
+          "verification": {
+            "size": [
+              1600,
+              1200
+            ],
+            "mode": "RGB",
+            "textMetadata": []
+          }
+        },
+        {
+          "key": "story-5",
+          "file": "assets/story/5.png",
+          "width": 1600,
+          "height": 1200,
+          "selectedCandidate": "story-5-rigid",
+          "processing": {
+            "exportSize": [
+              1600,
+              1200
+            ],
+            "individualElementTransform": false,
+            "externalInkRadius": 0
+          },
+          "generationSteps": [
+            {
+              "candidate": "story-5",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nUse case: illustration-story. Redraw target1 in theSAMEcomicstyleandidentities, matchingnewtopbackground(reference5). Reference2 containsall4originalportraitstyles,3existinggamepieces,4approvedr2pair.\nSTORY5: Themint-hoodiestudent discovers theirordinarygreenstrawglowinggentlyandgetsaquietdeterminedlook. Thecupis NOT ONTHEBAR. Playerholds ONEicedcoffeeplasticCUP(8cmwide,15cmtall) in theirRIGHTHAND beside theSCREEN-RIGHTedgeoftheirlaptoplid. Clearlyshowhandgrippingcupandcupraisedoffwood,notbehindlid. Playerupright,visibleneckandshoulderline,focusednarroweyesvisibleovercup.\nExactlyONE ordinary STRAIGHT greenstraw emerges8cmabove lid andtouchesthelips inONEdirectline. ItcanbetiltedbutMUSTNOTbend,curve,haveaccordionjointsorbecomeanextensionpipe. No secondstraw,nocigarette/disconnectedmouthstick. Gentlelightalongthisonestrawisthesolemagicalcue. Faceandcupmustreadtogetherasapersonnaturallyholdingandsippingadrink,NOTamonstercup.\nMakecupnaturalhandsize, notgiantforegroundprop. LaptoptowardlowerLEFT sofullcupvisibletoright. QuietcafewithlowPALEGRAY-GREENdividerastheseatboundary;neighborwearingwhiteheadphonesfarrightbehindit. No tallpowerpost. No mintchargerpluggedin(theplayer'swasstolen);ifaplugisvisibleonsocket,onlytheneighbor'sONEbrick-redphonecharger.\nWHITEroundcomicbubbleatLEFTEDGE40%,TOP8%,WIDTH16%,NOtail,containsONLYsimplifiedfacewithonefingeragainstlips,SHUSHpictogram. Nottheletters'shh',nowords. Keepbubbleaboveeyesandcup. Naturalgeneratedlineweight,noaddedthickoutline. Fullopaque1600x1200,4:3.",
+              "references": [
+                "assets/story/5.png",
+                {
+                  "contactSheet": "portrait-source-reference-sheet.png",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                "assets/scene/top.png"
+              ]
+            },
+            {
+              "candidate": "story-5-straight",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nEdit ONLY the green STRAW in target1. References2-5arealloriginalportraitrefs,existingpieces,r2charactersandnewtopbackground. Keep the exactcup,hand,face,eyeexpression,shoulders,laptop,divider,bubbleandcafe.\nERASE ALL current green tube segments, including the elbow bythemouth. Draw exactlyONE STRAIGHT RIGID GREEN DRINKINGSTRAW inasingle directdiagonal from the lips to the cup lid and insidecup. No joint, no elbow, no accordion ridges, no bendingnear lips, no curvedtop. Thetubeisstraightfromendtoendandabout8cmabovelid. A simpletubelikeordinaryuncurvedpapercafestraw,notabendyplasticstraw. Maintain the gentle magicalmintglow aroundthisonestraighttubeonly. Do notaddasecondtubeorloosemouthstick.\nPurpose: immediatelyreadasanordinarypersonholdingthecupandsippingnormally,notusinganextensionpipe. Keep opaque4:3,1600x1200,nowriting. Nootherchanges.",
+              "references": [
+                {
+                  "generatedCandidate": "story-5"
+                },
+                {
+                  "contactSheet": "portrait-source-reference-sheet.png",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                "assets/scene/top.png"
+              ]
+            },
+            {
+              "candidate": "story-5-new",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nGenerate a NEW wordless1600x1200opaque4:3comic, STORY5. Do not reuse the oldstory5composition. Image1=theNEWbackgroundwithaSTRAIGHTstrawforposeandcafe;image2=ALL4originalportraitrefs;image3=currentpuzzleobjects;image4=r2charactersforIDENTITYANDINKONLY(theirr2bendy-strawdesignisOUTDATED);image5=finishedplayerandneighborportraitsforfacesonly.\nPRIMARYSUBJECT: ordinaryright-handedstudentHOLDINGICEDCOFFEEANDSIPPING throughONE RIGIDSTRAIGHTGREENSTRAW. Thetopofthecupislowerthanlipsby8cm. HoldcupinRIGHTHANDatupperchestlevel,onSCREEN-RIGHTofthelaptoplid. Cup8cmwide15cmtall,clearplasticlid,plainbrownpapersleeve. Fingersvisiblygripcup; wholecupvisibleandNOTonthewood. A rigidunbendingpaperstrawrunsinONE STRAIGHT LINE fromcupinterior,throughthelid,tolips. ChooseacupanglethatallowsasingleSTRAIGHTline. Thetubemustbestraightlikeapencil,NOelbow,NOshortbendatmouth,NOaccordionjoint,NOcurve. Onlyone green tube, nosecondstraw. ReferencetheSTRAIGHTstrawinimage1,notbendyonesincharacterrefs.\nThemintsleevedstudent'smessyblackhair,focusednarroweyesandfacearevisibleaboveheldcup. Straightback,visibleneck,shouldersrelaxed. A gentlemintGLOWaroundonlythissinglestraightstrawsignalsthemagicdiscovery. Theplayernoticesitwithquietdetermination. Faceandcupnaturalhumanproportions,notagiantcup.\nLaptopbackinlowerLEFT,leavingfullcupexposedatitsRIGHT. Samewarmcafewindowbar,darkgreenframes,pendants,nightoutside. Atfarright,partofwhite-headphoneneighborcanbeseenBEYONDaLOWpalegray-greenflatdividerbetweenseats. No tallpost,noextrachargers,nobrick-redfixeddevices. Keepthenewscene'ssharedseatarrangement.\nAtLEFTEDGE40%,TOPEDGE8%,WIDTH16%,WHITEroundbubblewithouttailcontainsONLYafacewithfingeragainstlips,shushpictogram,nowordsornumerals. No extra bubbles. Keepnaturalgeneratedlineweight,noaddedhalo. Theimage mustreadnaturalsippingplusquietmagic,notanextensionpipe.",
+              "references": [
+                "assets/scene/top.png",
+                {
+                  "contactSheet": "portrait-source-reference-sheet.png",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                {
+                  "contactSheet": "final-character-reference-sheet.png",
+                  "files": [
+                    "assets/portrait/me.png",
+                    "assets/portrait/neighbor.png"
+                  ]
+                }
+              ]
+            },
+            {
+              "candidate": "story-5-rigid",
+              "selected": true,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nEdit ONLY the portion of the green straw ABOVE THE CUP LID in image1. It currently has a sloping shaft and a short vertical elbow immediately above the lid. ERASE BOTH and draw ONE perfectly straight diagonal tube directly from the existing lips to the existing cup lid, with zero change of direction. No vertical segment near lid. Do not move face, cup, hand or laptop. The tube can enter the lid away from its center to remain straight. Keep the gentle glow. Keep all other pixels/composition unchanged. References2-5 are the correct straight-straw background, all original portrait sources, existing object sheet and r2 identities. Only use r2 for identity, not its old bent straw. Opaque4:3.",
+              "references": [
+                {
+                  "generatedCandidate": "story-5-new"
+                },
+                "assets/scene/top.png",
+                {
+                  "contactSheet": "portrait-source-reference-sheet.png",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                }
+              ]
+            }
+          ],
+          "verification": {
+            "size": [
+              1600,
+              1200
+            ],
+            "mode": "RGB",
+            "textMetadata": []
+          }
+        },
+        {
+          "key": "story-6",
+          "file": "assets/story/6.png",
+          "width": 1600,
+          "height": 1200,
+          "selectedCandidate": "story-6-cup-clear",
+          "processing": {
+            "exportSize": [
+              1600,
+              1200
+            ],
+            "individualElementTransform": false,
+            "externalInkRadius": 0
+          },
+          "generationSteps": [
+            {
+              "candidate": "story-6",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nUse case: illustration-story. ONE full opaque1600x1200 4:3 WORDLESSCOMIC showing a magicstraw's function. Input1containsALL4originalportrait/comicstylerefs,input2existinggamepieces(includingtargetpapercup),input3r2player/neighborpair,input4NEWcafescenewithheldcupandSTRAIGHTstraw,input5existingICEPROJECTILEassetforitslook. Matchtheseimagesexactlyforstyleandidentity. Keepnaturalgeneratedlineweight,noaddedthickhalo.\nThe narrative mustreadLEFT-to-RIGHT asTHREE SUCCESSIVE MOMENTS withinoneimage, likeacomicssequence. Thinverticalgutterat30%widthand60%width,subpanelsuse30%,30%,40%. The SAMEmint-hoodieblack-hairedstudentappearsinfirstandsecondmomentbecauseTIMEpasses, nottwopeople. Neighborisnotneeded. Samewarmcafebar,deepgreenframes,nightoutside. Smallordinary58cmdeepwoodbar,notagigantictable.\nLEFT30%: studentholdsONEicedcoffeeplasticcupinRIGHTHAND,liftsittochest/mouthandsipsTHROUGHONEordinarySTRAIGHTgreenstraw. Cup8cmwide15cmtall,straw8cmabovelid,visiblebesidelaptopifshown. CheeksbecomeslightlyPUFFEDafterthesip. No bend,joint,accordionsection,secondtubeorlongextension. AWHITEcomicbubbleatx8%,y8%,width16%,NOtail containsONLYanICECUBEandthreeWINDSTREAKpictograms. Noletters,nolabels,numeralsorwordsanywhere.\nMIDDLE30%: nowthesamestudentturnsfaceRIGHTandaimstheSAMESTRAIGHTgreenstraw HORIZONTALLYRIGHT fromtheirlips. ThisstrawhasbeenLIFTEDOUTOFTHECUPtoaim; thecupremainsheldLOWintherighthandandcontainsNOsecondstraw. ONE SMALLBLUEICECUBE shootsfromtheFREEOPENSTRAWTIP withthinHORIZONTALspeedlines. Clearphysicaloriginatthetubeopening,notfromeyes,handorcup. Exactlyoneoutgoingcube,nospray.\nRIGHT40%: CLOSEVIEWofONEcreamLIDDEDPAPERCUPwithbrownpapersleeve,matchingthegamepiece. The SAMEsingleicecubehitsitsLEFTSIDE. CupSLIDESTOTHERIGHTacrossthebar, withspeedlinesTRAILINGONLEFT andsmallimpactstaratLEFTcontactpoint. Keepcupuprightwithslighttilt,notexploding,nospill. ThemovementMUSTberightward,notleft. ThisisicePUSHINGaPhysicalobject,notmerelycoolingadrink. TargetcupisNOTtheplasticdrinkintheplayer'shand.\nEachmomentdepictsONEstrawandONEicecubeatmost,thethreeframesareonechronologicalaction,nolongmagicbeam. Make the causalchain legiblewithoutanywrittenexplanation: SIP, ICEOUT, CUPPUSHED. DO NOT printthosewords. Noaxes,diagramboxlabelsorwatermark.",
+              "references": [
+                {
+                  "contactSheet": "portrait-source-reference-sheet.png",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                "assets/scene/top.png",
+                "assets/fx/ice.png"
+              ]
+            },
+            {
+              "candidate": "story-6-straight",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nEdit target1, preservingall3subpanelsandtheiractionsequence. References2-5alloriginalportraitrefs,existingpieces,r2identitiesandNEWSTRAIGHTSTRAWbackground.\nIn LEFTsubpanel, the strawcurrentlyhasanelbow. ERASEtheentireoldtubeandreplacewithoneSHORTSTRAIGHTGREENPAPERSTRAW directlyfromthelipstothecuplid, asasinglerigidunbentdiagonal. Donotmoveorresizecup,handorface; justdrawastraightlinebetweenexistinglipsandlid. No elbow,curve,accordionorsecondtube. Reference5showsthecorrectordinaryrigidstraw.\nIn MIDDLEsubpanel, theonlygreenstrawisHORIZONTALatmouthandfiresonecubeRIGHT. REMOVE anygreenstraw/stub/verticalgreenlinefrominsideandabovethehelddrinkcup. ThatcuphasNOstrawbecauseTHEONEstrawisnowinthemouthaimedright. Keepclearcup,lid,handanddrinkunchangedotherwise. No secondstrawanywherewithinthatmiddlemoment.\nRemove the smallTAIL fromtheice/windWHITEbubble,leavebubbleandpictogramatupperleft. Preserveallotherart: sipwithpuffedcheeks,thenstraightstrawiceout,thenicehitspapercup'sLEFTsideandslidescupRIGHTwithspeedlines. Don'tchangeactiondirectionormakeablizzard. Nootherchanges.",
+              "references": [
+                {
+                  "generatedCandidate": "story-6"
+                },
+                {
+                  "contactSheet": "portrait-source-reference-sheet.png",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                "assets/scene/top.png"
+              ]
+            },
+            {
+              "candidate": "story-6-cup-clear",
+              "selected": true,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render, or photographic texture. No text, letters, numbers, logos or brand marks.\nEdit ONLY the DRINK INSIDE THE CUP HELD IN THE MIDDLE SUBPANEL of image1. Remove EVERY green vertical stripe, straw stump, tube fragment or green mark inside and above this plastic cup. The contents are exclusively brown coffee and pale amber/clear ice cubes, no green pixels. Preserve the hand, lid, clear cup, coffee level and all surrounding artwork. The only green straw in the middle subpanel is the HORIZONTAL ONE AT THE MOUTH shooting ice to the RIGHT. It has been lifted out of the cup. Leave it unchanged. Leave the left panel's straight sipping straw and the right panel's moving paper cup unchanged. No other edits. References2-5 are all original portrait sources, object sheet, r2 pair and current background.",
+              "references": [
+                {
+                  "generatedCandidate": "story-6-straight"
+                },
+                {
+                  "contactSheet": "portrait-source-reference-sheet.png",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                {
+                  "contactSheet": "piece-reference-sheet.png",
+                  "files": [
+                    "assets/piece/top-my-plug.png",
+                    "assets/piece/top-their-plug.png",
+                    "assets/piece/top-cup.png",
+                    "assets/piece/top-book.png",
+                    "assets/piece/top-menu.png"
+                  ]
+                },
+                {
+                  "contactSheet": "r2-character-reference-sheet.png",
+                  "files": [
+                    "assets/style-test/r2-portrait.png",
+                    "assets/style-test/r2-neighbor-portrait.png"
+                  ]
+                },
+                "assets/scene/top.png"
+              ]
+            }
+          ],
+          "verification": {
+            "size": [
+              1600,
+              1200
+            ],
+            "mode": "RGB",
+            "textMetadata": []
+          }
+        }
+      ],
+      "verification": {
+        "status": "Generated and registered for review; numeric and readability deviations remain. See session_logs/2026-10-25.md.",
+        "manifestExpected": 31,
+        "pngTextMetadata": "None on all ten exports.",
+        "geometry": "Top tiles retain 264:180 = 88:60. Body width is about 32.6 percent for top, 32.8 percent for side, and 34.4 percent for side cap.",
+        "remainingDeviations": [
+          "Top background divider stops about 18-19 full-resolution pixels short of foreground tiles, so the complete divider can still read as separated pieces.",
+          "Ducked player hair intrudes approximately 87 full-resolution pixels into the first grid cell.",
+          "Laptop and held cup coordinates differ from guide; cup is fully visible beside lid and straight straw is readable.",
+          "Socket plate and hole diameters require review against 60-65 percent and minimum 12 percent targets; visual size is not certified.",
+          "Story bubbles and triptych gutter positions differ from src/story.js coordinates.",
+          "Unrequested story-1 through story-3 and portrait assets retain older continuity details."
+        ],
+        "protectedFiles": "SHA-256 unchanged from task start for every protected file.",
+        "browser": {
+          "artCheck": "31/31 registered, 39 images loaded, no broken images.",
+          "game": "Top view, ducked view and prologue 4, 5 and 6 visually inspected.",
+          "uiCheck": "21 PASS, 0 FAIL, including 375px overflow. Run on separate localhost origin to preserve progress on 127.0.0.1.",
+          "mobileLimitation": "The final viewport request did not change actual innerWidth, so it is not recorded as a new manual phone inspection. Automated 375px overflow check passed."
+        }
+      }
     }
   ]
 }

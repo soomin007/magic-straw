@@ -25,7 +25,7 @@
     { batch: 1, key: 'piece-top-menu', path: 'assets/piece/top-menu.png', width: 512, height: 512, refs: PIECE_REFS,
       subject: '카페 테이블에 세워 두는 삼각 메뉴판(아크릴 스탠드). 왼쪽 아래에서 오른쪽 위로 비스듬히 놓여 있다. 반대 방향은 게임이 좌우를 뒤집어 쓴다. 글자 없음' },
     { batch: 1, key: 'outlet-top-free', path: 'assets/outlet/top-free.png', width: 264, height: 180, refs: PIECE_REFS,
-      subject: '두 자리 사이 낮은 칸막이의 한 칸(바 위 한 줄 깊이 12cm)을 살짝 기울인 탑뷰로 본 모습. 그림 오른쪽 25%가 두께 3cm의 밝은 회녹색 칸막이 판이고, '
+      subject: '두 자리 사이 낮은 칸막이의 한 칸(바 위 한 줄 깊이 12cm)을 살짝 기울인 탑뷰로 본 모습. 그림 왼쪽 33%가 두께 4cm의 연한 회녹색 칸막이 판이고, '
         + '그 왼쪽 면에 한국식 둥근 콘센트 판(지름이 그림 높이의 60~65%, 둥근 구멍 두 개의 지름은 각각 그림 높이의 12% 이상)이 내 쪽을 향해 붙어 있다. 위아래로 이어 붙여 칸막이 하나가 된다' },
     { batch: 1, key: 'outlet-top-taken', path: 'assets/outlet/top-taken.png', width: 264, height: 180, refs: PIECE_REFS,
       subject: '같은 칸막이 칸인데, 콘센트에 옆자리 사람의 다른 기기 플러그(태블릿 충전기나 보조배터리 선)가 꽂혀 있다. 기기는 회색과 흰색 계열(벽돌색과 민트색 금지)이고, '
@@ -55,11 +55,11 @@
     { batch: 2, key: 'piece-side-menu', path: 'assets/piece/side-menu.png', width: 512, height: 512, refs: PIECE_REFS,
       subject: '삼각 메뉴판을 바 높이에서 정면으로 본 모습. 칸의 아래쪽 한 칸 높이만 차지한다' },
     { batch: 2, key: 'outlet-side-free', path: 'assets/outlet/side-free.png', width: 256, height: 256, refs: PIECE_REFS,
-      subject: '칸막이를 바 높이에서 정면으로 본 한 칸(높이 12cm). 그림 오른쪽 25%가 칸막이 판의 앞쪽 끝이고, 그 왼쪽 면에 왼쪽을 향한 큰 콘센트 판(지름이 그림 높이의 60~65%)이 붙어 있다. 위아래로 이어 붙인다' },
+      subject: '칸막이를 바 높이에서 정면으로 본 한 칸(높이 12cm). 그림 왼쪽 33%가 칸막이 판의 앞쪽 끝이고, 그 왼쪽 면에 왼쪽을 향한 큰 콘센트 판(지름이 그림 높이의 60~65%)이 붙어 있다. 위아래로 이어 붙인다' },
     { batch: 2, key: 'outlet-side-taken', path: 'assets/outlet/side-taken.png', width: 256, height: 256, refs: PIECE_REFS,
       subject: '같은 칸막이 칸에 옆자리 사람의 회색 기기 플러그가 꽂혀 있다. 벽돌색과 민트색은 쓰지 않고, 강조하지 않는다' },
     { batch: 2, key: 'outlet-side-cap', path: 'assets/outlet/side-cap.png', width: 256, height: 256, refs: PIECE_REFS,
-      subject: '칸막이의 맨 위 칸(바 위 24~36cm). 콘센트가 없고, 그림 오른쪽 25%의 칸막이 판과 그 윗면 가장자리만 보인다. 왼쪽 75%는 투명하다' },
+      subject: '칸막이의 맨 위 칸(바 위 24~36cm). 콘센트가 없고, 그림 왼쪽 33%의 칸막이 판과 그 윗면 가장자리만 보인다. 오른쪽 67%는 투명하다' },
 
     // 3차: 인물 일러스트와 프롤로그. 프롤로그는 글자 없이 그림과 기호만으로 읽혀야 한다.
     { batch: 3, key: 'portrait-me', path: 'assets/portrait/me.png', width: 1024, height: 1024, refs: PORTRAIT_REFS,

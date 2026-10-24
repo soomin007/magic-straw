@@ -14,7 +14,7 @@ window.SCENE_LAYOUT = {
   "top": {
     "gridLeft": 190,
     "gridTop": 300,
-    "straw": { "x": 262, "y": 150 },
+    "straw": { "x": 274, "y": 139 },
     "boxes": [
       { "label": "카페 안쪽", "tone": "window", "shape": "rect", "x": 0, "y": 0, "width": 960, "height": 232 },
       { "label": "", "tone": "table", "shape": "rect", "x": 0, "y": 230, "width": 960, "height": 252 },

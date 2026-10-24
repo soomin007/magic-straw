@@ -372,6 +372,14 @@ button {
   filter: grayscale(0.6);
 }
 
+.divider-bridge {
+  position: absolute;
+  left: 0;
+  width: var(--cell);
+  background-repeat: no-repeat;
+  background-position: left top;
+}
+
 .divider-segment {
   position: absolute;
   left: 0;
