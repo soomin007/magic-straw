@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>회색 상자 목업</title>
+  <style>
+    :root {
+      --bg: #e9e7e3;
+      --ink: #2b2b2b;
+      --muted: #6d6a66;
+      --box: #c9c6c0;
+      --box-dark: #9d9993;
+      --table: #d9d5ce;
+      --mine: #8fc7ad;
+      --theirs: #e19a8f;
+      --focus: #5aa9d6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 1040px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 60px;
+    }
+
+    h1 { font-size: 24px; margin-bottom: 4px; }
+    h2 { font-size: 19px; margin-top: 40px; }
+    p { margin-top: 0; }
+    .lead { color: var(--muted); }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+      margin-bottom: 12px;
+    }
+
+    .tab {
+      min-height: 40px;
+      padding-left: 14px;
+      padding-right: 14px;
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      background: #fff;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tab[aria-pressed="true"] { background: var(--ink); color: #fff; }
+
+    .stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f4f3f1;
+    }
+
+    .scene {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 960px;
+      height: 540px;
+      transform-origin: 0 0;
+    }
+
+    .view { position: absolute; inset: 0; display: none; }
+    .view.active { display: block; }
+
+    .box {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4px;
+      border: 2px solid var(--box-dark);
+      border-radius: 8px;
+      background: var(--box);
+      font-size: 13px;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+
+    .round { border-radius: 50%; }
+    .mine { background: var(--mine); border-color: #4f8f73; }
+    .theirs { background: var(--theirs); border-color: #b0594d; }
+    .table { background: var(--table); border-color: var(--box-dark); align-items: flex-start; justify-content: flex-start; padding: 8px; color: var(--muted); }
+    .floating { box-shadow: 10px 14px 0 rgba(0, 0, 0, 0.18); transform: scale(1.12); border-style: dashed; border-color: var(--focus); }
+
+    .grid {
+      position: absolute;
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.12) 2px, transparent 2px),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.12) 2px, transparent 2px);
+      background-size: 88px 88px;
+      border-right: 2px solid rgba(0, 0, 0, 0.12);
+      border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+    }
+
+    .row-focus {
+      position: absolute;
+      border: 3px dashed var(--focus);
+      border-radius: 10px;
+      background: rgba(90, 169, 214, 0.12);
+    }
+
+    .line {
+      position: absolute;
+      height: 4px;
+      background: var(--focus);
+      transform-origin: 0 50%;
+    }
+
+    .note {
+      position: absolute;
+      max-width: 230px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: #fff;
+      border: 2px solid var(--ink);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .label {
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      padding: 2px 10px;
+      border-radius: 6px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .dim { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); }
+
+    .phone {
+      position: absolute;
+      left: 300px;
+      top: 40px;
+      width: 360px;
+      height: 460px;
+      border: 10px solid #222;
+      border-radius: 36px;
+      background: #3a3a3a;
+      overflow: hidden;
+    }
+
+    .phone-screen {
+      position: absolute;
+      left: 20px;
+      top: 70px;
+      width: 300px;
+      height: 200px;
+      border: 4px solid #111;
+      border-radius: 8px;
+      background: #f4f3f1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 15px;
+    }
+
+    .phone-caption {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 24px;
+      color: #ddd;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .reticle {
+      position: absolute;
+      left: 12px;
+      top: 60px;
+      width: 316px;
+      height: 220px;
+      border: 2px dashed #fff;
+      border-radius: 6px;
+    }
+
+    .explain {
+      margin-top: 14px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: #fff;
+      border: 2px solid var(--box-dark);
+    }
+
+    .storyboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .panel {
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .panel-art {
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: var(--box);
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .panel-body { padding: 12px 14px; }
+    .panel-number { font-weight: 800; }
+    .line-text { margin-bottom: 0; color: #444; }
+
+    ol.steps { padding-left: 22px; }
+    ol.steps li { margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>회색 상자 목업</h1>
+    <p class="lead">그림 없이 배치와 흐름만 확인하는 목업입니다. 실제 그림은 Helltaker 같은 굵은 선 코믹 카툰으로 따로 만듭니다.
+      아래 버튼으로 세 가지 시점을 오갈 수 있습니다.</p>
+
+    <h2>판 화면</h2>
+    <div class="tabs" role="group" aria-label="시점">
+      <button class="tab" type="button" data-view="top" aria-pressed="true">앉아서 보기 (탑뷰)</button>
+      <button class="tab" type="button" data-view="side" aria-pressed="false">숙이기 (S)</button>
+      <button class="tab" type="button" data-view="camera" aria-pressed="false">휴대폰 카메라 (C)</button>
+    </div>
+
+    <div class="stage" id="stage">
+      <div class="scene" id="scene">
+
+        <!-- 탑뷰 -->
+        <section class="view active" data-view="top">
+          <div class="box table" style="left: 110px; top: 60px; width: 760px; height: 420px;">카페의 긴 테이블 (위에서 본 모습)</div>
+          <div class="grid" style="left: 190px; top: 96px; width: 616px; height: 352px;"></div>
+          <div class="row-focus" style="left: 186px; top: 184px; width: 536px; height: 88px;"></div>
+
+          <div class="box round mine" style="left: 14px; top: 196px; width: 120px; height: 120px;">나 (머리와 어깨)</div>
+          <div class="line" style="left: 130px; top: 226px; width: 60px;"></div>
+          <div class="box mine" style="left: 116px; top: 330px; width: 68px; height: 110px;">내 랩탑</div>
+          <div class="box" style="left: 30px; top: 380px; width: 64px; height: 64px;">음료 컵들</div>
+
+          <div class="box mine" style="left: 290px; top: 200px; width: 70px; height: 56px;">내 플러그</div>
+          <div class="box floating" style="left: 466px; top: 196px; width: 70px; height: 64px;">컵 (거품으로 떠 있음)</div>
+          <div class="box" style="left: 554px; top: 108px; width: 76px; height: 76px;">책 더미</div>
+          <div class="box" style="left: 378px; top: 372px; width: 76px; height: 64px;">컵</div>
+
+          <div class="box" style="left: 718px; top: 96px; width: 88px; height: 352px; align-items: flex-start;">멀티탭 (옆으로 누움)</div>
+          <div class="box theirs" style="left: 642px; top: 200px; width: 70px; height: 56px;">상대 플러그</div>
+          <div class="box theirs" style="left: 642px; top: 376px; width: 70px; height: 56px;">상대 플러그</div>
+
+          <div class="box round theirs" style="left: 826px; top: 330px; width: 120px; height: 120px;">옆자리 사람 (헤드폰)</div>
+          <div class="box theirs" style="left: 812px; top: 74px; width: 100px; height: 70px;">상대 랩탑 (멀리 있음)</div>
+
+          <span class="label">탑뷰: 어느 줄로 뱉을지 고른다</span>
+        </section>
+
+        <!-- 숙이기 -->
+        <section class="view" data-view="side">
+          <div class="box" style="left: 0; top: 400px; width: 960px; height: 30px; border-radius: 0;">테이블 윗면 (2번 줄을 옆에서 본 단면)</div>
+          <div class="grid" style="left: 190px; top: 136px; width: 528px; height: 264px;"></div>
+          <div class="row-focus" style="left: 186px; top: 222px; width: 536px; height: 88px;"></div>
+
+          <div class="box round mine" style="left: 20px; top: 250px; width: 130px; height: 130px;">숙인 나 (눈높이가 테이블)</div>
+          <div class="line" style="left: 150px; top: 292px; width: 40px;"></div>
+
+          <div class="box mine" style="left: 290px; top: 340px; width: 70px; height: 56px;">내 플러그</div>
+          <div class="box floating" style="left: 466px; top: 236px; width: 70px; height: 64px;">컵 (한 칸 떠 있음)</div>
+          <div class="note" style="left: 446px; top: 320px;">떠 있는 높이와 그 아래 빈칸이 정확히 보인다</div>
+
+          <div class="box" style="left: 718px; top: 136px; width: 88px; height: 264px; align-items: flex-start;">멀티탭 옆면</div>
+          <div class="box" style="left: 734px; top: 160px; width: 56px; height: 40px;">높은 콘센트</div>
+          <div class="box theirs" style="left: 642px; top: 340px; width: 70px; height: 56px;">상대 플러그</div>
+          <div class="box round theirs" style="left: 830px; top: 170px; width: 110px; height: 110px;">옆자리 사람</div>
+
+          <span class="label">숙이기: 고른 줄의 높이를 보고 조준한다</span>
+        </section>
+
+        <!-- 휴대폰 카메라 -->
+        <section class="view" data-view="camera">
+          <div class="box table" style="left: 110px; top: 60px; width: 760px; height: 420px;">탑뷰 장면</div>
+          <div class="dim"></div>
+          <div class="phone">
+            <div class="reticle"></div>
+            <div class="phone-screen">
+              <strong>상대 랩탑 화면 (확대)</strong>
+              <span>배터리 100% 충전 완료</span>
+              <span>드라마 재생 중</span>
+            </div>
+            <p class="phone-caption">두 손가락으로 확대하거나 화면을 끌어서 비출 곳을 옮긴다. 카메라를 닫으면 탑뷰로 돌아간다.</p>
+          </div>
+          <span class="label">휴대폰 카메라: 멀리 있는 것을 확대해서 본다</span>
+        </section>
+      </div>
+    </div>
+
+    <div class="explain" id="explain"></div>
+
+    <h2>프롤로그 콘티</h2>
+    <p class="lead">게임을 시작하면 만화 다섯 컷이 한 컷씩 넘어갑니다. 클릭하거나 스페이스를 누르면 다음 컷으로 가고, 언제든 건너뛸 수 있습니다.</p>
+    <div class="storyboard">
+      <article class="panel">
+        <div class="panel-art">새벽 카페. 노트북 앞에 전공책을 펴 놓은 주인공. 창밖은 깜깜하다.</div>
+        <div class="panel-body">
+          <p class="panel-number">컷 1</p>
+          <p class="line-text">"시험은 내일 아침 9시. 3단원까지만 오늘 끝내자."</p>
+        </div>
+      </article>
+      <article class="panel">
+        <div class="panel-art">노트북 충전기를 멀티탭에 꽂아 둔 채 자리에서 일어나는 뒷모습.</div>
+        <div class="panel-body">
+          <p class="panel-number">컷 2</p>
+          <p class="line-text">"잠깐 화장실만."</p>
+        </div>
+      </article>
+      <article class="panel">
+        <div class="panel-art">돌아와서 본 테이블. 내 플러그는 뽑혀서 바닥에 굴러 있고, 멀티탭 구멍은 헤드폰 낀 옆자리 사람의 플러그가 전부 차지했다.</div>
+        <div class="panel-body">
+          <p class="panel-number">컷 3</p>
+          <p class="line-text">"……어?"</p>
+        </div>
+      </article>
+      <article class="panel">
+        <div class="panel-art">말을 걸까 손을 들다 멈춘 주인공. 노트북 화면 구석에 배터리 부족 알림이 뜬다.</div>
+        <div class="panel-body">
+          <p class="panel-number">컷 4</p>
+          <p class="line-text">"따지면 길어진다. 나한테는 그럴 시간이 없다." / 알림: 배터리 7%</p>
+        </div>
+      </article>
+      <article class="panel">
+        <div class="panel-art">컵에 꽂힌 빨대를 클로즈업. 빨대가 살짝 반짝인다. 마지막에 게임 제목이 뜬다.</div>
+        <div class="panel-body">
+          <p class="panel-number">컷 5</p>
+          <p class="line-text">"조용히, 아무도 모르게 되찾는다." / 제목: 내 자리, 내 충전기</p>
+        </div>
+      </article>
+    </div>
+
+    <h2>튜토리얼 흐름</h2>
+    <p>첫 판은 손가락 표시가 다음에 누를 곳을 하나씩 짚어 줍니다. 설명 글은 주인공의 짧은 혼잣말 한 줄로만 보여 주고, 손가락이 가리키는 곳을 누르면 다음 단계로 넘어갑니다.</p>
+    <ol class="steps">
+      <li>손가락이 아이스 아메리카노 컵을 가리킵니다. 혼잣말은 "일단 한 모금."입니다.</li>
+      <li>컵을 누르면 손가락이 내 플러그가 있는 줄로 옮겨 갑니다. 혼잣말은 "저 줄로 뱉으면……"입니다.</li>
+      <li>그 줄을 누르면 얼음이 날아가 플러그를 밀어내고, 플러그가 빈 콘센트에 꽂힙니다. 작업 표시줄에 충전 중 표시가 뜹니다.</li>
+      <li>둘째 판에서는 손가락이 소다만 가리키고, 어디에 뱉을지는 플레이어가 고릅니다.</li>
+      <li>셋째 판부터는 손가락이 나오지 않습니다. 숙이기와 휴대폰 카메라는 처음 필요한 판에서 같은 방식으로 한 번씩 짚어 줍니다.</li>
+    </ol>
+  </main>
+
+  <script>
+    const explanations = {
+      top: '평소 시점입니다. 나는 테이블 왼쪽 끝에 앉아 있고, 빨대는 오른쪽을 향합니다. 줄을 고르면 그 줄을 따라 얼음이 날아가 처음 맞은 물건을 밀어냅니다. 소다 거품으로 뜬 물건은 조금 커지고 그림자가 떨어져 보여서, 위에서 봐도 떠 있다는 걸 알 수 있습니다. 멀티탭은 테이블 오른쪽 끝에 옆으로 눕혀 두었고, 줄마다 콘센트가 하나씩 있습니다.',
+      side: '숙이기를 누르면 지금 고른 줄 하나를 테이블 높이에서 옆으로 본 단면이 보입니다. 탑뷰에서는 짐작만 할 수 있던 높이가 정확히 보이고, 이 시점에서는 얼음을 어느 높이로 보낼지 고를 수 있습니다. 멀티탭 옆면의 높은 콘센트처럼 위에서는 안 보이던 것도 여기서 드러납니다. 다시 누르면 앉아서 보는 탑뷰로 돌아갑니다.',
+      camera: '휴대폰 카메라는 멀리 있는 것을 확대해 정보를 얻는 도구입니다. 판을 직접 바꾸지는 않습니다. 예를 들어 옆자리 사람의 랩탑이 이미 100% 충전돼 있다는 걸 확인하면, 이야기 쪽으로는 플러그를 빼앗을 명분이 생기고 퍼즐 쪽으로는 힌트가 됩니다. 2챕터에서는 상대가 어디를 보고 있는지 확인하는 데에도 씁니다.',
+    };
+
+    const tabs = document.querySelectorAll('.tab');
+    const views = document.querySelectorAll('.view');
+    const explain = document.getElementById('explain');
+
+    function show(name) {
+      tabs.forEach((tab) => tab.setAttribute('aria-pressed', String(tab.dataset.view === name)));
+      views.forEach((view) => view.classList.toggle('active', view.dataset.view === name));
+      explain.textContent = explanations[name];
+    }
+
+    tabs.forEach((tab) => tab.addEventListener('click', () => show(tab.dataset.view)));
+    document.addEventListener('keydown', (event) => {
+      if (event.key.toLowerCase() === 's') show('side');
+      if (event.key.toLowerCase() === 'c') show('camera');
+      if (event.key === 'Escape') show('top');
+    });
+
+    const stage = document.getElementById('stage');
+    const scene = document.getElementById('scene');
+    function fit() {
+      scene.style.transform = `scale(${stage.clientWidth / 960})`;
+    }
+    new ResizeObserver(fit).observe(stage);
+    show('top');
+  </script>
+</body>
+</html>
