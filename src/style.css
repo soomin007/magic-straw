@@ -338,6 +338,13 @@ button {
   position: absolute;
   top: 0;
   z-index: 2;
+  pointer-events: none;
+}
+
+/* 숙인 시점에서 보고 있는 줄이 아닌 물건은 흐리게 보인다. 얼음은 이 물건들에 닿지 않는다. */
+.piece.ghost {
+  opacity: 0.28;
+  filter: grayscale(0.6);
 }
 
 .divider-segment {
@@ -423,7 +430,7 @@ button {
 }
 
 .piece.floating .piece-bubble {
-  opacity: 1;
+  opacity: 0.7;
   transform: scale(1);
   animation: bob 1.4s ease-in-out infinite;
 }
@@ -541,11 +548,13 @@ button {
 
 /* 혼잣말과 알림 */
 
-/* 혼잣말은 화면 아래쪽(창틀 자리)에 띄운다. 위쪽에는 두 사람의 얼굴이 있다. */
+/* 혼잣말은 화면 위쪽 가운데, 두 사람 얼굴 사이의 카페 안쪽에 띄운다.
+   아래쪽에는 음료 버튼을 짚는 손가락이 와서 겹친다. */
 .speech {
   position: absolute;
-  left: 12px;
-  bottom: 12px;
+  left: 50%;
+  top: 12px;
+  transform: translateX(-50%);
   z-index: 6;
   max-width: min(360px, calc(100% - 24px));
   padding-top: 8px;
@@ -700,10 +709,29 @@ button {
   border-radius: 8px;
 }
 
+/* 단축키는 키보드 키처럼 테두리를 둘러 개수로 읽히지 않게 한다. 마우스가 없는 터치 화면에서는 숨긴다. */
 .key {
-  font-size: 12px;
-  font-weight: 400;
+  min-width: 20px;
+  padding-top: 1px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  border: 1.5px solid #a39684;
+  border-bottom-width: 3px;
+  background: #fffaf1;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
   color: #7d7268;
+  text-align: center;
+}
+
+@media (hover: none) {
+  .key {
+    display: none;
+  }
 }
 
 .drink[aria-pressed="true"],

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>화면 검사</title>
+  <style>
+    body { margin: 0; padding: 20px; font: 14px/1.6 ui-monospace, Consolas, monospace; background: #1d1b19; color: #eee; }
+    #summary { font-weight: bold; margin-bottom: 12px; }
+    .fail { color: #ff8a80; }
+    iframe { border: 1px solid #555; background: #000; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <!--
+    처음 하는 사람에게 화면이 어떻게 보이는지를 기계로 확인한다. 규칙 검증(verify.html)은 규칙이 맞는지만 보므로,
+    겹쳐서 안 보이는 안내, 숙였을 때 텅 빈 화면, 좁은 화면의 가로 넘침 같은 문제는 여기서 잡는다.
+    게임을 iframe으로 열고 실제 사람처럼 마우스를 움직이고 누른 뒤 결과를 본다. 진행 저장은 검사가 끝나면 지운다.
+  -->
+  <div id="summary">검사 중... (판마다 몇 초씩 걸립니다)</div>
+  <pre id="log"></pre>
+  <iframe id="frame" width="1000" height="640"></iframe>
+  <script>
+    const STORAGE_KEY = 'magic-straw-progress-v2';
+    const frame = document.getElementById('frame');
+    const lines = [];
+    let failures = 0;
+
+    function expect(condition, message) {
+      if (condition) lines.push(`PASS  ${message}`);
+      else {
+        failures += 1;
+        lines.push(`FAIL  ${message}`);
+      }
+      document.getElementById('log').textContent = lines.join('\n');
+    }
+
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    async function openGame(progress, width = 1000, height = 640) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ unlocked: 7, cleared: [], difficulty: 'relaxed', seenPrologue: true, ...progress }));
+      frame.width = width;
+      frame.height = height;
+      frame.src = `../index.html?check=${Date.now()}`;
+      await new Promise((resolve) => frame.addEventListener('load', resolve, { once: true }));
+      await sleep(900);
+      return frame.contentWindow;
+    }
+
+    function overlaps(a, b) {
+      return a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+    }
+
+    function boardCell(doc, column, line, lines) {
+      const box = doc.getElementById('board').getBoundingClientRect();
+      return {
+        clientX: box.left + (column + 0.5) * (box.width / 7),
+        clientY: box.top + (line + 0.5) * (box.height / lines),
+      };
+    }
+
+    async function run() {
+      // 1. 첫 판: 혼잣말과 손가락 안내가 겹치지 않아야 한다.
+      {
+        const win = await openGame({ current: 0 });
+        const doc = win.document;
+        const speech = doc.getElementById('speech');
+        const finger = doc.getElementById('finger');
+        expect(!speech.hidden && speech.textContent.trim().length > 0, '첫 판: 혼잣말이 보인다');
+        expect(!finger.hidden, '첫 판: 손가락 안내가 보인다');
+        expect(!overlaps(speech.getBoundingClientRect(), finger.getBoundingClientRect()), '첫 판: 혼잣말과 손가락이 겹치지 않는다');
+        doc.querySelector('.drink[data-drink="ice"]').click();
+        await sleep(200);
+        expect(!overlaps(speech.getBoundingClientRect(), finger.getBoundingClientRect()), '첫 판: 음료를 고른 뒤에도 혼잣말과 손가락이 겹치지 않는다');
+      }
+
+      // 2. 모든 판: 움직이는 물건이 탑뷰 화면 안에 보여야 한다.
+      for (let index = 0; index < 8; index++) {
+        const win = await openGame({ current: index });
+        const doc = win.document;
+        const stage = doc.getElementById('stage').getBoundingClientRect();
+        const pieces = [...doc.querySelectorAll('.piece')];
+        const allInside = pieces.every((piece) => {
+          const box = piece.getBoundingClientRect();
+          return !piece.hidden && box.left >= stage.left - 1 && box.right <= stage.right + 1 && box.top >= stage.top - 1 && box.bottom <= stage.bottom + 1;
+        });
+        expect(pieces.length > 0 && allInside, `${index + 1}번 판: 움직이는 물건 ${pieces.length}개가 모두 화면 안에 보인다`);
+      }
+
+      // 3. 숙이기 판: 다른 줄 위를 지나 숙이기 버튼을 눌러도, 숙인 화면에 내 플러그가 진하게 보여야 한다.
+      for (const index of [6, 7]) {
+        const win = await openGame({ current: index });
+        const doc = win.document;
+        const board = doc.getElementById('board');
+        board.dispatchEvent(new win.PointerEvent('pointermove', { bubbles: true, pointerType: 'mouse', ...boardCell(doc, 3, 2, 3) }));
+        await sleep(100);
+        doc.getElementById('btn-duck').click();
+        await sleep(500);
+        const plug = doc.querySelector('.piece-kind-myPlug');
+        expect(plug && !plug.hidden && !plug.classList.contains('ghost'), `${index + 1}번 판: 아래 줄을 지나 숙여도 내 플러그가 진하게 보인다`);
+      }
+
+      // 4. 휴대폰 폭: 가로로 넘치지 않는다.
+      {
+        const win = await openGame({ current: 0 }, 375, 812);
+        const doc = win.document;
+        expect(doc.documentElement.scrollWidth <= 375, `375px 폭: 가로 넘침이 없다 (scrollWidth ${doc.documentElement.scrollWidth})`);
+      }
+
+      localStorage.removeItem(STORAGE_KEY);
+      const summary = document.getElementById('summary');
+      summary.textContent = failures === 0 ? '모든 화면 검사 통과' : `실패 ${failures}개`;
+      summary.className = failures === 0 ? '' : 'fail';
+    }
+
+    run();
+  </script>
+</body>
+</html>

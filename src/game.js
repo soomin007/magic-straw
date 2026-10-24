@@ -27,7 +27,7 @@
   const OUTLET_LEVELS = 2;
 
   const INSERT_OFFSET = 14;
-  const TOP_LIFT = 14;
+  const TOP_LIFT = 26;
 
   const PIECE_MOVE_MS = 260;
   const LOW_BATTERY_SAVER = 2;
@@ -201,8 +201,9 @@
       button.className = 'drink';
       button.dataset.drink = drink;
       const key = DRINK_ORDER.indexOf(drink) + 1;
+      button.title = `단축키 ${key}`;
       button.innerHTML = `<span class="drink-icon">${Assets.html(`ui-drink-${drink}`)}</span>`
-        + `<span>${DRINK_LABELS[drink]}</span><span class="key">${key}</span>`;
+        + `<span>${DRINK_LABELS[drink]}</span><kbd class="key">${key}</kbd>`;
       button.addEventListener('click', () => selectDrink(drink));
       ui.drinks.appendChild(button);
     }
@@ -280,7 +281,8 @@
       element.className = `piece piece-kind-${obj.kind}`;
       if (obj.mirror === '\\') element.classList.add('mirror-back');
       const assetKey = `piece-${isTop ? 'top' : 'side'}-${KIND_ASSET[obj.kind]}`;
-      element.innerHTML = `<div class="piece-shadow"></div><div class="piece-body">${Assets.html(assetKey)}</div>${bubbleHtml()}`;
+      // 거품은 물건 뒤에 둔다. 앞에 두면 두꺼운 거품 테두리가 물건을 가린다.
+      element.innerHTML = `<div class="piece-shadow"></div>${bubbleHtml()}<div class="piece-body">${Assets.html(assetKey)}</div>`;
       ui.board.appendChild(element);
       game.pieceElements.set(obj.id, element);
     }
@@ -356,6 +358,7 @@
 
       if (isTop) {
         element.hidden = false;
+        element.classList.remove('ghost');
         // 물건 그림(CELL x CELL)은 줄보다 키가 커서, 아래 끝을 줄 아래 끝에 맞추고 위로 솟게 둔다.
         // 앞줄(창 쪽, row가 큰 줄)이 뒷줄을 가리도록 앞줄일수록 위에 그린다.
         element.style.transform = `translate(${offsetX}px, ${(obj.row + 1) * ROW_HEIGHT - CELL}px)`;
@@ -363,9 +366,11 @@
         body.style.transform = obj.z > 0 ? `translate(0, ${-obj.z * TOP_LIFT}px) scale(${1 + obj.z * 0.08})` : '';
         element.classList.toggle('lifted', obj.z > 0);
       } else {
-        element.hidden = obj.row !== game.focusRow;
+        // 보고 있는 줄이 아닌 물건도 흐리게 보여 주어, 숙였을 때 판이 텅 빈 것처럼 보이지 않게 한다.
+        element.hidden = false;
+        element.classList.toggle('ghost', obj.row !== game.focusRow);
         element.style.transform = `translate(${offsetX}px, ${(game.level.height - 1 - obj.z) * CELL}px)`;
-        element.style.zIndex = String(10);
+        element.style.zIndex = String(obj.row === game.focusRow ? 20 : 5);
         body.style.transform = '';
         element.classList.remove('lifted');
       }
@@ -392,6 +397,10 @@
   function setView(view) {
     if (game.busy || game.view === view) return;
     if (view === 'side' && !hasTool('duck')) return;
+    if (view === 'side' && !game.state.objects.some((obj) => obj.row === game.focusRow && obj.kind !== 'menu')) {
+      const myPlug = game.state.objects.find((obj) => obj.kind === 'myPlug');
+      if (myPlug) game.focusRow = myPlug.row;
+    }
     game.view = view;
     buildView();
     updateControls();
@@ -685,7 +694,8 @@
     clearAim();
     const cell = cellFromPointer(event);
     if (!cell) return;
-    if (game.view === 'top' && game.focusRow !== cell.row) {
+    // 보고 있는 줄은 얼음으로 조준할 때만 바꾼다. 숙이기 버튼으로 가는 길에 다른 줄을 지나가도 바뀌지 않게 한다.
+    if (game.view === 'top' && game.selectedDrink === 'ice' && game.focusRow !== cell.row) {
       game.focusRow = cell.row;
       updateTutorial();
     }
