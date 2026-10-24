@@ -814,20 +814,22 @@
 
     if (index < panels.length) {
       const panel = panels[index];
+      // 컷 그림이 있으면 말풍선과 기호가 그림 안에 있으므로 따로 얹지 않는다.
+      const hasArt = Boolean(Assets.file(panel.key));
       ui.prologuePanel.classList.remove('title');
       ui.prologueArt.innerHTML = Assets.html(panel.key, panel.scene);
-      ui.prologueBubble.textContent = panel.line;
+      ui.prologueBubble.textContent = panel.symbol;
       ui.prologueBubble.dataset.tail = panel.bubble.tail;
       placeInPanel(ui.prologueBubble, panel.bubble);
-      ui.prologueBubble.hidden = false;
-      ui.prologueNotice.hidden = !panel.notice;
+      ui.prologueBubble.hidden = hasArt;
+      ui.prologueNotice.hidden = hasArt || !panel.notice;
       ui.prologueNotice.textContent = panel.notice || '';
       if (panel.notice) placeInPanel(ui.prologueNotice, panel.noticeAt);
       ui.prologueCount.textContent = `${index + 1} / ${panels.length}`;
       ui.prologueNext.textContent = '다음';
     } else {
       ui.prologuePanel.classList.add('title');
-      ui.prologueArt.innerHTML = '<div class="title-card"><h1>내 자리, 내 충전기</h1><p>빨대 하나로 콘센트를 되찾는 퍼즐</p></div>';
+      ui.prologueArt.innerHTML = '<div class="title-card"><h1>내 자리, 내 충전기</h1></div>';
       ui.prologueBubble.hidden = true;
       ui.prologueNotice.hidden = true;
       ui.prologueCount.textContent = '';

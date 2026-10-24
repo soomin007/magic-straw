@@ -110,7 +110,7 @@
       expect(plug.x === 3 && plug.row === 2, '옆 줄로: 아래로 꺾인 얼음은 플러그를 아래 줄로 밀어냄');
       const trap = play(level, 3, [ice(1)]);
       const trapped = trap.state.objects.find((obj) => obj.kind === 'myPlug');
-      expect(trapped.x === 5 && trap.state.status === 'playing', '옆 줄로: 콘센트 없는 줄로 밀면 멀티탭 앞에서 멈춤');
+      expect(trapped.x === 5 && trap.state.status === 'playing', '옆 줄로: 콘센트 없는 줄로 밀면 칸막이 앞에서 멈춤');
     }
     {
       const level = byId.under;

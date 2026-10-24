@@ -1,43 +1,45 @@
 // 프롤로그, 튜토리얼 혼잣말, 판마다 시작할 때 나오는 혼잣말.
-// 그림은 assets/asset-list.js의 story-1 ~ story-5이고, 그림이 없으면 scene 설명이 회색 상자에 적힌다.
+// 퍼즐 게임은 말을 몰라도 할 수 있어야 하므로, 프롤로그는 글 없이 그림만 보고 이해할 수 있게 만든다.
+// 컷 그림(assets/asset-list.js의 story-1 ~ story-5)이 말풍선과 기호까지 그림 안에 담는다.
+// 그림이 오기 전에는 game.js가 회색 상자 위에 symbol을 말풍선으로 얹어서 흐름을 미리 보여 준다.
 (function (root) {
   'use strict';
 
-  // bubble은 컷 안의 말풍선 자리다. x, y, width는 컷 크기에 대한 퍼센트이고, tail은 꼬리 방향(left, right, none)이다.
-  // 프롤로그 그림을 그릴 때는 이 자리를 비워 두어야 한다. notice는 컷 안의 노트북 화면에 뜨는 경고 알림이다.
+  // scene은 그림을 그릴 때의 장면 설명이다(게임에는 그림이 없을 때만 보인다).
+  // symbol은 그 컷의 말풍선에 들어갈 기호이고, bubble은 컷 안의 말풍선 자리(x, y, width는 퍼센트, tail은 꼬리 방향)다.
+  // notice는 컷 안의 노트북 화면에 뜨는 경고 기호이고, noticeAt은 그 자리다.
   const prologue = [
     {
       key: 'story-1',
-      scene: '새벽 카페. 노트북 앞에 전공책을 펴 놓은 주인공. 창밖은 깜깜하다.',
-      line: '시험은 내일 아침 9시. 3단원까지만 오늘 끝내자.',
-      bubble: { x: 50, y: 6, width: 44, tail: 'left' },
+      scene: '새벽 카페 창가 바. 노트북 앞에 전공책을 펴 놓은 주인공. 창밖은 깜깜하고, 벽시계는 새벽 2시를 가리킨다.',
+      symbol: '⏰📚',
+      bubble: { x: 52, y: 8, width: 26, tail: 'left' },
     },
     {
       key: 'story-2',
-      scene: '충전기를 멀티탭에 꽂아 둔 채 자리에서 일어나는 뒷모습.',
-      line: '잠깐 화장실만.',
-      bubble: { x: 6, y: 8, width: 30, tail: 'right' },
+      scene: '노트북 충전기를 칸막이 콘센트에 꽂아 둔 채 자리에서 일어나, 화장실 표지판 쪽으로 가는 뒷모습.',
+      symbol: '🚻',
+      bubble: { x: 8, y: 10, width: 16, tail: 'right' },
     },
     {
       key: 'story-3',
-      scene: '돌아와서 본 테이블. 내 플러그는 뽑혀 굴러 있고, 멀티탭은 헤드폰 낀 옆자리 사람의 플러그가 전부 차지했다.',
-      line: '……어?',
-      bubble: { x: 64, y: 8, width: 20, tail: 'left' },
+      scene: '돌아와서 본 자리. 내 플러그는 뽑혀 바 위에 굴러 있고, 그 콘센트에는 헤드폰 낀 옆자리 사람의 휴대폰 충전기가 꽂혀 있다.',
+      symbol: '?!',
+      bubble: { x: 64, y: 8, width: 16, tail: 'left' },
     },
     {
       key: 'story-4',
-      scene: '말을 걸려고 손을 들다가 멈춘 주인공. 노트북 화면 구석에 경고 알림이 떠 있다.',
-      line: '따지면 길어진다. 나한테는 그럴 시간이 없다.',
-      bubble: { x: 5, y: 6, width: 46, tail: 'right' },
-      noticeAt: { x: 60, y: 58 },
-      // 판마다, 난이도마다 시작 배터리가 달라서 숫자를 적지 않는다.
-      notice: '배터리 부족, 곧 꺼집니다',
+      scene: '옆자리 사람에게 말을 걸려고 손을 들다가 멈춘 주인공. 상대는 헤드폰을 끼고 모른다. 노트북 화면에는 빨간 배터리 경고가 떠 있다.',
+      symbol: '💢…',
+      bubble: { x: 8, y: 8, width: 22, tail: 'right' },
+      notice: '🪫',
+      noticeAt: { x: 62, y: 56 },
     },
     {
       key: 'story-5',
-      scene: '음료 컵에 꽂힌 빨대가 은은하게 빛난다.',
-      line: '조용히, 아무도 모르게 되찾는다.',
-      bubble: { x: 28, y: 72, width: 44, tail: 'none' },
+      scene: '음료 컵에 꽂힌 빨대가 은은하게 빛난다. 컵 너머로 결심한 주인공의 눈빛.',
+      symbol: '🤫',
+      bubble: { x: 40, y: 8, width: 16, tail: 'none' },
     },
   ];
 
@@ -46,7 +48,7 @@
     pickIce: '일단 한 모금.',
     pickRow: '저 줄로 뱉으면……',
     pickSoda: '거품이면 들어 올릴 수 있을지도.',
-    duck: '멀티탭 옆면이 잘 안 보이는데.',
+    duck: '칸막이 위쪽이 잘 안 보이는데.',
     ducked: '숙이니까 높은 콘센트가 보인다.',
   };
 
