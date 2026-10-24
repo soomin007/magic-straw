@@ -212,6 +212,13 @@
     }
   }
 
+  // 거품 그림이 등록돼 있으면 그 그림을, 없으면 CSS로 그린 거품을 쓴다.
+  function bubbleHtml() {
+    return Assets.file('fx-bubble')
+      ? `<div class="piece-bubble has-art">${Assets.html('fx-bubble')}</div>`
+      : '<div class="piece-bubble"></div>';
+  }
+
   function buildView() {
     const { level } = game;
     const isTop = game.view === 'top';
@@ -249,7 +256,7 @@
       element.className = 'piece';
       if (obj.mirror === '\\') element.classList.add('mirror-back');
       const assetKey = `${isTop ? 'top' : 'side'}-${KIND_ASSET[obj.kind]}`;
-      element.innerHTML = `<div class="piece-shadow"></div><div class="piece-body">${Assets.html(assetKey)}</div><div class="piece-bubble"></div>`;
+      element.innerHTML = `<div class="piece-shadow"></div><div class="piece-body">${Assets.html(assetKey)}</div>${bubbleHtml()}`;
       ui.board.appendChild(element);
       game.pieceElements.set(obj.id, element);
     }
@@ -417,7 +424,9 @@
         target = ui.drinks.querySelector('[data-drink="ice"]');
         line = lines.pickIce;
       } else {
-        const center = topCellCenter(0, game.focusRow);
+        // 마우스가 있는 줄이 아니라 내 플러그가 있는 줄을 짚어야 첫 판에서 헷갈리지 않는다.
+        const myPlug = state.objects.find((obj) => obj.kind === 'myPlug');
+        const center = topCellCenter(0, myPlug.row);
         target = { x: center.x, y: center.y - CELL / 2 };
         line = lines.pickRow;
       }
@@ -508,6 +517,10 @@
     const target = Engine.findObject(game.state, targetId);
     const shot = document.createElement('div');
     shot.className = 'bubble-shot';
+    if (Assets.file('fx-bubble')) {
+      shot.classList.add('has-art');
+      shot.innerHTML = Assets.html('fx-bubble');
+    }
     ui.fxLayer.appendChild(shot);
     const start = game.view === 'top' ? TOP_STRAW : SIDE_STRAW;
     const end = game.view === 'top' ? topCellCenter(target.x, target.row) : sideCellCenter(target.x, target.z);

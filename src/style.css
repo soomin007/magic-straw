@@ -379,6 +379,12 @@ button {
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
+.piece-bubble.has-art,
+.bubble-shot.has-art {
+  border: 0;
+  background: none;
+}
+
 .piece.floating .piece-bubble {
   opacity: 1;
   transform: scale(1);

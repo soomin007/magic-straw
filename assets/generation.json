@@ -1,0 +1,163 @@
+{
+  "date": "2026-10-24",
+  "mode": "built-in image_gen",
+  "batch": 1,
+  "notes": "각 주제를 별도 호출로 생성했다. 알파 여백 정리와 지정 크기 변환만 파일 준비 과정에서 수행했다. 생성 원본은 작업한 컴퓨터의 image_gen 기본 저장소에 있다.",
+  "assets": [
+    {
+      "batch": 1,
+      "key": "top-my-plug",
+      "path": "assets/top/my-plug.png",
+      "width": 264,
+      "height": 264,
+      "subject": "내 충전기 플러그를 바로 위에서 본 모습. 민트색 몸통, 금속 핀 두 개가 오른쪽을 향하고, 왼쪽 가장자리로 짧은 선이 이어진다",
+      "prompt": "Use case: stylized-concept. Asset type: individual transparent PNG sprite for a 2D cartoon cafe puzzle. Create exactly ONE mint-green electrical charger plug, viewed STRICTLY from directly above, orthographic, no perspective, facing right. Bold confident black ink outline, graphic angular rounded silhouette, flat solid fills and exactly one crisp hard-edged darker mint shadow shape, upper-left light. Palette: black #171719, warm off-white #f6f1e7, mint #6cc3a0, steel gray. A chunky mint body with a simple broad grip groove, TWO parallel metallic prongs extend horizontally to the RIGHT edge, and one short black power cord exits left. Simple readable silhouette at 30px. Composition on square transparent canvas, body centered, uses ~90 percent width, 5 percent vertical edge margin, prong tips reach right edge, cord reaches left edge. No tabletop, no cast shadow, no background, no lettering, no extra objects, no face, no gradients, no texture, no 3D rendering. Make a polished bold comic game sprite, with actual transparent alpha. This is the style anchor for a unified asset set.",
+      "refinementPrompt": "Edit this plug sprite only to flatten its colors into bold hand-inked cel art. Keep the exact silhouette, top-down viewpoint, two prongs pointing right and short cord pointing left. Replace ALL smooth gradients, soft lighting, metallic gloss, photographic texture and airbrush shading with FLAT UNIFORM polygonal color areas: exactly one base mint #6cc3a0 and one darker mint #45876e for the body, plain flat light gray and dark gray prongs, black ink edges. Broad confident black outer contour. White highlight if any is a single hard-edged small flat shape. Two-dimensional comic drawing, absolutely no 3D rendering or color ramps. Transparent PNG, one plug only, preserve transparent margins. Do not change shape or add objects."
+    },
+    {
+      "batch": 1,
+      "key": "top-their-plug",
+      "path": "assets/top/their-plug.png",
+      "width": 264,
+      "height": 264,
+      "subject": "같은 모양의 벽돌색 플러그를 바로 위에서 본 모습",
+      "prompt": "Use case: stylized-concept. Asset type: single isolated transparent cartoon game sprite. Reference image is STYLE REFERENCE only except for the red plug which must match geometry. Use the same very thick confident black ink outlines, graphic comic shapes, vector-like flat screenprint solid colors and exactly one hard-edged shadow tone, upper-left light. No gradients, soft shading, texture, gloss, 3D, letters or ground shadows. Warm off-white #f6f1e7, black #171719, gray, mint #6cc3a0 for player and brick #d9534a for neighbor. Create a brick red counterpart of the reference mint plug. EXACT SAME TOP-DOWN SHAPE, proportions, prong positions, cord and orientation; replace mint body with brick #d9534a and its shadow with #943e39. One plug only. Two silver prongs face right and reach right edge, cord exits left. Preserve bold black outline. Use truly FLAT uniform fills, not smooth shading. Transparent background."
+    },
+    {
+      "batch": 1,
+      "key": "top-cup",
+      "path": "assets/top/cup.png",
+      "width": 264,
+      "height": 264,
+      "subject": "뚜껑 덮인 종이 커피컵을 바로 위에서 본 모습. 둥근 뚜껑과 마시는 구멍이 보인다",
+      "prompt": "Use case: stylized-concept. Asset type: single isolated transparent cartoon game sprite. Reference image is STYLE REFERENCE only except for the red plug which must match geometry. Use the same very thick confident black ink outlines, graphic comic shapes, vector-like flat screenprint solid colors and exactly one hard-edged shadow tone, upper-left light. No gradients, soft shading, texture, gloss, 3D, letters or ground shadows. Warm off-white #f6f1e7, black #171719, gray, mint #6cc3a0 for player and brick #d9534a for neighbor. Create ONE takeaway paper coffee cup viewed EXACTLY from directly above, strict orthographic overhead. Only a round warm off-white plastic lid with thick black outline, a small dark oval drinking hole near its upper edge and two bold circular inset rings. The paper body must NOT be visible below the lid, no handle, no perspective ellipse. Centered circle fills 88% of square canvas. Simple bold black and warm cream silhouette at 30px. Single flat gray shadow shape along lower-right rim. Transparent background, no floor or cast shadow."
+    },
+    {
+      "batch": 1,
+      "key": "top-book",
+      "path": "assets/top/book.png",
+      "width": 264,
+      "height": 264,
+      "subject": "두꺼운 전공책 세 권을 쌓은 더미를 바로 위에서 본 모습. 칸을 거의 꽉 채우고 무거워 보인다",
+      "prompt": "Use case: stylized-concept. Asset type: individual transparent sprite for a unified bold comic cafe puzzle. Reference image is STYLE reference only, draw a NEW requested subject. Bold confident black ink outline, flat solid fills and exactly one crisp hard-edged shadow shape, light from upper left. Black #171719, off-white #f6f1e7, wood brown, mint #6cc3a0 player, brick #d9534a neighbor. No gradients, texture, ground shadow, text, logos or extra objects. High-contrast comic silhouette readable at 30px. All colored regions should be uniform screenprinted solid fills, no color ramps. Exactly ONE heavy stack of three thick university textbooks seen STRICTLY from straight overhead, no perspective, no isometric. Three flat overlapping thick squared covers, warm ivory top book with dark gray corner blocks and one broad black spine band, two underlying gray and brown books offset a little so all three are legible. Very little exposed page edges. No title or writing. Compact square stack fills 90% square canvas, massive chunky silhouette rather than thin notebook. No loose papers, no pencil, no table, no cast shadow."
+    },
+    {
+      "batch": 1,
+      "key": "top-menu",
+      "path": "assets/top/menu.png",
+      "width": 264,
+      "height": 264,
+      "subject": "테이블에 세워 둔 삼각 메뉴판을 바로 위에서 본 모습. 칸의 왼쪽 아래에서 오른쪽 위로 비스듬히 놓여 있다. 반대 방향은 게임이 좌우를 뒤집어 쓴다",
+      "prompt": "Use case: stylized-concept. Asset type: single isolated transparent cartoon game sprite. Reference image is STYLE REFERENCE only except for the red plug which must match geometry. Use the same very thick confident black ink outlines, graphic comic shapes, vector-like flat screenprint solid colors and exactly one hard-edged shadow tone, upper-left light. No gradients, soft shading, texture, gloss, 3D, letters or ground shadows. Warm off-white #f6f1e7, black #171719, gray, mint #6cc3a0 for player and brick #d9534a for neighbor. Create ONE standing triangular folded tabletop menu tent viewed STRICTLY from directly above, orthographic, no perspective. Overhead silhouette is one long NARROW diagonal rectangle / from lower-left to upper-right, with a central ridge dividing two flat planes, sharp squared ends. It spans 85% canvas diagonal; thickness perpendicular to diagonal about 22% canvas. Warm off-white card, black outline, one flat warm gray plane, a small bold black coffee-bean pictogram if needed. No readable text, no base, no floor shadow, no table. Direction / must be instantly clear at 30px. A physical folded cardboard menu tent, not an arrow or a book."
+    },
+    {
+      "batch": 1,
+      "key": "top-strip-socket",
+      "path": "assets/top/strip-socket.png",
+      "width": 264,
+      "height": 264,
+      "subject": "테이블에 눕혀 둔 길쭉한 멀티탭의 한 구간을 위에서 본 모습. 콘센트 구멍 하나가 왼쪽을 향한다. 위아래로 이어 붙이면 멀티탭 하나가 되어야 한다",
+      "prompt": "Use case: stylized-concept. Asset type: individual transparent sprite for a unified bold comic cafe puzzle. Reference image is STYLE reference only, draw a NEW requested subject. Bold confident black ink outline, flat solid fills and exactly one crisp hard-edged shadow shape, light from upper left. Black #171719, off-white #f6f1e7, wood brown, mint #6cc3a0 player, brick #d9534a neighbor. No gradients, texture, ground shadow, text, logos or extra objects. High-contrast comic silhouette readable at 30px. All colored regions should be uniform screenprinted solid fills, no color ramps. One seamless vertical POWER STRIP MODULE tile. Strict straight overhead, orthographic, no perspective. The off-white rectangular power-strip body fills canvas from top edge to bottom edge with NO top/bottom endcap or horizontal border, so it can repeat seamlessly vertically. Black vertical outlines at x=5% and95% of square canvas; same uniform off-white color on the entire upper and lower 20% strips of image. Rightmost 14% body is a single flat gray side stripe, also continues through top/bottom edges. At mid-height only, a black socket opening is cut into the LEFT side edge facing LEFT: a half circular recess opening on left side, two short dark horizontal pin-entry slots, so a right-facing plug entering from left has a place to go. Small black inset round socket mark on broad top face also acceptable, but essential entry is at left edge. The object is viewed from directly above, socket is on its left-facing side, not centered facing viewer. Absolutely NO horizontal lines or decorations in top or bottom 20% of tile, all vertical edge lines continue exactly to canvas boundaries. Transparent outside body, no wire, no switch, no stand, no text.",
+      "refinementPrompt": "Edit this seamless power-strip module tile, keeping the same narrow vertical off-white body, black vertical edges, right gray stripe, fully transparent exterior and exact canvas dimensions. Change ONLY the black socket pocket halfway down the LEFT EDGE: make this socket pocket much larger vertically, from y=15% to y=85% of the full canvas. It should remain a black half-circle recess opening toward the left. Place its TWO horizontal pin-entry slots at y=37% and y=63% of the FULL canvas, not close together. Each slot is a flat gray horizontal rounded rectangle from x=33% to x=39% of full canvas, with black edge. This will align with the widely spaced two prongs of a plug. Preserve the body's top and bottom15% as perfectly plain continuous off-white with black straight vertical side borders, no cap or horizontal line, so tiles stack. No text, no ground shadow. Colors must be solid flat fills without gradients. Socket should read as a two-prong left-facing power outlet in overhead diagrammatic view."
+    },
+    {
+      "batch": 1,
+      "key": "top-strip-plain",
+      "path": "assets/top/strip-plain.png",
+      "width": 264,
+      "height": 264,
+      "subject": "같은 멀티탭의 콘센트가 없는 구간. 위아래로 다른 구간과 이어 붙는다",
+      "prompt": "Use case: stylized-concept. Individual transparent PNG asset in a single unified comic game asset set. Bold confident black ink outline, flat solid fills and exactly one crisp hard-edged shadow shape, light from upper left. Black #171719, off-white #f6f1e7, wood brown, mint #6cc3a0 player, brick #d9534a neighbor. No gradients, texture, ground shadow, text, logos or extra objects. High-contrast comic silhouette readable at 30px. Edit reference power-strip tile: REMOVE ONLY the black socket recess and two slots on left edge. Fill their place with the same flat warm off-white of the body, and restore the same perfectly straight black vertical left outer line. Preserve EXACT body width and x position, canvas size, right gray vertical stripe, upper and lower edges. Keep the body continuing beyond top and bottom image edges with no horizontal edge or endcap. This tile must seamlessly connect above/below the reference tile with no width step or color change. One blank power-strip module only. Transparent outside the body. Keep all other pixels as close as possible. No gradients, no text."
+    },
+    {
+      "batch": 1,
+      "key": "top-table",
+      "path": "assets/top/table.png",
+      "width": 2280,
+      "height": 1260,
+      "subject": "카페의 긴 나무 테이블 윗면을 바로 위에서 본 모습. 물건은 하나도 없고, 나뭇결과 가장자리만 있다",
+      "prompt": "Use case: stylized-concept. Asset type: individual transparent sprite for a unified bold comic cafe puzzle. Reference image is STYLE reference only, draw a NEW requested subject. Bold confident black ink outline, flat solid fills and exactly one crisp hard-edged shadow shape, light from upper left. Black #171719, off-white #f6f1e7, wood brown, mint #6cc3a0 player, brick #d9534a neighbor. No gradients, texture, ground shadow, text, logos or extra objects. High-contrast comic silhouette readable at 30px. All colored regions should be uniform screenprinted solid fills, no color ramps. Exactly ONE empty long rectangular cafe tabletop seen STRICTLY from straight above. No perspective, no isometric. Wide landscape composition, aspect ratio19:10.5 matching tabletop2280x1260. Rounded rectangular thick confident black ink perimeter, flat warm medium wood-brown top with only 3 sparse black stylized wood grain strokes along outside perimeter, and one crisp hard-edged darker brown narrow lower-right inner rim. Most of central surface COMPLETELY PLAIN FLAT brown because puzzle objects sit there. Transparent margin outside the whole table. No table legs, no background, no cups, no people, no laptop, no props, no cast shadow, no decorative objects, no tile grid, no text. Use fewer than six flat colors, 2D graphic comic screenprint, not shiny or photoreal."
+    },
+    {
+      "batch": 1,
+      "key": "top-me",
+      "path": "assets/top/me.png",
+      "width": 480,
+      "height": 480,
+      "subject": "테이블 왼쪽 끝에 앉은 대학생을 바로 위에서 본 모습. 헝클어진 머리와 어깨가 보이고, 입에 문 빨대가 오른쪽을 향한다",
+      "prompt": "Use case: stylized-concept. Individual transparent PNG asset in a single unified comic game asset set. Bold confident black ink outline, flat solid fills and exactly one crisp hard-edged shadow shape, light from upper left. Black #171719, off-white #f6f1e7, wood brown, mint #6cc3a0 player, brick #d9534a neighbor. No gradients, texture, ground shadow, text, logos or extra objects. High-contrast comic silhouette readable at 30px. A stylish expressive college student player character, isolated sprite for a comic puzzle. View STRICTLY from DIRECTLY ABOVE at crown of head and shoulders, orthographic like an overhead tabletop board game, not a face portrait or side view. Student sits LEFT of a table looking RIGHT. Tousled chunky dark-brown-black hair, mint-green sweatshirt #6cc3a0 with off-white shoulders, pale warm skin. Visible crown and back of head at center, shoulders on LEFT behind head, a small profile sliver of nose and tired single visible eye on RIGHT edge of head. One simple off-white magical straw held in mouth projects horizontally RIGHT from face nearly to right edge, straight, bold black outline, one tiny mint glint. Both hands loosely tuck near cheeks but no held props. Angular cartoon character design with strong silhouette and cheeky tired exam-cramming posture. All parts fit square canvas with 6% clear margins except straw tip reaches92%width. No table, chair, cup, floor, notebook, laptop, words, symbols, speech balloon or background. 2D cutout with flat untextured color areas, sharp black contour and one hard shadow per color, no 3D or gradients."
+    },
+    {
+      "batch": 1,
+      "key": "top-neighbor",
+      "path": "assets/top/neighbor.png",
+      "width": 480,
+      "height": 480,
+      "subject": "큰 헤드폰을 쓴 옆자리 사람을 바로 위에서 본 모습. 후드티를 입었고 왼쪽 아래를 향해 앉아 있다",
+      "prompt": "Use case: stylized-concept. Separate transparent PNG sprite from one unified comic cafe puzzle asset set. Bold confident black ink outline, flat solid fills and exactly one crisp hard-edged shadow shape, light from upper left. Black #171719, off-white #f6f1e7, wood brown, mint #6cc3a0 player, brick #d9534a neighbor. No gradients, texture, ground shadow, text, logos or extra objects. High-contrast comic silhouette readable at 30px. Create a DIFFERENT character in exactly the same drawing style as the student reference: the inconsiderate neighboring cafe customer, seen STRICTLY straight from DIRECTLY ABOVE, crown and shoulders, orthographic. This neighbor sits at lower-right of the table, face points diagonally LOWER LEFT. Chunky short charcoal hair with a neat fringe unlike student's messy spikes, HUGE closed-back BLACK HEADPHONES with warm off-white thick pads and broad headband clearly crossing crown, brick red #d9534a hoodie shoulders sit UPPER RIGHT behind the head. Tiny pale profile sliver at lower-left head edge, expression oblivious and absorbed. Torso hands and head all entirely in square with6%clear margins, fill88%. No straw, NO laptop, no table, no chair, no cup, no background or cast shadow. Bold angular comic college-aged person, 2D flat inked cel sprite, no gradients or texture."
+    },
+    {
+      "batch": 1,
+      "key": "top-my-laptop",
+      "path": "assets/top/my-laptop.png",
+      "width": 300,
+      "height": 420,
+      "subject": "열어 둔 내 랩탑을 위에서 본 모습. 민트색 스티커가 붙어 있다",
+      "prompt": "Use case: stylized-concept. Individual transparent PNG asset in a single unified comic game asset set. Bold confident black ink outline, flat solid fills and exactly one crisp hard-edged shadow shape, light from upper left. Black #171719, off-white #f6f1e7, wood brown, mint #6cc3a0 player, brick #d9534a neighbor. No gradients, texture, ground shadow, text, logos or extra objects. High-contrast comic silhouette readable at 30px. Exactly ONE open laptop, STRICT top-down orthographic overhead view. PORTRAIT canvas aspect5:7; entire laptop occupies88%canvas. The far screen half occupies UPPER half and keyboard base occupies LOWER half, separated by a broad black hinge. Screen is a simple blank flat warm off-white rectangular area in thick dark bezel; keyboard has only3 broad orderly rows of chunky plain dark gray key silhouettes with no letters, flat medium-gray chassis, one mint #6cc3a0 rectangular sticker on lower left palm rest, one black outlined trackpad center. Flat graphic construction, no perspective, not isometric, no tilted trapezoids, both screen and base represented as aligned rectangles. Black thick comic outlines and one hard-edged shadow tone. No glow, text, icons, cables, table or external shadow. Background truly transparent."
+    },
+    {
+      "batch": 1,
+      "key": "top-their-laptop",
+      "path": "assets/top/their-laptop.png",
+      "width": 300,
+      "height": 420,
+      "subject": "열어 둔 옆자리 사람의 랩탑을 위에서 본 모습. 벽돌색 스티커가 붙어 있다. 화면은 비워 둔다(게임이 글자를 그린다)",
+      "prompt": "Use case: stylized-concept. Separate transparent PNG sprite from one unified comic cafe puzzle asset set. Bold confident black ink outline, flat solid fills and exactly one crisp hard-edged shadow shape, light from upper left. Black #171719, off-white #f6f1e7, wood brown, mint #6cc3a0 player, brick #d9534a neighbor. No gradients, texture, ground shadow, text, logos or extra objects. High-contrast comic silhouette readable at 30px. Edit reference laptop to make neighbor's laptop: change ONLY the mint sticker on lower-left palm rest to brick-red #d9534a with one flat dark-red shadow shape. Preserve the exact shape, viewpoint, proportions, outline thickness, key layout, blank warm off-white screen and trackpad. Transparent background, entire single laptop no other objects. No text or screen icons, game will overlay dynamic screen content."
+    },
+    {
+      "batch": 1,
+      "key": "fx-bubble",
+      "path": "assets/fx/bubble.png",
+      "width": 264,
+      "height": 264,
+      "subject": "물건 하나를 감싸는 반투명 탄산 거품 방울. 가운데는 비어 있고 테두리와 반짝임만 있다",
+      "prompt": "Use case: stylized-concept. Separate transparent PNG sprite from one unified comic cafe puzzle asset set. Bold confident black ink outline, flat solid fills and exactly one crisp hard-edged shadow shape, light from upper left. Black #171719, off-white #f6f1e7, wood brown, mint #6cc3a0 player, brick #d9534a neighbor. No gradients, texture, ground shadow, text, logos or extra objects. High-contrast comic silhouette readable at 30px. Exactly ONE cartoon carbonated soda bubble outline effect, centered on transparent square canvas. A large clean near-circular ring fills90%width. The MIDDLE 74% of circle diameter must be fully transparent (alpha zero), so a game object is entirely visible through it. Thick black outer rim with a mint thin inner crescent and two small hard-edged white glints on upper-left rim; a single dark mint crescent lower-right rim. Ring stroke thickness about5%diameter, not a filled sphere. No solid white or colored interior, no object inside, no extra bubbles, no floor, no shadow, no perspective, no text. High contrast comic ink effect only. Treat as a hollow overlay sprite, not a glass ball render."
+    },
+    {
+      "batch": 1,
+      "key": "fx-ice",
+      "path": "assets/fx/ice.png",
+      "width": 96,
+      "height": 96,
+      "subject": "날아가는 작은 얼음 조각 하나",
+      "prompt": "Use case: stylized-concept. One separate transparent PNG game sprite. Reference is style reference only. Bold confident black ink outline, flat solid fills and exactly one crisp hard-edged shadow shape, light from upper left. Black #171719, off-white #f6f1e7, wood brown, mint #6cc3a0 player, brick #d9534a neighbor. No gradients, texture, ground shadow, text, logos or extra objects. High-contrast comic silhouette readable at 30px. Exactly ONE small flying ice chip, front-view game effect icon. Compact irregular chamfered ice square, slightly diamond shaped, fills85%square canvas. Thick bold black ink outside, flat off-white central face, one light mint-gray hard-edged facet at lower right and a single white shine notch at upper left. No multiple cubes, no splash, no motion trails, no droplets, no stars, no background or floor shadow. Extremely simple silhouette legible at15px. Transparent alpha around isolated chip, no gradient or glass rendering."
+    },
+    {
+      "batch": 1,
+      "key": "ui-drink-ice",
+      "path": "assets/ui/drink-ice.png",
+      "width": 192,
+      "height": 192,
+      "subject": "얼음이 든 아이스 아메리카노 컵과 빨대. 버튼에 들어갈 아이콘",
+      "prompt": "Use case: stylized-concept. One separate transparent PNG game sprite. Reference is style reference only. Bold confident black ink outline, flat solid fills and exactly one crisp hard-edged shadow shape, light from upper left. Black #171719, off-white #f6f1e7, wood brown, mint #6cc3a0 player, brick #d9534a neighbor. No gradients, texture, ground shadow, text, logos or extra objects. High-contrast comic silhouette readable at 30px. Exactly ONE iced americano takeaway cup with a straw, front-view button icon. One clear straight tapered cup with flat warm brown coffee inside and THREE simple large pale off-white ice shapes inside the drink. Bold black lid rim and an off-white straight straw angled slightly left. Cup and straw together fill85%square canvas with no cropping. Thick black confident outer contour, off-white transparent-cup frame, flat brown interior, one hard-edged dark brown shadow plane on lower right. Do not show coffee beans or any extra objects outside cup, no logo, letters, face, background, saucer or cast shadow. Readable at48px, simple flat comic sticker not glossy3D."
+    },
+    {
+      "batch": 1,
+      "key": "ui-drink-soda",
+      "path": "assets/ui/drink-soda.png",
+      "width": 192,
+      "height": 192,
+      "subject": "기포가 올라오는 투명한 초록빛 소다 컵과 빨대. 버튼에 들어갈 아이콘",
+      "prompt": "Use case: stylized-concept. One separate transparent PNG game sprite. Reference is style reference only. Bold confident black ink outline, flat solid fills and exactly one crisp hard-edged shadow shape, light from upper left. Black #171719, off-white #f6f1e7, wood brown, mint #6cc3a0 player, brick #d9534a neighbor. No gradients, texture, ground shadow, text, logos or extra objects. High-contrast comic silhouette readable at 30px. Exactly ONE transparent cup of mint-green soda with a straw, front-view button icon. Same simple shape as iced americano: clear tapered cup with thick black lid rim and off-white straight straw angled slightly left. Flat mint green #6cc3a0 soda with THREE simple large off-white bubble circles INSIDE the liquid. One hard-edged darker mint plane on lower right. Whole cup+straw fills85%square canvas. No ice, no fruit, no external floating bubbles, no logo, letters, face, background, saucer or cast shadow. Thick confident black contour, black and warm off-white accents, simple flat-color comic sticker readable at48px. One cup only, transparent background."
+    },
+    {
+      "batch": 1,
+      "key": "ui-finger",
+      "path": "assets/ui/finger.png",
+      "width": 192,
+      "height": 192,
+      "subject": "아래를 가리키는 만화풍 손가락. 튜토리얼에서 누를 곳을 짚는다",
+      "prompt": "Use case: stylized-concept. One separate transparent PNG game sprite. Reference is style reference only. Bold confident black ink outline, flat solid fills and exactly one crisp hard-edged shadow shape, light from upper left. Black #171719, off-white #f6f1e7, wood brown, mint #6cc3a0 player, brick #d9534a neighbor. No gradients, texture, ground shadow, text, logos or extra objects. High-contrast comic silhouette readable at 30px. Exactly ONE cartoon hand pointing directly DOWN, front-view tutorial pointer icon. Off-white simple glove hand with thick confident black ink outlines. Wrist cuff at TOP with mint-green narrow band, fist at middle, one straight extended index finger points to BOTTOM of square near90%canvas height. Other fingers curled together visibly beside index. One flat gray hard-edged shadow on right, no gradients or texture. Entire hand stays within90%canvas size and centered. No arrow, no ring, no button, no click marks, no text, no background or cast shadow. Crisp readable gesture at40px. Single hand only, transparent alpha."
+    }
+  ]
+}
