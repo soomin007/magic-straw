@@ -236,6 +236,7 @@
       place(scene, GRID_LEFT + CELL * 1 + 6, GRID_TOP + CELL * 1 + 6, CELL - 12, CELL - 12, image(file(style, 'my-plug')));
       place(scene, GRID_LEFT + CELL * 3 + 6, GRID_TOP + CELL * 1 + 6, CELL - 12, CELL - 12, image(file(style, 'cup')));
       place(scene, 4, 300, 230, 230, image(file(style, 'portrait')));
+      if (style === 'r2') place(scene, 726, 300, 230, 230, image(file(style, 'neighbor-portrait')));
       const speech = place(scene, 200, 470, null, null);
       speech.innerHTML = '<div class="speech" style="white-space: nowrap;">조용히, 아무도 모르게.</div>';
 
@@ -269,6 +270,13 @@
       row.appendChild(framed(file(style.id, 'cup'), 'square', '컵'));
       row.appendChild(framed(file(style.id, 'portrait'), 'square', '주인공 일러스트'));
       sources.appendChild(row);
+      // 옆자리 사람 일러스트는 2차 시험부터 만든다.
+      if (style.id === 'r2') {
+        const extra = document.createElement('div');
+        extra.className = 'row';
+        extra.appendChild(framed(file(style.id, 'neighbor-portrait'), 'square', '옆자리 사람 일러스트'));
+        sources.appendChild(extra);
+      }
       document.getElementById('source-columns').appendChild(column(style, sources));
     }
   </script>
