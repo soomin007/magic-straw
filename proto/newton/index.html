@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>운동량 시제품</title>
+  <style>
+    /* 장소와 인물을 정하기 전의 회색 상자 시제품이다. 규칙이 재미있는지만 본다(known-issues 17번). */
+    :root {
+      --bg: #e9e7e3;
+      --ink: #2b2b2b;
+      --floor: #f6f4f0;
+      --wall: #6d6a66;
+      --player: #5aa9d6;
+      --block: #c9c6c0;
+      --goal: #e0a800;
+      --cell: 64px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    [hidden] { display: none !important; }
+
+    .wrap {
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 16px;
+      padding-bottom: 40px;
+    }
+
+    .bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .dots,
+    .controls,
+    .hand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--ink);
+      background: #fff;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .dot.current { background: var(--ink); color: #fff; }
+    .dot.cleared { background: #9fd3b8; }
+
+    .btn {
+      min-width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 3px solid var(--ink);
+      background: #fff;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .btn:disabled { opacity: 0.35; cursor: default; }
+
+    /* 손에 든 물건. 채운 네모가 남은 던지기, 빈 네모가 이미 던진 것이다. */
+    .hand-item {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 3px solid var(--ink);
+      background: transparent;
+      opacity: 0.35;
+    }
+
+    .hand-item.full {
+      background: var(--block);
+      opacity: 1;
+    }
+
+    .board-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .board {
+      position: relative;
+      background: var(--floor);
+      border-radius: 10px;
+      touch-action: manipulation;
+    }
+
+    .tile,
+    .body,
+    .goal,
+    .arrow {
+      position: absolute;
+      width: var(--cell);
+      height: var(--cell);
+    }
+
+    .tile.wall {
+      background: var(--wall);
+    }
+
+    .goal {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    /* 플레이어가 멈춰야 할 곳은 동그라미, 물건이 멈춰야 할 곳은 네모 테두리다. */
+    .goal::after {
+      content: "";
+      width: 62%;
+      height: 62%;
+      border: 4px dashed var(--goal);
+    }
+
+    .goal.player-goal::after { border-radius: 50%; }
+    .goal.block-goal::after { border-radius: 6px; }
+
+    .body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      transition: transform 70ms linear;
+    }
+
+    .body::after {
+      content: "";
+      border: 4px solid var(--ink);
+    }
+
+    .body.player::after {
+      width: 72%;
+      height: 72%;
+      border-radius: 50%;
+      background: var(--player);
+    }
+
+    .body.block::after {
+      width: 64%;
+      height: 64%;
+      border-radius: 8px;
+      background: var(--block);
+    }
+
+    /* 던질 수 있는 방향. 아무것도 누르지 않아도 보이게 해서, 던질 수 있다는 것을 글 없이 알린다(known-issues 13번). */
+    .arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
+      padding: 0;
+    }
+
+    .arrow span {
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: calc(var(--cell) * 0.16) solid transparent;
+      border-right: calc(var(--cell) * 0.16) solid transparent;
+      border-bottom: calc(var(--cell) * 0.24) solid rgba(43, 43, 43, 0.45);
+    }
+
+    .arrow:hover span,
+    .arrow:focus-visible span {
+      border-bottom-color: var(--ink);
+    }
+
+    .arrow.right span { transform: rotate(90deg); }
+    .arrow.down span { transform: rotate(180deg); }
+    .arrow.left span { transform: rotate(270deg); }
+
+    .board.won .body.player::after {
+      background: #9fd3b8;
+    }
+
+    .board.shake {
+      animation: shake 0.25s ease 2;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .result {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 16px;
+      min-height: 42px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="bar">
+      <nav id="dots" class="dots" aria-label="판 고르기"></nav>
+      <div class="controls">
+        <div id="hand" class="hand" role="img" aria-label="남은 던지기"></div>
+        <button id="undo" class="btn" type="button" aria-label="되돌리기">↶</button>
+        <button id="restart" class="btn" type="button" aria-label="처음부터">↻</button>
+      </div>
+    </div>
+    <div class="board-wrap">
+      <div id="board" class="board"></div>
+    </div>
+    <div class="result">
+      <button id="next" class="btn" type="button" aria-label="다음 판" hidden>▶</button>
+    </div>
+  </main>
+
+  <script src="engine.js"></script>
+  <script src="levels.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      const Engine = window.NewtonEngine;
+      const levels = window.NEWTON_LEVELS.map(Engine.parseLevel);
+      const TICK_MS = 70;
+      const DIRECTION_LABELS = { up: '위', down: '아래', left: '왼쪽', right: '오른쪽' };
+      const board = document.getElementById('board');
+      const ui = {
+        dots: document.getElementById('dots'),
+        hand: document.getElementById('hand'),
+        undo: document.getElementById('undo'),
+        restart: document.getElementById('restart'),
+        next: document.getElementById('next'),
+      };
+      const game = { index: 0, level: null, state: null, history: [], busy: false, cleared: new Set() };
+
+      // 칸 크기는 화면 폭에 맞춘다. 좌우 여백 20px씩을 빼고, 큰 화면에서는 64px을 넘지 않는다.
+      function fitCell() {
+        const available = Math.min(window.innerWidth, 760) - 40;
+        const cell = Math.max(28, Math.min(64, Math.floor(available / game.level.width)));
+        document.documentElement.style.setProperty('--cell', `${cell}px`);
+        board.style.width = `${cell * game.level.width}px`;
+        board.style.height = `${cell * game.level.height}px`;
+        return cell;
+      }
+
+      function place(element, x, y) {
+        element.style.transform = `translate(calc(var(--cell) * ${x}), calc(var(--cell) * ${y}))`;
+      }
+
+      function startLevel(index) {
+        game.index = index;
+        game.level = levels[index];
+        game.state = game.level.start;
+        game.history = [];
+        game.busy = false;
+        draw();
+      }
+
+      function draw() {
+        const { level, state } = game;
+        fitCell();
+        board.innerHTML = '';
+        board.classList.remove('won');
+        for (let y = 0; y < level.height; y++) {
+          for (let x = 0; x < level.width; x++) {
+            if (!level.walls.has(`${x},${y}`)) continue;
+            const tile = document.createElement('div');
+            tile.className = 'tile wall';
+            place(tile, x, y);
+            board.appendChild(tile);
+          }
+        }
+        for (const goal of level.playerGoals) addGoal('player-goal', goal);
+        for (const goal of level.blockGoals) addGoal('block-goal', goal);
+        addBody('player', state.player);
+        for (const block of state.blocks) addBody('block', block);
+        drawArrows();
+        drawHud();
+      }
+
+      function addGoal(kind, goal) {
+        const element = document.createElement('div');
+        element.className = `goal ${kind}`;
+        place(element, goal.x, goal.y);
+        board.appendChild(element);
+      }
+
+      function addBody(kind, position) {
+        const element = document.createElement('div');
+        element.className = `body ${kind}`;
+        place(element, position.x, position.y);
+        board.appendChild(element);
+        return element;
+      }
+
+      function drawArrows() {
+        board.querySelectorAll('.arrow').forEach((arrow) => arrow.remove());
+        if (game.busy || Engine.status(game.level, game.state) !== 'playing') return;
+        for (const [name, d] of Object.entries(Engine.DIRECTIONS)) {
+          if (!Engine.canThrow(game.level, game.state, name)) continue;
+          const arrow = document.createElement('button');
+          arrow.type = 'button';
+          arrow.className = `arrow ${name}`;
+          arrow.setAttribute('aria-label', `${DIRECTION_LABELS[name]}으로 던지기`);
+          arrow.innerHTML = '<span></span>';
+          place(arrow, game.state.player.x + d.dx, game.state.player.y + d.dy);
+          arrow.addEventListener('click', () => throwTo(name));
+          board.appendChild(arrow);
+        }
+      }
+
+      function drawHud() {
+        ui.dots.innerHTML = '';
+        levels.forEach((level, index) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'dot';
+          dot.textContent = String(index + 1);
+          dot.classList.toggle('current', index === game.index);
+          dot.classList.toggle('cleared', game.cleared.has(level.id));
+          dot.addEventListener('click', () => {
+            if (!game.busy) startLevel(index);
+          });
+          ui.dots.appendChild(dot);
+        });
+        ui.hand.innerHTML = '';
+        for (let i = 0; i < game.level.throws; i++) {
+          const item = document.createElement('span');
+          item.className = 'hand-item';
+          item.classList.toggle('full', i < game.state.throwsLeft);
+          ui.hand.appendChild(item);
+        }
+        ui.undo.disabled = game.history.length === 0 || game.busy;
+        const status = Engine.status(game.level, game.state);
+        ui.next.hidden = status !== 'won';
+      }
+
+      function wait(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      async function throwTo(direction) {
+        if (game.busy || Engine.status(game.level, game.state) !== 'playing') return;
+        const result = Engine.throwIn(game.level, game.state, direction);
+        if (!result.ok) {
+          board.classList.remove('shake');
+          void board.offsetWidth;
+          board.classList.add('shake');
+          return;
+        }
+        game.busy = true;
+        drawArrows();
+        // 연출: 던진 물건을 새로 만들고, 차례마다의 위치로 몸체를 옮긴다. 0번은 플레이어, 마지막은 던진 물건이다.
+        const elements = [...board.querySelectorAll('.body')];
+        elements.push(addBody('block', result.frames[0][result.frames[0].length - 1]));
+        for (const frame of result.frames) {
+          frame.forEach((position, index) => place(elements[index], position.x, position.y));
+          await wait(TICK_MS);
+        }
+        game.history.push(game.state);
+        game.state = result.state;
+        game.busy = false;
+        if (result.status === 'won') {
+          game.cleared.add(game.level.id);
+          board.classList.add('won');
+        }
+        drawArrows();
+        drawHud();
+      }
+
+      function undo() {
+        if (game.busy || game.history.length === 0) return;
+        game.state = game.history.pop();
+        draw();
+      }
+
+      const KEY_DIRECTIONS = {
+        arrowup: 'up', w: 'up', arrowdown: 'down', s: 'down', arrowleft: 'left', a: 'left', arrowright: 'right', d: 'right',
+      };
+
+      document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        if (KEY_DIRECTIONS[key]) {
+          event.preventDefault();
+          throwTo(KEY_DIRECTIONS[key]);
+        } else if (key === 'z' || key === 'backspace') {
+          undo();
+        } else if (key === 'r') {
+          if (!game.busy) startLevel(game.index);
+        } else if ((key === 'enter' || key === ' ') && !ui.next.hidden) {
+          event.preventDefault();
+          ui.next.click();
+        }
+      });
+      ui.undo.addEventListener('click', undo);
+      ui.restart.addEventListener('click', () => {
+        if (!game.busy) startLevel(game.index);
+      });
+      ui.next.addEventListener('click', () => startLevel((game.index + 1) % levels.length));
+      window.addEventListener('resize', () => {
+        if (!game.busy) draw();
+      });
+
+      startLevel(0);
+    })();
+  </script>
+</body>
+</html>
