@@ -762,6 +762,10 @@ button {
   margin-bottom: 16px;
 }
 
+.caught-art.mirrored {
+  transform: scaleX(-1);
+}
+
 .overlay-title {
   margin-top: 0;
   margin-bottom: 8px;

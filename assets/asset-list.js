@@ -80,6 +80,12 @@
       subject: src('story-5') },
     { batch: 3, key: 'story-6', path: 'assets/story/6.png', width: 1600, height: 1200, refs: PORTRAIT_REFS,
       subject: src('story-6') },
+
+    // 4차: 2챕터(옆자리 사람의 시선과 뜨거운 차)에 쓰는 그림. 규칙은 docs/design.md의 "2챕터 첫 구현" 절에 있다.
+    { batch: 4, key: 'ui-drink-tea', path: 'assets/ui/drink-tea.png', width: 192, height: 192, refs: PIECE_REFS,
+      subject: '김이 피어오르는 뜨거운 차 종이컵(뚜껑 없이 티백 줄이 걸려 있다). 버튼에 들어갈 아이콘. 다른 음료 아이콘과 같은 크기와 선 굵기' },
+    { batch: 4, key: 'portrait-neighbor-caught', path: 'assets/portrait/neighbor-caught.png', width: 1024, height: 1024, refs: PORTRAIT_REFS,
+      subject: '같은 옆자리 사람 상반신(벽돌색 후드, 하얀 헤드폰)이 왼쪽(주인공 쪽)으로 고개를 홱 돌려 정면에 가깝게 이쪽을 쳐다본다. 헤드폰 한쪽을 손으로 내리고, 눈을 가늘게 뜬 의심하는 표정. 들킨 화면에 뜬다' },
   ];
 
   // 프롤로그 컷 내용은 src/story.js가 기준이다. 여기서는 그쪽을 가리키기만 한다.

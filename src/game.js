@@ -1163,7 +1163,12 @@
     buildBackdrop(ui.sideView, 'scene-side', LAYOUT.side.boxes);
     const finger = Assets.file('ui-finger') ? Assets.html('ui-finger') : '<div class="finger-default"></div>';
     ui.finger.querySelector('.finger-art').innerHTML = finger;
-    byId('caught-art').innerHTML = Assets.html('portrait-neighbor');
+    // 들킨 화면에는 이쪽을 돌아본 얼굴이 필요하다. 그 그림이 오기 전에는 오른쪽을 보는 인물 일러스트를 좌우로 뒤집어
+    // 주인공 쪽(왼쪽)을 보게 한다.
+    const caughtArt = byId('caught-art');
+    const hasCaughtPortrait = Boolean(Assets.file('portrait-neighbor-caught'));
+    caughtArt.innerHTML = Assets.html(hasCaughtPortrait ? 'portrait-neighbor-caught' : 'portrait-neighbor');
+    caughtArt.classList.toggle('mirrored', !hasCaughtPortrait);
     bindEvents();
     startLevel(game.levelIndex);
     fitScene();
