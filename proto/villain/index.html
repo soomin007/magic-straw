@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>콘센트 빌런 도감</title>
+  <style>
+    /* 콘센트 빌런 도감 첫 판. 콘셉트와 그림 규칙은 docs/concept-villains.md에 있다.
+       그림이 없는 동안은 테마별 색 규칙대로 칠한 상자로 보인다. 글은 넣지 않는다. */
+    :root {
+      --page: #1d1b19;
+      --ink: #111;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--page);
+      color: #eee;
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    [hidden] { display: none !important; }
+
+    .wrap {
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 12px;
+      padding-bottom: 32px;
+    }
+
+    .bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      min-width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 3px solid #eee;
+      background: #2b2826;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .btn:disabled { opacity: 0.35; cursor: default; }
+    .btn.off { opacity: 0.45; }
+
+    /* 장면은 960 x 540 좌표로 그리고 화면 폭에 맞춰 줄인다. 숫자는 layout.js가 기준이다. */
+    .viewport {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .scene {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 960px;
+      height: 540px;
+      transform-origin: 0 0;
+      overflow: hidden;
+    }
+
+    .layer,
+    .backdrop img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 960px;
+      height: 540px;
+    }
+
+    .box {
+      position: absolute;
+    }
+
+    .sprite {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: transform 130ms linear, opacity 0.5s ease;
+    }
+
+    .sprite img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 상호작용할 수 있는 것에는 게임이 흰 스티커 테두리와 약한 그림자를 붙인다(예전 카페 버전의 원칙 그대로). */
+    .sprite.sticker .art {
+      filter:
+        drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)
+        drop-shadow(0 3px 2px rgba(0, 0, 0, 0.35));
+    }
+
+    .art {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 그림이 없을 때의 상자 */
+    .gbox {
+      width: 100%;
+      height: 100%;
+      border: 3px solid var(--ink);
+      border-radius: 10px;
+    }
+
+    .gbox.round { border-radius: 50% 50% 40% 40%; }
+
+    .sprite.hop .art {
+      animation: hop 130ms ease;
+    }
+
+    @keyframes hop {
+      50% { transform: translateY(-4px); }
+    }
+
+    .sprite.ringing .art {
+      animation: ring 0.12s linear 6;
+    }
+
+    @keyframes ring {
+      25% { transform: translateX(-3px) rotate(-6deg); }
+      75% { transform: translateX(3px) rotate(6deg); }
+    }
+
+    .sprite.gone { opacity: 0; }
+
+    .scene.bump { animation: bump 0.12s ease; }
+
+    @keyframes bump {
+      50% { transform: var(--fit) translateX(2px); }
+    }
+
+    /* 판을 깨면 빌런 반응 일러스트가 크게 뜬다 */
+    .portrait {
+      position: absolute;
+      right: 40px;
+      bottom: 0;
+      width: 420px;
+      height: 420px;
+      transform: translateY(110%);
+      transition: transform 0.45s cubic-bezier(0.2, 1.4, 0.4, 1);
+      pointer-events: none;
+    }
+
+    .portrait.show { transform: translateY(0); }
+
+    .flash {
+      position: absolute;
+      inset: 0;
+      background: #fff;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .flash.go { animation: flash 0.5s ease; }
+
+    @keyframes flash {
+      0% { opacity: 0.7; }
+      100% { opacity: 0; }
+    }
+
+    .pad {
+      display: grid;
+      grid-template-columns: repeat(3, 56px);
+      grid-template-rows: repeat(2, 56px);
+      gap: 6px;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .pad .btn {
+      width: 56px;
+      height: 56px;
+    }
+
+    .pad [data-dir="up"] { grid-column: 2; grid-row: 1; }
+    .pad [data-dir="left"] { grid-column: 1; grid-row: 2; }
+    .pad [data-dir="down"] { grid-column: 2; grid-row: 2; }
+    .pad [data-dir="right"] { grid-column: 3; grid-row: 2; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="bar">
+      <button id="theme" class="btn" type="button" aria-label="그림체 바꾸기">◐</button>
+      <button id="sound" class="btn" type="button" aria-label="소리 켜고 끄기">♪</button>
+      <button id="undo" class="btn" type="button" aria-label="되돌리기">↶</button>
+      <button id="restart" class="btn" type="button" aria-label="처음부터">↻</button>
+    </div>
+    <div id="viewport" class="viewport">
+      <div id="scene" class="scene">
+        <div id="backdrop" class="layer backdrop"></div>
+        <div id="actors" class="layer"></div>
+        <div id="flash" class="flash"></div>
+        <div id="portrait" class="portrait"></div>
+      </div>
+    </div>
+    <div id="pad" class="pad">
+      <button class="btn" type="button" data-dir="up" aria-label="위">▲</button>
+      <button class="btn" type="button" data-dir="left" aria-label="왼쪽">◀</button>
+      <button class="btn" type="button" data-dir="down" aria-label="아래">▼</button>
+      <button class="btn" type="button" data-dir="right" aria-label="오른쪽">▶</button>
+    </div>
+  </main>
+
+  <script src="layout.js"></script>
+  <script src="engine.js"></script>
+  <script src="../../assets/villain/manifest.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      const Engine = window.VillainEngine;
+      const LAYOUT = window.VILLAIN_LAYOUT;
+      // 그림 좌표(1920 x 1080)를 장면 좌표(960 x 540)로 줄이는 비율
+      const SCALE = 0.5;
+      const TILE = LAYOUT.art.tile * SCALE;
+      const ORIGIN_X = LAYOUT.art.originX * SCALE;
+      const ORIGIN_Y = LAYOUT.art.originY * SCALE;
+      const STORAGE_KEY = 'villain-settings';
+
+      // 그림이 없을 때 상자에 칠하는 테마별 색. 색 규칙은 docs/concept-villains.md "그림체 시험 결과와 결정" 절과 같다.
+      const THEMES = {
+        a: { floor: '#e6e6e2', grid: '#b8b8b4', wall: '#3a3a3a', side: '#5a5a5a', table: '#9a9a9a', plant: '#6f6f6f',
+          player: '#c8302a', item: '#2f7a54', villain: '#cfcfcf', outletTheirs: '#9a9a9a', outletMine: '#c8302a' },
+        b: { floor: '#e8d6b4', grid: '#d2bd96', wall: '#c99a6b', side: '#b98f68', table: '#a9805c', plant: '#7f9a72',
+          player: '#7fd3b8', item: '#e8833a', villain: '#2f5e4a', outletTheirs: '#2f5e4a', outletMine: '#7fd3b8' },
+      };
+
+      const ui = {
+        viewport: document.getElementById('viewport'),
+        scene: document.getElementById('scene'),
+        backdrop: document.getElementById('backdrop'),
+        actors: document.getElementById('actors'),
+        flash: document.getElementById('flash'),
+        portrait: document.getElementById('portrait'),
+        theme: document.getElementById('theme'),
+        sound: document.getElementById('sound'),
+        undo: document.getElementById('undo'),
+        restart: document.getElementById('restart'),
+      };
+
+      const settings = loadSettings();
+      const game = { level: null, state: null, history: [], busy: false, won: false, sprites: {} };
+
+      function loadSettings() {
+        try {
+          return { theme: 'a', sound: true, ...JSON.parse(localStorage.getItem(STORAGE_KEY)) };
+        } catch (error) {
+          return { theme: 'a', sound: true };
+        }
+      }
+
+      function saveSettings() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+        } catch (error) {
+          // 저장하지 못해도 이번 플레이에는 영향이 없다.
+        }
+      }
+
+      function assetPath(key) {
+        const themeAssets = (window.VILLAIN_ASSETS || {})[settings.theme] || {};
+        return themeAssets[key] ? `../../${themeAssets[key]}` : null;
+      }
+
+      // 그림이 있으면 그림을, 없으면 색 상자를 돌려준다.
+      function art(key, color, round) {
+        const path = assetPath(key);
+        if (path) return `<img class="art" src="${path}" alt="" draggable="false">`;
+        return `<div class="art"><div class="gbox${round ? ' round' : ''}" style="background:${color}"></div></div>`;
+      }
+
+      // 장면 크기를 화면 폭에 맞춘다. clientWidth는 내용이 넘쳐도 커지지 않는다.
+      function fitScene() {
+        const width = ui.viewport.clientWidth;
+        const scale = width / 960;
+        ui.viewport.style.height = `${540 * scale}px`;
+        ui.scene.style.setProperty('--fit', `scale(${scale})`);
+        ui.scene.style.transform = `scale(${scale})`;
+      }
+
+      function tileLeft(x) {
+        return ORIGIN_X + x * TILE;
+      }
+
+      function tileTop(y) {
+        return ORIGIN_Y + y * TILE;
+      }
+
+      // 배경. 그림이 있으면 한 장으로, 없으면 지도대로 상자를 놓는다.
+      function drawBackdrop() {
+        const colors = THEMES[settings.theme];
+        const path = assetPath(`bg-${game.level.id}`);
+        if (path) {
+          ui.backdrop.innerHTML = `<img src="${path}" alt="" draggable="false">`;
+          return;
+        }
+        const boxes = [];
+        const box = (x, y, w, h, color, extra = '') => boxes.push(
+          `<div class="box" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;background:${color};${extra}"></div>`);
+        box(0, 0, 960, 540, colors.side);
+        box(0, 0, 960, ORIGIN_Y, colors.wall);
+        box(0, LAYOUT.art.uiTop * SCALE, 960, 540 - LAYOUT.art.uiTop * SCALE, '#151515');
+        game.level.map.forEach((line, y) => {
+          [...line].forEach((char, x) => {
+            box(tileLeft(x), tileTop(y), TILE, TILE, colors.floor, `box-shadow: inset 0 0 0 1px ${colors.grid}`);
+            if (char === 'T') box(tileLeft(x) + 2, tileTop(y) + 2, TILE - 4, TILE - 4, colors.table, 'border:2px solid #111;border-radius:6px');
+            if (char === 'L') box(tileLeft(x) + 8, tileTop(y) + 4, TILE - 16, TILE - 10, colors.plant, 'border:2px solid #111;border-radius:50% 50% 10px 10px');
+          });
+        });
+        ui.backdrop.innerHTML = boxes.join('');
+      }
+
+      // 움직이는 것과 바뀌는 것. 아래 줄에 있는 것이 앞에 보이도록 줄 번호로 겹침 순서를 정한다.
+      function addSprite(key, width, height, color, options = {}) {
+        const element = document.createElement('div');
+        element.className = `sprite${options.sticker ? ' sticker' : ''}`;
+        element.style.width = `${width}px`;
+        element.style.height = `${height}px`;
+        element.innerHTML = art(key, color, options.round);
+        ui.actors.appendChild(element);
+        return element;
+      }
+
+      // 칸 (x, y)의 아래쪽 가운데에 그림 아래쪽 가운데를 맞춘다.
+      function placeOnTile(element, x, y, width, height) {
+        const left = tileLeft(x) + (TILE - width) / 2;
+        const top = tileTop(y) + TILE - height;
+        element.style.transform = `translate(${left}px, ${top}px)`;
+        element.style.zIndex = String(10 + y * 10);
+      }
+
+      function setArt(element, key, color, round) {
+        element.innerHTML = art(key, color, round);
+      }
+
+      function startLevel() {
+        game.level = Engine.parseLevel(LAYOUT.levels[0]);
+        game.state = game.level.start;
+        game.history = [];
+        game.won = false;
+        game.busy = false;
+        draw();
+      }
+
+      function draw() {
+        const colors = THEMES[settings.theme];
+        const { level, state } = game;
+        drawBackdrop();
+        ui.actors.innerHTML = '';
+        ui.portrait.classList.remove('show');
+        ui.portrait.innerHTML = art('villain-portrait', colors.villain, true);
+
+        // 빌런 자리 위 벽의 콘센트
+        game.sprites.outlet = addSprite('outlet-theirs', TILE, TILE, colors.outletTheirs, { round: true });
+        placeOnTile(game.sprites.outlet, level.villain.x, level.villain.y - 1, TILE, TILE);
+
+        // 빌런은 의자 칸과 그 아래 테이블 칸에 걸쳐 엎드려 있다. 그림 아래쪽이 테이블 칸 아래쪽에 맞는다.
+        game.sprites.villain = addSprite('villain-sleep', TILE, TILE * 2.5, colors.villain, { round: true });
+        placeOnTile(game.sprites.villain, level.villain.x, level.villain.y + 1, TILE, TILE * 2.5);
+
+        game.sprites.items = state.items.map((item) => {
+          const size = item.kind === 'chair' ? [TILE, TILE * 1.25] : [TILE, TILE];
+          const element = addSprite(item.kind, size[0], size[1], colors.item, { sticker: true, round: item.kind === 'buzzer' });
+          element.dataset.kind = item.kind;
+          return element;
+        });
+        game.sprites.player = addSprite(`player-${state.facing}`, TILE, TILE * 1.5, colors.player, { sticker: true, round: true });
+        placeAll();
+        ui.undo.disabled = game.history.length === 0;
+      }
+
+      function placeAll() {
+        const { state } = game;
+        state.items.forEach((item, index) => {
+          const element = game.sprites.items[index];
+          placeOnTile(element, item.x, item.y, TILE, element.dataset.kind === 'chair' ? TILE * 1.25 : TILE);
+        });
+        placeOnTile(game.sprites.player, state.player.x, state.player.y, TILE, TILE * 1.5);
+        game.sprites.player.style.zIndex = String(15 + state.player.y * 10);
+      }
+
+      function wait(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      async function move(direction) {
+        Sound.start();
+        if (game.busy || game.won) return;
+        const result = Engine.step(game.level, game.state, direction);
+        const colors = THEMES[settings.theme];
+        if (result.state.facing !== game.state.facing) {
+          setArt(game.sprites.player, `player-${result.state.facing}`, colors.player, true);
+        }
+        if (!result.moved) {
+          game.state = result.state;
+          ui.scene.classList.remove('bump');
+          void ui.scene.offsetWidth;
+          ui.scene.classList.add('bump');
+          return;
+        }
+        game.history.push(game.state);
+        game.state = result.state;
+        game.sprites.player.classList.remove('hop');
+        void game.sprites.player.offsetWidth;
+        game.sprites.player.classList.add('hop');
+        placeAll();
+        ui.undo.disabled = false;
+        if (result.won) await win();
+      }
+
+      // 진동벨이 울리고, 빌런이 깨어나 반응 일러스트가 뜬 뒤, 빌런이 충전기를 챙겨 떠나고 내 충전기가 꽂힌다.
+      async function win() {
+        game.won = true;
+        game.busy = true;
+        const colors = THEMES[settings.theme];
+        const buzzer = game.sprites.items[game.state.items.findIndex((item) => item.kind === 'buzzer')];
+        await wait(180);
+        buzzer.classList.add('ringing');
+        await wait(800);
+        setArt(game.sprites.villain, 'villain-wake', colors.villain, true);
+        ui.flash.classList.remove('go');
+        void ui.flash.offsetWidth;
+        ui.flash.classList.add('go');
+        Sound.jingle();
+        ui.portrait.classList.add('show');
+        await wait(1800);
+        ui.portrait.classList.remove('show');
+        game.sprites.villain.classList.add('gone');
+        await wait(500);
+        setArt(game.sprites.outlet, 'outlet-mine', colors.outletMine, true);
+        game.busy = false;
+      }
+
+      function undo() {
+        if (game.busy || game.history.length === 0) return;
+        game.state = game.history.pop();
+        game.won = false;
+        draw();
+      }
+
+      // 소리. 배경 음악은 MP3 앞뒤의 짧은 무음을 잘라 내고 그 구간만 끊김 없이 반복한다(MP3를 그냥 반복하면 이음매에서 끊긴다).
+      // 브라우저는 사람이 한 번 누르기 전에는 소리를 내지 못하게 하므로, 첫 입력 때 시작한다.
+      const Sound = (function () {
+        let context = null;
+        let master = null;
+        let jingleBuffer = null;
+        let starting = false;
+
+        async function load(url) {
+          const response = await fetch(url);
+          return context.decodeAudioData(await response.arrayBuffer());
+        }
+
+        function audibleRange(buffer) {
+          const data = buffer.getChannelData(0);
+          const threshold = 0.003;
+          let first = 0;
+          while (first < data.length && Math.abs(data[first]) < threshold) first += 1;
+          let last = data.length - 1;
+          while (last > first && Math.abs(data[last]) < threshold) last -= 1;
+          return { start: first / buffer.sampleRate, end: (last + 1) / buffer.sampleRate };
+        }
+
+        async function start() {
+          if (starting || !window.AudioContext) return;
+          starting = true;
+          try {
+            context = new AudioContext();
+            master = context.createGain();
+            master.gain.value = settings.sound ? 1 : 0;
+            master.connect(context.destination);
+            const bgm = await load('../../assets/audio/bgm-cafe.mp3');
+            const range = audibleRange(bgm);
+            const source = context.createBufferSource();
+            const bgmGain = context.createGain();
+            bgmGain.gain.value = 0.55;
+            source.buffer = bgm;
+            source.loop = true;
+            source.loopStart = range.start;
+            source.loopEnd = range.end;
+            source.connect(bgmGain).connect(master);
+            source.start(0, range.start);
+            jingleBuffer = await load('../../assets/audio/jingle-clear.mp3');
+          } catch (error) {
+            // 파일을 직접 연 경우처럼 소리를 불러올 수 없으면 소리 없이 진행한다.
+          }
+        }
+
+        function jingle() {
+          if (!context || !jingleBuffer) return;
+          const source = context.createBufferSource();
+          source.buffer = jingleBuffer;
+          const range = audibleRange(jingleBuffer);
+          source.connect(master);
+          source.start(0, range.start);
+        }
+
+        function setOn(on) {
+          if (master) master.gain.value = on ? 1 : 0;
+        }
+
+        return { start, jingle, setOn };
+      })();
+
+      function applyButtons() {
+        ui.sound.classList.toggle('off', !settings.sound);
+        ui.theme.textContent = settings.theme === 'a' ? '◐' : '◑';
+      }
+
+      const KEY_DIRECTIONS = {
+        arrowup: 'up', w: 'up', arrowdown: 'down', s: 'down', arrowleft: 'left', a: 'left', arrowright: 'right', d: 'right',
+      };
+
+      document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        if (KEY_DIRECTIONS[key]) {
+          event.preventDefault();
+          move(KEY_DIRECTIONS[key]);
+        } else if (key === 'z' || key === 'backspace') {
+          event.preventDefault();
+          undo();
+        } else if (key === 'r') {
+          if (!game.busy) startLevel();
+        }
+      });
+      document.querySelectorAll('#pad [data-dir]').forEach((button) => {
+        button.addEventListener('click', () => move(button.dataset.dir));
+      });
+      ui.undo.addEventListener('click', undo);
+      ui.restart.addEventListener('click', () => {
+        if (!game.busy) startLevel();
+      });
+      ui.theme.addEventListener('click', () => {
+        if (game.busy) return;
+        settings.theme = settings.theme === 'a' ? 'b' : 'a';
+        saveSettings();
+        applyButtons();
+        draw();
+      });
+      ui.sound.addEventListener('click', () => {
+        settings.sound = !settings.sound;
+        saveSettings();
+        applyButtons();
+        Sound.start();
+        Sound.setOn(settings.sound);
+      });
+      new ResizeObserver(fitScene).observe(ui.viewport);
+
+      applyButtons();
+      startLevel();
+      fitScene();
+    })();
+  </script>
+</body>
+</html>
