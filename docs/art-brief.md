@@ -40,6 +40,8 @@
 | 10-24 | 상대가 꽂아 둔 다른 기기는 회색과 흰색으로만 | 벽돌색 기기가 상대 플러그로 읽혀서, 내 플러그가 그 앞에 꽂히자 "상대 플러그가 사라졌다"는 오해가 생겼다 | 벽돌색은 "움직일 수 있는 상대 물건"인 상대 플러그 하나뿐이다 |
 | 10-24 | 프롤로그에 시연 컷(`story-6`)을 더함 | 플레이 화면만으로는 마법 빨대가 무엇을 하는지 전해지지 않았다. 프롤로그는 글이 없으니 동작으로 보여 줘야 한다 | 마시면 얼음을 뱉고, 얼음이 물건을 민다 |
 | 10-24 | 4번 컷의 시계를 새벽 2시로 | 시계가 9시 무렵으로 보여 "시험 전날 새벽"의 급함이 사라졌다 | 늦은 밤, 시간이 없다 |
+| 10-28 | 프롤로그 여섯 컷에서 말풍선, 이모지, 만화 기호를 모두 뺌 | 수업 과제로 "AI가 멋대로 붙인 UI와 텍스트"를 지우는 중인데, 말풍선과 기호는 사용자가 정한 적 없이 AI가 그림에 얹은 것이다. 말풍선이 설명을 대신해서 그림 자체가 이야기를 말하지 못했다 | 말풍선 없이 표정과 몸짓과 소품(시계, 빈 배터리 화면)으로 "충전기를 뺏겼다"가 읽힌다 |
+| 10-28 | 옆자리 사람(빨간 후드)이 주인공 쪽이 아니라 반대쪽(오른쪽, 자기 랩탑과 창 쪽)을 보게 함 | 사용자 피드백: 옆자리 사람이 주인공 쪽을 바라보면 부자연스럽다. 옆자리 사람은 헤드폰을 끼고 자기 일에 몰두해 있어야 "나는 모르는 사이에 충전기를 빼앗겼다"가 자연스럽고, 몰래 되찾는다는 상황도 믿을 수 있다 | 헤드폰 낀 상대가 내 쪽을 보지 않고 자기 화면에 빠져 있다 |
 
 ## 그림체
 
@@ -165,9 +167,9 @@
 
 ## 프롤로그
 
-프롤로그는 말을 몰라도 읽혀야 한다. 컷마다 장면 설명(`scene`)과 말풍선 기호(`symbol`)가 `src/story.js`에 있다.
-말풍선과 기호는 그림 안에 직접 그리고, 글자는 한 자도 넣지 않는다. 시계, 화장실 표지판, 느낌표와 물음표, 빈 배터리 같은 기호만 쓴다.
-말풍선 자리는 `src/story.js`의 `bubble` 위치를 따른다. 컷의 인물은 인물 일러스트와 같은 사람으로 알아볼 수 있어야 한다.
+프롤로그는 말을 몰라도 읽혀야 한다. 컷마다 장면 설명(`scene`)이 `src/story.js`에 있다.
+2026-10-28부터 말풍선, 이모지, 만화 기호(느낌표, 물음표, 분노 표시, 땀 표시 등), 글자는 컷에 하나도 넣지 않는다.
+이야기는 표정과 몸짓과 소품(시계, 화장실 표지판, 빈 배터리가 뜬 랩탑 화면)만으로 읽혀야 한다. 컷의 인물은 인물 일러스트와 같은 사람으로 알아볼 수 있어야 한다.
 여섯째 컷(`story-6`)은 마법 빨대가 무엇을 하는지 보여 주는 시연 컷이다. 한 컷 안에서 왼쪽부터 "한 모금 빨아들임, 입의 빨대 끝에서 얼음이 수평으로 튀어나감,
 바 위 종이컵이 얼음에 맞아 오른쪽으로 미끄러짐" 세 동작을 만화의 연속 동작처럼 그린다. 세 동작은 컷 너비를 대략 30%, 30%, 40%로 나눠 쓴다.
 넷째 컷의 벽시계나 휴대폰 시계는 새벽 2시를 가리켜야 한다(작은 바늘이 2, 큰 바늘이 12).
@@ -211,7 +213,7 @@ LINE (scene-): Outlines thinner than the puzzle objects so the pieces stand out.
 VIEW (top, scene-top): Slightly tilted top-down view, seen from above with a little of the front side visible (like Stardew Valley). Not isometric.
 VIEW (side-): Eye-level front view at bar-counter height, orthographic.
 VIEW (portrait-): Bust portrait, transparent background.
-VIEW (story-): Full comic panel with background, wordless. Speech bubbles contain only pictograms and symbols, never letters.
+VIEW (story-): Full comic panel with background, wordless. No speech bubbles, no emoji, no manga symbols (!, ?, anger marks, sweat drops), no letters. The story is told by faces, gestures and props only.
 
 Transparent PNG items add: Single object, centered, transparent background, no ground shadow, no white border.
 ```
@@ -241,4 +243,26 @@ outlet- 다섯 칸은 manifest에서 등록을 빼 두었으니 같은 경로에
 docs/layout-guide/scene-top.png와 scene-side.png, assets/asset-list.js의 subject를 따라.
 다 만들면 docs/art-check.html과 index.html로 확인해 줘. 숫자가 맞는지와 함께 "화면에서 읽혀야 하는 것"이 실제로 그렇게 읽히는지도 봐 줘.
 숫자와 다르게 나왔거나, 숫자는 맞는데 이유를 지키지 못한 곳이 있으면 세션 로그에 적고, 커밋 대기 목록을 남기고 멈춰 줘. 커밋은 하지 마.
+```
+
+### 2026-10-28 의뢰 (말풍선 제거와 옆자리 사람의 시선)
+
+```text
+AGENTS.md와 docs/art-brief.md를 다시 읽어 줘. 특히 "바꾼 것과 그 이유" 절의 10-28 두 줄을 먼저 읽어 줘.
+수업 과제로 "AI가 멋대로 만든 UI와 텍스트"를 지우는 중이고, 그림에서 바꿀 것이 두 가지 남았어.
+
+1) 프롤로그 여섯 컷(story-1 ~ story-6)에서 말풍선, 이모지(알람 시계와 책 더미 그림, 화장실 표시 등), 만화 기호(?!, 분노 표시, 말줄임표)를 전부 빼 줘.
+   이유: 말풍선과 기호는 사용자가 정한 적 없이 AI가 그림에 얹은 것이고, 말풍선이 설명을 대신해서 그림 자체는 이야기를 말하지 않았어.
+   말풍선이 있던 자리에는 아무것도 넣지 않고, 이야기는 표정, 몸짓, 소품만으로 읽히게 해 줘.
+   소품은 그대로 둬도 돼: 벽시계(새벽 2시), 화장실 표지판, 빈 배터리 경고가 뜬 랩탑 화면. 글자는 여전히 한 자도 넣지 마.
+   말풍선이 컷 위쪽 약 18~25%를 차지하던 컷(story-3, story-4)은 그 자리를 배경(창밖, 조명)으로 채워 줘.
+2) 옆자리 사람(빨간 후드, 헤드폰)이 주인공 쪽을 보지 않고 반대쪽을 보게 다시 그려 줘.
+   대상: scene-top, scene-side, story-3, story-4, portrait-neighbor.
+   이유: 헤드폰을 끼고 자기 일에 몰두한 사람이어야 "내가 모르는 사이 충전기가 빼앗겼다"가 자연스럽고, 몰래 되찾는다는 상황도 믿을 수 있어.
+   지금은 scene-top과 scene-side에서 얼굴이 칸막이 쪽(왼쪽, 주인공 쪽)으로 돌아가 있어서, 상대가 나를 보고 있는 것처럼 읽혀.
+   얼굴은 정면에서 오른쪽(칸막이 반대쪽)으로 약 25도 틀고, 시선은 자기 랩탑이나 창 쪽을 향하게 해 줘. 턱을 괴는 자세는 유지해도 돼.
+   위치와 크기는 그대로 유지해 줘(docs/layout-guide의 배치, 얼굴 가로 90~100%와 세로 14~41%).
+
+스티커 위치가 그림 배경에 의존하는 scene-top과 scene-side는 크기와 배치를 바꾸면 안 돼. 바뀌는 건 말풍선과 얼굴 방향뿐이야.
+다 만들면 docs/art-check.html과 index.html로 확인하고, 세션 로그에 커밋 대기 목록을 남기고 멈춰 줘. 커밋은 하지 마.
 ```

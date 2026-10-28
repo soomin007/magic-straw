@@ -21,7 +21,7 @@ Baba Is You와 There Is No Game, Helltaker를 참고해 적은 규칙을 조합�
 | `src/levels.js` | 1챕터 레벨 지도 |
 | `src/game.js` | 판 그리기, 입력, 연출, 튜토리얼, 프롤로그 |
 | `src/assets.js` | 그림을 찾고, 없으면 회색 상자로 대신한다 |
-| `src/story.js` | 프롤로그 컷과 혼잣말 |
+| `src/story.js` | 프롤로그 컷 목록 |
 | `tools/verify.html` | 레벨마다 최소 행동 수를 탐색해 확인하는 검증 도구 |
 | `docs/design.md` | 규칙, 레벨, 시작 흐름, 확장 계획 |
 | `docs/playtest.md` | 다른 사람에게 해 보게 할 때 쓰는 플레이 테스트 기록지 |

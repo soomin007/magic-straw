@@ -98,25 +98,9 @@ button {
   min-width: 0;
 }
 
-.app-icon {
-  width: 14px;
-  height: 14px;
-  border-radius: 4px;
-  background: var(--mint);
-  border: 2px solid var(--ink);
-  flex-shrink: 0;
-}
-
 .app-title {
   font-weight: 800;
   white-space: nowrap;
-}
-
-.level-name {
-  color: #7d7268;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .level-dots {
@@ -575,77 +559,6 @@ button {
   cursor: default;
 }
 
-.side-label {
-  font-weight: 800;
-}
-
-/* 혼잣말과 알림 */
-
-/* 혼잣말은 화면 위쪽 가운데, 두 사람 얼굴 사이의 카페 안쪽에 띄운다.
-   아래쪽에는 음료 버튼을 짚는 손가락이 와서 겹친다. */
-.speech {
-  position: absolute;
-  left: 50%;
-  top: 12px;
-  transform: translateX(-50%);
-  z-index: 6;
-  max-width: min(360px, calc(100% - 24px));
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 14px;
-  padding-right: 14px;
-  border-radius: 14px;
-  border: 3px solid var(--ink);
-  background: #fff;
-  font-weight: 700;
-  line-height: 1.4;
-  box-shadow: 4px 4px 0 var(--ink);
-}
-
-.speech {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.speech-portrait {
-  flex-shrink: 0;
-  width: 56px;
-  height: 56px;
-  margin-top: -18px;
-  margin-bottom: -18px;
-  margin-left: -6px;
-}
-
-.speech-portrait .gbox {
-  font-size: 12px;
-}
-
-.toast {
-  position: absolute;
-  left: 50%;
-  bottom: 12px;
-  z-index: 6;
-  max-width: calc(100% - 40px);
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 14px;
-  padding-right: 14px;
-  border-radius: 10px;
-  background: rgba(43, 38, 35, 0.92);
-  color: var(--paper);
-  font-size: 14px;
-  transform: translate(-50%, 8px);
-  opacity: 0;
-  transition: opacity 0.18s ease, transform 0.18s ease;
-  pointer-events: none;
-}
-
-.toast.visible {
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
-
 /* 튜토리얼 손가락 */
 
 .finger {
@@ -740,31 +653,6 @@ button {
   border-width: 2px;
   font-size: 11px;
   border-radius: 8px;
-}
-
-/* 단축키는 키보드 키처럼 테두리를 둘러 개수로 읽히지 않게 한다. 마우스가 없는 터치 화면에서는 숨긴다. */
-.key {
-  min-width: 20px;
-  padding-top: 1px;
-  padding-bottom: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-radius: 5px;
-  border: 1.5px solid #a39684;
-  border-bottom-width: 3px;
-  background: #fffaf1;
-  font-family: inherit;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: #7d7268;
-  text-align: center;
-}
-
-@media (hover: none) {
-  .key {
-    display: none;
-  }
 }
 
 .drink[aria-pressed="true"],
@@ -889,38 +777,6 @@ button {
   font-size: 20px;
 }
 
-.os-popup p {
-  margin: 0;
-  padding-top: 14px;
-  padding-bottom: 16px;
-  padding-left: 14px;
-  padding-right: 14px;
-  line-height: 1.5;
-}
-
-.help-panel {
-  position: absolute;
-  z-index: 25;
-  right: 12px;
-  top: 12px;
-  width: 360px;
-  max-width: calc(100% - 24px);
-  max-height: calc(100% - 24px);
-  overflow-y: auto;
-  padding-top: 4px;
-  padding-bottom: 16px;
-  padding-left: 18px;
-  padding-right: 18px;
-  border-radius: 12px;
-  border: 3px solid var(--ink);
-  background: var(--paper);
-  line-height: 1.6;
-}
-
-.help-title {
-  font-weight: 900;
-}
-
 /* 휴대폰 카메라 */
 
 .camera-overlay {
@@ -958,29 +814,7 @@ button {
   margin-right: auto;
 }
 
-.camera-title {
-  margin-top: 10px;
-  margin-bottom: 4px;
-  font-weight: 900;
-}
-
-.camera-lines {
-  margin: 0;
-  line-height: 1.5;
-}
-
-.camera-line {
-  display: block;
-  white-space: nowrap;
-}
-
-.camera-thought {
-  margin-top: 14px;
-  margin-bottom: 14px;
-  font-weight: 700;
-}
-
-/* 프롤로그. 만화 컷 한 장 안에 말풍선과 알림을 얹는다. 컷은 4:3 비율로 창에 맞춰 줄인다. */
+/* 프롤로그. 컷은 4:3 비율로 창에 맞춰 줄인다. */
 
 .prologue {
   position: absolute;
@@ -1055,59 +889,6 @@ button {
   to { opacity: 1; transform: none; }
 }
 
-/* 만화 말풍선. 위치와 꼬리 방향은 src/story.js의 bubble 값으로 정한다. */
-.comic-bubble {
-  position: absolute;
-  margin: 0;
-  padding-top: 0.6em;
-  padding-bottom: 0.6em;
-  padding-left: 0.9em;
-  padding-right: 0.9em;
-  border-radius: 1.2em;
-  border: 4px solid #111;
-  background: #fff;
-  color: #111;
-  font-size: max(22px, 6cqw);
-  font-weight: 900;
-  line-height: 1.2;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.comic-bubble::after {
-  content: "";
-  position: absolute;
-  bottom: -18px;
-  width: 22px;
-  height: 22px;
-  border-right: 4px solid #111;
-  border-bottom: 4px solid #111;
-  background: #fff;
-  transform: skewX(30deg) rotate(45deg);
-}
-
-.comic-bubble[data-tail="left"]::after { left: 18%; }
-.comic-bubble[data-tail="right"]::after { right: 18%; }
-.comic-bubble[data-tail="none"]::after { display: none; }
-
-/* 컷 안의 노트북 화면에 뜬 경고 알림 */
-.prologue-notice {
-  position: absolute;
-  margin: 0;
-  padding-top: 0.4em;
-  padding-bottom: 0.4em;
-  padding-left: 0.7em;
-  padding-right: 0.7em;
-  border-radius: 6px;
-  border: 3px solid #111;
-  background: #d8434a;
-  color: #fff;
-  font-size: max(20px, 5cqw);
-  font-weight: 800;
-  line-height: 1;
-  box-shadow: 4px 4px 0 #111;
-}
-
 .prologue-actions {
   display: flex;
   align-items: center;
@@ -1117,12 +898,6 @@ button {
   padding-bottom: 12px;
   padding-left: 16px;
   padding-right: 16px;
-}
-
-.prologue-count {
-  margin-right: auto;
-  color: #9a9186;
-  font-size: 14px;
 }
 
 .title-card {
@@ -1153,29 +928,6 @@ button {
   background: var(--os-bar);
   color: var(--os-text);
   font-size: 13px;
-}
-
-.start-button {
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
-  background:
-    linear-gradient(90deg, transparent 45%, var(--os-bar) 45% 55%, transparent 55%),
-    linear-gradient(180deg, transparent 45%, var(--os-bar) 45% 55%, transparent 55%),
-    #8fb4ff;
-}
-
-.task-app {
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border-bottom: 2px solid #8fb4ff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .system-tray {
@@ -1229,42 +981,7 @@ button {
   background: #ff6b5e;
 }
 
-.battery.charging .battery-text::after {
-  content: " 충전 중";
-  font-weight: 400;
-}
-
-.os-notify {
-  position: fixed;
-  right: 16px;
-  bottom: calc(var(--taskbar-height) + 12px);
-  z-index: 40;
-  max-width: calc(100% - 32px);
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-left: 16px;
-  padding-right: 16px;
-  border-radius: 10px;
-  background: #2b2f3a;
-  color: var(--os-text);
-  font-size: 14px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  transform: translateY(16px);
-  opacity: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  pointer-events: none;
-}
-
-.os-notify.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* 좁은 화면 */
-
-.rotate-hint {
-  display: none;
-}
 
 @media (max-width: 640px) {
   .desktop {
@@ -1278,10 +995,7 @@ button {
     font-size: 15px;
   }
 
-  .task-app,
-  .dday,
-  .label-long,
-  .key {
+  .label-long {
     display: none;
   }
 
@@ -1313,22 +1027,6 @@ button {
 
 }
 
-@media (max-width: 640px) and (orientation: portrait) {
-  .rotate-hint {
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 16px;
-    margin: 0;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-align: center;
-    font-size: 14px;
-    color: #7d7268;
-  }
-}
-
 /* 휴대폰을 세로로 들면 게임 전체를 90도 돌려 가로로 보여 준다(2026-10-24 결정).
    폰을 가로로 돌리면 원래대로 보인다. 입력 좌표는 game.js가 배치 좌표로 계산해서 회전과 상관없이 맞는다. */
 @media (orientation: portrait) and (hover: none) and (max-width: 900px) {
@@ -1340,10 +1038,6 @@ button {
     height: 100vw;
     transform: translateX(100vw) rotate(90deg);
     transform-origin: top left;
-  }
-
-  .rotate-hint {
-    display: none !important;
   }
 }
 

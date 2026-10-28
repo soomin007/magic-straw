@@ -35,13 +35,13 @@
   const PIECE_MOVE_MS = 260;
   const LOW_BATTERY_SAVER = 2;
   const DEATHS_BEFORE_SKIP = 3;
-  const LEVEL_LINE_MS = 3500;
   const STORAGE_KEY = 'magic-straw-progress-v2';
 
   const DRINK_ORDER = ['ice', 'soda'];
-  const DRINK_LABELS = { ice: '아이스 아메리카노', soda: '소다' };
   // 음료 버튼에 붙이는 효과 기호. 글을 몰라도 얼음은 밀고, 소다는 띄운다는 것을 알 수 있게 한다.
   const DRINK_EFFECT = { ice: '→', soda: '↑' };
+  // 얼음 조준선(줄마다의 경로 힌트와 올려 둔 줄의 경로선)은 처음 두 판에서만 보여 준다.
+  const AIM_LINE_LEVELS = 2;
   const KIND_ASSET = { myPlug: 'my-plug', theirPlug: 'their-plug', cup: 'cup', book: 'book', menu: 'menu' };
 
   const byId = (id) => document.getElementById(id);
@@ -59,42 +59,31 @@
     aimHints: byId('aim-hints'),
     fxLayer: byId('fx-layer'),
     sideBar: byId('side-bar'),
-    sideLabel: byId('side-label'),
     rowUp: byId('row-up'),
     rowDown: byId('row-down'),
-    speech: byId('speech'),
-    toast: byId('toast'),
-    levelName: byId('level-name'),
     levelDots: byId('level-dots'),
     difficultyButton: byId('btn-difficulty'),
     undoButton: byId('btn-undo'),
     restartButton: byId('btn-restart'),
-    helpButton: byId('btn-help'),
     drinks: byId('drinks'),
     tools: byId('tools'),
     duckButton: byId('btn-duck'),
     cameraButton: byId('btn-camera'),
     finger: byId('finger'),
     camera: byId('camera'),
-    notify: byId('notify'),
     battery: byId('battery'),
     batteryFill: byId('battery-fill'),
     batteryText: byId('battery-text'),
     overlayDead: byId('overlay-dead'),
     overlayWon: byId('overlay-won'),
-    wonText: byId('won-text'),
     wonNext: byId('won-next'),
     deadSkip: byId('dead-skip'),
     popupLow: byId('popup-low'),
     popupLowBar: byId('popup-low-bar'),
-    helpPanel: byId('help-panel'),
     prologue: byId('prologue'),
     prologueStage: byId('prologue-stage'),
     prologuePanel: byId('prologue-panel'),
     prologueArt: byId('prologue-art'),
-    prologueBubble: byId('prologue-bubble'),
-    prologueNotice: byId('prologue-notice'),
-    prologueCount: byId('prologue-count'),
     prologueNext: byId('prologue-next'),
   };
 
@@ -109,13 +98,10 @@
     focusRow: 0,
     busy: false,
     deaths: {},
-    saverNoticeShown: false,
     lowPopupShown: false,
     prologueIndex: -1,
-    levelLine: null,
     pendingAction: null,
     lastPointerType: 'mouse',
-    touchHintShown: false,
     pieceElements: new Map(),
   };
 
@@ -196,7 +182,6 @@
     game.level = levels[index];
     game.state = Engine.initial(game.level, Engine.batteryFor(game.level, progress.difficulty));
     game.history = [];
-    game.saverNoticeShown = false;
     game.lowPopupShown = false;
     game.view = 'top';
     const myPlug = game.state.objects.find((obj) => obj.kind === 'myPlug');
@@ -211,7 +196,7 @@
     buildDrinks();
     buildView();
     updateHud();
-    showLevelLine();
+    updateTutorial();
   }
 
   function buildDrinks() {
@@ -222,10 +207,7 @@
       button.type = 'button';
       button.className = 'drink';
       button.dataset.drink = drink;
-      const key = DRINK_ORDER.indexOf(drink) + 1;
-      button.title = `단축키 ${key}`;
-      button.innerHTML = `<span class="drink-icon">${Assets.html(`ui-drink-${drink}`)}<span class="effect" aria-hidden="true">${DRINK_EFFECT[drink]}</span></span>`
-        + `<span>${DRINK_LABELS[drink]}</span><kbd class="key">${key}</kbd>`;
+      button.innerHTML = `<span class="drink-icon">${Assets.html(`ui-drink-${drink}`)}<span class="effect" aria-hidden="true">${DRINK_EFFECT[drink]}</span></span>`;
       button.addEventListener('click', () => selectDrink(drink));
       ui.drinks.appendChild(button);
     }
@@ -326,7 +308,6 @@
       for (const image of ui.board.querySelectorAll('.piece-body .asset')) alignToFloor(image);
     }
 
-    ui.sideLabel.textContent = `${game.focusRow + 1}번 줄을 바 높이에서 보는 중`;
     ui.rowUp.disabled = game.focusRow === 0;
     ui.rowDown.disabled = game.focusRow === level.rows - 1;
     ui.duckButton.setAttribute('aria-pressed', String(!isTop));
@@ -470,6 +451,10 @@
 
   // 음료를 고르면 마우스를 올리지 않아도 쓸 수 있는 곳을 흐리게 보여 준다.
   // 얼음은 줄마다 날아갈 경로를, 소다는 띄울 수 있는 물건의 거품 테두리를 보여 준다.
+  function showsAimLine() {
+    return game.levelIndex < AIM_LINE_LEVELS;
+  }
+
   function clearHints() {
     ui.aimHints.innerHTML = '';
     for (const element of game.pieceElements.values()) element.classList.remove('can-lift');
@@ -479,6 +464,7 @@
     clearHints();
     if (!game.level || game.busy || game.state.status !== 'playing' || !game.selectedDrink) return;
     if (game.selectedDrink === 'ice') {
+      if (!showsAimLine()) return;
       const lines = game.view === 'top' ? game.level.rows : game.level.height;
       for (let line = 0; line < lines; line++) {
         const action = game.view === 'top'
@@ -556,16 +542,12 @@
 
   function updateHud() {
     const { level, state } = game;
-    ui.levelName.textContent = `${game.levelIndex + 1}. ${level.title}`;
-    document.title = `${level.title} | 내 자리, 내 충전기`;
-
     ui.levelDots.innerHTML = '';
     levels.forEach((item, index) => {
       const dot = document.createElement('button');
       dot.type = 'button';
       dot.className = 'level-dot';
       dot.textContent = String(index + 1);
-      dot.title = item.title;
       dot.disabled = index > progress.unlocked;
       dot.classList.toggle('current', index === game.levelIndex);
       dot.classList.toggle('cleared', progress.cleared.includes(item.id));
@@ -577,7 +559,6 @@
 
     const difficulty = Engine.DIFFICULTIES.find((item) => item.id === progress.difficulty);
     ui.difficultyButton.innerHTML = `<span class="label-long">난이도 </span>${difficulty.label}`;
-    ui.difficultyButton.title = `난이도 ${difficulty.label}`;
     ui.undoButton.disabled = game.history.length === 0;
 
     const full = Engine.batteryFor(level, progress.difficulty);
@@ -593,20 +574,7 @@
     updateControls();
   }
 
-  // 혼잣말, 손가락 안내
-
-  let levelLineTimer = null;
-  function showLevelLine() {
-    clearTimeout(levelLineTimer);
-    game.levelLine = Story.levelLines[game.level.id] || null;
-    if (game.levelLine) {
-      levelLineTimer = setTimeout(() => {
-        game.levelLine = null;
-        updateTutorial();
-      }, LEVEL_LINE_MS);
-    }
-    updateTutorial();
-  }
+  // 손가락 안내
 
   function pointFinger(target) {
     if (!target) {
@@ -627,63 +595,30 @@
 
   function updateTutorial() {
     if (!game.level) return;
-    const lines = Story.tutorialLines;
     const { state } = game;
     const playing = state.status === 'playing' && game.prologueIndex < 0 && !game.busy;
     const fresh = state.used === 0;
     let target = null;
-    let line = null;
 
     if (playing && fresh && game.level.tutorial === 'full') {
       if (game.selectedDrink !== 'ice') {
         target = ui.drinks.querySelector('[data-drink="ice"]');
-        line = lines.pickIce;
       } else {
         // 마우스가 있는 줄이 아니라 내 플러그가 있는 줄을 짚어야 첫 판에서 헷갈리지 않는다.
         const myPlug = state.objects.find((obj) => obj.kind === 'myPlug');
         const center = topCellCenter(0, myPlug.row);
         target = { x: center.x, y: center.y - ROW_HEIGHT / 2 };
-        line = lines.pickRow;
       }
     } else if (playing && fresh && game.level.tutorial === 'drink' && game.selectedDrink !== 'soda') {
       target = ui.drinks.querySelector('[data-drink="soda"]');
-      line = lines.pickSoda;
-    } else if (playing && fresh && game.level.tutorial === 'duck') {
-      if (game.view === 'top') {
-        target = ui.duckButton;
-        line = lines.duck;
-      } else {
-        line = lines.ducked;
-      }
+    } else if (playing && fresh && game.level.tutorial === 'duck' && game.view === 'top') {
+      target = ui.duckButton;
     }
 
     pointFinger(target);
-    const speech = line || (game.prologueIndex < 0 ? game.levelLine : null);
-    ui.speech.hidden = !speech;
-    // Helltaker처럼 혼잣말 옆에 주인공 얼굴을 띄운다.
-    ui.speech.innerHTML = speech
-      ? `<span class="speech-portrait">${Assets.html('portrait-me')}</span><span class="speech-text"></span>`
-      : '';
-    if (speech) ui.speech.querySelector('.speech-text').textContent = speech;
   }
 
   // 연출
-
-  let toastTimer = null;
-  function showToast(message) {
-    ui.toast.textContent = message;
-    ui.toast.classList.add('visible');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => ui.toast.classList.remove('visible'), 1800);
-  }
-
-  let notifyTimer = null;
-  function showNotification(message) {
-    ui.notify.textContent = message;
-    ui.notify.classList.add('visible');
-    clearTimeout(notifyTimer);
-    notifyTimer = setTimeout(() => ui.notify.classList.remove('visible'), 2600);
-  }
 
   function shakeBoard() {
     ui.board.classList.remove('shake');
@@ -814,13 +749,17 @@
   function showAim(action) {
     clearAim();
     if (action.drink === 'ice') {
-      const bandLine = game.view === 'top' ? action.row : game.level.height - 1 - action.z;
-      ui.aimBand.style.top = `${bandLine * (game.view === 'top' ? ROW_HEIGHT : CELL)}px`;
-      ui.aimBand.classList.add('visible');
       const preview = Engine.step(game.level, game.state, action);
+      if (showsAimLine()) {
+        const bandLine = game.view === 'top' ? action.row : game.level.height - 1 - action.z;
+        ui.aimBand.style.top = `${bandLine * (game.view === 'top' ? ROW_HEIGHT : CELL)}px`;
+        ui.aimBand.classList.add('visible');
+      }
       if (!preview.ok) return;
-      const points = icePathPoints(preview.effect).map((point) => `${point.x},${point.y}`).join(' ');
-      ui.aimPath.setAttribute('points', points);
+      if (showsAimLine()) {
+        const points = icePathPoints(preview.effect).map((point) => `${point.x},${point.y}`).join(' ');
+        ui.aimPath.setAttribute('points', points);
+      }
       if (preview.effect.hitId) game.pieceElements.get(preview.effect.hitId).classList.add('targeted');
     } else if (Engine.check(game.level, game.state, action).ok) {
       game.pieceElements.get(action.target).classList.add('targeted');
@@ -849,15 +788,9 @@
     if (game.busy || game.state.status !== 'playing') return;
     const cell = cellFromPointer(event);
     if (!cell) return;
-    if (!game.selectedDrink) {
-      showToast('먼저 아래에서 음료를 고르세요');
-      return;
-    }
+    if (!game.selectedDrink) return;
     const action = actionForCell(cell);
-    if (!action) {
-      showToast('거품은 물건에 붙여야 합니다');
-      return;
-    }
+    if (!action) return;
 
     if (game.lastPointerType !== 'touch' && game.lastPointerType !== 'pen') {
       perform(action);
@@ -870,24 +803,18 @@
     }
     const verdict = Engine.check(game.level, game.state, action);
     if (!verdict.ok) {
-      showToast(verdict.reason);
       shakeBoard();
       return;
     }
     if (game.view === 'top') game.focusRow = cell.row;
     showAim(action);
     game.pendingAction = action;
-    if (!game.touchHintShown) {
-      game.touchHintShown = true;
-      showToast('같은 곳을 한 번 더 누르면 뱉습니다');
-    }
   }
 
   async function perform(action) {
     if (game.busy) return;
     const result = Engine.step(game.level, game.state, action);
     if (!result.ok) {
-      showToast(result.reason);
       shakeBoard();
       return;
     }
@@ -921,10 +848,6 @@
       onDead();
       return;
     }
-    if (state.battery <= LOW_BATTERY_SAVER && !game.saverNoticeShown) {
-      game.saverNoticeShown = true;
-      showNotification('배터리가 얼마 남지 않아 절전 모드를 켰습니다');
-    }
     if (state.battery === 1 && !game.lowPopupShown) {
       game.lowPopupShown = true;
       showLowBatteryPopup();
@@ -932,19 +855,14 @@
   }
 
   function onWin() {
-    const { level, state } = game;
+    const { level } = game;
     if (!progress.cleared.includes(level.id)) progress.cleared.push(level.id);
     progress.unlocked = Math.max(progress.unlocked, Math.min(game.levelIndex + 1, levels.length - 1));
     saveProgress();
     updateHud();
-    showNotification('전원에 연결됨, 충전 중');
 
     const isLast = game.levelIndex === levels.length - 1;
-    const best = state.used === level.optimal ? ' 가장 짧은 방법으로 풀었습니다.' : '';
-    ui.wonText.textContent = isLast
-      ? `${state.used}번 만에 되찾았습니다.${best} 1챕터의 마지막 판이었습니다.`
-      : `${state.used}번 만에 되찾았습니다.${best}`;
-    ui.wonNext.textContent = isLast ? '처음 판으로' : '다음 판';
+    ui.wonNext.textContent = isLast ? '↻' : '▶';
     setTimeout(() => {
       ui.popupLow.hidden = true;
       ui.overlayWon.hidden = false;
@@ -989,21 +907,12 @@
     nextLevel();
   }
 
-  // '여유로', '보통으로'처럼 받침에 맞는 조사를 고른다.
-  function withRo(word) {
-    const code = word.charCodeAt(word.length - 1) - 0xac00;
-    const finalConsonant = code >= 0 && code <= 11171 ? code % 28 : 0;
-    return finalConsonant === 0 || finalConsonant === 8 ? '로' : '으로';
-  }
-
   function cycleDifficulty() {
     if (game.busy) return;
     const ids = Engine.DIFFICULTIES.map((item) => item.id);
     progress.difficulty = ids[(ids.indexOf(progress.difficulty) + 1) % ids.length];
     saveProgress();
     startLevel(game.levelIndex);
-    const label = Engine.DIFFICULTIES.find((item) => item.id === progress.difficulty).label;
-    showToast(`난이도를 ${label}${withRo(label)} 바꾸고 판을 처음부터 시작합니다`);
   }
 
   // 배터리 부족 팝업. 판을 가리지만 제목 줄을 잡고 끌어서 치울 수 있다.
@@ -1039,36 +948,24 @@
     if (!hasTool('camera') || game.busy) return;
     const shouldOpen = open !== undefined ? open : ui.camera.hidden;
     ui.camera.hidden = !shouldOpen;
-    if (shouldOpen) {
-      byId('camera-art').innerHTML = Assets.html('top-their-laptop');
-      byId('camera-title').textContent = Story.camera.title;
-      byId('camera-lines').innerHTML = Story.camera.lines.map((line) => `<span class="camera-line">${line}</span>`).join('');
-      byId('camera-thought').textContent = Story.camera.thought;
-    }
+    if (shouldOpen) byId('camera-art').innerHTML = Assets.html('top-their-laptop');
   }
 
   // 프롤로그
 
   function openPrologue() {
     game.prologueIndex = 0;
-    ui.helpPanel.hidden = true;
     ui.prologue.hidden = false;
     showProloguePanel();
   }
 
-  // 컷을 4:3 비율로 창 안에 가장 크게 맞춘다. 말풍선 글자 크기도 컷 너비를 따라간다.
+  // 컷을 4:3 비율로 창 안에 가장 크게 맞춘다.
   function fitPrologue() {
     const width = ui.prologueStage.clientWidth - 32;
     const height = ui.prologueStage.clientHeight - 24;
     const panelWidth = Math.max(0, Math.min(width, (height * 4) / 3));
     ui.prologuePanel.style.width = `${panelWidth}px`;
     ui.prologuePanel.style.height = `${(panelWidth * 3) / 4}px`;
-  }
-
-  function placeInPanel(element, position) {
-    element.style.left = `${position.x}%`;
-    element.style.top = `${position.y}%`;
-    element.style.width = position.width ? `${position.width}%` : '';
   }
 
   function showProloguePanel() {
@@ -1080,26 +977,13 @@
 
     if (index < panels.length) {
       const panel = panels[index];
-      // 컷 그림이 있으면 말풍선과 기호가 그림 안에 있으므로 따로 얹지 않는다.
-      const hasArt = Boolean(Assets.file(panel.key));
       ui.prologuePanel.classList.remove('title');
       ui.prologueArt.innerHTML = Assets.html(panel.key, panel.scene);
-      ui.prologueBubble.textContent = panel.symbol;
-      ui.prologueBubble.dataset.tail = panel.bubble.tail;
-      placeInPanel(ui.prologueBubble, panel.bubble);
-      ui.prologueBubble.hidden = hasArt;
-      ui.prologueNotice.hidden = hasArt || !panel.notice;
-      ui.prologueNotice.textContent = panel.notice || '';
-      if (panel.notice) placeInPanel(ui.prologueNotice, panel.noticeAt);
-      ui.prologueCount.textContent = `${index + 1} / ${panels.length}`;
-      ui.prologueNext.textContent = '다음';
+      ui.prologueNext.textContent = '▶';
     } else {
       ui.prologuePanel.classList.add('title');
       ui.prologueArt.innerHTML = '<div class="title-card"><h1>내 자리, 내 충전기</h1></div>';
-      ui.prologueBubble.hidden = true;
-      ui.prologueNotice.hidden = true;
-      ui.prologueCount.textContent = '';
-      ui.prologueNext.textContent = '시작하기';
+      ui.prologueNext.textContent = '▶';
     }
     fitPrologue();
   }
@@ -1115,7 +999,7 @@
     ui.prologue.hidden = true;
     progress.seenPrologue = true;
     saveProgress();
-    showLevelLine();
+    updateTutorial();
   }
 
   function onKey(event) {
@@ -1148,7 +1032,6 @@
       event.preventDefault();
       moveFocusRow(1);
     } else if (key === 'escape') {
-      ui.helpPanel.hidden = true;
       toggleCamera(false);
       if (game.selectedDrink) selectDrink(game.selectedDrink);
     } else if (key === '1' || key === '2') {
@@ -1174,13 +1057,6 @@
     ui.undoButton.addEventListener('click', undo);
     ui.restartButton.addEventListener('click', restart);
     ui.difficultyButton.addEventListener('click', cycleDifficulty);
-    ui.helpButton.addEventListener('click', () => {
-      ui.helpPanel.hidden = !ui.helpPanel.hidden;
-    });
-    byId('help-close').addEventListener('click', () => {
-      ui.helpPanel.hidden = true;
-    });
-    byId('help-prologue').addEventListener('click', openPrologue);
     ui.duckButton.addEventListener('click', () => setView(game.view === 'top' ? 'side' : 'top'));
     ui.cameraButton.addEventListener('click', () => toggleCamera());
     byId('camera-close').addEventListener('click', () => toggleCamera(false));

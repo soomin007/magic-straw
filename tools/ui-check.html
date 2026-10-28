@@ -59,18 +59,23 @@
     }
 
     async function run() {
-      // 1. 첫 판: 혼잣말과 손가락 안내가 겹치지 않아야 한다.
+      // 1. 첫 판: 글이 없어도 손가락 안내가 음료 버튼을 짚고, 음료를 고르면 판의 줄로 옮겨 간다.
       {
         const win = await openGame({ current: 0 });
         const doc = win.document;
-        const speech = doc.getElementById('speech');
         const finger = doc.getElementById('finger');
-        expect(!speech.hidden && speech.textContent.trim().length > 0, '첫 판: 혼잣말이 보인다');
         expect(!finger.hidden, '첫 판: 손가락 안내가 보인다');
-        expect(!overlaps(speech.getBoundingClientRect(), finger.getBoundingClientRect()), '첫 판: 혼잣말과 손가락이 겹치지 않는다');
+        expect(doc.querySelectorAll('.speech, .toast').length === 0, '첫 판: 혼잣말과 안내 문구 요소가 없다');
+      }
+
+      // 1-1. 시연을 이미 본 뒤에는 음료를 고르면 손가락이 판의 줄로 옮겨 간다.
+      {
+        const win = await openGame({ current: 0, demosSeen: ['ice', 'soda'] });
+        const doc = win.document;
+        const finger = doc.getElementById('finger');
         doc.querySelector('.drink[data-drink="ice"]').click();
         await sleep(200);
-        expect(!overlaps(speech.getBoundingClientRect(), finger.getBoundingClientRect()), '첫 판: 음료를 고른 뒤에도 혼잣말과 손가락이 겹치지 않는다');
+        expect(!finger.hidden, '첫 판: 음료를 고른 뒤에도 손가락 안내가 보인다');
       }
 
       // 2. 모든 판: 움직이는 물건이 탑뷰 화면 안에 보여야 한다.
@@ -119,6 +124,25 @@
         await sleep(200);
         expect(doc.querySelectorAll('.aim-hint').length === 0 && doc.querySelectorAll('.piece.can-lift').length > 0,
           `소다를 고르면 띄울 수 있는 물건 ${doc.querySelectorAll('.piece.can-lift').length}개에 거품 테두리가 보인다`);
+      }
+
+      // 5-1. 얼음 조준선은 처음 두 판에서만 보인다.
+      for (const index of [0, 1, 2, 5]) {
+        const win = await openGame({ current: index, demosSeen: ['ice', 'soda'] });
+        const doc = win.document;
+        doc.querySelector('.drink[data-drink="ice"]').click();
+        await sleep(200);
+        const hints = doc.querySelectorAll('.aim-hint').length;
+        // 판의 자식 요소에서 올려 두어야 판이 화면 좌표로 칸을 구한다(판에서 바로 보낸 가짜 이벤트에는 offsetX가 없다).
+        let pathShown = false;
+        for (let line = 0; line < 3; line++) {
+          doc.getElementById('divider').dispatchEvent(new win.PointerEvent('pointermove', { bubbles: true, pointerType: 'mouse', ...boardCell(doc, 3, line, 3) }));
+          await sleep(60);
+          if (doc.getElementById('aim-path').getAttribute('points') !== '') pathShown = true;
+        }
+        const expected = index < 2;
+        expect(expected ? hints > 0 && pathShown : hints === 0 && !pathShown,
+          `${index + 1}번 판: 얼음 조준선이 ${expected ? '보인다' : '보이지 않는다'} (힌트 ${hints}개, 경로선 ${pathShown})`);
       }
 
       // 6. 음료를 처음 고르면 한 번 시연하고, 시연은 판을 바꾸지 않는다
