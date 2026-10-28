@@ -216,7 +216,7 @@
       const done = window.ASSET_LIST.filter((asset) => manifest[asset.key]).length;
       document.getElementById('summary').textContent = `전체 그림 ${window.ASSET_LIST.length}장 중 ${done}장 등록됨`;
 
-      const batchNames = { 1: '1차: 판 배경과 판 위 물건', 2: '2차: 숙이기 시점', 3: '3차: 인물 일러스트와 프롤로그', 4: '4차: 2챕터 시선과 뜨거운 차' };
+      const batchNames = { 1: '1차: 1~6번 판의 플레이 화면', 2: '2차: 프롤로그와 들킨 화면', 3: '3차: 물속에서 보기 시점', 4: '4차: 그대로 쓰는 효과와 손가락' };
       const container = document.getElementById('batches');
       for (const batch of [1, 2, 3, 4]) {
         const heading = document.createElement('h2');
