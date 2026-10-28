@@ -37,7 +37,7 @@
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     async function openGame(progress, width = 1000, height = 640) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ unlocked: 7, cleared: [], difficulty: 'relaxed', seenPrologue: true, ...progress }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ unlocked: 99, cleared: [], difficulty: 'relaxed', seenPrologue: true, ...progress }));
       frame.width = width;
       frame.height = height;
       frame.src = `../index.html?check=${Date.now()}`;
@@ -58,8 +58,14 @@
       };
     }
 
-    // 판 수는 게임의 levels.js에서 읽는다. 챕터가 늘어도 모든 판을 검사하게 한다.
+    // 판 수와 판 순서는 게임의 levels.js에서 읽는다. 판 순서를 바꿔도 검사가 판 id로 같은 판을 찾게 한다.
     let levelCount = 0;
+    let levelIds = [];
+    const indexOf = (id) => {
+      const index = levelIds.indexOf(id);
+      if (index < 0) throw new Error(`levels.js에 ${id} 판이 없습니다`);
+      return index;
+    };
 
     async function run() {
       // 1. 첫 판: 글이 없어도 손가락 안내가 음료 버튼을 짚고, 음료를 고르면 판의 줄로 옮겨 간다.
@@ -70,6 +76,12 @@
         expect(!finger.hidden, '첫 판: 손가락 안내가 보인다');
         expect(doc.querySelectorAll('.speech, .toast').length === 0, '첫 판: 혼잣말과 안내 문구 요소가 없다');
         levelCount = win.LEVEL_DEFINITIONS.length;
+        levelIds = win.LEVEL_DEFINITIONS.map((level) => level.id);
+        // 처음 하는 사람이 10분 안에 시선 규칙을 겪도록, 시선은 4번째 판에서 처음 나온다.
+        const firstGaze = win.LEVEL_DEFINITIONS.findIndex((level) => level.gaze);
+        expect(firstGaze === 3, `판 순서: 시선이 ${firstGaze + 1}번째 판에서 처음 나온다 (기대 4번째)`);
+        const leftovers = win.LEVEL_DEFINITIONS.filter((level) => level.chapter || (level.tools || []).includes('camera'));
+        expect(leftovers.length === 0, `판 정의에 챕터 구분과 휴대폰 카메라가 없다 (${leftovers.map((level) => level.id).join(', ') || '없음'})`);
       }
 
       // 1-1. 시연을 이미 본 뒤에는 음료를 고르면 손가락이 판의 줄로 옮겨 간다.
@@ -96,7 +108,7 @@
       }
 
       // 3. 숙이기 판: 다른 줄 위를 지나 숙이기 버튼을 눌러도, 숙인 화면에 내 플러그가 진하게 보여야 한다.
-      for (const index of [6, 7]) {
+      for (const index of [indexOf('duck'), indexOf('ledge')]) {
         const win = await openGame({ current: index });
         const doc = win.document;
         const board = doc.getElementById('board');
@@ -117,7 +129,7 @@
 
       // 5. 음료 버튼의 효과 기호와, 마우스를 올리지 않아도 보이는 안내
       {
-        const win = await openGame({ current: 1, demosSeen: ['ice', 'soda'] });
+        const win = await openGame({ current: indexOf('under'), demosSeen: ['ice', 'soda'] });
         const doc = win.document;
         const effects = [...doc.querySelectorAll('.drink .effect')].map((element) => element.textContent);
         expect(effects.join(' ') === '→ ↑', `음료 버튼에 효과 기호가 있다 (${effects.join(' ')})`);
@@ -130,9 +142,9 @@
           `소다를 고르면 띄울 수 있는 물건 ${doc.querySelectorAll('.piece.can-lift').length}개에 거품 테두리가 보인다`);
       }
 
-      // 5-1. 얼음 조준선은 얼음의 새 동작을 처음 가르치는 판(1, 2, 3, 5, 7번)에서만 보인다.
-      // 기대값을 levels.js에서 읽지 않고 여기 따로 적어서, 레벨 값을 잘못 고쳐도 검사가 잡아내게 한다.
-      const aimLineLevels = [0, 1, 2, 4, 6];
+      // 5-1. 얼음 조준선은 얼음의 새 동작을 처음 가르치는 판(한 모금, 거품 아래로, 메뉴판, 옆 줄로, 숙여서 보기)에서만 보인다.
+      // 기대값을 levels.js의 aimLine에서 읽지 않고 여기 판 id로 따로 적어서, 레벨 값을 잘못 고쳐도 검사가 잡아내게 한다.
+      const aimLineLevels = ['sip', 'under', 'menu', 'sideways', 'duck'].map(indexOf);
       for (let index = 0; index < levelCount; index++) {
         const win = await openGame({ current: index, demosSeen: ['ice', 'soda'] });
         const doc = win.document;
@@ -168,8 +180,8 @@
       }
 
       // 7. 2챕터: 시선이 판에 보이고, 차를 뱉으면 김이 시선을 가리고, 보는 칸에서 상대 플러그를 띄우면 들킨 화면이 뜬다.
-      const glanceIndex = 8;
-      const steamIndex = 9;
+      const glanceIndex = indexOf('glance');
+      const steamIndex = indexOf('steam');
       const clickCell = (win, column, line) => {
         const doc = win.document;
         doc.getElementById('divider').dispatchEvent(new win.MouseEvent('click', { bubbles: true, ...boardCell(doc, column, line, 3) }));
