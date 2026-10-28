@@ -3,6 +3,15 @@
 // width와 height는 그릴 크기이고, batch는 만드는 순서다. refs는 함께 넣을 레퍼런스(references/ 안의 파일 이름 앞부분)다.
 //
 // piece-로 시작하는 그림은 게임 중에 움직이는 물건이다. 흰 스티커 테두리와 그림자는 게임 코드가 붙이므로 그림에는 넣지 않는다.
+//
+// 이름 대응(2026-10-28). 게임을 카페에서 "샘을 빼앗긴 물의 정령" 세계로 옮겼지만, key와 경로는 카페 때 이름을 그대로 둔다.
+// 게임 코드와 manifest가 이 이름으로 그림을 찾기 때문이다. Codex는 같은 경로에 새 그림을 덮어쓴다.
+//   my-plug     물길 돌               their-plug  펌프 관 끝
+//   cup         양동이                book        바위
+//   menu        비스듬히 박힌 석판     outlet-     샘 입구 돌벽의 홈(free 빈 홈, taken 다른 관이 박힌 홈, cap 돌벽 맨 위)
+//   drink-ice   얼음                  drink-soda  물방울 거품          drink-tea  안개
+//   portrait-me 물의 정령             portrait-neighbor  샘지기(-caught는 정령을 알아챈 얼굴)
+//   scene-top   샘가를 물 쪽에서 본 판 배경   scene-side  물속에서 수면 높이로 본 배경
 (function (root) {
   'use strict';
 

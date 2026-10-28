@@ -1094,7 +1094,7 @@
       ui.prologueNext.textContent = '▶';
     } else {
       ui.prologuePanel.classList.add('title');
-      ui.prologueArt.innerHTML = '<div class="title-card"><h1>내 자리, 내 충전기</h1></div>';
+      ui.prologueArt.innerHTML = '<div class="title-card"><h1>내 샘, 내 물길</h1></div>';
       ui.prologueNext.textContent = '▶';
     }
     fitPrologue();

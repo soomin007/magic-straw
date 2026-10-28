@@ -3,29 +3,32 @@
 (function (root) {
   'use strict';
 
-  // 회색 상자에 적을 짧은 이름과 색 계열. mine은 민트, theirs는 벽돌색, 나머지는 회색이다.
+  // 회색 상자에 적을 짧은 이름과 색 계열. mine은 민트(정령의 것), theirs는 벽돌색(마을 사람들의 것), spirit은 물빛, 나머지는 회색이다.
+  // key는 카페 때 이름 그대로이고, 물의 정령 세계와의 대응은 assets/asset-list.js 머리말에 있다.
   const PLACEHOLDERS = {
-    'piece-top-my-plug': { label: '내 플러그', tone: 'mine' },
-    'piece-top-their-plug': { label: '상대 충전기', tone: 'theirs' },
-    'piece-top-cup': { label: '컵', tone: 'light' },
-    'piece-top-book': { label: '책 더미', tone: 'heavy' },
-    'piece-top-menu': { label: '메뉴판', tone: 'menu' },
-    'piece-side-my-plug': { label: '내 플러그', tone: 'mine' },
-    'piece-side-their-plug': { label: '상대 충전기', tone: 'theirs' },
-    'piece-side-cup': { label: '컵', tone: 'light' },
-    'piece-side-book': { label: '책 더미', tone: 'heavy' },
-    'piece-side-menu': { label: '메뉴판', tone: 'heavy' },
+    'piece-top-my-plug': { label: '물길 돌', tone: 'mine' },
+    'piece-top-their-plug': { label: '펌프 관', tone: 'theirs' },
+    'piece-top-cup': { label: '양동이', tone: 'light' },
+    'piece-top-book': { label: '바위', tone: 'heavy' },
+    'piece-top-menu': { label: '석판', tone: 'menu' },
+    'piece-side-my-plug': { label: '물길 돌', tone: 'mine' },
+    'piece-side-their-plug': { label: '펌프 관', tone: 'theirs' },
+    'piece-side-cup': { label: '양동이', tone: 'light' },
+    'piece-side-book': { label: '바위', tone: 'heavy' },
+    'piece-side-menu': { label: '석판', tone: 'heavy' },
     'outlet-top-free': { label: '', tone: 'socket' },
     'outlet-top-taken': { label: '', tone: 'taken' },
     'outlet-side-free': { label: '', tone: 'socket' },
     'outlet-side-taken': { label: '', tone: 'taken' },
     'outlet-side-cap': { label: '', tone: 'partition-cap' },
-    'portrait-me': { label: '나', tone: 'mine', round: true },
-    'portrait-me-determined': { label: '나', tone: 'mine', round: true },
-    'portrait-neighbor': { label: '옆자리', tone: 'theirs', round: true },
+    'portrait-me': { label: '정령', tone: 'mine', round: true },
+    'portrait-me-determined': { label: '정령', tone: 'mine', round: true },
+    'portrait-neighbor': { label: '샘지기', tone: 'theirs', round: true },
+    'portrait-neighbor-caught': { label: '샘지기', tone: 'theirs', round: true },
     'ui-drink-ice': { label: '얼음', tone: 'light' },
-    'ui-drink-soda': { label: '소다', tone: 'light' },
-    'ui-drink-tea': { label: '차', tone: 'light' },
+    'ui-drink-soda': { label: '거품', tone: 'light' },
+    'ui-drink-tea': { label: '안개', tone: 'light' },
+    'ui-spirit': { label: '', tone: 'spirit', round: true },
   };
 
   function escapeHtml(text) {

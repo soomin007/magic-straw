@@ -23,7 +23,7 @@
   const LEVEL_DEFINITIONS = [
     {
       id: 'sip',
-      title: '한 모금',
+      title: '한 줌',
       drinks: ['ice'],
       optimal: 1,
       tutorial: 'full',
@@ -59,7 +59,7 @@
       ],
     },
     {
-      // 시선이 처음 나오는 판. 상대가 보고 있을 때 바로 빼앗으면 들키므로, 한 번 기다리거나 다른 준비를 먼저 한다.
+      // 시선이 처음 나오는 판. 샘지기가 보고 있을 때 바로 관을 건드리면 들키므로, 한 번 기다리거나 다른 준비를 먼저 한다.
       id: 'glance',
       title: '눈치',
       drinks: ['ice', 'soda'],
@@ -73,7 +73,7 @@
     },
     {
       id: 'menu',
-      title: '메뉴판',
+      title: '석판',
       drinks: ['ice'],
       optimal: 1,
       aimLine: true,
@@ -84,9 +84,9 @@
       ],
     },
     {
-      // 상대가 칸막이 쪽만 보고 있어서, 차의 김으로 시선을 가려야 빼앗을 수 있다.
+      // 샘지기가 샘 입구 쪽만 보고 있어서, 안개로 시선을 가려야 관을 빼낼 수 있다.
       id: 'steam',
-      title: '김',
+      title: '안개',
       drinks: ['ice', 'soda', 'tea'],
       optimal: 3,
       needsTea: true,
@@ -122,7 +122,7 @@
       ],
     },
     {
-      // "순서" 판에 시선을 더했다. 플러그를 옮기는 일, 김을 피우는 일, 빼앗는 일의 순서를 짜야 한다.
+      // "순서" 판에 시선을 더했다. 물길 돌을 옮기는 일, 안개를 뱉는 일, 관을 빼내는 일의 순서를 짜야 한다.
       id: 'cover',
       title: '틈타기',
       drinks: ['ice', 'soda', 'tea'],
@@ -136,7 +136,7 @@
     },
     {
       id: 'duck',
-      title: '숙여서 보기',
+      title: '가라앉아 보기',
       tools: ['duck'],
       drinks: ['ice', 'soda'],
       optimal: 2,
@@ -152,7 +152,7 @@
     },
     {
       id: 'ledge',
-      title: '발판',
+      title: '바위 발판',
       tools: ['duck'],
       drinks: ['ice', 'soda'],
       optimal: 4,
