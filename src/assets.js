@@ -25,6 +25,7 @@
     'portrait-neighbor': { label: '옆자리', tone: 'theirs', round: true },
     'ui-drink-ice': { label: '얼음', tone: 'light' },
     'ui-drink-soda': { label: '소다', tone: 'light' },
+    'ui-drink-tea': { label: '차', tone: 'light' },
   };
 
   function escapeHtml(text) {

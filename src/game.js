@@ -37,9 +37,9 @@
   const DEATHS_BEFORE_SKIP = 3;
   const STORAGE_KEY = 'magic-straw-progress-v2';
 
-  const DRINK_ORDER = ['ice', 'soda'];
-  // 음료 버튼에 붙이는 효과 기호. 글을 몰라도 얼음은 밀고, 소다는 띄운다는 것을 알 수 있게 한다.
-  const DRINK_EFFECT = { ice: '→', soda: '↑' };
+  const DRINK_ORDER = ['ice', 'soda', 'tea'];
+  // 음료 버튼에 붙이는 효과 기호. 글을 몰라도 얼음은 밀고, 소다는 띄우고, 차는 김을 피운다는 것을 알 수 있게 한다.
+  const DRINK_EFFECT = { ice: '→', soda: '↑', tea: '≋' };
   const KIND_ASSET = { myPlug: 'my-plug', theirPlug: 'their-plug', cup: 'cup', book: 'book', menu: 'menu' };
 
   const byId = (id) => document.getElementById(id);
@@ -55,6 +55,9 @@
     aimBand: byId('aim-band'),
     aimPath: byId('aim-path'),
     aimHints: byId('aim-hints'),
+    gazeNow: byId('gaze-now'),
+    gazeNext: byId('gaze-next'),
+    steamCloud: byId('steam-cloud'),
     fxLayer: byId('fx-layer'),
     sideBar: byId('side-bar'),
     rowUp: byId('row-up'),
@@ -74,6 +77,7 @@
     batteryText: byId('battery-text'),
     overlayDead: byId('overlay-dead'),
     overlayWon: byId('overlay-won'),
+    overlayCaught: byId('overlay-caught'),
     wonNext: byId('won-next'),
     deadSkip: byId('dead-skip'),
     popupLow: byId('popup-low'),
@@ -443,6 +447,7 @@
     }
     ui.board.classList.toggle('aim-ice', game.selectedDrink === 'ice');
     ui.board.classList.toggle('aim-soda', game.selectedDrink === 'soda');
+    ui.board.classList.toggle('aim-tea', game.selectedDrink === 'tea');
     updateHints();
     updateTutorial();
   }
@@ -478,6 +483,7 @@
       }
       return;
     }
+    if (game.selectedDrink !== 'soda') return;
     for (const obj of game.state.objects) {
       const element = game.pieceElements.get(obj.id);
       if (element.classList.contains('ghost')) continue;
@@ -490,6 +496,17 @@
     progress.demosSeen = [...(progress.demosSeen || []), drink];
     saveProgress();
     if (game.view !== 'top') return;
+
+    // 차는 판을 바꾸지 않으니, 칸막이 위로 김이 피어오르는 모습만 반투명하게 한 번 보여 준다.
+    if (drink === 'tea') {
+      game.busy = true;
+      clearHints();
+      updateTutorial();
+      await puffSteam(true);
+      game.busy = false;
+      updateControls();
+      return;
+    }
 
     const myPlug = game.state.objects.find((obj) => obj.kind === 'myPlug');
     let demo = null;
@@ -539,6 +556,29 @@
     updateControls();
   }
 
+  // 2챕터 시선. 이번 행동 때 상대가 보는 칸은 노랗게 칠하고, 그다음 행동 때 볼 칸이 다르면 점선으로 미리 보여 준다.
+  // Hitman GO처럼 시선을 늘 판에 보여 주어, 들키는 것이 운이 아니라 읽을 수 있는 규칙이 되게 한다.
+  // 김이 남아 있으면 칠하는 대신 칸막이 위에 김을 띄운다.
+  function updateGaze() {
+    const { level, state } = game;
+    const playing = state.status === 'playing';
+    const now = playing ? Engine.watchedFrom(level, state) : null;
+    const afterNext = { ...state, used: state.used + 1, steam: Math.max(0, state.steam - 1) };
+    const next = playing ? Engine.watchedFrom(level, afterNext) : null;
+    placeGaze(ui.gazeNow, now);
+    placeGaze(ui.gazeNext, next !== now ? next : null);
+    ui.steamCloud.hidden = !(playing && level.gaze && state.steam > 0);
+    ui.steamCloud.style.left = `${(level.width - 2) * CELL}px`;
+    ui.steamCloud.style.width = `${2 * CELL}px`;
+  }
+
+  function placeGaze(element, from) {
+    element.hidden = from === null;
+    if (from === null) return;
+    element.style.left = `${from * CELL}px`;
+    element.style.width = `${(game.level.width - 1 - from) * CELL}px`;
+  }
+
   function updateHud() {
     const { level, state } = game;
     ui.levelDots.innerHTML = '';
@@ -546,6 +586,7 @@
       const dot = document.createElement('button');
       dot.type = 'button';
       dot.className = 'level-dot';
+      dot.classList.toggle('chapter-start', index > 0 && (item.chapter || 1) !== (levels[index - 1].chapter || 1));
       dot.textContent = String(index + 1);
       dot.disabled = index > progress.unlocked;
       dot.classList.toggle('current', index === game.levelIndex);
@@ -570,6 +611,7 @@
     ui.battery.classList.toggle('charging', charging);
     ui.window.classList.toggle('power-saver', saver);
 
+    updateGaze();
     updateControls();
   }
 
@@ -610,6 +652,8 @@
       }
     } else if (playing && fresh && game.level.tutorial === 'drink' && game.selectedDrink !== 'soda') {
       target = ui.drinks.querySelector('[data-drink="soda"]');
+    } else if (playing && fresh && game.level.tutorial === 'tea' && game.selectedDrink !== 'tea') {
+      target = ui.drinks.querySelector('[data-drink="tea"]');
     } else if (playing && fresh && game.level.tutorial === 'duck' && game.view === 'top') {
       target = ui.duckButton;
     }
@@ -688,6 +732,26 @@
     shot.remove();
   }
 
+  // 차를 뱉으면 빨대 끝에서 김이 칸막이 위로 피어오른다.
+  async function puffSteam(ghost = false) {
+    const { level } = game;
+    const puff = document.createElement('div');
+    puff.className = ghost ? 'steam-puff demo-ghost' : 'steam-puff';
+    ui.fxLayer.appendChild(puff);
+    const start = game.view === 'top' ? TOP_STRAW : SIDE_STRAW;
+    const end = game.view === 'top'
+      ? topCellCenter(level.width - 1, Math.floor(level.rows / 2))
+      : sideCellCenter(level.width - 1, level.height - 1);
+    const duration = 650;
+    const animation = puff.animate([
+      { transform: `translate(${start.x}px, ${start.y}px) scale(0.4)`, opacity: 0.9 },
+      { transform: `translate(${end.x}px, ${end.y - 30}px) scale(2.4)`, opacity: ghost ? 0.4 : 0.85 },
+    ], { duration, easing: 'ease-out', fill: 'forwards' });
+    await animationDone(animation, duration);
+    puff.animate([{ opacity: ghost ? 0.4 : 0.85 }, { opacity: 0 }], { duration: 200, fill: 'forwards' });
+    setTimeout(() => puff.remove(), 220);
+  }
+
   // 조준과 입력
 
   // 판 안의 위치는 판 자신의 좌표(offsetX, offsetY)로 구한다. 판에 확대, 축소, 회전이 걸려 있어도 맞는다.
@@ -720,6 +784,8 @@
   }
 
   function actionForCell(cell) {
+    // 차는 조준하지 않으므로 판의 어디를 눌러도 뱉는다.
+    if (game.selectedDrink === 'tea') return { drink: 'tea' };
     if (game.selectedDrink === 'ice') {
       return game.view === 'top'
         ? { drink: 'ice', row: cell.row, z: 0 }
@@ -760,7 +826,7 @@
         ui.aimPath.setAttribute('points', points);
       }
       if (preview.effect.hitId) game.pieceElements.get(preview.effect.hitId).classList.add('targeted');
-    } else if (Engine.check(game.level, game.state, action).ok) {
+    } else if (action.drink === 'soda' && Engine.check(game.level, game.state, action).ok) {
       game.pieceElements.get(action.target).classList.add('targeted');
     }
   }
@@ -823,7 +889,8 @@
     clearHints();
     updateTutorial();
     if (action.drink === 'ice') await shootIce(result.effect);
-    else await shootBubble(result.effect.targetId);
+    else if (action.drink === 'soda') await shootBubble(result.effect.targetId);
+    else await puffSteam();
 
     render(result.frames[0], true);
     await wait(PIECE_MOVE_MS);
@@ -845,6 +912,10 @@
     }
     if (state.status === 'dead') {
       onDead();
+      return;
+    }
+    if (state.status === 'caught') {
+      onCaught();
       return;
     }
     if (state.battery === 1 && !game.lowPopupShown) {
@@ -876,9 +947,16 @@
     ui.overlayDead.hidden = false;
   }
 
+  // 들키면 옆자리 사람이 이쪽을 돌아본 얼굴을 띄운다. 배터리가 다 닳았을 때처럼 되돌리거나 처음부터 할 수 있다.
+  function onCaught() {
+    ui.popupLow.hidden = true;
+    ui.overlayCaught.hidden = false;
+  }
+
   function hideOverlays() {
     ui.overlayDead.hidden = true;
     ui.overlayWon.hidden = true;
+    ui.overlayCaught.hidden = true;
     ui.popupLow.hidden = true;
   }
 
@@ -1033,7 +1111,7 @@
     } else if (key === 'escape') {
       toggleCamera(false);
       if (game.selectedDrink) selectDrink(game.selectedDrink);
-    } else if (key === '1' || key === '2') {
+    } else if (key === '1' || key === '2' || key === '3') {
       const drink = DRINK_ORDER[Number(key) - 1];
       if (game.level.drinks.includes(drink)) selectDrink(drink);
     } else if ((key === 'enter' || key === ' ') && !ui.overlayWon.hidden) {
@@ -1066,6 +1144,8 @@
     ui.deadSkip.addEventListener('click', skipLevel);
     ui.wonNext.addEventListener('click', nextLevel);
     byId('won-undo').addEventListener('click', undo);
+    byId('caught-undo').addEventListener('click', undo);
+    byId('caught-restart').addEventListener('click', restart);
     byId('popup-low-close').addEventListener('click', () => {
       ui.popupLow.hidden = true;
     });
@@ -1083,6 +1163,7 @@
     buildBackdrop(ui.sideView, 'scene-side', LAYOUT.side.boxes);
     const finger = Assets.file('ui-finger') ? Assets.html('ui-finger') : '<div class="finger-default"></div>';
     ui.finger.querySelector('.finger-art').innerHTML = finger;
+    byId('caught-art').innerHTML = Assets.html('portrait-neighbor');
     bindEvents();
     startLevel(game.levelIndex);
     fitScene();

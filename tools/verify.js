@@ -13,7 +13,7 @@
   // canDuck이 false면 숙이기 없이 탑뷰에서 할 수 있는 행동만 쓴다.
   function solve(level, canDuck = true) {
     const start = Engine.initial(level, SEARCH_DEPTH_LIMIT + 1);
-    const seen = new Set([Engine.boardKey(start)]);
+    const seen = new Set([Engine.boardKey(start, level)]);
     let frontier = [{ state: start, path: [] }];
 
     for (let depth = 0; depth < SEARCH_DEPTH_LIMIT; depth++) {
@@ -24,7 +24,10 @@
           if (!result.ok) continue;
           const path = [...node.path, action];
           if (result.state.status === 'won') return { moves: path.length, path };
-          const key = Engine.boardKey(result.state);
+          // 들켰거나 배터리가 다 닳은 상태는 더 나아갈 수 없다. 이 상태를 본 것으로 기록하면,
+          // 판 모양이 같은데 들키지 않은 상태를 나중에 만났을 때 이미 본 것으로 여겨 건너뛰게 된다.
+          if (result.state.status !== 'playing') continue;
+          const key = Engine.boardKey(result.state, level);
           if (seen.has(key)) continue;
           seen.add(key);
           nextFrontier.push({ state: result.state, path });
@@ -37,6 +40,7 @@
 
   function describe(action) {
     if (action.drink === 'ice') return action.z === 0 ? `얼음→${action.row}줄` : `얼음→${action.row}줄 ${action.z}층(숙여서)`;
+    if (action.drink === 'tea') return '차(김)';
     return `소다→${action.target}`;
   }
 
@@ -82,6 +86,12 @@
         expect(topOnly.moves === null, `${level.title}: 숙이기 없이는 풀리지 않음`);
       } else {
         expect(topOnly.moves === level.optimal, `${level.title}: 숙이기 없이 탑뷰만으로 풀림`);
+      }
+
+      // 차가 꼭 필요한 판은 차를 빼면 풀리지 않아야 한다.
+      if (level.needsTea) {
+        const withoutTea = solve({ ...level, drinks: level.drinks.filter((drink) => drink !== 'tea') });
+        expect(withoutTea.moves === null, `${level.title}: 차 없이는 풀리지 않음`);
       }
 
       // 빠듯 난이도에서도 깰 수 있고, 배터리가 한 칸 모자라면 깰 수 없어야 한다.
@@ -170,6 +180,30 @@
       const level = byId.sip;
       const verdict = Engine.check(level, Engine.initial(level, 3), soda('myPlug-0'));
       expect(!verdict.ok, '첫 판에는 소다가 없음');
+    }
+
+    // 2챕터 시선 규칙
+    const tea = { drink: 'tea' };
+    {
+      const level = byId.glance;
+      const theirs = level.objects.find((obj) => obj.kind === 'theirPlug');
+      const caught = play(level, 5, [soda(theirs.id)]);
+      expect(caught.state.status === 'caught', '눈치: 상대가 보는 칸에서 상대 플러그를 띄우면 들킴');
+      expect(play(level, 5, [soda(theirs.id), ice(1)]).rejected !== undefined, '눈치: 들킨 뒤에는 더 행동할 수 없음');
+      const mine = play(level, 5, [ice(1)]);
+      expect(mine.state.status === 'playing', '눈치: 상대가 보고 있어도 내 플러그를 미는 것은 괜찮음');
+      const waited = play(level, 5, [ice(1), soda(theirs.id), ice(1)]);
+      expect(waited.state.status === 'won', '눈치: 상대가 고개를 돌린 차례에 빼앗으면 들키지 않음');
+    }
+    {
+      const level = byId.steam;
+      const theirs = level.objects.find((obj) => obj.kind === 'theirPlug');
+      const covered = play(level, 5, [tea, soda(theirs.id)]);
+      expect(covered.state.status === 'playing', '김: 차를 뱉은 다음 행동까지는 상대가 보지 못함');
+      const late = play(level, 5, [tea, ice(0), soda(theirs.id)]);
+      expect(late.state.status === 'caught', '김: 김이 걷힌 뒤에는 다시 들킴');
+      const won = play(level, 5, [tea, soda(theirs.id), ice(1)]);
+      expect(won.state.status === 'won', '김: 차, 소다, 얼음 순서로 되찾음');
     }
 
     return { failures, lines };

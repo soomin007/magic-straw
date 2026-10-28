@@ -58,6 +58,9 @@
       };
     }
 
+    // 판 수는 게임의 levels.js에서 읽는다. 챕터가 늘어도 모든 판을 검사하게 한다.
+    let levelCount = 0;
+
     async function run() {
       // 1. 첫 판: 글이 없어도 손가락 안내가 음료 버튼을 짚고, 음료를 고르면 판의 줄로 옮겨 간다.
       {
@@ -66,6 +69,7 @@
         const finger = doc.getElementById('finger');
         expect(!finger.hidden, '첫 판: 손가락 안내가 보인다');
         expect(doc.querySelectorAll('.speech, .toast').length === 0, '첫 판: 혼잣말과 안내 문구 요소가 없다');
+        levelCount = win.LEVEL_DEFINITIONS.length;
       }
 
       // 1-1. 시연을 이미 본 뒤에는 음료를 고르면 손가락이 판의 줄로 옮겨 간다.
@@ -79,7 +83,7 @@
       }
 
       // 2. 모든 판: 움직이는 물건이 탑뷰 화면 안에 보여야 한다.
-      for (let index = 0; index < 8; index++) {
+      for (let index = 0; index < levelCount; index++) {
         const win = await openGame({ current: index });
         const doc = win.document;
         const stage = doc.getElementById('stage').getBoundingClientRect();
@@ -129,7 +133,7 @@
       // 5-1. 얼음 조준선은 얼음의 새 동작을 처음 가르치는 판(1, 2, 3, 5, 7번)에서만 보인다.
       // 기대값을 levels.js에서 읽지 않고 여기 따로 적어서, 레벨 값을 잘못 고쳐도 검사가 잡아내게 한다.
       const aimLineLevels = [0, 1, 2, 4, 6];
-      for (let index = 0; index < 8; index++) {
+      for (let index = 0; index < levelCount; index++) {
         const win = await openGame({ current: index, demosSeen: ['ice', 'soda'] });
         const doc = win.document;
         doc.querySelector('.drink[data-drink="ice"]').click();
@@ -161,6 +165,39 @@
         expect(doc.querySelectorAll('.demo-ghost').length === 0 && doc.querySelector('.piece-kind-myPlug').style.transform === before,
           '시연이 끝나면 유령이 사라지고 판은 그대로다');
         expect(saved.demosSeen.includes('ice') && doc.getElementById('battery-text').textContent === battery, '시연은 저장되고 배터리를 쓰지 않는다');
+      }
+
+      // 7. 2챕터: 시선이 판에 보이고, 차를 뱉으면 김이 시선을 가리고, 보는 칸에서 상대 플러그를 띄우면 들킨 화면이 뜬다.
+      const glanceIndex = 8;
+      const steamIndex = 9;
+      const clickCell = (win, column, line) => {
+        const doc = win.document;
+        doc.getElementById('divider').dispatchEvent(new win.MouseEvent('click', { bubbles: true, ...boardCell(doc, column, line, 3) }));
+      };
+      {
+        const win = await openGame({ current: glanceIndex, demosSeen: ['ice', 'soda', 'tea'] });
+        const doc = win.document;
+        expect(!doc.getElementById('gaze-now').hidden, '눈치 판: 처음 차례에 상대가 보는 칸이 노랗게 보인다');
+        expect(doc.getElementById('gaze-next').hidden, '눈치 판: 다음 차례에 상대가 보지 않으면 점선이 없다');
+        doc.querySelector('.drink[data-drink="soda"]').click();
+        await sleep(100);
+        clickCell(win, 5, 1);
+        await sleep(1800);
+        expect(!doc.getElementById('overlay-caught').hidden, '눈치 판: 보는 칸에서 상대 플러그를 띄우면 들킨 화면이 뜬다');
+        doc.getElementById('caught-undo').click();
+        await sleep(300);
+        expect(doc.getElementById('overlay-caught').hidden && !doc.getElementById('gaze-now').hidden, '눈치 판: 되돌리면 들킨 화면이 닫히고 시선이 다시 보인다');
+      }
+      {
+        const win = await openGame({ current: steamIndex, demosSeen: ['ice', 'soda', 'tea'] });
+        const doc = win.document;
+        const teaButton = doc.querySelector('.drink[data-drink="tea"]');
+        expect(teaButton && teaButton.querySelector('.effect').textContent === '≋', '김 판: 차 버튼에 김 기호가 있다');
+        teaButton.click();
+        await sleep(100);
+        clickCell(win, 2, 1);
+        await sleep(1500);
+        expect(!doc.getElementById('steam-cloud').hidden && doc.getElementById('gaze-now').hidden, '김 판: 차를 뱉으면 김이 뜨고 노란 시선이 사라진다');
       }
 
       localStorage.removeItem(STORAGE_KEY);

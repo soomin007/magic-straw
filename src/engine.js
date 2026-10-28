@@ -5,11 +5,18 @@
 //   row  탑뷰 화면의 위에서 아래로 커진다.
 //   z    테이블 면(0)에서 위로 커진다. 탑뷰에서는 z = 0 높이로만 조준할 수 있고, 숙이기를 해야 더 높이 조준할 수 있다.
 // 콘센트는 (row, z) 자리마다 있거나 없다. 플러그는 콘센트 칸막이 바로 왼쪽 칸에 있을 때 꽂힌 것으로 본다.
+//
+// 2챕터부터는 옆자리 사람의 시선이 규칙에 들어온다(Hitman GO처럼 시선이 닿는 칸이 늘 판에 보이고, 턴마다 정해진 순서로 바뀐다).
+// 레벨의 gaze는 행동마다 차례로 돌아가는 목록이고, 각 값은 상대가 보고 있는 가장 왼쪽 열(그 열부터 칸막이까지 모든 줄)이거나 null(자기 화면만 봄)이다.
+// 상대가 보고 있는 칸에서 상대 플러그를 건드리면(밀거나 거품으로 띄우면) 들키고 판이 끝난다. 내 물건을 움직이는 것은 들켜도 괜찮다.
+// 뜨거운 차(tea)를 뱉으면 김이 피어올라, 차를 뱉은 행동과 그다음 행동 동안 상대의 시선을 가린다.
 (function (root) {
   'use strict';
 
   // 거품이 붙은 물건은 뱉은 행동과 그다음 행동이 끝날 때까지 떠 있다가 터진다.
   const BUBBLE_LIFETIME = 2;
+  // 차의 김도 거품과 같은 길이로, 뱉은 행동과 그다음 행동 동안 남는다.
+  const STEAM_LIFETIME = 2;
   const DEFAULT_HEIGHT = 3;
   const ICE_STEP_LIMIT = 200;
 
@@ -88,10 +95,35 @@
       objects: level.objects.map((obj) => ({ ...obj, bubble: 0, inserted: false })),
       battery,
       used: 0,
+      steam: 0,
       status: 'playing',
     };
     settle(level, state);
     return state;
+  }
+
+  // 지금부터 offset번째 뒤의 행동 때 상대가 보기로 정해진 열. 김은 따지지 않는다(화면에 다음 시선을 미리 보여 줄 때 쓴다).
+  function plannedGaze(level, state, offset = 0) {
+    if (!level.gaze || level.gaze.length === 0) return null;
+    return level.gaze[(state.used + offset) % level.gaze.length];
+  }
+
+  // 이번 행동 때 상대가 실제로 보고 있는 가장 왼쪽 열. 김이 남아 있으면 아무것도 보지 못한다.
+  function watchedFrom(level, state) {
+    if (state.steam > 0) return null;
+    return plannedGaze(level, state);
+  }
+
+  // 행동 전과 효과 직후를 비교해, 상대가 보는 칸에서 상대 플러그가 움직였거나 떠올랐는지 본다.
+  // 거품이 터져 저절로 떨어지는 것은 내가 건드린 것이 아니므로 효과 직후까지만 비교한다.
+  function touchedTheirPlugInSight(before, afterEffect, from) {
+    return before.objects.some((obj) => {
+      if (obj.kind !== 'theirPlug') return false;
+      const after = afterEffect.objects.find((item) => item.id === obj.id);
+      const moved = obj.x !== after.x || obj.row !== after.row || obj.z !== after.z
+        || obj.inserted !== after.inserted || after.bubble > obj.bubble;
+      return moved && (obj.x >= from || after.x >= from);
+    });
   }
 
   function objectAt(state, x, row, z) {
@@ -218,6 +250,9 @@
       return { ok: true };
     }
 
+    // 차는 조준하지 않는다. 김은 두 자리 사이 칸막이 위로 피어오른다.
+    if (action.drink === 'tea') return { ok: true };
+
     return { ok: false, reason: '모르는 음료입니다' };
   }
 
@@ -228,28 +263,36 @@
     if (!verdict.ok) return verdict;
 
     const next = clone(state);
+    const from = watchedFrom(level, state);
     let effect;
 
     if (action.drink === 'ice') {
       effect = { drink: 'ice', ...fireIce(level, next, action.row, action.z) };
-    } else {
+    } else if (action.drink === 'soda') {
       const target = findObject(next, action.target);
       target.z += 1;
       target.bubble = BUBBLE_LIFETIME;
       target.inserted = false;
       effect = { drink: 'soda', targetId: target.id };
+    } else {
+      next.steam = STEAM_LIFETIME;
+      effect = { drink: 'tea' };
     }
     const afterEffect = clone(next);
+    const caught = from !== null && touchedTheirPlugInSight(state, afterEffect, from);
+    if (caught) effect.caught = true;
 
     for (const obj of next.objects) {
       if (obj.bubble > 0) obj.bubble -= 1;
     }
+    if (next.steam > 0) next.steam -= 1;
     settle(level, next);
 
     next.used += 1;
     next.battery -= 1;
     const myPlugIn = next.objects.some((obj) => obj.kind === 'myPlug' && obj.inserted);
-    if (myPlugIn) next.status = 'won';
+    if (caught) next.status = 'caught';
+    else if (myPlugIn) next.status = 'won';
     else if (next.battery <= 0) next.status = 'dead';
 
     return { ok: true, state: next, effect, frames: [afterEffect, clone(next)] };
@@ -271,20 +314,27 @@
         if (check(level, state, action).ok) actions.push(action);
       }
     }
+    if (level.drinks.includes('tea')) actions.push({ drink: 'tea' });
     return actions;
   }
 
-  // 배터리와 사용 횟수를 뺀, 판의 모양만 나타내는 문자열
-  function boardKey(state) {
-    return state.objects
+  // 배터리와 사용 횟수를 뺀, 판의 모양만 나타내는 문자열.
+  // 시선이 있는 판은 같은 모양이어도 시선 차례가 다르면 다른 상태이므로 차례와 김도 넣는다.
+  function boardKey(state, level) {
+    const objects = state.objects
       .map((obj) => `${obj.id}:${obj.x},${obj.row},${obj.z},${obj.bubble},${obj.inserted ? 1 : 0}`)
       .sort()
       .join('|');
+    const phase = level && level.gaze ? state.used % level.gaze.length : 0;
+    return `${objects}#${state.steam}@${phase}`;
   }
 
   const Engine = {
     BUBBLE_LIFETIME,
+    STEAM_LIFETIME,
     DIFFICULTIES,
+    plannedGaze,
+    watchedFrom,
     batteryFor,
     KIND_RULES,
     parseLevel,

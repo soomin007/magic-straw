@@ -30,6 +30,9 @@
               <div id="side-view" class="view side-view" hidden>
               </div>
               <div id="board" class="board">
+                <div id="gaze-now" class="gaze-zone" hidden></div>
+                <div id="gaze-next" class="gaze-zone next" hidden></div>
+                <div id="steam-cloud" class="steam-cloud" hidden></div>
                 <div id="aim-band" class="aim-band"></div>
                 <div id="divider" class="divider"></div>
               </div>
@@ -73,6 +76,14 @@
               <button id="dead-undo" class="btn" type="button" aria-label="되돌리기">↶</button>
               <button id="dead-restart" class="btn" type="button" aria-label="처음부터">↻</button>
               <button id="dead-skip" class="btn ghost" type="button" aria-label="이 판 건너뛰기" hidden>»</button>
+            </div>
+          </div>
+
+          <div id="overlay-caught" class="overlay caught" hidden>
+            <div id="caught-art" class="caught-art" aria-hidden="true"></div>
+            <div class="overlay-actions">
+              <button id="caught-undo" class="btn" type="button" aria-label="되돌리기">↶</button>
+              <button id="caught-restart" class="btn" type="button" aria-label="처음부터">↻</button>
             </div>
           </div>
 
