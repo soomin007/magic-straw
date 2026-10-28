@@ -4524,6 +4524,250 @@
         "browser": "art-check 31/31 registered, 39 images loaded, no broken images; prologue, level 1 and level 7 ducked view inspected. Actual 375px game viewport had no horizontal overflow.",
         "concurrentWork": "Other-agent source/document edits and a HEAD change were observed during this task. User explicitly authorized final record-only completion. No unrelated files were edited or reverted by Codex. UI result describes its observation time, not later source changes."
       }
+    },
+    {
+      "date": "2026-10-28",
+      "name": "water-spirit-trial",
+      "tool": "built-in image_gen",
+      "scope": "Three-asset approval set only: scene-top, portrait-me, piece-top-my-plug. Remaining batches await user review. No game code, asset-list or layout edits; no commit.",
+      "rationale": "Replace an arbitrary magical cafe device with a water spirit using its own water to recover a spring diverted without permission; capture in a keeper bottle explains stealth. Human villagers are busy and indifferent, not villains. First ten minutes and spirit identity are the production priority.",
+      "sourceOfTruth": [
+        "AGENTS.md",
+        "CLAUDE.md",
+        "docs/art-brief.md (water-spirit section)",
+        "assets/asset-list.js",
+        "docs/layout-guide/scene-top.png",
+        "src/layout.js"
+      ],
+      "processingPolicy": "Whole-canvas export resizing and PNG text metadata removal only. No individual element movement, compositing, outline reinforcement or forced geometry correction with code.",
+      "assets": [
+        {
+          "key": "scene-top",
+          "file": "assets/scene/top.png",
+          "width": 1920,
+          "height": 1080,
+          "selectedCandidate": "scene-top-aligned",
+          "generationSteps": [
+            {
+              "candidate": "scene-top",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render or photographic texture. This is a NEW forest water-spirit world, not the old cafe. References supply line quality and color handling only; do not copy their characters, objects, text, symbols or interfaces. No cafe, modern clothing, cup, straw, electronics, plugs, cables, letters, numbers, words, runes, logos, speech balloons, emoji, floating comic symbols, frames or watermarks. A hand-painted cartoon feel matching the approved r2 natural ink. Sky-blue water and mint belong to the spirit; rusty brick-red belongs to villagers. No white sticker border or ground shadow.\nCreate an opaque 1920x1080 game BACKGROUND for a small forest spring, seen from the FRONT water's edge looking slightly downward across a narrow bank. Not isometric, no diamond-shaped field. Image1 is the BINDING layout map only: do NOT paint its colored blocks, grid, stripes or labels. Image2 is the NEW WATER SPIRIT character identity: same adult water face, flowing sky-blue waterfall hair, mint leaf ornament, watery body, weary pensive expression and ink. Images3-4 are the required forest/cartoon style references ONLY. Image5 approved r2 object shows foreground line weight; background outlines must be THINNER so objects stand out. Natural daylight filtered by deep forest, mossy rocks, ferns and roots; no buildings or people in distant forest. This is an intimate spring, not a huge lake or broad plaza.\nEXACT normalized layout over the FULL canvas: forest backdrop x0-100%,y0-43%; bank earth/flat flagstones/moss extends x0-100%,y43-89%; low front bank rim y89-94%; foreground strip of water/reeds y94-100% ONLY. Terrain in the rectangular PLAY AREA x20-75%,y56-89% must be completely empty flat neutral stone/quiet fine gravel, no rocks, grass clumps, roots, people, shadows, puddles, ripples or grid lines. Adjacent OVERLAY AREA x75-84%,y56-89% also empty ground: do NOT draw the front stone wall or sockets there, the game overlays them.\nLEFT SPIRIT: exact same adult watery being as image2. Face bounds x15-27%,y8-35%, face about232x288px. Face yawed20 degrees toward SCREEN RIGHT. Mouth near (520,278) pixels, just LEFT of the game's fixed ice launch point (548,278) pixels. Lips must be fully visible, never covered by hand, stone or hair. The mouth height of278px is critical: an ice cube will fly from there horizontally RIGHT. No straw, no held cup, no visible ice projectile. Normal adult shoulders about646px wide, body x4-38%,y31-56%, waist submerged in a SMALL spring pocket behind the left bank rim. Right hand half-raised x28-34%,y36-51%, fingers BELOW the mouth, preparing to spit. Neck and shoulder line visible, upright adult proportions. One rounded low bank ledge in front of body x3-27%,y35-54%, width454px, not a laptop-shaped rectangle. Mint aquatic grass patch on ledge x13-17%,y41-47%. The spring pocket stays LEFT behind ledge and DOES NOT flood the puzzle area.\nRIGHT SPRING KEEPER: middle-aged ordinary villager, worn straw hat, white/cream shirt, rusty brick-red work VEST, neutral busy absorbed expression, NOT a villain. Face at x90-100%,y8-35%, upper body x79-100%,y31-56%, cut off a little by right edge, shoulder width646px at full size. Face turned25 degrees toward SCREEN RIGHT, away from spirit and central wall, gaze toward village OFFSCREEN RIGHT, never toward spirit/camera. Standing behind a wooden water tub at x85-100%,y35-54%, width454px: plain natural wood, NOT a laptop, no red mark. Small clearly recognizable EMPTY transparent open-neck glass BOTTLE sits ON tub at x94-99%,y41-47%, with cork removed. White/gray glass rim, no glowing spirit in this ordinary scene. A bottle can capture a spirit later. Do not enlarge keeper or tub into the play field.\nREAR WALL: only the rear110cm-projection segment of a THIN stone partition at x75-78%,y35-56%, about58px wide and220px deep on image, lower end EXACTLY y600px, left edge x1436px and right edge1494px. Pale gray upright stone slab thickness4cm, total real height36cm, not a tall pillar, not a round boulder. It continues as separately drawn tiles forward down the right edge of puzzle; leave x75-84%,y56-89% blank for those. No sockets, bamboo pipes, rust-red pipes or movable props painted into empty puzzle area.\nSCALE: one future grid cell is12cm =176px wide and120px deep; whole puzzle 1056x360px; each adult shoulder44cm =646px; head16x23cm =232x288px; each bank ledge/tub31cm =454px; total bank depth58cm =580px. Adults only95cm apart. Do not make huge terrain compared with adults. All perspective/placement follows input1, no cafe imagery. No text, no symbols, no graphic glows, no frame or sticker borders.",
+              "references": [
+                "docs/layout-guide/scene-top.png",
+                {
+                  "generatedCandidate": "portrait-me"
+                },
+                "references/view-cultofthelamb-1.jpg",
+                "references/view-dontstarve-1.jpg",
+                "assets/style-test/r2-my-plug.png"
+              ]
+            },
+            {
+              "candidate": "scene-top-aligned",
+              "selected": true,
+              "prompt": "EDIT image1, same illustrated forest, same water spirit identity from image3, same ordinary middle-aged straw-hat spring keeper looking RIGHT, same colors and ink. Image2 is exact binding layout map, images4-5 art style references only. Preserve style and all character identity. Do NOT redesign. Correct only these integration positions, using percentages of the FULL16:9 image (1920x1080 export):\n1. The spirit MOUTH is currently too far LEFT, near22% of width, so an ice cube spawning at28.5% seems to appear in empty air. Shift/reshape the spirit's head and visible face RIGHT within the guide head area, with the lips at x27.2% y25.7% (about522,278px). The game's ice spawn is548,278px, only26px to the RIGHT of these lips. Lips unobstructed, face angled20 degrees RIGHT. Keep normal face anatomy and upright visible neck; do NOT add a long snout, spout, straw, tube, ice or hand over the mouth. Face should occupy roughly x15-28%,y8-35%; preserve flowing water hair and mint aquatic leaf ornament, normal adult shoulder width44cm. Preserve watery shoulders and right hand half-raised below the mouth at x28-34%,y36-51%. Head and neck integrate naturally into same watery body.\n2. The THIN rear stone partition is currently too far left and extends into the puzzle field. Move its exact bounds to LEFT x74.8%,RIGHT x77.8%,TOP y35.2%,BOTTOM y55.56% (x1436-1494,y380-600 at1920x1080). Gray upright thin slab thickness4cm, low height36cm. Front/bottom end at y600 meets separate foreground wall tiles. Do not draw any wall, socket, pipe, grass or object into x75-84%,y56-89%, that region must stay empty ground.\n3. The bank's front edge is currently too high. Extend the clean flat flagstone/gravel ground downward so front rim starts y88.9% and finishes y93.7%; foreground water and reeds only below y93.7%. The puzzle area x20-75%,y55.56-88.9% must be fully empty level muted neutral earth/fine stone texture. No loose pebbles, roots, grass clumps, water or shadows crossing that rectangle. Keep organic forest texture outside gameplay rectangles.\nThe spirit's low stone bank ledge x3-27%,y35-54% and the keeper tub x85-100%,y35-54% remain about31cm wide(454px). Ensure bottom of tub does not enter gameplay overlay x75-84%,y56-89%. Keep small empty OPEN glass bottle visibly ON the tub at x94-99%,y41-47%; the bottle is smaller than a human head, not head-sized. Keep keeper face at x90-100%,y8-35%, nose and eyes RIGHT, away from spirit, no menace. Keep distant forest only, no people or buildings. No cafe, letters, numbers, symbols, comic balloons, grid, diagram colors or sticker borders. Preserve image1's appealing storybook cartoon background, and use image2 only for corrected proportions.",
+              "references": [
+                {
+                  "generatedCandidate": "scene-top"
+                },
+                "docs/layout-guide/scene-top.png",
+                {
+                  "generatedCandidate": "portrait-me"
+                },
+                "references/view-cultofthelamb-1.jpg",
+                "references/view-dontstarve-1.jpg"
+              ]
+            }
+          ],
+          "processing": {
+            "key": "scene-top",
+            "file": "assets/scene/top.png",
+            "nativeSize": [
+              1672,
+              941
+            ],
+            "exportSize": [
+              1920,
+              1080
+            ],
+            "mode": "RGB",
+            "textMetadata": [],
+            "elementTransform": false,
+            "outlineReinforcement": false
+          },
+          "sha256": "45b10493c985a67f91e41eec27d4655ef521e92de9bd89d6f9fba68a846627cd"
+        },
+        {
+          "key": "portrait-me",
+          "file": "assets/portrait/me.png",
+          "width": 1024,
+          "height": 1024,
+          "selectedCandidate": "portrait-me",
+          "generationSteps": [
+            {
+              "candidate": "portrait-me",
+              "selected": true,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render or photographic texture. This is a NEW forest water-spirit world, not the old cafe. References supply line quality and color handling only; do not copy their characters, objects, text, symbols or interfaces. No cafe, modern clothing, cup, straw, electronics, plugs, cables, letters, numbers, words, runes, logos, speech balloons, emoji, floating comic symbols, frames or watermarks. A hand-painted cartoon feel matching the approved r2 natural ink. Sky-blue water and mint belong to the spirit; rusty brick-red belongs to villagers. No white sticker border or ground shadow.\nCreate ONE 1024x1024 bust portrait on genuinely TRANSPARENT background. Input1 contains all four original portrait references, input2 is approved r2 ink/style only; the black-haired hoodie student must not appear. Subject: an ANDROGYNOUS ADULT water spirit, human-sized adult proportions with visible neck and broad normal shoulders, not a child, baby, mascot or giant-headed chibi. Their ENTIRE face, torso, arms and waterfall hair are clear SKY-BLUE WATER, slightly translucent with restrained light passing through; never human flesh-colored skin. Big rounded expressive eyes with tired upper lids, weary and worried from losing their spring, lips gently pursed as if holding water. Face yawed about20 degrees toward SCREEN RIGHT. Hair consists of flowing rivulets cascading behind the shoulders, with ONE simple MINT aquatic LEAF ornament near the left temple. Distinct continuous watery silhouette, wavy ends, subtle ripples within the water body, muted deeper teal shadows. Smooth modest water torso without clothing, nipples or sexual detail. Upper body fills the frame with narrow margin, head not cropped; right hand half-raised below and in front of mouth, hand not hiding lips. Keep natural generated line thickness like r2 portrait, dark #111 ink without extra thick silhouette reinforcement. No held object, no ice cube, no magic staff, crown, jewelry or extra decoration. The single leaf and waterfall hair must be repeatable in later illustrations. Simple quiet worried character that reads clearly as living water at game scale.",
+              "references": [
+                {
+                  "contactSheet": "portrait-source-reference-sheet.png",
+                  "files": [
+                    "references/portrait-helltaker-1.jpg",
+                    "references/portrait-helltaker-2.jpg",
+                    "references/portrait-helltaker-3.jpg",
+                    "references/character-cultofthelamb-1.jpg"
+                  ]
+                },
+                "assets/style-test/r2-portrait.png"
+              ]
+            }
+          ],
+          "processing": {
+            "key": "portrait-me",
+            "file": "assets/portrait/me.png",
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "exportSize": [
+              1024,
+              1024
+            ],
+            "mode": "RGBA",
+            "textMetadata": [],
+            "elementTransform": false,
+            "outlineReinforcement": false,
+            "opaqueAlphaBox": [
+              20,
+              16,
+              1011,
+              1010
+            ],
+            "partialAlphaPixels": 670203
+          },
+          "sha256": "2754c88451092ac2df7d69f279a800fbfda92d9b99092742e23eefd5579b0744"
+        },
+        {
+          "key": "piece-top-my-plug",
+          "file": "assets/piece/top-my-plug.png",
+          "width": 512,
+          "height": 512,
+          "selectedCandidate": "piece-top-my-plug-refined",
+          "generationSteps": [
+            {
+              "candidate": "piece-top-my-plug",
+              "selected": false,
+              "prompt": "Follow the art style of the attached reference images exactly. Cartoon game asset. Do not use realistic rendering, 3D render or photographic texture. This is a NEW forest water-spirit world, not the old cafe. References supply line quality and color handling only; do not copy their characters, objects, text, symbols or interfaces. No cafe, modern clothing, cup, straw, electronics, plugs, cables, letters, numbers, words, runes, logos, speech balloons, emoji, floating comic symbols, frames or watermarks. A hand-painted cartoon feel matching the approved r2 natural ink. Sky-blue water and mint belong to the spirit; rusty brick-red belongs to villagers. No white sticker border or ground shadow.\nCreate ONE isolated 512x512 transparent PNG object: the spirit's WATERWAY STONE, a palm-sized river QUARTZ PEBBLE 12cm wide. Broad rounded gray-white stone body on LEFT, tapering into a blunt chisel/wedge-shaped projecting RIGHT END that inserts into a groove. The wedge tip points RIGHT and reaches the RIGHT canvas boundary, not downward. One continuous mint-green WAVY WATER VEIN wraps HORIZONTALLY around the body, subtly luminous on the stone surface with no glow aura outside silhouette. It is a river stone, not a manufactured adapter, gemstone, crystal spike, metal tool or plug; no prongs, cables, eye, face or letter-like rune. Slightly tilted top-down view with a little front face visible, not isometric. Opaque stone face with a little quartz translucency, same mint as reference plug but GRAY STONE material. Fill x about16-512,y about80-440: short occupied dimension about360px. Exterior #111 ink must be 8-10% of the object's shortest dimension, approximately29-35px here, with a crisp unblurred edge; internal stone facets and vein outlines thinner. References1 sheet contains Bug Fables, Cult of the Lamb and Castle Crashers; references2-3 approved thick object ink ONLY, do not recreate plug or cup. No base, ground shadow or white sticker edge. Simple tactile heavy pebble with one distinctive mint water vein.",
+              "references": [
+                {
+                  "contactSheet": "piece-source-reference-sheet.png",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                },
+                "assets/style-test/r2-my-plug.png",
+                "assets/style-test/r2-cup.png"
+              ]
+            },
+            {
+              "candidate": "piece-top-my-plug-refined",
+              "selected": true,
+              "prompt": "Edit IMAGE1 only. Keep exactly this ONE gray river-quartz stone with mint wavy water vein and RIGHT-facing blunt wedge. Keep its palette, simple facets, orientation and transparent background. Image2 and3 are ONLY references for very heavy exterior ink, not their plug/cup shapes. Image4 contains original asset-list style references. Two corrections only: (1) Thicken ONLY exterior #111 border so its normal width is8-10% of the stone body's occupied SHORT dimension, meaning about60-70px when the current stone is about650px tall. This is much thicker than current20px, match approved r2 object's bold ink. Interior vein/facet lines remain thin. Crisp outer edge, no blur or glow. (2) Extend the existing right wedge horizontally to reach the RIGHT CANVAS EDGE, no transparent gap there, while keeping remaining stone rounded and same vertical center. Occupy at least95% canvas width and about65-70%height. Export square, for512x512 game asset. Genuine transparent background, no shadow or white sticker edge, no letters, numbers, runes, cables or metal pins. This remains a palm-sized river stone, not a manufactured plug.",
+              "references": [
+                {
+                  "generatedCandidate": "piece-top-my-plug"
+                },
+                "assets/style-test/r2-my-plug.png",
+                "assets/style-test/r2-cup.png",
+                {
+                  "contactSheet": "piece-source-reference-sheet.png",
+                  "files": [
+                    "references/line-bugfables-1.jpg",
+                    "references/view-cultofthelamb-1.jpg",
+                    "references/line-castlecrashers-1.jpg"
+                  ]
+                }
+              ]
+            }
+          ],
+          "processing": {
+            "key": "piece-top-my-plug",
+            "file": "assets/piece/top-my-plug.png",
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "exportSize": [
+              512,
+              512
+            ],
+            "mode": "RGBA",
+            "textMetadata": [],
+            "elementTransform": false,
+            "outlineReinforcement": false,
+            "opaqueAlphaBox": [
+              0,
+              108,
+              512,
+              411
+            ],
+            "partialAlphaPixels": 113484,
+            "borderScanSamples": [
+              {
+                "x": 128,
+                "topInkPx": 20,
+                "percentOfShortSide": 6.6
+              },
+              {
+                "x": 256,
+                "topInkPx": 20,
+                "percentOfShortSide": 6.6
+              },
+              {
+                "x": 358,
+                "topInkPx": 26,
+                "percentOfShortSide": 8.58
+              }
+            ],
+            "shortSidePx": 303,
+            "tipGapPx": 0
+          },
+          "sha256": "718e1708c7f82daf6b8bbef1de66b3e08d2db15a1e99b64eb8dfc4eb484d514b"
+        }
+      ],
+      "verification": {
+        "status": "Trial set awaiting user approval. Numeric and causal/readability discrepancies remain listed in session log.",
+        "manifest": "Exactly three added registrations; existing fx-bubble, fx-ice and ui-finger retained. Six of34 registered.",
+        "readability": "Same sky-blue watery adult, flowing hair and mint plant ornament in portrait and scene. Gray stone has mint water vein and right-facing wedge. Ordinary keeper looks screen right with an open empty bottle on tub. No drawn text or comic symbols.",
+        "remainingDeviations": [
+          "Spirit mouth approximately (540,304) in1920x1080, whereas launch is(548,278): about26px too low, so oral launch alignment is not approved.",
+          "Rear wall approximately x1464-1556,y368-648 versus x1436-1494,y380-600; wall is too wide/right and extends into overlay region.",
+          "Front bank rim begins around y910 rather than960; bottom gameplay row partially overlaps rim.",
+          "Stone exterior scan samples are6.6,6.6,8.58 percent of occupied short side, not uniformly8-10 percent. Tip reaches right canvas edge.",
+          "Mint plant ornament is one sprig with three leaves rather than one individual leaf.",
+          "Spring-rights violation and bottle capture threat cannot be fully evaluated until the requested later pump, wall and prologue assets exist."
+        ],
+        "uiCheck": {
+          "pass": 52,
+          "fail": 0,
+          "origin": "isolated local preview origin",
+          "gameViewport": [
+            1280,
+            720
+          ],
+          "mobileViewport": [
+            375,
+            812
+          ],
+          "mobileScrollWidth": 375,
+          "brokenImages": 0,
+          "consoleWarningsAndErrors": 0
+        },
+        "protectedFiles": "All tracked files outside the six-file authorized scope match starting SHA-256 values.",
+        "note": "Automated UI pass does not certify scene geometry or story clarity. Trial approval is pending."
+      }
     }
   ]
 }

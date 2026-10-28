@@ -8,6 +8,9 @@
 //
 // 예: 'piece-top-my-plug': 'assets/piece/top-my-plug.png',
 window.ASSET_MANIFEST = {
+  'scene-top': 'assets/scene/top.png',
+  'portrait-me': 'assets/portrait/me.png',
+  'piece-top-my-plug': 'assets/piece/top-my-plug.png',
   'fx-bubble': 'assets/fx/bubble.png',
   'fx-ice': 'assets/fx/ice.png',
   'ui-finger': 'assets/ui/finger.png',
