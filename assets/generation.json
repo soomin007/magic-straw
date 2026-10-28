@@ -4083,6 +4083,447 @@
           "mobileLimitation": "The final viewport request did not change actual innerWidth, so it is not recorded as a new manual phone inspection. Automated 375px overflow check passed."
         }
       }
+    },
+    {
+      "date": "2026-10-28",
+      "tool": "built-in image_gen",
+      "editIntent": "precise-object-edit",
+      "scope": "Nine replacements in place: remove unapproved balloons and graphic symbols from all six prologue panels, and turn the neighbor toward screen right in the five specifically requested assets. Preserve current composition, palette and line weight. No manifest/source edits or commit.",
+      "sourceOfTruth": [
+        "AGENTS.md",
+        "docs/art-brief.md (2026-10-28 reasons)",
+        "assets/asset-list.js",
+        "src/story.js",
+        "docs/layout-guide/scene-top.png",
+        "docs/layout-guide/scene-side.png"
+      ],
+      "processingPolicy": "Only full-canvas resize to required export dimensions and PNG text metadata removal. No per-element transform, composite, outline reinforcement or line redraw.",
+      "assets": [
+        {
+          "key": "scene-top",
+          "file": "assets/scene/top.png",
+          "width": 1920,
+          "height": 1080,
+          "prompt": "Use case: precise-object-edit. EDIT image 1, do not invent a new composition. Same composition, same people, same colors, same line thickness. Change ONLY the one or two specified things below. Follow the attached reference images' art style, but the existing image 1 is the binding source for exact framing and linework. Other reference images are STYLE ONLY; do not copy their characters, objects, UI, symbols, text or layouts. Do not use realistic rendering, 3D render or photographic texture. No letters, numbers, words, logos, watermark, captions, speech balloons, thought balloons, emoji, punctuation, anger marks, sweat drops, or illustrative inserts. Do not add an outer outline. Preserve all actual physical props specified below. Preserve every unedited person's face, pose, clothes, hand, cup, straw and laptop exactly. No reframing, mirroring, camera change, zoom, global relighting, color change, moving or scaling any other element.\nTurn ONLY the red-hoodie headphone student's HEAD and FACE from front toward SCREEN RIGHT by about 25 degrees (the nose points to the viewer's right, AWAY from the mint student and the central divider). This is a yaw rotation, not a sideways tilt or entire character flip. Pupils must look down-right toward their OWN laptop or right-side window, never toward the mint student on screen left and never toward the camera. Keep black hair, large white headphones, neutral absorbed expression, same neck, torso, shoulders and hand pose. The person is oblivious and immersed in their own work. Keep the chin-resting pose if present. Keep head center, head scale and occupied image footprint the same.\n1920x1080 opaque game background. Images 2 and 4 are style references; image 3 is a locked layout guide only, do not render its blocks. Face features stay at the far right, roughly x90-100 percent. Preserve EXACT existing counter edges, wood grain, pendant lights, windows, rear divider, empty puzzle region x20-75% y56-89%, empty foreground divider region x75-84% y56-89%, player, held cup and straight straw, both laptops. Do not correct or move anything else. The editing area is ONLY the neighbor head and facial features in upper-right. No new marks.",
+          "references": [
+            "assets/scene/top.png",
+            {
+              "contactSheet": "scene-source-reference-sheet.png",
+              "files": [
+                "references/view-cultofthelamb-1.jpg",
+                "references/view-dontstarve-1.jpg"
+              ]
+            },
+            "docs/layout-guide/scene-top.png",
+            {
+              "contactSheet": "r2-character-reference-sheet.png",
+              "files": [
+                "assets/style-test/r2-portrait.png",
+                "assets/style-test/r2-neighbor-portrait.png"
+              ]
+            }
+          ],
+          "targetRole": "Existing file at listed path before this edit. Other attached images are style or locked layout references only.",
+          "processing": {
+            "nativeSize": [
+              1672,
+              941
+            ],
+            "exportSize": [
+              1920,
+              1080
+            ],
+            "mode": "RGB",
+            "textMetadata": [],
+            "wholeImageMAE": 5.805,
+            "processing": "Whole canvas resize only; no element relocation, compositing, outline reinforcement, or line redraw.",
+            "fixedRegionsMAE": {
+              "tableCenter": 2.6
+            },
+            "beforeHorizontalEdgeRows": [
+              934,
+              935,
+              984,
+              985
+            ],
+            "afterHorizontalEdgeRows": [
+              933,
+              934,
+              984,
+              985
+            ]
+          },
+          "sha256": "5d8d9808a904be5872da7056f08875295cfb6b7d8eadc8b22921f735353a53ca"
+        },
+        {
+          "key": "scene-side",
+          "file": "assets/scene/side.png",
+          "width": 1920,
+          "height": 1080,
+          "prompt": "Use case: precise-object-edit. EDIT image 1, do not invent a new composition. Same composition, same people, same colors, same line thickness. Change ONLY the one or two specified things below. Follow the attached reference images' art style, but the existing image 1 is the binding source for exact framing and linework. Other reference images are STYLE ONLY; do not copy their characters, objects, UI, symbols, text or layouts. Do not use realistic rendering, 3D render or photographic texture. No letters, numbers, words, logos, watermark, captions, speech balloons, thought balloons, emoji, punctuation, anger marks, sweat drops, or illustrative inserts. Do not add an outer outline. Preserve all actual physical props specified below. Preserve every unedited person's face, pose, clothes, hand, cup, straw and laptop exactly. No reframing, mirroring, camera change, zoom, global relighting, color change, moving or scaling any other element.\nTurn ONLY the red-hoodie headphone student's HEAD and FACE from front toward SCREEN RIGHT by about 25 degrees (the nose points to the viewer's right, AWAY from the mint student and the central divider). This is a yaw rotation, not a sideways tilt or entire character flip. Pupils must look down-right toward their OWN laptop or right-side window, never toward the mint student on screen left and never toward the camera. Keep black hair, large white headphones, neutral absorbed expression, same neck, torso, shoulders and hand pose. The person is oblivious and immersed in their own work. Keep the chin-resting pose if present. Keep head center, head scale and occupied image footprint the same.\n1920x1080 opaque ducked eye-level game background. Images 2 and 4 are style references; image 3 is a locked layout guide, do not render its blocks. Face features remain at x90-100%, y14-41% with the same original occupied head area. Preserve EXACT existing counter front, sill, lamps, wall gradient, left ducked student and straw tip, torso and chin-resting hand. Keep empty gameplay region and all counter heights fixed. Editing area ONLY the neighbor head in upper-right. No new marks.",
+          "references": [
+            "assets/scene/side.png",
+            {
+              "contactSheet": "scene-source-reference-sheet.png",
+              "files": [
+                "references/view-cultofthelamb-1.jpg",
+                "references/view-dontstarve-1.jpg"
+              ]
+            },
+            "docs/layout-guide/scene-side.png",
+            {
+              "contactSheet": "r2-character-reference-sheet.png",
+              "files": [
+                "assets/style-test/r2-portrait.png",
+                "assets/style-test/r2-neighbor-portrait.png"
+              ]
+            }
+          ],
+          "targetRole": "Existing file at listed path before this edit. Other attached images are style or locked layout references only.",
+          "processing": {
+            "nativeSize": [
+              1672,
+              941
+            ],
+            "exportSize": [
+              1920,
+              1080
+            ],
+            "mode": "RGB",
+            "textMetadata": [],
+            "wholeImageMAE": 7.4,
+            "processing": "Whole canvas resize only; no element relocation, compositing, outline reinforcement, or line redraw.",
+            "fixedRegionsMAE": {
+              "centerWall": 4.152,
+              "sill": 2.625
+            },
+            "beforeHorizontalEdgeRows": [
+              814,
+              823,
+              884,
+              885
+            ],
+            "afterHorizontalEdgeRows": [
+              811,
+              814,
+              884,
+              885
+            ]
+          },
+          "sha256": "5092f9e9d1a12e3a44add5705634a838e2ec9a84cda39199596fadf07d295d64"
+        },
+        {
+          "key": "portrait-neighbor",
+          "file": "assets/portrait/neighbor.png",
+          "width": 1024,
+          "height": 1024,
+          "prompt": "Use case: precise-object-edit. EDIT image 1, do not invent a new composition. Same composition, same people, same colors, same line thickness. Change ONLY the one or two specified things below. Follow the attached reference images' art style, but the existing image 1 is the binding source for exact framing and linework. Other reference images are STYLE ONLY; do not copy their characters, objects, UI, symbols, text or layouts. Do not use realistic rendering, 3D render or photographic texture. No letters, numbers, words, logos, watermark, captions, speech balloons, thought balloons, emoji, punctuation, anger marks, sweat drops, or illustrative inserts. Do not add an outer outline. Preserve all actual physical props specified below. Preserve every unedited person's face, pose, clothes, hand, cup, straw and laptop exactly. No reframing, mirroring, camera change, zoom, global relighting, color change, moving or scaling any other element.\nTurn ONLY the red-hoodie headphone student's HEAD and FACE from front toward SCREEN RIGHT by about 25 degrees (the nose points to the viewer's right, AWAY from the mint student and the central divider). This is a yaw rotation, not a sideways tilt or entire character flip. Pupils must look down-right toward their OWN laptop or right-side window, never toward the mint student on screen left and never toward the camera. Keep black hair, large white headphones, neutral absorbed expression, same neck, torso, shoulders and hand pose. The person is oblivious and immersed in their own work. Keep the chin-resting pose if present. Keep head center, head scale and occupied image footprint the same.\n1024x1024 bust portrait, genuinely transparent background. Image 2 contains all four art-style references from the asset list; image 3 is approved r2 identity/style only and its leftward-facing gaze must NOT be copied. Preserve same transparent framing, hoodie shape, shoulder position, ink, colors, expression and crop. Rotate head toward SCREEN RIGHT while preserving the torso. No laptop or other new prop.",
+          "references": [
+            "assets/portrait/neighbor.png",
+            {
+              "contactSheet": "portrait-source-reference-sheet.png",
+              "files": [
+                "references/portrait-helltaker-1.jpg",
+                "references/portrait-helltaker-2.jpg",
+                "references/portrait-helltaker-3.jpg",
+                "references/character-cultofthelamb-1.jpg"
+              ]
+            },
+            {
+              "contactSheet": "r2-character-reference-sheet.png",
+              "files": [
+                "assets/style-test/r2-portrait.png",
+                "assets/style-test/r2-neighbor-portrait.png"
+              ]
+            }
+          ],
+          "targetRole": "Existing file at listed path before this edit. Other attached images are style or locked layout references only.",
+          "processing": {
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "exportSize": [
+              1024,
+              1024
+            ],
+            "mode": "RGBA",
+            "textMetadata": [],
+            "wholeImageMAE": 30.191,
+            "processing": "Whole canvas resize only; no element relocation, compositing, outline reinforcement, or line redraw."
+          },
+          "sha256": "1fb8e1b981b7373837209796f3b2841766e5bec251c3c3dd945b1414043d55e8"
+        },
+        {
+          "key": "story-1",
+          "file": "assets/story/1.png",
+          "width": 1600,
+          "height": 1200,
+          "prompt": "Use case: precise-object-edit. EDIT image 1, do not invent a new composition. Same composition, same people, same colors, same line thickness. Change ONLY the one or two specified things below. Follow the attached reference images' art style, but the existing image 1 is the binding source for exact framing and linework. Other reference images are STYLE ONLY; do not copy their characters, objects, UI, symbols, text or layouts. Do not use realistic rendering, 3D render or photographic texture. No letters, numbers, words, logos, watermark, captions, speech balloons, thought balloons, emoji, punctuation, anger marks, sweat drops, or illustrative inserts. Do not add an outer outline. Preserve all actual physical props specified below. Preserve every unedited person's face, pose, clothes, hand, cup, straw and laptop exactly. No reframing, mirroring, camera change, zoom, global relighting, color change, moving or scaling any other element.\nRemove ALL speech/thought balloons, their outlines, tails and contents, all floating emoji, punctuation and cartoon symbols anywhere in the image. Restore only a natural continuation of the existing cafe background behind removed areas: matching night view, window framing, ceiling/wall and pendant lighting. Do not replace the removed balloon with anything explanatory, a new object, an inset, a border, a sign or a blank white patch. Tell the scene only through existing expressions, body gestures and real physical props. Keep physical wall clock with long minute hand pointing to 12 and short hour hand pointing to 2, keep the actual restroom sign mounted on the door/wall, and keep the empty battery warning ON the actual laptop screen when present. No written text even on these props. Physical wall decor remains decor, do not turn it into an overlay.\n1600x1200 opaque full-frame comic panel. Image 1 is the EXACT existing panel to edit; image 2 contains all four asset-list art-style references, and image 3 is approved r2 style/identity only, not its bubbles or old straws. Preserve composition and colors.\nStory 1. Remove the enormous upper-middle balloon containing the red alarm clock and a stack of textbooks, including all orange accent marks. The physical textbook OPEN ON THE BAR stays. Keep the real wall clock at upper right showing 2:00, tired mint student studying, neighbor, plugged mint charger and all furniture exactly. Fill the former balloon with matching existing interior ceiling/window and lamps. No actual new alarm clock or pile of books.",
+          "references": [
+            "assets/story/1.png",
+            {
+              "contactSheet": "portrait-source-reference-sheet.png",
+              "files": [
+                "references/portrait-helltaker-1.jpg",
+                "references/portrait-helltaker-2.jpg",
+                "references/portrait-helltaker-3.jpg",
+                "references/character-cultofthelamb-1.jpg"
+              ]
+            },
+            {
+              "contactSheet": "r2-character-reference-sheet.png",
+              "files": [
+                "assets/style-test/r2-portrait.png",
+                "assets/style-test/r2-neighbor-portrait.png"
+              ]
+            }
+          ],
+          "targetRole": "Existing file at listed path before this edit. Other attached images are style or locked layout references only.",
+          "processing": {
+            "nativeSize": [
+              1448,
+              1086
+            ],
+            "exportSize": [
+              1600,
+              1200
+            ],
+            "mode": "RGB",
+            "textMetadata": [],
+            "wholeImageMAE": 10.767,
+            "processing": "Whole canvas resize only; no element relocation, compositing, outline reinforcement, or line redraw."
+          },
+          "sha256": "1d10586c8f058b6f8fcd733b26c4af2222498b281e1ca500e970d2fc995c375c"
+        },
+        {
+          "key": "story-2",
+          "file": "assets/story/2.png",
+          "width": 1600,
+          "height": 1200,
+          "prompt": "Use case: precise-object-edit. EDIT image 1, do not invent a new composition. Same composition, same people, same colors, same line thickness. Change ONLY the one or two specified things below. Follow the attached reference images' art style, but the existing image 1 is the binding source for exact framing and linework. Other reference images are STYLE ONLY; do not copy their characters, objects, UI, symbols, text or layouts. Do not use realistic rendering, 3D render or photographic texture. No letters, numbers, words, logos, watermark, captions, speech balloons, thought balloons, emoji, punctuation, anger marks, sweat drops, or illustrative inserts. Do not add an outer outline. Preserve all actual physical props specified below. Preserve every unedited person's face, pose, clothes, hand, cup, straw and laptop exactly. No reframing, mirroring, camera change, zoom, global relighting, color change, moving or scaling any other element.\nRemove ALL speech/thought balloons, their outlines, tails and contents, all floating emoji, punctuation and cartoon symbols anywhere in the image. Restore only a natural continuation of the existing cafe background behind removed areas: matching night view, window framing, ceiling/wall and pendant lighting. Do not replace the removed balloon with anything explanatory, a new object, an inset, a border, a sign or a blank white patch. Tell the scene only through existing expressions, body gestures and real physical props. Keep physical wall clock with long minute hand pointing to 12 and short hour hand pointing to 2, keep the actual restroom sign mounted on the door/wall, and keep the empty battery warning ON the actual laptop screen when present. No written text even on these props. Physical wall decor remains decor, do not turn it into an overlay.\n1600x1200 opaque full-frame comic panel. Image 1 is the EXACT existing panel to edit; image 2 contains all four asset-list art-style references, and image 3 is approved r2 style/identity only, not its bubbles or old straws. Preserve composition and colors.\nStory 2. Remove the upper-left white balloon containing blue/red restroom pictograms completely, reconstruct the ceiling/doorway backdrop there. KEEP the small real restroom sign on the left door beneath it. Keep the mint student's departing back view, the mint charger still plugged into outlet, the cups, laptops and neighbor exactly. Do not remove the physical restroom plaque.",
+          "references": [
+            "assets/story/2.png",
+            {
+              "contactSheet": "portrait-source-reference-sheet.png",
+              "files": [
+                "references/portrait-helltaker-1.jpg",
+                "references/portrait-helltaker-2.jpg",
+                "references/portrait-helltaker-3.jpg",
+                "references/character-cultofthelamb-1.jpg"
+              ]
+            },
+            {
+              "contactSheet": "r2-character-reference-sheet.png",
+              "files": [
+                "assets/style-test/r2-portrait.png",
+                "assets/style-test/r2-neighbor-portrait.png"
+              ]
+            }
+          ],
+          "targetRole": "Existing file at listed path before this edit. Other attached images are style or locked layout references only.",
+          "processing": {
+            "nativeSize": [
+              1448,
+              1086
+            ],
+            "exportSize": [
+              1600,
+              1200
+            ],
+            "mode": "RGB",
+            "textMetadata": [],
+            "wholeImageMAE": 5.414,
+            "processing": "Whole canvas resize only; no element relocation, compositing, outline reinforcement, or line redraw."
+          },
+          "sha256": "3cc023c860f728708eaed30154d3463c5fba3f2128100cdc76346b19683c1ef1"
+        },
+        {
+          "key": "story-3",
+          "file": "assets/story/3.png",
+          "width": 1600,
+          "height": 1200,
+          "prompt": "Use case: precise-object-edit. EDIT image 1, do not invent a new composition. Same composition, same people, same colors, same line thickness. Change ONLY the one or two specified things below. Follow the attached reference images' art style, but the existing image 1 is the binding source for exact framing and linework. Other reference images are STYLE ONLY; do not copy their characters, objects, UI, symbols, text or layouts. Do not use realistic rendering, 3D render or photographic texture. No letters, numbers, words, logos, watermark, captions, speech balloons, thought balloons, emoji, punctuation, anger marks, sweat drops, or illustrative inserts. Do not add an outer outline. Preserve all actual physical props specified below. Preserve every unedited person's face, pose, clothes, hand, cup, straw and laptop exactly. No reframing, mirroring, camera change, zoom, global relighting, color change, moving or scaling any other element.\nRemove ALL speech/thought balloons, their outlines, tails and contents, all floating emoji, punctuation and cartoon symbols anywhere in the image. Restore only a natural continuation of the existing cafe background behind removed areas: matching night view, window framing, ceiling/wall and pendant lighting. Do not replace the removed balloon with anything explanatory, a new object, an inset, a border, a sign or a blank white patch. Tell the scene only through existing expressions, body gestures and real physical props. Keep physical wall clock with long minute hand pointing to 12 and short hour hand pointing to 2, keep the actual restroom sign mounted on the door/wall, and keep the empty battery warning ON the actual laptop screen when present. No written text even on these props. Physical wall decor remains decor, do not turn it into an overlay.\n1600x1200 opaque full-frame comic panel. Image 1 is the EXACT existing panel to edit; image 2 contains all four asset-list art-style references, and image 3 is approved r2 style/identity only, not its bubbles or old straws. Preserve composition and colors.\nStory 3. Remove upper-middle ?! balloon and ALL yellow surprise ticks above mint student's head. Fill its upper 18-25 percent region with natural background, continuing the ceiling, night windows and lights. Turn ONLY the red-hoodie headphone student's HEAD and FACE from front toward SCREEN RIGHT by about 25 degrees (the nose points to the viewer's right, AWAY from the mint student and the central divider). This is a yaw rotation, not a sideways tilt or entire character flip. Pupils must look down-right toward their OWN laptop or right-side window, never toward the mint student on screen left and never toward the camera. Keep black hair, large white headphones, neutral absorbed expression, same neck, torso, shoulders and hand pose. The person is oblivious and immersed in their own work. Keep the chin-resting pose if present. Keep head center, head scale and occupied image footprint the same. Keep the neighbor's existing hands and actual phone. Let nose and eyes point down-right toward the right edge of their own phone/laptop region; do not aim at protagonist. Preserve the shocked mint student's wide eyes, open mouth and reaching hand toward their clearly disconnected MINT two-round-pin plug on the bar. Keep the neighbor's RED charger visibly plugged into the shared socket and connected to their phone. The stolen charging spot must read through these real props with no explanatory graphics.",
+          "references": [
+            "assets/story/3.png",
+            {
+              "contactSheet": "portrait-source-reference-sheet.png",
+              "files": [
+                "references/portrait-helltaker-1.jpg",
+                "references/portrait-helltaker-2.jpg",
+                "references/portrait-helltaker-3.jpg",
+                "references/character-cultofthelamb-1.jpg"
+              ]
+            },
+            {
+              "contactSheet": "r2-character-reference-sheet.png",
+              "files": [
+                "assets/style-test/r2-portrait.png",
+                "assets/style-test/r2-neighbor-portrait.png"
+              ]
+            }
+          ],
+          "targetRole": "Existing file at listed path before this edit. Other attached images are style or locked layout references only.",
+          "processing": {
+            "nativeSize": [
+              1448,
+              1086
+            ],
+            "exportSize": [
+              1600,
+              1200
+            ],
+            "mode": "RGB",
+            "textMetadata": [],
+            "wholeImageMAE": 9.567,
+            "processing": "Whole canvas resize only; no element relocation, compositing, outline reinforcement, or line redraw."
+          },
+          "sha256": "e898e2f551ecb6ff92d2ba392d34fffa136fb7ef524be6783885b436ecde8499"
+        },
+        {
+          "key": "story-4",
+          "file": "assets/story/4.png",
+          "width": 1600,
+          "height": 1200,
+          "prompt": "Use case: precise-object-edit. EDIT image 1, do not invent a new composition. Same composition, same people, same colors, same line thickness. Change ONLY the one or two specified things below. Follow the attached reference images' art style, but the existing image 1 is the binding source for exact framing and linework. Other reference images are STYLE ONLY; do not copy their characters, objects, UI, symbols, text or layouts. Do not use realistic rendering, 3D render or photographic texture. No letters, numbers, words, logos, watermark, captions, speech balloons, thought balloons, emoji, punctuation, anger marks, sweat drops, or illustrative inserts. Do not add an outer outline. Preserve all actual physical props specified below. Preserve every unedited person's face, pose, clothes, hand, cup, straw and laptop exactly. No reframing, mirroring, camera change, zoom, global relighting, color change, moving or scaling any other element.\nRemove ALL speech/thought balloons, their outlines, tails and contents, all floating emoji, punctuation and cartoon symbols anywhere in the image. Restore only a natural continuation of the existing cafe background behind removed areas: matching night view, window framing, ceiling/wall and pendant lighting. Do not replace the removed balloon with anything explanatory, a new object, an inset, a border, a sign or a blank white patch. Tell the scene only through existing expressions, body gestures and real physical props. Keep physical wall clock with long minute hand pointing to 12 and short hour hand pointing to 2, keep the actual restroom sign mounted on the door/wall, and keep the empty battery warning ON the actual laptop screen when present. No written text even on these props. Physical wall decor remains decor, do not turn it into an overlay.\n1600x1200 opaque full-frame comic panel. Image 1 is the EXACT existing panel to edit; image 2 contains all four asset-list art-style references, and image 3 is approved r2 style/identity only, not its bubbles or old straws. Preserve composition and colors.\nStory 4. Remove entire upper-left anger/ellipsis balloon, outline and tail. Fill that upper 18-25 percent region with matching night window, ceiling and lamps, with no replacement symbol. Turn ONLY the red-hoodie headphone student's HEAD and FACE from front toward SCREEN RIGHT by about 25 degrees (the nose points to the viewer's right, AWAY from the mint student and the central divider). This is a yaw rotation, not a sideways tilt or entire character flip. Pupils must look down-right toward their OWN laptop or right-side window, never toward the mint student on screen left and never toward the camera. Keep black hair, large white headphones, neutral absorbed expression, same neck, torso, shoulders and hand pose. The person is oblivious and immersed in their own work. Keep the chin-resting pose if present. Keep head center, head scale and occupied image footprint the same. Preserve mint student's hesitant raised hand STOPPING before calling to neighbor, their anxious/annoyed face, the loose mint charger and the neighbor red charger occupying socket. KEEP red EMPTY BATTERY warning as part of actual laptop screen; the warning triangle there is a physical screen prop, not a floating comic symbol. KEEP real wall clock at upper right at exactly 2:00.",
+          "references": [
+            "assets/story/4.png",
+            {
+              "contactSheet": "portrait-source-reference-sheet.png",
+              "files": [
+                "references/portrait-helltaker-1.jpg",
+                "references/portrait-helltaker-2.jpg",
+                "references/portrait-helltaker-3.jpg",
+                "references/character-cultofthelamb-1.jpg"
+              ]
+            },
+            {
+              "contactSheet": "r2-character-reference-sheet.png",
+              "files": [
+                "assets/style-test/r2-portrait.png",
+                "assets/style-test/r2-neighbor-portrait.png"
+              ]
+            }
+          ],
+          "targetRole": "Existing file at listed path before this edit. Other attached images are style or locked layout references only.",
+          "processing": {
+            "nativeSize": [
+              1448,
+              1086
+            ],
+            "exportSize": [
+              1600,
+              1200
+            ],
+            "mode": "RGB",
+            "textMetadata": [],
+            "wholeImageMAE": 12.524,
+            "processing": "Whole canvas resize only; no element relocation, compositing, outline reinforcement, or line redraw."
+          },
+          "sha256": "da4f52541175ae18da29a6538abc7cebae7a8b256f98339bfe152f8a96478ae9"
+        },
+        {
+          "key": "story-5",
+          "file": "assets/story/5.png",
+          "width": 1600,
+          "height": 1200,
+          "prompt": "Use case: precise-object-edit. EDIT image 1, do not invent a new composition. Same composition, same people, same colors, same line thickness. Change ONLY the one or two specified things below. Follow the attached reference images' art style, but the existing image 1 is the binding source for exact framing and linework. Other reference images are STYLE ONLY; do not copy their characters, objects, UI, symbols, text or layouts. Do not use realistic rendering, 3D render or photographic texture. No letters, numbers, words, logos, watermark, captions, speech balloons, thought balloons, emoji, punctuation, anger marks, sweat drops, or illustrative inserts. Do not add an outer outline. Preserve all actual physical props specified below. Preserve every unedited person's face, pose, clothes, hand, cup, straw and laptop exactly. No reframing, mirroring, camera change, zoom, global relighting, color change, moving or scaling any other element.\nRemove ALL speech/thought balloons, their outlines, tails and contents, all floating emoji, punctuation and cartoon symbols anywhere in the image. Restore only a natural continuation of the existing cafe background behind removed areas: matching night view, window framing, ceiling/wall and pendant lighting. Do not replace the removed balloon with anything explanatory, a new object, an inset, a border, a sign or a blank white patch. Tell the scene only through existing expressions, body gestures and real physical props. Keep physical wall clock with long minute hand pointing to 12 and short hour hand pointing to 2, keep the actual restroom sign mounted on the door/wall, and keep the empty battery warning ON the actual laptop screen when present. No written text even on these props. Physical wall decor remains decor, do not turn it into an overlay.\n1600x1200 opaque full-frame comic panel. Image 1 is the EXACT existing panel to edit; image 2 contains all four asset-list art-style references, and image 3 is approved r2 style/identity only, not its bubbles or old straws. Preserve composition and colors.\nStory 5. Remove the upper-left circular chibi shushing-character inset completely. Restore matching window/plants/lighting behind it. Remove the three bright green floating emphasis dashes around the straw, but preserve subtle continuous soft glow on the actual single straight green straw. Keep main mint student's determined eyes, right hand holding cup beside laptop, all other poses, props and framing exactly. No replacement head, icon, inset or sparkles.",
+          "references": [
+            "assets/story/5.png",
+            {
+              "contactSheet": "portrait-source-reference-sheet.png",
+              "files": [
+                "references/portrait-helltaker-1.jpg",
+                "references/portrait-helltaker-2.jpg",
+                "references/portrait-helltaker-3.jpg",
+                "references/character-cultofthelamb-1.jpg"
+              ]
+            },
+            {
+              "contactSheet": "r2-character-reference-sheet.png",
+              "files": [
+                "assets/style-test/r2-portrait.png",
+                "assets/style-test/r2-neighbor-portrait.png"
+              ]
+            }
+          ],
+          "targetRole": "Existing file at listed path before this edit. Other attached images are style or locked layout references only.",
+          "processing": {
+            "nativeSize": [
+              1448,
+              1086
+            ],
+            "exportSize": [
+              1600,
+              1200
+            ],
+            "mode": "RGB",
+            "textMetadata": [],
+            "wholeImageMAE": 7.479,
+            "processing": "Whole canvas resize only; no element relocation, compositing, outline reinforcement, or line redraw."
+          },
+          "sha256": "c80a9beece90557cd9b4082405a1452f07b3ce4eea096e2763448a00d271dd99"
+        },
+        {
+          "key": "story-6",
+          "file": "assets/story/6.png",
+          "width": 1600,
+          "height": 1200,
+          "prompt": "Use case: precise-object-edit. EDIT image 1, do not invent a new composition. Same composition, same people, same colors, same line thickness. Change ONLY the one or two specified things below. Follow the attached reference images' art style, but the existing image 1 is the binding source for exact framing and linework. Other reference images are STYLE ONLY; do not copy their characters, objects, UI, symbols, text or layouts. Do not use realistic rendering, 3D render or photographic texture. No letters, numbers, words, logos, watermark, captions, speech balloons, thought balloons, emoji, punctuation, anger marks, sweat drops, or illustrative inserts. Do not add an outer outline. Preserve all actual physical props specified below. Preserve every unedited person's face, pose, clothes, hand, cup, straw and laptop exactly. No reframing, mirroring, camera change, zoom, global relighting, color change, moving or scaling any other element.\nRemove ALL speech/thought balloons, their outlines, tails and contents, all floating emoji, punctuation and cartoon symbols anywhere in the image. Restore only a natural continuation of the existing cafe background behind removed areas: matching night view, window framing, ceiling/wall and pendant lighting. Do not replace the removed balloon with anything explanatory, a new object, an inset, a border, a sign or a blank white patch. Tell the scene only through existing expressions, body gestures and real physical props. Keep physical wall clock with long minute hand pointing to 12 and short hour hand pointing to 2, keep the actual restroom sign mounted on the door/wall, and keep the empty battery warning ON the actual laptop screen when present. No written text even on these props. Physical wall decor remains decor, do not turn it into an overlay.\n1600x1200 opaque full-frame comic panel. Image 1 is the EXACT existing panel to edit; image 2 contains all four asset-list art-style references, and image 3 is approved r2 style/identity only, not its bubbles or old straws. Preserve composition and colors.\nStory 6. Remove upper-left bubble with ice and wind pictogram completely, restore only cafe interior behind it. Remove floating white collision STARBURST at the right cup, every drawn speed line and decorative arc/tick around ice or cup. Retain only the actual physical ice cubes and objects; remove graphic trails and symbolic motion annotations. Preserve same three-stage split-panel composition and borders, same characters, cups, laptops and background. Left: held cup, single straight straw in mouth, cheeks puffed. Middle: real ice cube at horizontal straw tip pointed RIGHT, same cup in hand with no extra straw. Right: the real ice cube touches paper cup at its left side and the cup is leaning/sliding RIGHT. Let the contact and rightward cup tilt convey force without symbols. No extra icons or letters.",
+          "references": [
+            "assets/story/6.png",
+            {
+              "contactSheet": "portrait-source-reference-sheet.png",
+              "files": [
+                "references/portrait-helltaker-1.jpg",
+                "references/portrait-helltaker-2.jpg",
+                "references/portrait-helltaker-3.jpg",
+                "references/character-cultofthelamb-1.jpg"
+              ]
+            },
+            {
+              "contactSheet": "r2-character-reference-sheet.png",
+              "files": [
+                "assets/style-test/r2-portrait.png",
+                "assets/style-test/r2-neighbor-portrait.png"
+              ]
+            }
+          ],
+          "targetRole": "Existing file at listed path before this edit. Other attached images are style or locked layout references only.",
+          "processing": {
+            "nativeSize": [
+              1448,
+              1086
+            ],
+            "exportSize": [
+              1600,
+              1200
+            ],
+            "mode": "RGB",
+            "textMetadata": [],
+            "wholeImageMAE": 10.762,
+            "processing": "Whole canvas resize only; no element relocation, compositing, outline reinforcement, or line redraw."
+          },
+          "sha256": "d950dfbcc96506c40d31eab6bc6c5bcb3457200b0a2e59e2fe44dfbc2b0d650b"
+        }
+      ],
+      "verification": {
+        "visual": "All six original balloon/inset areas were inspected and filled with cafe backdrop. No floating speech or thought bubble, emoji, punctuation, anger/surprise marks, shush inset, green accent rays, collision starburst, speed lines or drawn arcs remain in the selected panels. Physical restroom plaque, 2:00 wall clocks, and actual laptop battery warning remain by user request.",
+        "gaze": "The five requested red-hoodie assets visually face screen right, away from the protagonist. About 25 degrees is a visual art target, not a measured 3D rotation.",
+        "readability": "Disconnected mint plug, occupied red charger, shocked face and reaching hand convey the stolen socket; hesitant raised hand plus actual battery warning conveys lack of time. Three real-action moments convey sip, eject ice and push cup without explanatory symbols.",
+        "manifest": "Unchanged; same nine paths and existing registrations.",
+        "uiCheck": "28 PASS, 0 FAIL on separate cold-cache 8124 origin after the unrelated aimLine source change. Earlier mixed-cache run failed six items; cold-cache run resolved them.",
+        "limitations": [
+          "Generated redraws do not preserve unedited raster pixels exactly; small line, fold and color differences remain.",
+          "Scene top sampled table/front and sill edges remain within 1 px; side sampled bar edge remains within about 3 px and sill within 0 px of original.",
+          "Existing scene-side face is lower than the written y14-41 percent guide; original occupied placement was prioritized over repositioning the head.",
+          "The earlier divider join gap and ducked hair intrusion are inherited and were outside this strictly localized edit.",
+          "Neighbor face in story-1, story-2 and story-5 was not rotated, because the user specified rotation only for scene-top, scene-side, story-3, story-4 and portrait-neighbor.",
+          "Portrait alpha bounding box changed from [65,40,958,1000] to [38,15,986,1014]."
+        ],
+        "browser": "art-check 31/31 registered, 39 images loaded, no broken images; prologue, level 1 and level 7 ducked view inspected. Actual 375px game viewport had no horizontal overflow.",
+        "concurrentWork": "Other-agent source/document edits and a HEAD change were observed during this task. User explicitly authorized final record-only completion. No unrelated files were edited or reverted by Codex. UI result describes its observation time, not later source changes."
+      }
     }
   ]
 }
