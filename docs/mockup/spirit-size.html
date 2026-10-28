@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>정령 크기 목업</title>
+  <style>
+    :root {
+      --bg: #e9e7e3;
+      --ink: #2b2b2b;
+      --muted: #6d6a66;
+      --spirit: #7cc4e8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+      line-height: 1.6;
+      /* 한국어 낱말 중간에서 줄이 꺾이지 않게 띄어쓰기에서만 끊는다. */
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .wrap {
+      max-width: 1040px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 60px;
+    }
+
+    h1 { font-size: 24px; margin-bottom: 4px; }
+    h2 { font-size: 19px; margin-top: 36px; margin-bottom: 6px; }
+    p { margin-top: 0; }
+    .lead { color: var(--muted); }
+    .nw { white-space: nowrap; }
+
+    .scene {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 3px solid var(--ink);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .scene text {
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>정령 크기 회색 상자</h1>
+    <p class="lead">정령을 작은 물방울 모양으로 바꿀 때 <span class="nw">얼마나 작게</span>, <span class="nw">어디에 둘지</span>를 고르는 목업이다.
+      생김새는 Codex의 <span class="nw">후보 그림으로</span> 따로 고르고, 여기서는 <span class="nw">크기와 자리만</span> 본다.
+      장면의 다른 상자는 지금 게임과 같은 <span class="nw">src/layout.js</span> 숫자로 그렸다.</p>
+    <p>세 장면 모두 샘지기는 사람 크기 그대로다. 파란 물방울이 정령이고,
+      <span class="nw">흰 테두리의</span> 작은 점은 얼음이 출발하는 자리(장면의 <span class="nw">274, 139px)다.</span> 정령의 입이 이 점 바로 왼쪽에 와야 한다.</p>
+
+    <h2>A. 손바닥만 한 정령</h2>
+    <p><span class="nw">키 20cm, 폭 15cm</span><span class="nw">(장면에서 110 x 125px,</span> <span class="nw">화면 높이의 23%)이다.</span>
+      샘 가장자리 돌 위에 올라앉는다. 샘지기와의 크기 차이가 가장 크다.</p>
+    <svg class="scene" id="scene-a" viewBox="0 0 960 540" role="img" aria-label="A 장면"></svg>
+
+    <h2>B. 무릎 높이의 정령</h2>
+    <p><span class="nw">키 30cm, 폭 22cm</span><span class="nw">(장면에서 160 x 188px,</span> <span class="nw">화면 높이의 35%)이다.</span>
+      샘물에서 몸을 내밀고, 몸 아래쪽은 <span class="nw">돌 턱</span>에 가려진다. 표정을 읽기에 넉넉한 크기다.</p>
+    <svg class="scene" id="scene-b" viewBox="0 0 960 540" role="img" aria-label="B 장면"></svg>
+
+    <h2>C. 지금처럼 사람 상반신 크기</h2>
+    <p>비교용이다. 지금 배치의 정령 자리<span class="nw">(머리 116 x 144px,</span> <span class="nw">상반신 324 x 132px)를</span>
+      물방울 모양으로만 바꾼 것이다. 샘지기와 크기가 같아서 약자의 처지가 크기로는 <span class="nw">보이지 않는다.</span></p>
+    <svg class="scene" id="scene-c" viewBox="0 0 960 540" role="img" aria-label="C 장면"></svg>
+  </main>
+
+  <script src="../../src/layout.js"></script>
+  <script>
+    // 회색 상자 색. 게임의 회색 상자(src/style.css)와 같은 색 계열이다.
+    const TONE_FILL = {
+      window: '#2f4a3a',
+      table: '#c8b98f',
+      laptop: '#a0a3aa',
+      theirs: '#d9534a',
+      partition: '#cfd8d3',
+      light: '#f2e6cf',
+      edge: '#8f7a5a',
+      mine: '#6cc3a0',
+    };
+
+    // 정령 자리였던 상자. 후보마다 이 상자 대신 물방울 정령을 그린다.
+    const SPIRIT_LABELS = ['정령 (몸)', '정령 (얼굴)', '정령의 손'];
+    const isSpiritBox = (box) => SPIRIT_LABELS.includes(box.label) || (box.tone === 'mine' && box.label === '');
+
+    // 물방울 모양. 위가 뾰족하고 아래가 둥글다. 눈은 높이의 58% 자리에 둔다.
+    function droplet(box) {
+      const { x, y, width: w, height: h } = box;
+      const cx = x + w / 2;
+      const side = y + h * 0.66;
+      const body = `M ${cx} ${y} C ${cx + w * 0.18} ${y + h * 0.28}, ${x + w} ${y + h * 0.42}, ${x + w} ${side} `
+        + `A ${w / 2} ${h * 0.34} 0 0 1 ${x} ${side} C ${x} ${y + h * 0.42}, ${cx - w * 0.18} ${y + h * 0.28}, ${cx} ${y} Z`;
+      const eyeY = y + h * 0.58;
+      const eyeR = Math.max(3, w * 0.045);
+      return `<path d="${body}" fill="#7cc4e8" stroke="#2b2b2b" stroke-width="4"/>`
+        + `<circle cx="${cx - w * 0.12}" cy="${eyeY}" r="${eyeR}" fill="#2b2b2b"/>`
+        + `<circle cx="${cx + w * 0.16}" cy="${eyeY}" r="${eyeR}" fill="#2b2b2b"/>`;
+    }
+
+    // 도형과 이름표를 나눠 그린다. 이름표를 맨 나중에 얹어야 뒤에 그린 작은 상자에 가려지지 않는다.
+    function boxSvg(box) {
+      const fill = TONE_FILL[box.tone] || '#c9c6c0';
+      const shape = box.shape === 'ellipse'
+        ? `<ellipse cx="${box.x + box.width / 2}" cy="${box.y + box.height / 2}" rx="${box.width / 2}" ry="${box.height / 2}" fill="${fill}" stroke="#2b2b2b" stroke-width="2"/>`
+        : `<rect x="${box.x}" y="${box.y}" width="${box.width}" height="${box.height}" rx="${box.shape === 'round' ? 18 : 0}" fill="${fill}" stroke="#2b2b2b" stroke-width="2"/>`;
+      const light = ['window', 'theirs', 'laptop'].includes(box.tone);
+      // 좁은 상자(돌벽 뒤쪽 등)는 이름표가 넘쳐 다른 상자를 가리므로 이름을 적지 않는다.
+      const label = box.label && box.width >= 100
+        ? `<text x="${box.x + box.width / 2}" y="${box.y + Math.min(box.height / 2, 40) + 5}" text-anchor="middle" fill="${light ? '#fff' : '#2b2b2b'}">${box.label}</text>`
+        : '';
+      return { shape, label };
+    }
+
+    function puzzleArea() {
+      const layout = window.SCENE_LAYOUT;
+      const cell = layout.scale.cellWidthPx;
+      const row = layout.scale.rowHeightPx;
+      const left = layout.top.gridLeft;
+      const top = layout.top.gridTop;
+      let svg = '';
+      for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 6; c++) {
+          svg += `<rect x="${left + c * cell}" y="${top + r * row}" width="${cell}" height="${row}" fill="none" stroke="rgba(43,43,43,0.25)"/>`;
+        }
+      }
+      svg += `<rect x="${left + 6 * cell}" y="${top}" width="${cell}" height="${3 * row}" fill="#cfd8d3" stroke="#2b2b2b" stroke-width="2"/>`;
+      return svg;
+    }
+
+    // spirit: 정령 상자, inFront: 샘 가장자리 돌보다 앞에 그릴지(돌 위에 올라앉으면 앞, 물에서 몸을 내밀면 뒤)
+    function drawScene(id, spirit, inFront) {
+      const layout = window.SCENE_LAYOUT;
+      const straw = layout.top.straw;
+      let svg = '';
+      let labels = '';
+      for (const box of layout.top.boxes) {
+        if (isSpiritBox(box)) continue;
+        if (box.label === '샘 가장자리 돌' && !inFront) svg += droplet(spirit);
+        const drawn = boxSvg(box);
+        svg += drawn.shape;
+        labels += drawn.label;
+        if (box.label === '샘 가장자리 돌' && inFront) svg += droplet(spirit);
+      }
+      svg += puzzleArea() + labels;
+      svg += `<circle cx="${straw.x}" cy="${straw.y}" r="6" fill="#2b2b2b" stroke="#fff" stroke-width="2"/>`;
+      document.getElementById(id).innerHTML = svg;
+    }
+
+    // 세로 크기는 지금 배치의 사람 머리(23cm = 144px)와 같은 비율(1cm = 6.26px)로 잡았다.
+    drawScene('scene-a', { x: 150, y: 58, width: 110, height: 125 }, true);
+    drawScene('scene-b', { x: 98, y: 4, width: 160, height: 188 }, false);
+    drawScene('scene-c', { x: 70, y: 43, width: 290, height: 259 }, false);
+  </script>
+</body>
+</html>

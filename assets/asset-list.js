@@ -19,6 +19,8 @@
   const PIECE_REFS = ['line-bugfables-1', 'view-cultofthelamb-1', 'line-castlecrashers-1'];
   const SCENE_REFS = ['view-cultofthelamb-1', 'view-dontstarve-1'];
   const PORTRAIT_REFS = ['portrait-helltaker-1', 'portrait-helltaker-2', 'portrait-helltaker-3', 'character-cultofthelamb-1'];
+  // 정령에는 Helltaker 소녀 그림을 넣지 않는다. 그 그림의 성별과 체형이 정령에 묻어났다(known-issues 16번, 2026-10-28).
+  const SPIRIT_REFS = ['character-cultofthelamb-1'];
 
   // 묶음 순서는 다음 수업(2026-11-04)에서 처음 하는 사람이 10분 동안 보는 순서를 따른다(2026-10-28).
   // 1차는 1~6번 판의 플레이 화면, 2차는 프롤로그와 들킨 화면(역시 처음 10분 안에 보인다), 3차는 10분 뒤의 물속에서 보기 판이다.
@@ -34,17 +36,16 @@
         + '화면 가운데 띠는 평평한 판석과 자갈이 깔린 샘가 땅이고, 오른쪽에 물길 홈이 파인 얇은 돌벽(샘 입구 돌벽)이 앞뒤로 서 있다. '
         + '돌벽은 퍼즐 판 뒤쪽 부분만 배경에 그리고, 판 옆 부분은 비워 둔다. 화면 맨 아래는 앞쪽 물가의 수면과 풀이다. '
         + '배치와 크기는 docs/art-brief.md의 "물의 정령 버전" 절의 표, 구도는 docs/layout-guide/scene-top.png를 따른다' },
-    { batch: 1, key: 'portrait-me', path: 'assets/portrait/me.png', width: 1024, height: 1024, refs: PORTRAIT_REFS,
-      subject: '물의 정령 상반신. 몸 전체가 맑은 물빛(하늘색)의 물로 되어 있어 몸 안이 살짝 비치고, 머리카락은 물줄기처럼 어깨 뒤로 흘러내린다. '
-        + '사람과 같은 크기의 어른 체형, 크고 둥근 눈, 머리카락에 민트색 물풀 잎 장식이 하나 있다. 샘을 빼앗겨 지친 표정. '
-        + '이후 모든 컷과 화면에서 이 생김새를 그대로 쓴다' },
+    { batch: 1, key: 'portrait-me', path: 'assets/portrait/me.png', width: 1024, height: 1024, refs: SPIRIT_REFS,
+      subject: '물의 정령. 생김새는 정령 후보 시험(docs/art-brief.md의 "2026-10-28 의뢰 (정령 후보 시험)")에서 사용자가 고른 것으로 다시 쓴다. '
+        + '사람이 아니고 성별이 없는 작은 물방울 모양의 정령이라는 것까지만 정했다. 고르기 전에는 이 그림을 그리지 않는다' },
     { batch: 1, key: 'piece-top-my-plug', path: 'assets/piece/top-my-plug.png', width: 512, height: 512, refs: PIECE_REFS,
       subject: '정령의 물길 돌. 강가의 둥근 회색 차돌 하나(가로 12cm)인데, 오른쪽 끝이 쐐기처럼 깎여 홈에 끼우기 좋은 모양이다. '
         + '돌을 가로로 두르는 민트색 물결 무늬가 은은하게 빛나 정령의 것임을 보여 준다. 깎인 쐐기 끝이 오른쪽 가장자리에 닿는다' },
     { batch: 1, key: 'portrait-neighbor', path: 'assets/portrait/neighbor.png', width: 1024, height: 1024, refs: PORTRAIT_REFS,
       subject: '샘지기 상반신. 마을의 중년 사람, 낡은 밀짚모자, 녹슨 벽돌색 작업 조끼, 허리띠에 코르크 마개 유리병을 매달았다. '
         + '악당이 아니라 마을에 물을 대느라 바쁜 평범한 사람의 무심한 표정. 얼굴은 정면에서 오른쪽으로 약 25도 틀어져 있고 왼쪽(정령 쪽)을 보지 않는다' },
-    { batch: 1, key: 'ui-spirit', path: 'assets/ui/spirit.png', width: 256, height: 304, refs: PORTRAIT_REFS,
+    { batch: 1, key: 'ui-spirit', path: 'assets/ui/spirit.png', width: 256, height: 304, refs: SPIRIT_REFS,
       subject: '아래 트레이와 증발 화면, 다시 차오르는 화면에 쓰는 작은 정령 전신. portrait-me와 같은 정령을 아이콘처럼 단순하게, 정면으로 서서 두 손을 모은 자세. '
         + '물방울처럼 아래가 둥근 실루엣이라 크기를 줄이거나 흐리게 해도 정령으로 읽힌다. 게임이 크기와 투명도를 바꾸므로 그림은 가득 찬 상태 하나만 그린다' },
     { batch: 1, key: 'piece-top-their-plug', path: 'assets/piece/top-their-plug.png', width: 512, height: 512, refs: PIECE_REFS,
@@ -86,7 +87,7 @@
     { batch: 2, key: 'portrait-neighbor-caught', path: 'assets/portrait/neighbor-caught.png', width: 1024, height: 1024, refs: PORTRAIT_REFS,
       subject: '같은 샘지기 상반신(밀짚모자, 벽돌색 조끼)이 왼쪽(정령 쪽)으로 고개를 홱 돌려 정면에 가깝게 이쪽을 쳐다본다. '
         + '한 손으로 코르크 마개를 연 유리병을 이쪽으로 내밀고, 눈을 크게 뜬 놀란 표정. 들킨 화면에 뜬다' },
-    { batch: 2, key: 'portrait-me-determined', path: 'assets/portrait/me-determined.png', width: 1024, height: 1024, refs: PORTRAIT_REFS,
+    { batch: 2, key: 'portrait-me-determined', path: 'assets/portrait/me-determined.png', width: 1024, height: 1024, refs: SPIRIT_REFS,
       subject: '같은 물의 정령이 눈을 가늘게 뜨고 볼에 물을 머금은 채 조용히 결심한 표정. 입가에 하얀 얼음 결정이 맺혀 있다. 프롤로그 5번 컷의 인물 기준' },
 
     // 3차: 물속에서 보기(수면 높이에서 앞으로 본 단면) 시점. 10, 11번 판에 쓴다.
