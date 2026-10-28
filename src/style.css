@@ -9,9 +9,11 @@
   --sky: #5aa9d6;
   --gray: #c9c6c0;
   --gray-dark: #8f8a83;
-  --frame: #1f2e27;
-  --spirit: #7cc4e8;
-  --spirit-dark: #3f8fb8;
+  --os-bar: #1f2229;
+  --os-text: #e9ebf0;
+  --wallpaper-top: #3d4a6b;
+  --wallpaper-bottom: #8e7187;
+  --taskbar-height: 44px;
   --cell: 88px;
 }
 
@@ -24,13 +26,10 @@ body {
   margin: 0;
   height: 100%;
   overflow: hidden;
-  background: var(--frame);
+  background: var(--os-bar);
   color: var(--ink);
   font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
   -webkit-tap-highlight-color: transparent;
-  /* 한국어 낱말 중간에서 줄이 꺾이지 않게 띄어쓰기에서만 끊는다(회색 상자 이름표와 프롤로그 장면 설명). */
-  word-break: keep-all;
-  overflow-wrap: break-word;
 }
 
 button {
@@ -43,20 +42,24 @@ button {
   display: none !important;
 }
 
-/* 게임 바탕. 예전에는 랩탑 바탕화면과 작업 표시줄을 그렸지만, 물의 정령 컨셉으로 옮기며(2026-10-28) 게임 창이 화면을 채운다. */
+/* 랩탑 바탕화면 */
 
 .screen {
   position: fixed;
   inset: 0;
   display: flex;
   flex-direction: column;
-  background: var(--frame);
+  background: linear-gradient(160deg, var(--wallpaper-top), var(--wallpaper-bottom));
 }
 
 .desktop {
   flex: 1;
   min-height: 0;
   display: flex;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .window {
@@ -67,8 +70,10 @@ button {
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 12px;
   overflow: hidden;
   background: var(--cream);
+  box-shadow: 0 18px 50px rgba(10, 12, 20, 0.45);
 }
 
 .titlebar {
@@ -113,6 +118,11 @@ button {
   font-size: 11px;
   font-weight: 700;
   color: #a39684;
+}
+
+/* 챕터가 바뀌는 판 앞에는 틈을 두어 챕터를 구분한다. */
+.level-dot.chapter-start {
+  margin-left: 10px;
 }
 
 .level-dot.cleared {
@@ -181,9 +191,8 @@ button {
   transition: filter 0.8s ease;
 }
 
-/* 몸의 물이 거의 남지 않으면 판의 색이 바래며 말라 간다. 화면을 어둡게 하지 않고 채도만 낮춘다. */
-.window.drying .stage {
-  filter: saturate(0.25) brightness(0.98);
+.window.power-saver .stage {
+  filter: grayscale(0.85) brightness(0.78);
 }
 
 .scene {
@@ -283,9 +292,8 @@ button {
     var(--plate),
     var(--panel);
 }
-.gbox-window { background: #2f4a3a; color: #cfe3d3; border-radius: 0; }
-.gbox-table { background: #c8b98f; border-radius: 18px; color: transparent; }
-.gbox-spirit { background: var(--spirit); border-radius: 50% 50% 42% 42%; }
+.gbox-window { background: #2f3b52; color: #c9d3e6; border-radius: 0; }
+.gbox-table { background: #d9b88f; border-radius: 18px; color: transparent; }
 .gbox-plain { background: var(--gray); }
 
 /* 메뉴판 회색 상자는 얼음이 꺾이는 기울기가 보이도록 대각선을 그린다. 기본은 "/" 모양이고, "\\" 메뉴판은 좌우를 뒤집는다. */
@@ -664,7 +672,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 8px 16px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -679,74 +687,6 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-}
-
-.tools {
-  margin-left: auto;
-}
-
-/* 정령의 몸. --fill(0~1)이 남은 물의 비율이고, 몸의 크기와 투명도가 그것을 따라간다.
-   가득 찼을 때 몸은 44 x 52px이고, 다 마르면 45% 크기에 35% 불투명도까지 줄어든다. */
-.spirit-meter {
-  --fill: 1;
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  min-height: 52px;
-}
-
-.spirit-body {
-  width: 44px;
-  height: 52px;
-  transform-origin: 50% 100%;
-  transform: scale(calc(0.45 + 0.55 * var(--fill)));
-  opacity: calc(0.35 + 0.65 * var(--fill));
-  transition: transform 0.45s ease, opacity 0.45s ease;
-}
-
-.spirit-meter.refilled .spirit-body {
-  animation: refill-glow 0.9s ease;
-}
-
-@keyframes refill-glow {
-  0% { filter: none; }
-  50% { filter: drop-shadow(0 0 8px var(--spirit)); }
-  100% { filter: none; }
-}
-
-.spirit-body .gbox {
-  border-width: 3px;
-}
-
-/* 물방울 하나가 행동 하나다. 채운 방울이 남은 행동이고, 전체 개수가 그 판의 최대 행동 수다. */
-.drops {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 5px;
-  max-width: 120px;
-  padding-bottom: 4px;
-}
-
-.drop {
-  width: 13px;
-  height: 13px;
-  border: 2px dashed rgba(43, 38, 35, 0.45);
-  border-radius: 0 50% 50% 50%;
-  transform: rotate(45deg) scale(0.85);
-  background: transparent;
-  transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
-}
-
-.drop.full {
-  border: 2px solid var(--ink);
-  background: var(--spirit);
-  transform: rotate(45deg) scale(1);
-}
-
-/* 판을 깨면 아래 방울부터 차례로 다시 찬다. */
-.spirit-meter.refilled .drop.full {
-  transition-delay: calc(var(--order) * 60ms);
 }
 
 .drink,
@@ -804,40 +744,20 @@ button {
   text-align: center;
 }
 
-/* 증발과 다시 차오름은 글 없이 정령의 몸만으로 보여 준다(2026-10-28). 그림은 트레이와 같은 ui-spirit이다. */
-.spirit-art {
-  width: 110px;
-  height: 130px;
-  margin-bottom: 18px;
+.screen-off {
+  background: #050506;
+  color: #9aa0ab;
+  animation: power-off 0.5s ease;
 }
 
-/* 몸의 물이 바닥나면 정령이 김이 되어 위로 흩어진다. */
-.evaporated {
-  background: rgba(214, 224, 228, 0.92);
+@keyframes power-off {
+  0% { clip-path: inset(0 0 0 0); background: #fff; }
+  40% { clip-path: inset(49% 0 49% 0); background: #fff; }
+  100% { clip-path: inset(0 0 0 0); background: #050506; }
 }
 
-.evaporated .spirit-art {
-  animation: evaporate 1.4s ease-out both;
-}
-
-@keyframes evaporate {
-  from { opacity: 0.7; transform: translateY(0) scale(0.6); filter: blur(0); }
-  to { opacity: 0.12; transform: translateY(-28px) scale(0.75, 0.9); filter: blur(4px); }
-}
-
-/* 판을 깨면 물길이 이어져 작아졌던 몸이 다시 가득 찬다. */
 .won {
-  background: rgba(226, 242, 248, 0.9);
-}
-
-.won .spirit-art {
-  animation: refill 1s ease-out both;
-}
-
-@keyframes refill {
-  from { opacity: 0.45; transform: scale(0.5); filter: drop-shadow(0 0 0 var(--spirit)); }
-  70% { opacity: 1; transform: scale(1.06); filter: drop-shadow(0 0 14px var(--spirit)); }
-  to { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 4px var(--spirit)); }
+  background: rgba(244, 237, 225, 0.9);
 }
 
 .caught {
@@ -852,6 +772,24 @@ button {
 
 .caught-art.mirrored {
   transform: scaleX(-1);
+}
+
+.overlay-title {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.screen-off .overlay-title {
+  color: #e9ebf0;
+}
+
+.overlay-text {
+  margin-top: 0;
+  margin-bottom: 18px;
+  max-width: 420px;
+  line-height: 1.6;
 }
 
 .overlay-actions {
@@ -873,6 +811,88 @@ button {
 
 .btn.ghost {
   background: #fff;
+}
+
+.screen-off .btn {
+  border-color: #c7ccd6;
+  background: #2a2d35;
+  color: #e9ebf0;
+}
+
+.os-popup {
+  position: absolute;
+  z-index: 15;
+  left: 50%;
+  top: 30%;
+  width: 300px;
+  max-width: calc(100% - 40px);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fbfbfd;
+  color: #222;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+  transform: translate(-50%, 0);
+}
+
+.os-popup-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  padding-right: 6px;
+  background: #d8434a;
+  color: #fff;
+  font-weight: 700;
+  cursor: grab;
+  touch-action: none;
+}
+
+.os-popup-close {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 20px;
+}
+
+/* 휴대폰 카메라 */
+
+.camera-overlay {
+  background: rgba(20, 20, 24, 0.6);
+}
+
+.phone {
+  width: 300px;
+  max-width: 100%;
+  padding-top: 26px;
+  padding-bottom: 18px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 34px;
+  border: 8px solid #17171a;
+  background: #2d2d33;
+  color: #eee;
+}
+
+.phone-screen {
+  padding-top: 14px;
+  padding-bottom: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 10px;
+  border: 2px dashed rgba(255, 255, 255, 0.7);
+  background: #f4f1ea;
+  color: var(--ink);
+}
+
+.camera-art {
+  width: 120px;
+  height: 120px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* 프롤로그. 컷은 4:3 비율로 창에 맞춰 줄인다. */
@@ -977,9 +997,81 @@ button {
   color: #b9b2a6;
 }
 
+/* 작업 표시줄 */
+
+.taskbar {
+  height: var(--taskbar-height);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
+  background: var(--os-bar);
+  color: var(--os-text);
+  font-size: 13px;
+}
+
+.system-tray {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.battery {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.battery-icon {
+  position: relative;
+  width: 28px;
+  height: 14px;
+  padding: 2px;
+  border: 2px solid currentColor;
+  border-radius: 4px;
+}
+
+.battery-icon::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 3px;
+  width: 3px;
+  height: 4px;
+  border-radius: 0 2px 2px 0;
+  background: currentColor;
+}
+
+.battery-fill {
+  display: block;
+  height: 100%;
+  border-radius: 1px;
+  background: #7ee08f;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.battery.low {
+  color: #ff8a80;
+}
+
+.battery.low .battery-fill {
+  background: #ff6b5e;
+}
+
 /* 좁은 화면 */
 
 @media (max-width: 640px) {
+  .desktop {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
   .app-title {
     font-size: 15px;
   }
@@ -1032,6 +1124,21 @@ button {
 
 /* 휴대폰 가로 화면(세로로 들어 돌린 경우와 실제로 가로로 든 경우)은 높이가 짧아서, 판을 크게 보이도록 둘레를 얇게 줄인다. */
 @media (hover: none) and (orientation: portrait) and (max-width: 900px), (hover: none) and (orientation: landscape) and (max-height: 500px) {
+  :root {
+    --taskbar-height: 30px;
+  }
+
+  .desktop {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .window {
+    border-radius: 0;
+  }
+
   .titlebar {
     flex-wrap: nowrap;
     padding-top: 2px;
@@ -1065,13 +1172,8 @@ button {
     height: 32px;
   }
 
-  .spirit-meter {
-    min-height: 40px;
-  }
-
-  .spirit-body {
-    width: 34px;
-    height: 40px;
+  .taskbar {
+    font-size: 12px;
   }
 }
 

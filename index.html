@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>내 샘, 내 물길</title>
+  <title>내 자리, 내 충전기</title>
   <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
       <section id="window" class="window" aria-label="게임 창">
         <header class="titlebar">
           <div class="title-left">
-            <span class="app-title">내 샘, 내 물길</span>
+            <span class="app-title">내 자리, 내 충전기</span>
           </div>
           <div class="title-right">
             <nav id="level-dots" class="level-dots" aria-label="판 고르기"></nav>
@@ -51,14 +51,10 @@
           </div>
 
           <footer class="tray">
-            <!-- 정령의 몸이 곧 남은 행동 수다. 몸의 크기와 투명도, 채운 물방울 개수가 남은 물을 따라간다. -->
-            <div id="spirit-meter" class="spirit-meter" role="img" aria-label="정령의 몸에 남은 물">
-              <div id="spirit-body" class="spirit-body"></div>
-              <div id="drops" class="drops"></div>
-            </div>
             <div id="drinks" class="drinks"></div>
             <div id="tools" class="tools">
-              <button id="btn-duck" class="tool" type="button" aria-pressed="false" aria-label="물속에 가라앉아 보기">⤓</button>
+              <button id="btn-duck" class="tool" type="button" aria-pressed="false">숙이기</button>
+              <button id="btn-camera" class="tool" type="button">카메라</button>
             </div>
           </footer>
 
@@ -66,8 +62,17 @@
             <div class="finger-art"></div>
           </div>
 
-          <div id="overlay-dead" class="overlay evaporated" hidden>
-            <div id="dead-art" class="spirit-art" aria-hidden="true"></div>
+          <div id="camera" class="overlay camera-overlay" hidden>
+            <div class="phone">
+              <div class="phone-screen">
+                <div id="camera-art" class="camera-art"></div>
+              </div>
+              <button id="camera-close" class="btn" type="button" aria-label="카메라 닫기">×</button>
+            </div>
+          </div>
+
+          <div id="overlay-dead" class="overlay screen-off" hidden>
+            <p class="overlay-title">배터리가 모두 닳았습니다</p>
             <div class="overlay-actions">
               <button id="dead-undo" class="btn" type="button" aria-label="되돌리기">↶</button>
               <button id="dead-restart" class="btn" type="button" aria-label="처음부터">↻</button>
@@ -84,10 +89,17 @@
           </div>
 
           <div id="overlay-won" class="overlay won" hidden>
-            <div id="won-art" class="spirit-art" aria-hidden="true"></div>
+            <p class="overlay-title">충전기를 되찾았습니다</p>
             <div class="overlay-actions">
               <button id="won-next" class="btn" type="button" aria-label="다음 판">▶</button>
               <button id="won-undo" class="btn ghost" type="button" aria-label="되돌려 보기">↶</button>
+            </div>
+          </div>
+
+          <div id="popup-low" class="os-popup" hidden>
+            <div id="popup-low-bar" class="os-popup-bar">
+              <span>배터리 부족</span>
+              <button id="popup-low-close" class="os-popup-close" type="button" aria-label="닫기">×</button>
             </div>
           </div>
 
@@ -105,6 +117,15 @@
         </div>
       </section>
     </div>
+
+    <footer class="taskbar">
+      <div class="system-tray">
+        <span id="battery" class="battery" aria-label="배터리">
+          <span class="battery-icon"><span id="battery-fill" class="battery-fill"></span></span>
+          <span id="battery-text" class="battery-text"></span>
+        </span>
+      </div>
+    </footer>
   </div>
 
   <script src="src/layout.js"></script>

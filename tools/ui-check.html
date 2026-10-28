@@ -35,15 +35,9 @@
     }
 
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    // 연출이 끝나기를 정해진 시간만큼 기다리면, 창이 가려져 타이머가 느려졌을 때 검사가 거짓으로 실패한다.
-    // 그래서 결과가 화면에 나타날 때까지 짧게 거듭 확인하고, 제한 시간이 지나면 그대로 다음 판정으로 넘어간다.
-    async function waitFor(condition, limit = 8000) {
-      const start = Date.now();
-      while (!condition() && Date.now() - start < limit) await sleep(100);
-    }
 
     async function openGame(progress, width = 1000, height = 640) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ unlocked: 99, cleared: [], difficulty: 'relaxed', seenPrologue: true, ...progress }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ unlocked: 7, cleared: [], difficulty: 'relaxed', seenPrologue: true, ...progress }));
       frame.width = width;
       frame.height = height;
       frame.src = `../index.html?check=${Date.now()}`;
@@ -64,14 +58,8 @@
       };
     }
 
-    // 판 수와 판 순서는 게임의 levels.js에서 읽는다. 판 순서를 바꿔도 검사가 판 id로 같은 판을 찾게 한다.
+    // 판 수는 게임의 levels.js에서 읽는다. 챕터가 늘어도 모든 판을 검사하게 한다.
     let levelCount = 0;
-    let levelIds = [];
-    const indexOf = (id) => {
-      const index = levelIds.indexOf(id);
-      if (index < 0) throw new Error(`levels.js에 ${id} 판이 없습니다`);
-      return index;
-    };
 
     async function run() {
       // 1. 첫 판: 글이 없어도 손가락 안내가 음료 버튼을 짚고, 음료를 고르면 판의 줄로 옮겨 간다.
@@ -82,12 +70,6 @@
         expect(!finger.hidden, '첫 판: 손가락 안내가 보인다');
         expect(doc.querySelectorAll('.speech, .toast').length === 0, '첫 판: 혼잣말과 안내 문구 요소가 없다');
         levelCount = win.LEVEL_DEFINITIONS.length;
-        levelIds = win.LEVEL_DEFINITIONS.map((level) => level.id);
-        // 처음 하는 사람이 10분 안에 시선 규칙을 겪도록, 시선은 4번째 판에서 처음 나온다.
-        const firstGaze = win.LEVEL_DEFINITIONS.findIndex((level) => level.gaze);
-        expect(firstGaze === 3, `판 순서: 시선이 ${firstGaze + 1}번째 판에서 처음 나온다 (기대 4번째)`);
-        const leftovers = win.LEVEL_DEFINITIONS.filter((level) => level.chapter || (level.tools || []).includes('camera'));
-        expect(leftovers.length === 0, `판 정의에 챕터 구분과 휴대폰 카메라가 없다 (${leftovers.map((level) => level.id).join(', ') || '없음'})`);
       }
 
       // 1-1. 시연을 이미 본 뒤에는 음료를 고르면 손가락이 판의 줄로 옮겨 간다.
@@ -114,7 +96,7 @@
       }
 
       // 3. 숙이기 판: 다른 줄 위를 지나 숙이기 버튼을 눌러도, 숙인 화면에 내 플러그가 진하게 보여야 한다.
-      for (const index of [indexOf('duck'), indexOf('ledge')]) {
+      for (const index of [6, 7]) {
         const win = await openGame({ current: index });
         const doc = win.document;
         const board = doc.getElementById('board');
@@ -135,7 +117,7 @@
 
       // 5. 음료 버튼의 효과 기호와, 마우스를 올리지 않아도 보이는 안내
       {
-        const win = await openGame({ current: indexOf('under'), demosSeen: ['ice', 'soda'] });
+        const win = await openGame({ current: 1, demosSeen: ['ice', 'soda'] });
         const doc = win.document;
         const effects = [...doc.querySelectorAll('.drink .effect')].map((element) => element.textContent);
         expect(effects.join(' ') === '→ ↑', `음료 버튼에 효과 기호가 있다 (${effects.join(' ')})`);
@@ -148,9 +130,9 @@
           `소다를 고르면 띄울 수 있는 물건 ${doc.querySelectorAll('.piece.can-lift').length}개에 거품 테두리가 보인다`);
       }
 
-      // 5-1. 얼음 조준선은 얼음의 새 동작을 처음 가르치는 판(한 모금, 거품 아래로, 메뉴판, 옆 줄로, 숙여서 보기)에서만 보인다.
-      // 기대값을 levels.js의 aimLine에서 읽지 않고 여기 판 id로 따로 적어서, 레벨 값을 잘못 고쳐도 검사가 잡아내게 한다.
-      const aimLineLevels = ['sip', 'under', 'menu', 'sideways', 'duck'].map(indexOf);
+      // 5-1. 얼음 조준선은 얼음의 새 동작을 처음 가르치는 판(1, 2, 3, 5, 7번)에서만 보인다.
+      // 기대값을 levels.js에서 읽지 않고 여기 따로 적어서, 레벨 값을 잘못 고쳐도 검사가 잡아내게 한다.
+      const aimLineLevels = [0, 1, 2, 4, 6];
       for (let index = 0; index < levelCount; index++) {
         const win = await openGame({ current: index, demosSeen: ['ice', 'soda'] });
         const doc = win.document;
@@ -174,7 +156,7 @@
         const win = await openGame({ current: 0, demosSeen: [] });
         const doc = win.document;
         const before = doc.querySelector('.piece-kind-myPlug').style.transform;
-        const drops = doc.querySelectorAll('.drop.full').length;
+        const battery = doc.getElementById('battery-text').textContent;
         doc.querySelector('.drink[data-drink="ice"]').click();
         await sleep(500);
         expect(doc.querySelectorAll('.piece.demo-ghost').length === 1, '얼음을 처음 고르면 반투명 시연이 나온다');
@@ -182,12 +164,12 @@
         const saved = JSON.parse(win.localStorage.getItem(STORAGE_KEY));
         expect(doc.querySelectorAll('.demo-ghost').length === 0 && doc.querySelector('.piece-kind-myPlug').style.transform === before,
           '시연이 끝나면 유령이 사라지고 판은 그대로다');
-        expect(saved.demosSeen.includes('ice') && doc.querySelectorAll('.drop.full').length === drops, '시연은 저장되고 몸의 물을 쓰지 않는다');
+        expect(saved.demosSeen.includes('ice') && doc.getElementById('battery-text').textContent === battery, '시연은 저장되고 배터리를 쓰지 않는다');
       }
 
       // 7. 2챕터: 시선이 판에 보이고, 차를 뱉으면 김이 시선을 가리고, 보는 칸에서 상대 플러그를 띄우면 들킨 화면이 뜬다.
-      const glanceIndex = indexOf('glance');
-      const steamIndex = indexOf('steam');
+      const glanceIndex = 8;
+      const steamIndex = 9;
       const clickCell = (win, column, line) => {
         const doc = win.document;
         doc.getElementById('divider').dispatchEvent(new win.MouseEvent('click', { bubbles: true, ...boardCell(doc, column, line, 3) }));
@@ -200,7 +182,7 @@
         doc.querySelector('.drink[data-drink="soda"]').click();
         await sleep(100);
         clickCell(win, 5, 1);
-        await waitFor(() => !doc.getElementById('overlay-caught').hidden);
+        await sleep(1800);
         expect(!doc.getElementById('overlay-caught').hidden, '눈치 판: 보는 칸에서 상대 플러그를 띄우면 들킨 화면이 뜬다');
         doc.getElementById('caught-undo').click();
         await sleep(300);
@@ -214,7 +196,7 @@
         teaButton.click();
         await sleep(100);
         clickCell(win, 2, 1);
-        await waitFor(() => !doc.getElementById('steam-cloud').hidden);
+        await sleep(1500);
         expect(!doc.getElementById('steam-cloud').hidden && doc.getElementById('gaze-now').hidden, '김 판: 차를 뱉으면 김이 뜨고 노란 시선이 사라진다');
       }
 
@@ -231,67 +213,6 @@
         const saved = JSON.parse(win.localStorage.getItem(STORAGE_KEY));
         expect(!doc.getElementById('prologue').hidden && saved.current === 0 && saved.cleared.length === 0 && !saved.seenPrologue,
           '초기화: 두 번 누르면 진행 기록이 지워지고 프롤로그가 뜬다');
-      }
-
-      // 9. 정령의 몸이 곧 남은 행동 수다. 랩탑 연출(작업 표시줄, 배터리, 배터리 부족 팝업, 화면 꺼짐, 카메라)은 남지 않는다.
-      {
-        const win = await openGame({ current: indexOf('sip'), demosSeen: ['ice', 'soda', 'tea'] });
-        const doc = win.document;
-        const leftovers = doc.querySelectorAll('.taskbar, #battery, #popup-low, .screen-off, #camera, #btn-camera').length;
-        expect(leftovers === 0, `랩탑 연출 요소가 남지 않았다 (${leftovers}개)`);
-        const full = win.Engine.batteryFor(win.LEVEL_DEFINITIONS[indexOf('sip')], 'relaxed');
-        const meter = doc.getElementById('spirit-meter');
-        const body = doc.getElementById('spirit-body');
-        expect(!meter.hidden && body.getBoundingClientRect().width > 0, '트레이에 정령의 몸이 보인다');
-        expect(doc.querySelectorAll('.drop').length === full && doc.querySelectorAll('.drop.full').length === full,
-          `물방울이 그 판의 최대 행동 수만큼 있고 모두 차 있다 (${doc.querySelectorAll('.drop.full').length}/${doc.querySelectorAll('.drop').length}, 기대 ${full})`);
-        // 가려진 창에서는 CSS 전환이 진행되지 않으므로(known-issues 2번), 전환을 잠깐 끄고 목표 크기를 잰다.
-        const bodyWidth = () => {
-          body.style.transition = 'none';
-          const width = body.getBoundingClientRect().width;
-          body.style.transition = '';
-          return width;
-        };
-        const fullWidth = bodyWidth();
-        const fire = (line) => {
-          doc.getElementById('divider').dispatchEvent(new win.MouseEvent('click', { bubbles: true, ...boardCell(doc, 3, line, 3) }));
-        };
-        doc.querySelector('.drink[data-drink="ice"]').click();
-        await sleep(100);
-        const fullDrops = () => doc.querySelectorAll('.drop.full').length;
-        // 남은 물은 연출이 모두 끝난 뒤에 줄어든다. 날아가는 얼음 조각까지 사라져야 다음 행동을 받는다.
-        const idle = () => !doc.querySelector('.ice-shot');
-        fire(0);
-        await waitFor(() => fullDrops() === full - 1 && idle());
-        const smallerWidth = bodyWidth();
-        expect(doc.querySelectorAll('.drop.full').length === full - 1 && smallerWidth < fullWidth,
-          `한 번 뱉으면 물방울이 하나 줄고 몸이 작아진다 (${doc.querySelectorAll('.drop.full').length}개, 폭 ${fullWidth.toFixed(0)} → ${smallerWidth.toFixed(0)})`);
-        for (let shot = 1; shot < full - 1; shot++) {
-          fire(0);
-          await waitFor(() => fullDrops() === full - 1 - shot && idle());
-          await sleep(300);
-        }
-        const stage = doc.getElementById('stage');
-        stage.style.transition = 'none';
-        const stageFilter = win.getComputedStyle(stage).filter;
-        stage.style.transition = '';
-        expect(doc.getElementById('window').classList.contains('drying') && stageFilter.includes('saturate'),
-          `물이 거의 남지 않으면 판의 채도가 낮아진다 (${stageFilter})`);
-        fire(0);
-        await waitFor(() => !doc.getElementById('overlay-dead').hidden);
-        const dead = doc.getElementById('overlay-dead');
-        const deadText = [...dead.childNodes].filter((node) => !(node.classList && node.classList.contains('overlay-actions'))).map((node) => node.textContent).join('').trim();
-        expect(!dead.hidden && deadText === '' && dead.querySelector('#dead-undo') && dead.querySelector('#dead-restart'),
-          `물이 바닥나면 글 없는 증발 화면에 되돌리기와 처음부터 버튼이 뜬다 (글 "${deadText}")`);
-        doc.getElementById('dead-undo').click();
-        await sleep(400);
-        expect(dead.hidden && doc.querySelectorAll('.drop.full').length === 1, '되돌리면 증발 화면이 닫히고 물방울 하나가 돌아온다');
-        fire(1);
-        await waitFor(() => !doc.getElementById('overlay-won').hidden);
-        const won = doc.getElementById('overlay-won');
-        const wonText = [...won.childNodes].filter((node) => !(node.classList && node.classList.contains('overlay-actions'))).map((node) => node.textContent).join('').trim();
-        expect(!won.hidden && wonText === '' && doc.querySelectorAll('.drop.full').length === full && meter.classList.contains('refilled'),
-          `판을 깨면 글 없이 몸과 물방울이 다시 가득 찬다 (${doc.querySelectorAll('.drop.full').length}/${full}, 글 "${wonText}")`);
       }
 
       localStorage.removeItem(STORAGE_KEY);
