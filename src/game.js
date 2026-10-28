@@ -66,6 +66,7 @@
     difficultyButton: byId('btn-difficulty'),
     undoButton: byId('btn-undo'),
     restartButton: byId('btn-restart'),
+    resetButton: byId('btn-reset'),
     drinks: byId('drinks'),
     tools: byId('tools'),
     duckButton: byId('btn-duck'),
@@ -108,8 +109,12 @@
   };
 
   // 진행 저장. 저장소를 쓸 수 없는 환경에서도 게임은 그대로 돌아가야 한다.
+  function freshProgress() {
+    return { current: 0, unlocked: 0, cleared: [], difficulty: 'relaxed', seenPrologue: false, demosSeen: [] };
+  }
+
   function loadProgress() {
-    const fallback = { current: 0, unlocked: 0, cleared: [], difficulty: 'relaxed', seenPrologue: false, demosSeen: [] };
+    const fallback = freshProgress();
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
       return saved ? { ...fallback, ...saved } : fallback;
@@ -974,6 +979,36 @@
     startLevel(game.levelIndex);
   }
 
+  // 진행 기록을 모두 지우고 프롤로그부터 다시 시작한다. 지우면 되돌릴 수 없으므로 글 대신 두 번 누르기로 확인한다.
+  // 한 번 누르면 버튼이 빨갛게 흔들리고, 그 상태에서 3초 안에 한 번 더 눌러야 지운다.
+  const RESET_ARM_MS = 3000;
+  let resetTimer = null;
+  function onResetClick() {
+    if (game.busy) return;
+    if (!ui.resetButton.classList.contains('armed')) {
+      ui.resetButton.classList.add('armed');
+      resetTimer = setTimeout(() => ui.resetButton.classList.remove('armed'), RESET_ARM_MS);
+      return;
+    }
+    clearTimeout(resetTimer);
+    ui.resetButton.classList.remove('armed');
+    resetProgress();
+  }
+
+  function resetProgress() {
+    for (const key of Object.keys(progress)) delete progress[key];
+    Object.assign(progress, freshProgress());
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (error) {
+      // 저장소를 쓸 수 없어도 이번 플레이는 처음부터 다시 시작한다.
+    }
+    game.deaths = {};
+    game.selectedDrink = null;
+    startLevel(0);
+    openPrologue();
+  }
+
   function nextLevel() {
     startLevel(game.levelIndex + 1 < levels.length ? game.levelIndex + 1 : 0);
   }
@@ -1133,6 +1168,7 @@
     });
     ui.undoButton.addEventListener('click', undo);
     ui.restartButton.addEventListener('click', restart);
+    ui.resetButton.addEventListener('click', onResetClick);
     ui.difficultyButton.addEventListener('click', cycleDifficulty);
     ui.duckButton.addEventListener('click', () => setView(game.view === 'top' ? 'side' : 'top'));
     ui.cameraButton.addEventListener('click', () => toggleCamera());

@@ -200,6 +200,21 @@
         expect(!doc.getElementById('steam-cloud').hidden && doc.getElementById('gaze-now').hidden, '김 판: 차를 뱉으면 김이 뜨고 노란 시선이 사라진다');
       }
 
+      // 8. 초기화 버튼: 한 번 누르면 확인 상태만 되고, 한 번 더 누르면 진행 기록을 지우고 프롤로그부터 시작한다.
+      {
+        const win = await openGame({ current: 5, unlocked: 7, cleared: ['sip', 'under'] });
+        const doc = win.document;
+        const reset = doc.getElementById('btn-reset');
+        reset.click();
+        await sleep(100);
+        expect(reset.classList.contains('armed') && doc.getElementById('prologue').hidden, '초기화: 한 번 누르면 확인 상태가 되고 아직 지우지 않는다');
+        reset.click();
+        await sleep(300);
+        const saved = JSON.parse(win.localStorage.getItem(STORAGE_KEY));
+        expect(!doc.getElementById('prologue').hidden && saved.current === 0 && saved.cleared.length === 0 && !saved.seenPrologue,
+          '초기화: 두 번 누르면 진행 기록이 지워지고 프롤로그가 뜬다');
+      }
+
       localStorage.removeItem(STORAGE_KEY);
       const summary = document.getElementById('summary');
       summary.textContent = failures === 0 ? '모든 화면 검사 통과' : `실패 ${failures}개`;
