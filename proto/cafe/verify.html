@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>카페 시제품 검증</title>
+  <style>
+    body { margin: 0; padding: 20px; font: 14px/1.6 ui-monospace, Consolas, monospace; background: #1d1b19; color: #eee; }
+    #summary { font-weight: bold; margin-bottom: 12px; }
+    .fail { color: #ff8a80; }
+  </style>
+</head>
+<body>
+  <!-- 판마다 해법 탐색으로 최소 차례 수를 찾아 levels.js에 적은 값과 같은지 보고, 시작하자마자 들키지 않는지 본다. -->
+  <div id="summary">검증 중...</div>
+  <pre id="log"></pre>
+  <script src="engine.js"></script>
+  <script src="levels.js"></script>
+  <script>
+    const lines = [];
+    let failures = 0;
+    function expect(condition, message) {
+      lines.push(`${condition ? 'PASS' : 'FAIL'}  ${message}`);
+      if (!condition) failures += 1;
+    }
+    for (const definition of window.CAFE_LEVELS) {
+      const level = CafeEngine.parseLevel(definition);
+      const result = CafeEngine.solve(level);
+      expect(result.moves === definition.optimal,
+        `${definition.id}: 최소 ${result.moves}차례 (기록된 값 ${definition.optimal}) [${(result.path || []).join(' ')}]`);
+      expect(CafeEngine.gazeAt(level, level.start).hit !== 'player', `${definition.id}: 시작하자마자 들키지 않음`);
+    }
+    document.getElementById('summary').textContent = failures === 0 ? '모든 검증 통과' : `실패 ${failures}개`;
+    document.getElementById('summary').className = failures === 0 ? '' : 'fail';
+    document.getElementById('log').textContent = lines.join('\n');
+  </script>
+</body>
+</html>
