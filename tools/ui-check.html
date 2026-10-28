@@ -126,8 +126,10 @@
           `소다를 고르면 띄울 수 있는 물건 ${doc.querySelectorAll('.piece.can-lift').length}개에 거품 테두리가 보인다`);
       }
 
-      // 5-1. 얼음 조준선은 처음 두 판에서만 보인다.
-      for (const index of [0, 1, 2, 5]) {
+      // 5-1. 얼음 조준선은 얼음의 새 동작을 처음 가르치는 판(1, 2, 3, 5, 7번)에서만 보인다.
+      // 기대값을 levels.js에서 읽지 않고 여기 따로 적어서, 레벨 값을 잘못 고쳐도 검사가 잡아내게 한다.
+      const aimLineLevels = [0, 1, 2, 4, 6];
+      for (let index = 0; index < 8; index++) {
         const win = await openGame({ current: index, demosSeen: ['ice', 'soda'] });
         const doc = win.document;
         doc.querySelector('.drink[data-drink="ice"]').click();
@@ -140,7 +142,7 @@
           await sleep(60);
           if (doc.getElementById('aim-path').getAttribute('points') !== '') pathShown = true;
         }
-        const expected = index < 2;
+        const expected = aimLineLevels.includes(index);
         expect(expected ? hints > 0 && pathShown : hints === 0 && !pathShown,
           `${index + 1}번 판: 얼음 조준선이 ${expected ? '보인다' : '보이지 않는다'} (힌트 ${hints}개, 경로선 ${pathShown})`);
       }

@@ -9,6 +9,8 @@
 // 지도에서 '\'는 자바스크립트 문자열이라 '\\'로 적는다. 화면에서는 한 칸이다.
 // needsDuck이 true인 판은 숙이기로 높이를 조준해야만 풀린다. tutorial은 손가락 안내를 어디까지 보여 줄지 정한다.
 // tools는 그 판에서 쓸 수 있는 보기 도구(휴대폰 카메라, 숙이기)다. 도구는 처음 필요한 판부터 하나씩 늘어난다.
+// aimLine이 true인 판은 얼음 조준선(줄마다의 경로 힌트와 올려 둔 줄의 경로선)을 보여 준다.
+// 얼음의 새 동작을 처음 가르치는 판에만 켜고, 그 동작을 응용하는 판에서는 끈다.
 // optimal은 최소 행동 수다. tools/verify.js가 실제 탐색 결과와 같은지 확인한다.
 (function (root) {
   'use strict';
@@ -20,6 +22,7 @@
       drinks: ['ice'],
       optimal: 1,
       tutorial: 'full',
+      aimLine: true,
       floor: [
         '......#',
         '.P....S',
@@ -32,6 +35,7 @@
       drinks: ['ice', 'soda'],
       optimal: 2,
       tutorial: 'drink',
+      aimLine: true,
       floor: [
         '......#',
         '.c.P..S',
@@ -43,6 +47,7 @@
       title: '메뉴판',
       drinks: ['ice'],
       optimal: 1,
+      aimLine: true,
       floor: [
         '.\\....#',
         '......#',
@@ -67,6 +72,7 @@
       tools: ['camera'],
       drinks: ['ice', 'soda'],
       optimal: 2,
+      aimLine: true,
       floor: [
         '...\\..#',
         '...P..#',
@@ -93,6 +99,7 @@
       optimal: 2,
       needsDuck: true,
       tutorial: 'duck',
+      aimLine: true,
       floor: [
         '......#',
         '.P....#',

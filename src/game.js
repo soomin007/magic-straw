@@ -40,8 +40,6 @@
   const DRINK_ORDER = ['ice', 'soda'];
   // 음료 버튼에 붙이는 효과 기호. 글을 몰라도 얼음은 밀고, 소다는 띄운다는 것을 알 수 있게 한다.
   const DRINK_EFFECT = { ice: '→', soda: '↑' };
-  // 얼음 조준선(줄마다의 경로 힌트와 올려 둔 줄의 경로선)은 처음 두 판에서만 보여 준다.
-  const AIM_LINE_LEVELS = 2;
   const KIND_ASSET = { myPlug: 'my-plug', theirPlug: 'their-plug', cup: 'cup', book: 'book', menu: 'menu' };
 
   const byId = (id) => document.getElementById(id);
@@ -451,8 +449,9 @@
 
   // 음료를 고르면 마우스를 올리지 않아도 쓸 수 있는 곳을 흐리게 보여 준다.
   // 얼음은 줄마다 날아갈 경로를, 소다는 띄울 수 있는 물건의 거품 테두리를 보여 준다.
+  // 얼음 조준선은 레벨에 aimLine이 켜진 판(얼음의 새 동작을 처음 가르치는 판)에서만 보여 준다.
   function showsAimLine() {
-    return game.levelIndex < AIM_LINE_LEVELS;
+    return Boolean(game.level.aimLine);
   }
 
   function clearHints() {
