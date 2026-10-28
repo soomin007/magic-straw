@@ -10,7 +10,7 @@
   </style>
 </head>
 <body>
-  <!-- 판마다 해법 탐색으로 최소 던지기 수를 찾아, levels.js에 적은 값과 같은지 본다. 던질 물건이 하나 모자라면 못 깨는지도 본다. -->
+  <!-- 판마다 해법 탐색으로 최소 걸음 수와 차는 횟수를 찾아, levels.js에 적은 값과 같은지 본다. -->
   <div id="summary">검증 중...</div>
   <pre id="log"></pre>
   <script src="engine.js"></script>
@@ -25,13 +25,8 @@
     for (const definition of window.NEWTON_LEVELS) {
       const level = NewtonEngine.parseLevel(definition);
       const result = NewtonEngine.solve(level);
-      expect(result.moves === definition.optimal,
-        `${definition.id}: 최소 ${result.moves}번 던짐 (기록된 값 ${definition.optimal}) [${(result.path || []).join(' ')}]`);
-      if (definition.throws > definition.optimal) {
-        lines.push(`      던질 물건 ${definition.throws}개 중 여유 ${definition.throws - definition.optimal}개`);
-      }
-      const short = NewtonEngine.solve(NewtonEngine.parseLevel({ ...definition, throws: definition.optimal - 1 }));
-      expect(short.moves === null, `${definition.id}: 물건이 하나 모자라면 못 깸`);
+      expect(result.moves === definition.optimal && result.kicks === definition.kicks,
+        `${definition.id}: 최소 ${result.moves}걸음, 차기 ${result.kicks}번 (기록된 값 ${definition.optimal}걸음, ${definition.kicks}번) [${(result.path || []).join(' ')}]`);
     }
     document.getElementById('summary').textContent = failures === 0 ? '모든 검증 통과' : `실패 ${failures}개`;
     document.getElementById('summary').className = failures === 0 ? '' : 'fail';
