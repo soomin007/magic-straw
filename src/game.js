@@ -33,7 +33,8 @@
   const TOP_LIFT = 26;
 
   const PIECE_MOVE_MS = 260;
-  const LOW_BATTERY_SAVER = 2;
+  // 몸에 남은 물이 이만큼 이하가 되면 판의 색이 바래며 말라 간다.
+  const DRYING_AT = 2;
   const DEATHS_BEFORE_SKIP = 3;
   const STORAGE_KEY = 'magic-straw-progress-v2';
 
@@ -70,19 +71,15 @@
     drinks: byId('drinks'),
     tools: byId('tools'),
     duckButton: byId('btn-duck'),
-    cameraButton: byId('btn-camera'),
     finger: byId('finger'),
-    camera: byId('camera'),
-    battery: byId('battery'),
-    batteryFill: byId('battery-fill'),
-    batteryText: byId('battery-text'),
+    spiritMeter: byId('spirit-meter'),
+    spiritBody: byId('spirit-body'),
+    drops: byId('drops'),
     overlayDead: byId('overlay-dead'),
     overlayWon: byId('overlay-won'),
     overlayCaught: byId('overlay-caught'),
     wonNext: byId('won-next'),
     deadSkip: byId('dead-skip'),
-    popupLow: byId('popup-low'),
-    popupLowBar: byId('popup-low-bar'),
     prologue: byId('prologue'),
     prologueStage: byId('prologue-stage'),
     prologuePanel: byId('prologue-panel'),
@@ -101,7 +98,6 @@
     focusRow: 0,
     busy: false,
     deaths: {},
-    lowPopupShown: false,
     prologueIndex: -1,
     pendingAction: null,
     lastPointerType: 'mouse',
@@ -189,7 +185,6 @@
     game.level = levels[index];
     game.state = Engine.initial(game.level, Engine.batteryFor(game.level, progress.difficulty));
     game.history = [];
-    game.lowPopupShown = false;
     game.view = 'top';
     const myPlug = game.state.objects.find((obj) => obj.kind === 'myPlug');
     game.focusRow = myPlug ? myPlug.row : 0;
@@ -199,8 +194,8 @@
     saveProgress();
 
     hideOverlays();
-    ui.camera.hidden = true;
     buildDrinks();
+    buildDrops();
     buildView();
     updateHud();
     updateTutorial();
@@ -219,8 +214,20 @@
       ui.drinks.appendChild(button);
     }
     ui.duckButton.hidden = !hasTool('duck');
-    ui.cameraButton.hidden = !hasTool('camera');
-    ui.tools.hidden = ui.duckButton.hidden && ui.cameraButton.hidden;
+    ui.tools.hidden = ui.duckButton.hidden;
+  }
+
+  // 아래 트레이의 물방울. 전체 개수는 그 판의 최대 행동 수이고, 채운 방울이 남은 행동 수다.
+  function buildDrops() {
+    ui.drops.innerHTML = '';
+    const full = Engine.batteryFor(game.level, progress.difficulty);
+    for (let index = 0; index < full; index++) {
+      const drop = document.createElement('span');
+      drop.className = 'drop';
+      // 판을 깨고 다시 차오를 때 아래 방울부터 차례로 차게 한다.
+      drop.style.setProperty('--order', String(index));
+      ui.drops.appendChild(drop);
+    }
   }
 
   function selectDrink(drink) {
@@ -585,13 +592,11 @@
   }
 
   function updateHud() {
-    const { level, state } = game;
     ui.levelDots.innerHTML = '';
     levels.forEach((item, index) => {
       const dot = document.createElement('button');
       dot.type = 'button';
       dot.className = 'level-dot';
-      dot.classList.toggle('chapter-start', index > 0 && (item.chapter || 1) !== (levels[index - 1].chapter || 1));
       dot.textContent = String(index + 1);
       dot.disabled = index > progress.unlocked;
       dot.classList.toggle('current', index === game.levelIndex);
@@ -606,18 +611,26 @@
     ui.difficultyButton.innerHTML = `<span class="label-long">난이도 </span>${difficulty.label}`;
     ui.undoButton.disabled = game.history.length === 0;
 
-    const full = Engine.batteryFor(level, progress.difficulty);
-    const charging = state.status === 'won';
-    // 빠듯 난이도는 처음부터 배터리가 적으므로, 한 번이라도 행동한 뒤에만 절전 모드를 켠다.
-    const saver = state.status === 'playing' && state.used > 0 && state.battery <= LOW_BATTERY_SAVER;
-    ui.batteryText.textContent = `${state.battery}%`;
-    ui.batteryFill.style.width = charging ? '100%' : `${Math.max(0, state.battery / full) * 100}%`;
-    ui.battery.classList.toggle('low', !charging && state.battery <= LOW_BATTERY_SAVER);
-    ui.battery.classList.toggle('charging', charging);
-    ui.window.classList.toggle('power-saver', saver);
-
+    updateSpirit();
     updateGaze();
     updateControls();
+  }
+
+  // 정령의 몸. 엔진의 battery가 몸에 남은 물이고, 뱉을 때마다 한 방울씩 줄어든다.
+  // 몸의 크기와 투명도가 남은 양을 따라가고, 판을 깨면 물길이 이어져 몸이 다시 가득 찬다.
+  function updateSpirit() {
+    const { level, state } = game;
+    const full = Engine.batteryFor(level, progress.difficulty);
+    const refilled = state.status === 'won';
+    const left = refilled ? full : Math.max(0, state.battery);
+    const ratio = full > 0 ? left / full : 0;
+    ui.spiritMeter.style.setProperty('--fill', ratio.toFixed(3));
+    ui.spiritMeter.classList.toggle('refilled', refilled);
+    ui.spiritMeter.classList.toggle('empty', left === 0);
+    [...ui.drops.children].forEach((drop, index) => drop.classList.toggle('full', index < left));
+    // 빠듯 난이도는 처음부터 물이 적으므로, 한 번이라도 뱉은 뒤에만 말라 가는 연출을 켠다.
+    const drying = state.status === 'playing' && state.used > 0 && state.battery <= DRYING_AT;
+    ui.window.classList.toggle('drying', drying);
   }
 
   // 손가락 안내
@@ -921,11 +934,6 @@
     }
     if (state.status === 'caught') {
       onCaught();
-      return;
-    }
-    if (state.battery === 1 && !game.lowPopupShown) {
-      game.lowPopupShown = true;
-      showLowBatteryPopup();
     }
   }
 
@@ -938,23 +946,21 @@
 
     const isLast = game.levelIndex === levels.length - 1;
     ui.wonNext.textContent = isLast ? '↻' : '▶';
+    // 트레이의 물방울이 다시 차오르는 것을 먼저 보여 주고, 그다음 몸이 차오르는 화면을 띄운다.
     setTimeout(() => {
-      ui.popupLow.hidden = true;
       ui.overlayWon.hidden = false;
-    }, 500);
+    }, 700);
   }
 
   function onDead() {
     const id = game.level.id;
     game.deaths[id] = (game.deaths[id] || 0) + 1;
-    ui.popupLow.hidden = true;
     ui.deadSkip.hidden = game.deaths[id] < DEATHS_BEFORE_SKIP || game.levelIndex === levels.length - 1;
     ui.overlayDead.hidden = false;
   }
 
-  // 들키면 옆자리 사람이 이쪽을 돌아본 얼굴을 띄운다. 배터리가 다 닳았을 때처럼 되돌리거나 처음부터 할 수 있다.
+  // 들키면 샘지기가 이쪽을 알아챈 얼굴을 띄운다. 증발했을 때처럼 되돌리거나 처음부터 할 수 있다.
   function onCaught() {
-    ui.popupLow.hidden = true;
     ui.overlayCaught.hidden = false;
   }
 
@@ -962,7 +968,6 @@
     ui.overlayDead.hidden = true;
     ui.overlayWon.hidden = true;
     ui.overlayCaught.hidden = true;
-    ui.popupLow.hidden = true;
   }
 
   function undo() {
@@ -1025,42 +1030,6 @@
     progress.difficulty = ids[(ids.indexOf(progress.difficulty) + 1) % ids.length];
     saveProgress();
     startLevel(game.levelIndex);
-  }
-
-  // 배터리 부족 팝업. 판을 가리지만 제목 줄을 잡고 끌어서 치울 수 있다.
-  function showLowBatteryPopup() {
-    ui.popupLow.style.left = '50%';
-    ui.popupLow.style.top = '30%';
-    ui.popupLow.style.transform = 'translate(-50%, 0)';
-    ui.popupLow.hidden = false;
-  }
-
-  function enablePopupDrag() {
-    let drag = null;
-    ui.popupLowBar.addEventListener('pointerdown', (event) => {
-      if (event.target.closest('button')) return;
-      const box = ui.popupLow.getBoundingClientRect();
-      const parent = ui.body.getBoundingClientRect();
-      drag = { dx: event.clientX - box.left, dy: event.clientY - box.top, parent };
-      ui.popupLowBar.setPointerCapture(event.pointerId);
-    });
-    ui.popupLowBar.addEventListener('pointermove', (event) => {
-      if (!drag) return;
-      ui.popupLow.style.transform = 'none';
-      ui.popupLow.style.left = `${event.clientX - drag.parent.left - drag.dx}px`;
-      ui.popupLow.style.top = `${event.clientY - drag.parent.top - drag.dy}px`;
-    });
-    ui.popupLowBar.addEventListener('pointerup', () => {
-      drag = null;
-    });
-  }
-
-  // 휴대폰 카메라. 판을 바꾸지 않고 멀리 있는 것을 확대해 보여 준다.
-  function toggleCamera(open) {
-    if (!hasTool('camera') || game.busy) return;
-    const shouldOpen = open !== undefined ? open : ui.camera.hidden;
-    ui.camera.hidden = !shouldOpen;
-    if (shouldOpen) byId('camera-art').innerHTML = Assets.html('top-their-laptop');
   }
 
   // 프롤로그
@@ -1135,8 +1104,6 @@
       restart();
     } else if (key === 's') {
       setView(game.view === 'top' ? 'side' : 'top');
-    } else if (key === 'c') {
-      toggleCamera();
     } else if (key === 'arrowup' && game.view === 'side') {
       event.preventDefault();
       moveFocusRow(-1);
@@ -1144,7 +1111,6 @@
       event.preventDefault();
       moveFocusRow(1);
     } else if (key === 'escape') {
-      toggleCamera(false);
       if (game.selectedDrink) selectDrink(game.selectedDrink);
     } else if (key === '1' || key === '2' || key === '3') {
       const drink = DRINK_ORDER[Number(key) - 1];
@@ -1171,8 +1137,6 @@
     ui.resetButton.addEventListener('click', onResetClick);
     ui.difficultyButton.addEventListener('click', cycleDifficulty);
     ui.duckButton.addEventListener('click', () => setView(game.view === 'top' ? 'side' : 'top'));
-    ui.cameraButton.addEventListener('click', () => toggleCamera());
-    byId('camera-close').addEventListener('click', () => toggleCamera(false));
     ui.rowUp.addEventListener('click', () => moveFocusRow(-1));
     ui.rowDown.addEventListener('click', () => moveFocusRow(1));
     byId('dead-undo').addEventListener('click', undo);
@@ -1182,13 +1146,9 @@
     byId('won-undo').addEventListener('click', undo);
     byId('caught-undo').addEventListener('click', undo);
     byId('caught-restart').addEventListener('click', restart);
-    byId('popup-low-close').addEventListener('click', () => {
-      ui.popupLow.hidden = true;
-    });
     ui.prologueNext.addEventListener('click', nextProloguePanel);
     byId('prologue-skip').addEventListener('click', closePrologue);
     ui.prologuePanel.addEventListener('click', nextProloguePanel);
-    enablePopupDrag();
     document.addEventListener('keydown', onKey);
     new ResizeObserver(fitScene).observe(ui.stage);
     new ResizeObserver(fitPrologue).observe(ui.prologueStage);
@@ -1205,6 +1165,8 @@
     const hasCaughtPortrait = Boolean(Assets.file('portrait-neighbor-caught'));
     caughtArt.innerHTML = Assets.html(hasCaughtPortrait ? 'portrait-neighbor-caught' : 'portrait-neighbor');
     caughtArt.classList.toggle('mirrored', !hasCaughtPortrait);
+    // 트레이와 증발 화면과 다시 차오르는 화면은 같은 정령 그림을 쓴다. 크기와 투명도는 CSS가 바꾼다.
+    for (const container of [ui.spiritBody, byId('dead-art'), byId('won-art')]) container.innerHTML = Assets.html('ui-spirit');
     bindEvents();
     startLevel(game.levelIndex);
     fitScene();

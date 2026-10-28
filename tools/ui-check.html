@@ -35,6 +35,12 @@
     }
 
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    // 연출이 끝나기를 정해진 시간만큼 기다리면, 창이 가려져 타이머가 느려졌을 때 검사가 거짓으로 실패한다.
+    // 그래서 결과가 화면에 나타날 때까지 짧게 거듭 확인하고, 제한 시간이 지나면 그대로 다음 판정으로 넘어간다.
+    async function waitFor(condition, limit = 8000) {
+      const start = Date.now();
+      while (!condition() && Date.now() - start < limit) await sleep(100);
+    }
 
     async function openGame(progress, width = 1000, height = 640) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ unlocked: 99, cleared: [], difficulty: 'relaxed', seenPrologue: true, ...progress }));
@@ -168,7 +174,7 @@
         const win = await openGame({ current: 0, demosSeen: [] });
         const doc = win.document;
         const before = doc.querySelector('.piece-kind-myPlug').style.transform;
-        const battery = doc.getElementById('battery-text').textContent;
+        const drops = doc.querySelectorAll('.drop.full').length;
         doc.querySelector('.drink[data-drink="ice"]').click();
         await sleep(500);
         expect(doc.querySelectorAll('.piece.demo-ghost').length === 1, '얼음을 처음 고르면 반투명 시연이 나온다');
@@ -176,7 +182,7 @@
         const saved = JSON.parse(win.localStorage.getItem(STORAGE_KEY));
         expect(doc.querySelectorAll('.demo-ghost').length === 0 && doc.querySelector('.piece-kind-myPlug').style.transform === before,
           '시연이 끝나면 유령이 사라지고 판은 그대로다');
-        expect(saved.demosSeen.includes('ice') && doc.getElementById('battery-text').textContent === battery, '시연은 저장되고 배터리를 쓰지 않는다');
+        expect(saved.demosSeen.includes('ice') && doc.querySelectorAll('.drop.full').length === drops, '시연은 저장되고 몸의 물을 쓰지 않는다');
       }
 
       // 7. 2챕터: 시선이 판에 보이고, 차를 뱉으면 김이 시선을 가리고, 보는 칸에서 상대 플러그를 띄우면 들킨 화면이 뜬다.
@@ -194,7 +200,7 @@
         doc.querySelector('.drink[data-drink="soda"]').click();
         await sleep(100);
         clickCell(win, 5, 1);
-        await sleep(1800);
+        await waitFor(() => !doc.getElementById('overlay-caught').hidden);
         expect(!doc.getElementById('overlay-caught').hidden, '눈치 판: 보는 칸에서 상대 플러그를 띄우면 들킨 화면이 뜬다');
         doc.getElementById('caught-undo').click();
         await sleep(300);
@@ -208,7 +214,7 @@
         teaButton.click();
         await sleep(100);
         clickCell(win, 2, 1);
-        await sleep(1500);
+        await waitFor(() => !doc.getElementById('steam-cloud').hidden);
         expect(!doc.getElementById('steam-cloud').hidden && doc.getElementById('gaze-now').hidden, '김 판: 차를 뱉으면 김이 뜨고 노란 시선이 사라진다');
       }
 
@@ -225,6 +231,67 @@
         const saved = JSON.parse(win.localStorage.getItem(STORAGE_KEY));
         expect(!doc.getElementById('prologue').hidden && saved.current === 0 && saved.cleared.length === 0 && !saved.seenPrologue,
           '초기화: 두 번 누르면 진행 기록이 지워지고 프롤로그가 뜬다');
+      }
+
+      // 9. 정령의 몸이 곧 남은 행동 수다. 랩탑 연출(작업 표시줄, 배터리, 배터리 부족 팝업, 화면 꺼짐, 카메라)은 남지 않는다.
+      {
+        const win = await openGame({ current: indexOf('sip'), demosSeen: ['ice', 'soda', 'tea'] });
+        const doc = win.document;
+        const leftovers = doc.querySelectorAll('.taskbar, #battery, #popup-low, .screen-off, #camera, #btn-camera').length;
+        expect(leftovers === 0, `랩탑 연출 요소가 남지 않았다 (${leftovers}개)`);
+        const full = win.Engine.batteryFor(win.LEVEL_DEFINITIONS[indexOf('sip')], 'relaxed');
+        const meter = doc.getElementById('spirit-meter');
+        const body = doc.getElementById('spirit-body');
+        expect(!meter.hidden && body.getBoundingClientRect().width > 0, '트레이에 정령의 몸이 보인다');
+        expect(doc.querySelectorAll('.drop').length === full && doc.querySelectorAll('.drop.full').length === full,
+          `물방울이 그 판의 최대 행동 수만큼 있고 모두 차 있다 (${doc.querySelectorAll('.drop.full').length}/${doc.querySelectorAll('.drop').length}, 기대 ${full})`);
+        // 가려진 창에서는 CSS 전환이 진행되지 않으므로(known-issues 2번), 전환을 잠깐 끄고 목표 크기를 잰다.
+        const bodyWidth = () => {
+          body.style.transition = 'none';
+          const width = body.getBoundingClientRect().width;
+          body.style.transition = '';
+          return width;
+        };
+        const fullWidth = bodyWidth();
+        const fire = (line) => {
+          doc.getElementById('divider').dispatchEvent(new win.MouseEvent('click', { bubbles: true, ...boardCell(doc, 3, line, 3) }));
+        };
+        doc.querySelector('.drink[data-drink="ice"]').click();
+        await sleep(100);
+        const fullDrops = () => doc.querySelectorAll('.drop.full').length;
+        // 남은 물은 연출이 모두 끝난 뒤에 줄어든다. 날아가는 얼음 조각까지 사라져야 다음 행동을 받는다.
+        const idle = () => !doc.querySelector('.ice-shot');
+        fire(0);
+        await waitFor(() => fullDrops() === full - 1 && idle());
+        const smallerWidth = bodyWidth();
+        expect(doc.querySelectorAll('.drop.full').length === full - 1 && smallerWidth < fullWidth,
+          `한 번 뱉으면 물방울이 하나 줄고 몸이 작아진다 (${doc.querySelectorAll('.drop.full').length}개, 폭 ${fullWidth.toFixed(0)} → ${smallerWidth.toFixed(0)})`);
+        for (let shot = 1; shot < full - 1; shot++) {
+          fire(0);
+          await waitFor(() => fullDrops() === full - 1 - shot && idle());
+          await sleep(300);
+        }
+        const stage = doc.getElementById('stage');
+        stage.style.transition = 'none';
+        const stageFilter = win.getComputedStyle(stage).filter;
+        stage.style.transition = '';
+        expect(doc.getElementById('window').classList.contains('drying') && stageFilter.includes('saturate'),
+          `물이 거의 남지 않으면 판의 채도가 낮아진다 (${stageFilter})`);
+        fire(0);
+        await waitFor(() => !doc.getElementById('overlay-dead').hidden);
+        const dead = doc.getElementById('overlay-dead');
+        const deadText = [...dead.childNodes].filter((node) => !(node.classList && node.classList.contains('overlay-actions'))).map((node) => node.textContent).join('').trim();
+        expect(!dead.hidden && deadText === '' && dead.querySelector('#dead-undo') && dead.querySelector('#dead-restart'),
+          `물이 바닥나면 글 없는 증발 화면에 되돌리기와 처음부터 버튼이 뜬다 (글 "${deadText}")`);
+        doc.getElementById('dead-undo').click();
+        await sleep(400);
+        expect(dead.hidden && doc.querySelectorAll('.drop.full').length === 1, '되돌리면 증발 화면이 닫히고 물방울 하나가 돌아온다');
+        fire(1);
+        await waitFor(() => !doc.getElementById('overlay-won').hidden);
+        const won = doc.getElementById('overlay-won');
+        const wonText = [...won.childNodes].filter((node) => !(node.classList && node.classList.contains('overlay-actions'))).map((node) => node.textContent).join('').trim();
+        expect(!won.hidden && wonText === '' && doc.querySelectorAll('.drop.full').length === full && meter.classList.contains('refilled'),
+          `판을 깨면 글 없이 몸과 물방울이 다시 가득 찬다 (${doc.querySelectorAll('.drop.full').length}/${full}, 글 "${wonText}")`);
       }
 
       localStorage.removeItem(STORAGE_KEY);
