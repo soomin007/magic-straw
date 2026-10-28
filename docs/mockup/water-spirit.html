@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>물의 정령 목업</title>
+  <style>
+    :root {
+      --bg: #e9e7e3;
+      --ink: #2b2b2b;
+      --muted: #6d6a66;
+      --box: #c9c6c0;
+      --box-dark: #9d9993;
+      --ground: #d9d5ce;
+      --spirit: #7cc4e8;
+      --spirit-dark: #3f8fb8;
+      --theirs: #c2574a;
+      --gaze: rgba(255, 204, 51, 0.32);
+      --gaze-line: rgba(214, 156, 0, 0.85);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+      line-height: 1.6;
+      /* 한국어 낱말 중간에서 줄이 꺾이지 않게 띄어쓰기에서만 끊는다. */
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .wrap {
+      max-width: 1040px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 60px;
+    }
+
+    h1 { font-size: 24px; margin-bottom: 4px; }
+    h2 { font-size: 19px; margin-top: 40px; }
+    p { margin-top: 0; }
+    .lead { color: var(--muted); }
+    .nw { white-space: nowrap; }
+
+    /* 프롤로그 컷. 4:3 회색 상자 안에 도형으로 구도만 잡는다. */
+    .panels {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .panel {
+      margin: 0;
+    }
+
+    .panel figcaption {
+      margin-top: 8px;
+      font-size: 15px;
+    }
+
+    .panel b { margin-right: 4px; }
+
+    .frame {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border: 3px solid var(--ink);
+      border-radius: 10px;
+      background: var(--box);
+    }
+
+    .shape {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .spring { background: #a9d6ec; border-radius: 50%; }
+    .spirit { background: var(--spirit); border-radius: 50% 50% 45% 45%; }
+    .spirit.faint { opacity: 0.5; }
+    .pipe { background: var(--theirs); color: #fff; border-radius: 6px; }
+    .person { background: var(--box-dark); border-radius: 40% 40% 8px 8px; }
+    .bottle { background: #eef4f6; border-radius: 6px 6px 10px 10px; }
+    .stone { background: var(--spirit-dark); color: #fff; border-radius: 40%; }
+    .ice { background: #e6f6ff; border-radius: 4px; }
+    .mark { border-style: dashed; background: transparent; }
+
+    /* 판 대응. 지금 판과 같은 가로 7칸, 세로 3줄. */
+    .board-wrap {
+      overflow-x: auto;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(7, 64px);
+      grid-template-rows: repeat(3, 52px);
+      width: max-content;
+      border: 3px solid var(--ink);
+      border-radius: 10px;
+      background: var(--ground);
+      position: relative;
+    }
+
+    .cell {
+      position: relative;
+      border-right: 1px solid rgba(43, 43, 43, 0.15);
+      border-bottom: 1px solid rgba(43, 43, 43, 0.15);
+    }
+
+    .cell.inlet {
+      background: #a9d6ec;
+      border-left: 3px solid var(--ink);
+    }
+
+    .cell .shape {
+      inset: 6px;
+    }
+
+    .gaze {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: calc(64px * 3);
+      width: calc(64px * 3);
+      border: 3px solid var(--gaze-line);
+      border-radius: 8px;
+      background: var(--gaze);
+      pointer-events: none;
+    }
+
+    .legend {
+      margin-top: 12px;
+      padding-left: 20px;
+    }
+
+    /* 몸이 곧 턴 */
+    .body-meter {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 18px;
+    }
+
+    .body-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+    }
+
+    .body-step .spirit {
+      position: static;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>물의 정령 컨셉 회색 상자</h1>
+    <p class="lead">그림을 그리기 전에 <span class="nw">프롤로그 컷 순서</span>와 <span class="nw">판 대응</span>을 확인하는 목업이다.
+      상자 안의 글은 그림을 설명하는 이름표이고, 게임에는 <span class="nw">글 없이</span> 그림만 나온다.
+      컨셉 설명은 <span class="nw">docs/concept-water-spirit.md</span>에 있다.</p>
+
+    <h2>프롤로그 여섯 컷</h2>
+    <p>말풍선과 기호 없이 표정, 몸짓, 소품만으로 읽혀야 한다. 4컷이 <span class="nw">"왜 대놓고 맞서지 못하는가"</span>를 <span class="nw">보여 주는</span> 컷이다.</p>
+    <div class="panels">
+      <figure class="panel">
+        <div class="frame">
+          <div class="shape spring" style="left: 22%; top: 48%; width: 56%; height: 38%;">샘</div>
+          <div class="shape spirit" style="left: 42%; top: 36%; width: 16%; height: 24%;">정령</div>
+          <div class="shape stone" style="left: 74%; top: 58%; width: 12%; height: 14%;">돌</div>
+        </div>
+        <figcaption><b>1.</b> 숲속 샘에서 정령이 쉬고, 샘가의 <span class="nw">물길 돌</span>이 물을 숲으로 잇는다.</figcaption>
+      </figure>
+      <figure class="panel">
+        <div class="frame">
+          <div class="shape spring" style="left: 22%; top: 48%; width: 56%; height: 38%;">샘</div>
+          <div class="shape person" style="left: 64%; top: 16%; width: 16%; height: 40%;">사람</div>
+          <div class="shape pipe" style="left: 56%; top: 54%; width: 30%; height: 10%;">펌프 관</div>
+          <div class="shape stone" style="left: 8%; top: 18%; width: 12%; height: 14%;">돌</div>
+          <div class="shape mark" style="left: 20%; top: 26%; width: 28%; height: 22%;">던져진 길</div>
+        </div>
+        <figcaption><b>2.</b> 마을 사람들이 샘에 <span class="nw">펌프 관</span>을 박고, <span class="nw">물길 돌</span>을 뽑아 던진다.</figcaption>
+      </figure>
+      <figure class="panel">
+        <div class="frame">
+          <div class="shape spring" style="left: 30%; top: 58%; width: 40%; height: 26%;">줄어든 샘</div>
+          <div class="shape spirit faint" style="left: 45%; top: 44%; width: 10%; height: 15%;">정령</div>
+          <div class="shape pipe" style="left: 62%; top: 62%; width: 34%; height: 8%;">관</div>
+        </div>
+        <figcaption><b>3.</b> 샘물이 관으로 빨려 나가고, <span class="nw">정령의 몸이</span> 작고 흐려진다.</figcaption>
+      </figure>
+      <figure class="panel">
+        <div class="frame">
+          <div class="shape spirit faint" style="left: 12%; top: 50%; width: 12%; height: 18%;">정령</div>
+          <div class="shape person" style="left: 56%; top: 14%; width: 20%; height: 62%;">샘지기</div>
+          <div class="shape bottle" style="left: 74%; top: 44%; width: 10%; height: 20%;">유리병</div>
+        </div>
+        <figcaption><b>4.</b> 정령이 샘지기에게 다가가다, <span class="nw">손에 든 유리병</span>을 보고 바위 뒤로 숨는다.</figcaption>
+      </figure>
+      <figure class="panel">
+        <div class="frame">
+          <div class="shape spirit" style="left: 36%; top: 26%; width: 28%; height: 44%;">결심한 정령</div>
+          <div class="shape ice" style="left: 60%; top: 60%; width: 10%; height: 12%;">얼음</div>
+        </div>
+        <figcaption><b>5.</b> 정령이 눈을 가늘게 뜨고, <span class="nw">몸의 물 한 줌</span>을 얼음으로 굳힌다.</figcaption>
+      </figure>
+      <figure class="panel">
+        <div class="frame">
+          <div class="shape spirit" style="left: 6%; top: 40%; width: 14%; height: 22%;">정령</div>
+          <div class="shape ice" style="left: 34%; top: 46%; width: 8%; height: 10%;">얼음</div>
+          <div class="shape stone" style="left: 56%; top: 44%; width: 12%; height: 14%;">돌</div>
+          <div class="shape mark" style="left: 72%; top: 40%; width: 18%; height: 22%;">샘 입구 홈</div>
+        </div>
+        <figcaption><b>6.</b> 시연 컷. 정령이 얼음을 뱉고, <span class="nw">맞은 돌</span>이 미끄러져 <span class="nw">샘 입구 홈</span>에 들어간다.</figcaption>
+      </figure>
+    </div>
+
+    <h2>판 대응</h2>
+    <p>지금 판과 같은 <span class="nw">가로 7칸</span>, <span class="nw">세로 3줄</span>이다. <span class="nw">맨 오른쪽 열</span>이 카페의 <span class="nw">콘센트 칸막이</span> 대신 <span class="nw">샘 입구 홈</span>이고,
+      노란 칸은 이번 행동 때 샘지기가 <span class="nw">보는 곳</span>이다.</p>
+    <div class="board-wrap">
+      <div class="board" aria-label="판 대응 예시">
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"><div class="shape mark">석판</div></div>
+        <div class="cell"></div><div class="cell"></div>
+        <div class="cell inlet"></div>
+
+        <div class="cell"></div>
+        <div class="cell"><div class="shape stone">돌</div></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell"><div class="shape pipe">관</div></div>
+        <div class="cell inlet"></div>
+
+        <div class="cell"><div class="shape" style="background: var(--box-dark);">바위</div></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="shape" style="background: #fff;">양동이</div></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell inlet"></div>
+
+        <div class="gaze"></div>
+      </div>
+    </div>
+    <ul class="legend">
+      <li>돌은 정령의 <span class="nw">물길 돌</span>이고, <span class="nw">샘 입구 홈</span>에 끼우면 판을 깬다.</li>
+      <li>관은 사람들이 박아 둔 <span class="nw">펌프 관 끝</span>이다. 샘지기가 <span class="nw">보는 칸</span>에서 건드리면 들킨다.</li>
+      <li>바위는 무겁고, 양동이는 가볍고, 석판은 얼음을 꺾는다.</li>
+    </ul>
+
+    <h2>몸이 곧 턴</h2>
+    <p><span class="nw">랩탑 배터리</span> 대신 정령의 <span class="nw">몸 크기</span>와 투명도가 <span class="nw">남은 행동 수</span>를 보여 준다.
+      <span class="nw">뱉을 때마다</span> <span class="nw">몸이 줄고</span>, 다 마르면 증발한다. 물길을 이으면 <span class="nw">다시 차오른다</span>.</p>
+    <div class="body-meter">
+      <div class="body-step"><div class="shape spirit" style="width: 64px; height: 84px;"></div>4번 남음</div>
+      <div class="body-step"><div class="shape spirit" style="width: 52px; height: 68px;"></div>3번</div>
+      <div class="body-step"><div class="shape spirit" style="width: 40px; height: 52px; opacity: 0.8;"></div>2번</div>
+      <div class="body-step"><div class="shape spirit" style="width: 28px; height: 36px; opacity: 0.6;"></div>1번</div>
+      <div class="body-step"><div class="shape spirit mark" style="width: 28px; height: 36px;"></div>증발</div>
+    </div>
+  </main>
+</body>
+</html>
