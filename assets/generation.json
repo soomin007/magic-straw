@@ -4768,6 +4768,213 @@
         "protectedFiles": "All tracked files outside the six-file authorized scope match starting SHA-256 values.",
         "note": "Automated UI pass does not certify scene geometry or story clarity. Trial approval is pending."
       }
+    },
+    {
+      "date": "2026-10-29",
+      "name": "socket-villain-style-comparison",
+      "tool": "built-in image_gen",
+      "scope": "Four independent style-test PNGs only, not registered in manifest or integrated into game.",
+      "goal": "Player freely moves one cafe floor cell at a time, with no penalty for experimentation, to make the neighboring student willingly unplug their own charger. Ice and water spirit are discarded.",
+      "sourceOfTruth": [
+        "AGENTS.md",
+        "known-issues.md (16,17,18)",
+        "docs/concept-villains.md",
+        "current user brief"
+      ],
+      "referencePolicy": "Every reference was attached as its own unmodified file. No contact sheets. Helltaker images are style only, not gender/body/face references. Cult of the Lamb image is style only, not sheep identity. r2-portrait is the player identity only. Each reaction uses its own generated screen as villain identity reference.",
+      "processingPolicy": "Whole-canvas resizing and metadata stripping only. No geometry manipulation, palette remap, compositing or outline redraw.",
+      "assets": [
+        {
+          "key": "v-a-screen",
+          "file": "assets/style-test/v-a-screen.png",
+          "width": 1920,
+          "height": 1080,
+          "transparent": false,
+          "selectedCandidate": "v-a-screen",
+          "generationSteps": [
+            {
+              "candidate": "v-a-screen",
+              "selected": true,
+              "prompt": "Create a game art STYLE TEST, not a playable implementation. New direction: the player freely walks one grid cell at a time around a study cafe, and wins by making a socket-hogging student willingly unplug their own charger. NO ice, spitting, magic straw, water spirit, battery/turn meter or punitive mechanic. No letters, numbers, words, labels, logos, watermarks, captions, speech bubbles, ZZZ, question marks, exclamation symbols, icons or decorative motion marks. Use very FEW LINES and large clear masses. No hatching, crosshatching, sketch strokes, texture, grain, detailed materials, patterned clothes, tiny props, photographic realism or3D. Do not copy characters, gender, faces, body types, demons, horns, hearts, sheep, crowns, animal anatomy or costumes from STYLE references. The villain is only the user's provisional concept: a college student with hood pulled low, deliberately GENDER-AMBIGUOUS. Loose hoodie obscures body shape. Simple neutral face, no conspicuous eyelashes, breasts, hourglass curves, beard, makeup or jewelry, no long flowing hair. They are comically asleep, not a monster. One plain dark-green hood-up hoodie, unmarked sleeves.\n1920x1080 opaque widescreen GAME SCREEN MOCKUP of the first cafe puzzle, sleeping charger hog. Slightly tilted top-down orthographic view of FLOOR, horizontal and vertical edges aligned with canvas, NOT isometric, not a diamond board, no vanishing-point perspective. Show the front faces of props a little. Read the image as a whole traversable FLOOR puzzle, not a tabletop still life. Same layout is used in both style tests: about9 columns by6 rows, board spans roughly x270-1650,y180-900, cells about150x120px. Grid optional, if visible use extremely faint minimal seams. Sparse counter with two pendant lamps visible only above board, upper strip y0-120. Empty footer y950-1080 reserved for possible undo/restart icon row: do NOT paint any actual UI or text there.\nTOP RIGHT TABLE: around x1320-1690,y205-430, within the upper-right board area. The hood-up villain is slumped ASLEEP over this table, one arm cuddling a clearly recognizable long white POWER STRIP, their other arm under their head. Mouth hangs OPEN toward viewer so a single drool bead at lip is visible. Hood covers forehead. Three Korean220V ROUND sockets in strip, ONE rectangular phone charging adapter visibly plugged into it, a single uncomplicated cord connected to ONE phone on table. This physical strip/charger must read even in simplified art, no floating outlet icon. Villain's seated chair partly visible at table.\nBOTTOM LEFT PLAYER: around x380,y745, SMALL FULL BODY standing on floor, total height about180px =1.5 projected cell heights. Same student identity as the supplied r2-portrait: messy black hair, droopy eyes and mint hoodie with hood DOWN. No cup or straw, hands free, ordinary standing pose, face oriented toward puzzle. The identity input is for person and hoodie only, do not copy its pose, huge bust framing, objects or scratch hatching.\nONLY OTHER BOARD PROPS: ONE simple restaurant vibrating pager around x900,y470, a palm-sized rounded-square puck with one blank button (no digits, no letters); TWO free chairs around x1125,y540 and x750,y720, plus villain's chair for THREE chairs total; ONE potted plant around x600,y330 with a broad simple leaf clump. Chairs are movable-looking discrete objects, not a row of cafe tables. Keep traversable routes open between player, pager and sleeping villain. No extra diners, wall posters, laptops, mugs, books, signs, menu boards, tiny decorations or collectathon props. Sleeping villain and phone charging monopoly are visual focus, player small.\nSTYLE A: use attached Helltaker images for graphic language ONLY: almost entirely BLACK and WHITE with ONE and ONLY accent hue, DEEP CAFE GREEN #195445. Thick bold black contour, very few internal lines, LARGE solid BLACK SHADOW MASSES, stark contrast, minimal background. Never use red, skin peach, blue, yellow, mint as a second green, or color gradients. A few plain gray planes may separate objects but black/white dominate. Render protagonist's reference mint hoodie in the SAME deep green accent while preserving their identity. Power strip white with black sockets. Villain hood also deep green, differentiated from player by hood-up sleeping pose. No fine folds. Do not copy the long-haired female demon characters, body shapes, face, horns or heart symbols from the Helltaker references.\nINPUT ROLES: Image1 and image2 are separate unmodified STYLE references. Image3 is the player IDENTITY reference ONLY. Keep these roles separate.",
+              "references": [
+                "references/portrait-helltaker-1.jpg",
+                "references/portrait-helltaker-2.jpg",
+                "assets/style-test/r2-portrait.png"
+              ]
+            }
+          ],
+          "processing": {
+            "key": "v-a-screen",
+            "file": "assets/style-test/v-a-screen.png",
+            "nativeSize": [
+              1672,
+              941
+            ],
+            "exportSize": [
+              1920,
+              1080
+            ],
+            "mode": "RGB",
+            "textMetadata": [],
+            "sha256": "9baff3aa9eae949ae02527bcd05a87c9e46be2a35f2610a93d0a939f700027ae",
+            "processing": "Whole-canvas resize and metadata stripping only; no compositing, geometry edits, color remap or line redraw."
+          }
+        },
+        {
+          "key": "v-b-screen",
+          "file": "assets/style-test/v-b-screen.png",
+          "width": 1920,
+          "height": 1080,
+          "transparent": false,
+          "selectedCandidate": "v-b-screen-flat",
+          "generationSteps": [
+            {
+              "candidate": "v-b-screen",
+              "selected": false,
+              "prompt": "Create a game art STYLE TEST, not a playable implementation. New direction: the player freely walks one grid cell at a time around a study cafe, and wins by making a socket-hogging student willingly unplug their own charger. NO ice, spitting, magic straw, water spirit, battery/turn meter or punitive mechanic. No letters, numbers, words, labels, logos, watermarks, captions, speech bubbles, ZZZ, question marks, exclamation symbols, icons or decorative motion marks. Use very FEW LINES and large clear masses. No hatching, crosshatching, sketch strokes, texture, grain, detailed materials, patterned clothes, tiny props, photographic realism or3D. Do not copy characters, gender, faces, body types, demons, horns, hearts, sheep, crowns, animal anatomy or costumes from STYLE references. The villain is only the user's provisional concept: a college student with hood pulled low, deliberately GENDER-AMBIGUOUS. Loose hoodie obscures body shape. Simple neutral face, no conspicuous eyelashes, breasts, hourglass curves, beard, makeup or jewelry, no long flowing hair. They are comically asleep, not a monster. One plain dark-green hood-up hoodie, unmarked sleeves.\n1920x1080 opaque widescreen GAME SCREEN MOCKUP of the first cafe puzzle, sleeping charger hog. Slightly tilted top-down orthographic view of FLOOR, horizontal and vertical edges aligned with canvas, NOT isometric, not a diamond board, no vanishing-point perspective. Show the front faces of props a little. Read the image as a whole traversable FLOOR puzzle, not a tabletop still life. Same layout is used in both style tests: about9 columns by6 rows, board spans roughly x270-1650,y180-900, cells about150x120px. Grid optional, if visible use extremely faint minimal seams. Sparse counter with two pendant lamps visible only above board, upper strip y0-120. Empty footer y950-1080 reserved for possible undo/restart icon row: do NOT paint any actual UI or text there.\nTOP RIGHT TABLE: around x1320-1690,y205-430, within the upper-right board area. The hood-up villain is slumped ASLEEP over this table, one arm cuddling a clearly recognizable long white POWER STRIP, their other arm under their head. Mouth hangs OPEN toward viewer so a single drool bead at lip is visible. Hood covers forehead. Three Korean220V ROUND sockets in strip, ONE rectangular phone charging adapter visibly plugged into it, a single uncomplicated cord connected to ONE phone on table. This physical strip/charger must read even in simplified art, no floating outlet icon. Villain's seated chair partly visible at table.\nBOTTOM LEFT PLAYER: around x380,y745, SMALL FULL BODY standing on floor, total height about180px =1.5 projected cell heights. Same student identity as the supplied r2-portrait: messy black hair, droopy eyes and mint hoodie with hood DOWN. No cup or straw, hands free, ordinary standing pose, face oriented toward puzzle. The identity input is for person and hoodie only, do not copy its pose, huge bust framing, objects or scratch hatching.\nONLY OTHER BOARD PROPS: ONE simple restaurant vibrating pager around x900,y470, a palm-sized rounded-square puck with one blank button (no digits, no letters); TWO free chairs around x1125,y540 and x750,y720, plus villain's chair for THREE chairs total; ONE potted plant around x600,y330 with a broad simple leaf clump. Chairs are movable-looking discrete objects, not a row of cafe tables. Keep traversable routes open between player, pager and sleeping villain. No extra diners, wall posters, laptops, mugs, books, signs, menu boards, tiny decorations or collectathon props. Sleeping villain and phone charging monopoly are visual focus, player small.\nSTYLE B: a WARM playful CARTOON with THICK EVEN BLACK LINES, low line count, flat solid areas and ONLY ONE shadow step. Use FIVE to SIX dominant colors total, black ink included: ink-black #16191b, warm cream #f3e5c5, mint #75baa0 (player hoodie), deep green #254c40 (villain hoodie/foliage), light cafe tan #d5b17c and warm terracotta #b87b58. Reuse these palette colors for single-step shadows; no gradients, no extra light effects or material texture. Cafe warmth comes from cream/tan blocks, not detailed wooden grain. Required Cult of the Lamb reference supplies even outlines and compact readable masses ONLY; neither person is a lamb or animal, no fleece, crown, horn or copied costume. Do not inherit the r2 identity reference's dense shading, lines, long straw or drink.\nINPUT ROLES: Image1 is the separate unmodified STYLE reference ONLY. Image2 is the human player IDENTITY reference ONLY. Keep these roles separate.",
+              "references": [
+                "references/character-cultofthelamb-1.jpg",
+                "assets/style-test/r2-portrait.png"
+              ]
+            },
+            {
+              "candidate": "v-b-screen-flat",
+              "selected": true,
+              "prompt": "Edit IMAGE1 only, preserving EXACTLY its scene layout, two human students, costumes, sleeping/drooling villain hugging a power strip with ONE phone charger plugged in, floor board, player size, table, vibrating pager, chairs, plant, counter, pendant lights and empty footer. This is the SAME styleB game mockup, not a redesign.\nONE correction: remove ALL soft gradients, shaded material rendering, light beams and blended shadows. Every region must be a solid flat color, with at most ONE HARD-EDGED flat shadow block per object. Floor one uniform warm tan, counter one flat warm wood color, no vignette, no overhead glow pools, no texture, no grain. Keep thick EVEN BLACK contours and FEW internal lines. Use six dominant palette colors: ink-black, warm cream, mint(player hoodie), deep green(villain hoodie/foliage), light cafe tan, warm terracotta. Reuse this palette for shadows, no peach/red/blue additions. Image2 (unmodified Cult of the Lamb) is STYLE ONLY, no animal/crown/fleece. Image3 is player IDENTITY ONLY, no straw/cup or dense hatching. Preserve gender-ambiguous hooded human villain and same r2 mint-hoodie human player. No writing, letters, numbers, labels, logos, UI icons, balloons or cartoon symbols. 1920x1080 opaque widescreen; retain empty footer.",
+              "references": [
+                {
+                  "generatedCandidate": "v-b-screen"
+                },
+                "references/character-cultofthelamb-1.jpg",
+                "assets/style-test/r2-portrait.png"
+              ]
+            }
+          ],
+          "processing": {
+            "key": "v-b-screen",
+            "file": "assets/style-test/v-b-screen.png",
+            "nativeSize": [
+              1672,
+              941
+            ],
+            "exportSize": [
+              1920,
+              1080
+            ],
+            "mode": "RGB",
+            "textMetadata": [],
+            "sha256": "b1f0bca3a15f3ebacd319e3fd884165e43d8062365994b2c7f4e56ee382c5d21",
+            "processing": "Whole-canvas resize and metadata stripping only; no compositing, geometry edits, color remap or line redraw."
+          }
+        },
+        {
+          "key": "v-a-villain",
+          "file": "assets/style-test/v-a-villain.png",
+          "width": 1024,
+          "height": 1024,
+          "transparent": true,
+          "selectedCandidate": "v-a-villain",
+          "generationSteps": [
+            {
+              "candidate": "v-a-villain",
+              "selected": true,
+              "prompt": "Create a game art STYLE TEST, not a playable implementation. New direction: the player freely walks one grid cell at a time around a study cafe, and wins by making a socket-hogging student willingly unplug their own charger. NO ice, spitting, magic straw, water spirit, battery/turn meter or punitive mechanic. No letters, numbers, words, labels, logos, watermarks, captions, speech bubbles, ZZZ, question marks, exclamation symbols, icons or decorative motion marks. Use very FEW LINES and large clear masses. No hatching, crosshatching, sketch strokes, texture, grain, detailed materials, patterned clothes, tiny props, photographic realism or3D. Do not copy characters, gender, faces, body types, demons, horns, hearts, sheep, crowns, animal anatomy or costumes from STYLE references. The villain is only the user's provisional concept: a college student with hood pulled low, deliberately GENDER-AMBIGUOUS. Loose hoodie obscures body shape. Simple neutral face, no conspicuous eyelashes, breasts, hourglass curves, beard, makeup or jewelry, no long flowing hair. They are comically asleep, not a monster. One plain dark-green hood-up hoodie, unmarked sleeves.\nCreate ONE1024x1024 GENUINELY TRANSPARENT bust illustration of the SAME hood-up sleeping college-student VILLAIN shown at TOP RIGHT in image1, now just WOKEN in shock after they voluntarily unplugged their phone charger to go collect their order. This is the large expressive level-clear reward portrait. Image1 is character identity/costume reference ONLY, do NOT copy its cafe or board. Same dark-green plain hood pulled low, neutral gender-ambiguous face, short/mostly concealed hair, loose hoodie obscuring torso. No feminine demon-face or lamb traits. Eyes now dramatically WIDE with small pupils, eyebrows raised, mouth large and open in startled disbelief; one residual drool bead at lip is enough. Convey reaction through FACE and BODY, no floating punctuation, sweat icon, stars, hearts, speed marks or speech bubble. Hunched shoulders, startled flinch, both hands tightly clutch ONE recognizable rectangular unplugged PHONE CHARGING ADAPTER and its simple loose cord close to chest. Two ROUND metal Korean220V prongs visible on unplugged adapter; not a weapon, remote control, power-strip or drink. Keep fingers readable with very few lines. No phone needed, no table or background. Head entirely within square frame, upper torso cropped near waist at bottom, fill frame with large face and hands and narrow transparent margin. No extra outer sticker contour or ground shadow. Use only large masses, no scratches, hatching, texture, detailed seams or many folds.\nSTYLE A: use attached Helltaker images for graphic language ONLY: almost entirely BLACK and WHITE with ONE and ONLY accent hue, DEEP CAFE GREEN #195445. Thick bold black contour, very few internal lines, LARGE solid BLACK SHADOW MASSES, stark contrast, minimal background. Never use red, skin peach, blue, yellow, mint as a second green, or color gradients. A few plain gray planes may separate objects but black/white dominate. Render protagonist's reference mint hoodie in the SAME deep green accent while preserving their identity. Power strip white with black sockets. Villain hood also deep green, differentiated from player by hood-up sleeping pose. No fine folds. Do not copy the long-haired female demon characters, body shapes, face, horns or heart symbols from the Helltaker references.\nInput2 and3 are separate, unmodified STYLE references only. Their female demon faces, eyelashes, bust/hips, long hair, horns and hearts must NOT transfer. Keep the generic hooded human student established in image1.",
+              "references": [
+                {
+                  "generatedCandidate": "v-a-screen"
+                },
+                "references/portrait-helltaker-1.jpg",
+                "references/portrait-helltaker-2.jpg"
+              ]
+            }
+          ],
+          "processing": {
+            "key": "v-a-villain",
+            "file": "assets/style-test/v-a-villain.png",
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "exportSize": [
+              1024,
+              1024
+            ],
+            "mode": "RGBA",
+            "textMetadata": [],
+            "sha256": "20c2a40a7d65eb4fe06eb434908e5564c260378601d22e438d8643da5bf7d4a4",
+            "processing": "Whole-canvas resize and metadata stripping only; no compositing, geometry edits, color remap or line redraw.",
+            "alphaRange": [
+              0,
+              255
+            ],
+            "alphaBoundingBox": [
+              119,
+              3,
+              1008,
+              1024
+            ]
+          }
+        },
+        {
+          "key": "v-b-villain",
+          "file": "assets/style-test/v-b-villain.png",
+          "width": 1024,
+          "height": 1024,
+          "transparent": true,
+          "selectedCandidate": "v-b-villain",
+          "generationSteps": [
+            {
+              "candidate": "v-b-villain",
+              "selected": true,
+              "prompt": "Create a game art STYLE TEST, not a playable implementation. New direction: the player freely walks one grid cell at a time around a study cafe, and wins by making a socket-hogging student willingly unplug their own charger. NO ice, spitting, magic straw, water spirit, battery/turn meter or punitive mechanic. No letters, numbers, words, labels, logos, watermarks, captions, speech bubbles, ZZZ, question marks, exclamation symbols, icons or decorative motion marks. Use very FEW LINES and large clear masses. No hatching, crosshatching, sketch strokes, texture, grain, detailed materials, patterned clothes, tiny props, photographic realism or3D. Do not copy characters, gender, faces, body types, demons, horns, hearts, sheep, crowns, animal anatomy or costumes from STYLE references. The villain is only the user's provisional concept: a college student with hood pulled low, deliberately GENDER-AMBIGUOUS. Loose hoodie obscures body shape. Simple neutral face, no conspicuous eyelashes, breasts, hourglass curves, beard, makeup or jewelry, no long flowing hair. They are comically asleep, not a monster. One plain dark-green hood-up hoodie, unmarked sleeves.\nCreate ONE1024x1024 GENUINELY TRANSPARENT bust illustration of the SAME hood-up sleeping college-student VILLAIN shown at TOP RIGHT in image1, now just WOKEN in shock after they voluntarily unplugged their phone charger to go collect their order. This is the large expressive level-clear reward portrait. Image1 is character identity/costume reference ONLY, do NOT copy its cafe or board. Same dark-green plain hood pulled low, neutral gender-ambiguous face, short/mostly concealed hair, loose hoodie obscuring torso. No feminine demon-face or lamb traits. Eyes now dramatically WIDE with small pupils, eyebrows raised, mouth large and open in startled disbelief; one residual drool bead at lip is enough. Convey reaction through FACE and BODY, no floating punctuation, sweat icon, stars, hearts, speed marks or speech bubble. Hunched shoulders, startled flinch, both hands tightly clutch ONE recognizable rectangular unplugged PHONE CHARGING ADAPTER and its simple loose cord close to chest. Two ROUND metal Korean220V prongs visible on unplugged adapter; not a weapon, remote control, power-strip or drink. Keep fingers readable with very few lines. No phone needed, no table or background. Head entirely within square frame, upper torso cropped near waist at bottom, fill frame with large face and hands and narrow transparent margin. No extra outer sticker contour or ground shadow. Use only large masses, no scratches, hatching, texture, detailed seams or many folds.\nSTYLE B: a WARM playful CARTOON with THICK EVEN BLACK LINES, low line count, flat solid areas and ONLY ONE shadow step. Use FIVE to SIX dominant colors total, black ink included: ink-black #16191b, warm cream #f3e5c5, mint #75baa0 (player hoodie), deep green #254c40 (villain hoodie/foliage), light cafe tan #d5b17c and warm terracotta #b87b58. Reuse these palette colors for single-step shadows; no gradients, no extra light effects or material texture. Cafe warmth comes from cream/tan blocks, not detailed wooden grain. Required Cult of the Lamb reference supplies even outlines and compact readable masses ONLY; neither person is a lamb or animal, no fleece, crown, horn or copied costume. Do not inherit the r2 identity reference's dense shading, lines, long straw or drink.\nInput2 is a separate unmodified STYLE reference only. Keep this human college student, no lamb, animal eyes/anatomy, crown, fleece or copied outfit. Absolutely FLAT color blocks and one HARD-EDGED shadow step, no gradients or soft shading.",
+              "references": [
+                {
+                  "generatedCandidate": "v-b-screen"
+                },
+                "references/character-cultofthelamb-1.jpg"
+              ]
+            }
+          ],
+          "processing": {
+            "key": "v-b-villain",
+            "file": "assets/style-test/v-b-villain.png",
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "exportSize": [
+              1024,
+              1024
+            ],
+            "mode": "RGBA",
+            "textMetadata": [],
+            "sha256": "c2a9d70083333e7c5923db2932238064ad27a1358f5325c4ffbe48aefb479be3",
+            "processing": "Whole-canvas resize and metadata stripping only; no compositing, geometry edits, color remap or line redraw.",
+            "alphaRange": [
+              0,
+              255
+            ],
+            "alphaBoundingBox": [
+              0,
+              7,
+              944,
+              1024
+            ]
+          }
+        }
+      ],
+      "verification": {
+        "visual": "Both screens show upper-right hooded sleeping student with drool, a power strip/plugged phone charger/phone, lower-left r2 hoodie player, cafe pager, chairs and one main board plant; footer reserved empty. Both reaction cutouts show same hood-up student waking in shock and clutching charger. No text, demons, sheep, magic straw, ice mechanic or water spirit.",
+        "manifest": "Byte-for-byte unchanged by SHA-256.",
+        "reviewNotes": [
+          "B received one flat-color cleanup. Some gentle tonal variation remains, so exact single-step fills and an exact six-color raster palette are not certified.",
+          "Player appears closer to two projected floor cells tall than the requested approximate1.5.",
+          "A has an extra table-front chair and counter stools, and both screens have extra border plants outside the main board.",
+          "Screens communicate the same scene and prop arrangement but are not identical grid layouts. Grid seams are visible in A and removed in selected B; about9x6 is a visual layout target, not a validated playable board."
+        ],
+        "status": "Saved for user style choice; no runtime/UI changes or commit.",
+        "protectedFiles": "All tracked files outside generation record and session log match baseline. Four new PNGs are the only new project files."
+      }
     }
   ]
 }
