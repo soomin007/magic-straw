@@ -8,6 +8,7 @@
 // 사람 그림은 칸 하나 너비에 칸 하나 반 높이(96 x 144px)이고, 발이 칸 아래쪽에 닿는다. 그림 파일은 그 두 배로 그린다.
 // 판마다 villain은 빌런 그림 key 세 가지(평소, 반응, 반응 일러스트)와 그림 크기(heightTiles), 그림 아래쪽이 닿는 칸(anchorRow, 빌런 칸 기준)이다.
 // 콘센트는 언제나 빌런 칸 바로 위 줄의 벽(판 밖 -1번 줄)에 붙는다. view가 있는 판은 카메라 화각 규칙을 쓴다(engine.js 머리말).
+// demo는 그 판에서 처음 나오는 기믹을 반투명한 주인공이 한 번 시연할 자리다(kind: push는 물건 밀기, view는 화각에 들어갔다 되돌아오기).
 window.VILLAIN_LAYOUT = {
   "art": { "width": 1920, "height": 1080, "tile": 96, "originX": 384, "originY": 240, "columns": 12, "rows": 7, "uiTop": 912 },
   "sprite": { "personWidthTiles": 1, "personHeightTiles": 1.5 },
@@ -17,6 +18,7 @@ window.VILLAIN_LAYOUT = {
       "optimal": 17,
       "pushes": 7,
       "villain": { "idle": "villain-sleep", "react": "villain-wake", "portrait": "villain-portrait", "heightTiles": 2.5, "anchorRow": 1 },
+      "demo": { "kind": "push", "from": { "x": 1, "y": 1 }, "dir": "right" },
       "map": [
         "......LL.LV.",
         "..c.....L*T.",
@@ -32,6 +34,7 @@ window.VILLAIN_LAYOUT = {
       "optimal": 17,
       "pushes": 6,
       "view": { "dir": "down", "width": 3 },
+      "demo": { "kind": "view", "from": { "x": 3, "y": 2 }, "dir": "right" },
       "villain": { "idle": "streamer-idle", "react": "streamer-react", "portrait": "streamer-portrait", "heightTiles": 1.5, "anchorRow": 0 },
       "map": [
         "....LTL.....",
