@@ -450,6 +450,7 @@
   <script src="layout.js"></script>
   <script src="engine.js"></script>
   <script src="../../assets/villain/manifest.js"></script>
+  <script src="../../assets/villain/bg-grid.js"></script>
   <script>
     (function () {
       'use strict';
@@ -458,9 +459,13 @@
       const LAYOUT = window.VILLAIN_LAYOUT;
       // 그림 좌표(1920 x 1080)를 장면 좌표(960 x 540)로 줄이는 비율
       const SCALE = 0.5;
-      const TILE = LAYOUT.art.tile * SCALE;
-      const ORIGIN_X = LAYOUT.art.originX * SCALE;
-      const ORIGIN_Y = LAYOUT.art.originY * SCALE;
+      // 칸의 크기와 판의 왼쪽 위 모서리. 기본값은 layout.js의 숫자이고, 배경 그림이 있으면 그 그림의 실제 바닥 격자로 바꾼다.
+      // 이미지 생성기가 배치 안내 그림을 정확히 지키지 못해서, 그림을 늘이지 않고 게임이 그림의 격자를 따른다(known-issues 19번).
+      // TILE은 칸의 가로(그림 크기도 이 값을 기준으로 한다), TILE_H는 칸의 세로다.
+      let TILE = LAYOUT.art.tile * SCALE;
+      let TILE_H = TILE;
+      let ORIGIN_X = LAYOUT.art.originX * SCALE;
+      let ORIGIN_Y = LAYOUT.art.originY * SCALE;
       const STORAGE_KEY = 'villain-settings';
 
       // 그림이 없을 때 상자에 칠하는 테마별 색. 색 규칙은 docs/concept-villains.md "그림체 시험 결과와 결정" 절과 같다.
@@ -535,7 +540,21 @@
       }
 
       function tileTop(y) {
-        return ORIGIN_Y + y * TILE;
+        return ORIGIN_Y + y * TILE_H;
+      }
+
+      // 고른 테마와 판의 배경 그림에 잰 격자(assets/villain/bg-grid.js)가 있으면 그 격자를 쓰고, 없으면 layout.js의 기본 격자를 쓴다.
+      function applyGrid() {
+        const art = LAYOUT.art;
+        const key = `bg-${game.level.id}`;
+        const measured = assetPath(key) && ((window.VILLAIN_BG_GRID || {})[settings.theme] || {})[key];
+        const grid = measured || {
+          left: art.originX, top: art.originY, right: art.originX + art.columns * art.tile, bottom: art.originY + art.rows * art.tile,
+        };
+        ORIGIN_X = grid.left * SCALE;
+        ORIGIN_Y = grid.top * SCALE;
+        TILE = ((grid.right - grid.left) / art.columns) * SCALE;
+        TILE_H = ((grid.bottom - grid.top) / art.rows) * SCALE;
       }
 
       // 배경. 그림이 있으면 한 장으로, 없으면 지도대로 상자를 놓는다.
@@ -554,7 +573,7 @@
         box(0, LAYOUT.art.uiTop * SCALE, 960, 540 - LAYOUT.art.uiTop * SCALE, '#151515');
         game.level.map.forEach((line, y) => {
           [...line].forEach((char, x) => {
-            box(tileLeft(x), tileTop(y), TILE, TILE, colors.floor, `box-shadow: inset 0 0 0 1px ${colors.grid}`);
+            box(tileLeft(x), tileTop(y), TILE, TILE_H, colors.floor, `box-shadow: inset 0 0 0 1px ${colors.grid}`);
             if (char === 'T') box(tileLeft(x) + 2, tileTop(y) + 2, TILE - 4, TILE - 4, colors.table, 'border:2px solid #111;border-radius:6px');
             if (char === 'L') box(tileLeft(x) + 8, tileTop(y) + 4, TILE - 16, TILE - 10, colors.plant, 'border:2px solid #111;border-radius:50% 50% 10px 10px');
           });
@@ -576,7 +595,7 @@
       // 칸 (x, y)의 아래쪽 가운데에 그림 아래쪽 가운데를 맞춘다.
       function placeOnTile(element, x, y, width, height) {
         const left = tileLeft(x) + (TILE - width) / 2;
-        const top = tileTop(y) + TILE - height;
+        const top = tileTop(y) + TILE_H - height;
         element.style.transform = `translate(${left}px, ${top}px)`;
         element.style.zIndex = String(10 + y * 10);
       }
@@ -701,6 +720,7 @@
       function draw() {
         const colors = THEMES[settings.theme];
         const { level, state } = game;
+        applyGrid();
         drawBackdrop();
         ui.actors.innerHTML = '';
         ui.portrait.classList.remove('show');
@@ -743,7 +763,7 @@
         element.style.left = `${tileLeft(game.level.goal.x)}px`;
         element.style.top = `${tileTop(game.level.goal.y)}px`;
         element.style.width = `${TILE}px`;
-        element.style.height = `${TILE}px`;
+        element.style.height = `${TILE_H}px`;
         ui.view.parentNode.insertBefore(element, ui.actors);
         game.sprites.goal = element;
       }
@@ -800,7 +820,7 @@
           element.style.left = `${tileLeft(cell.x)}px`;
           element.style.top = `${tileTop(cell.y)}px`;
           element.style.width = `${TILE}px`;
-          element.style.height = `${TILE}px`;
+          element.style.height = `${TILE_H}px`;
           ui.view.appendChild(element);
         }
       }

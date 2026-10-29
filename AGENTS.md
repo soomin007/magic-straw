@@ -32,6 +32,8 @@ Claude Code가 그 파일들을 검토하고, 공개해도 되는 것만 골라 
 크기나 위치가 숫자와 다르게 나오면 그림을 키우거나 줄여 맞추지 말고, 어떤 숫자와 어떻게 다른지 세션 로그에 적어 Claude Code에게 넘긴다.
 다만 투명 여백을 다듬고 캔버스 안에서 위치를 맞추는 일(예: 네 방향 인물 그림의 발바닥 높이를 같게 맞추기)은 묻지 않고 Python(Pillow 등)으로 해도 된다(2026-10-29 사용자 결정).
 선, 색, 형태, 표정은 코드로 고치지 않고, 무엇을 어떻게 맞췄는지 `assets/generation.json`에 적는다.
+빌런 도감 배경은 생성기가 바닥 격자를 배치 숫자대로 그리지 못한다(known-issues 19번). 그래서 배경을 그린 뒤에는 그림 속 타일 줄의 위치를 재서
+`assets/villain/bg-grid.js`에 그 배경의 left, top, right, bottom을 적는다. 게임은 이 숫자로 칸을 그림에 맞춘다. 재는 방법은 그 파일 머리말에 있다.
 범위는 그림 파일 만들기, `assets/manifest.js`에 등록하기, `docs/art-check.html`로 확인하기, `assets/generation.json`에 생성 지시문 남기기까지다.
 `generation.json`에는 원본 이미지의 로컬 경로(`C:\Users\...`)를 적지 않는다. 이 저장소는 공개 저장소다.
 그림 때문에 코드를 바꿔야 할 것 같으면 고치지 말고, 이유를 세션 로그에 남겨 Claude Code에게 넘긴다.
@@ -56,7 +58,7 @@ Claude Code가 같은 시간에 `session_logs/YYYY-MM-DD.md`를 고칠 수 있�
 
 - 사용자가 정한 방향을 바꾸지 않는다. 방향이 이상해 보이면 고치기 전에 먼저 이유를 말하고 묻는다.
 - Claude Code가 작업 중인지 묻지 않고 바로 일한다(2026-10-29 사용자 결정, 매번 묻는 것이 번거로웠다). 대신 맡은 파일만 고친다.
-  Codex가 고치는 파일은 그림 파일(`assets/` 아래 PNG 등), 그림 등록 파일(`assets/manifest.js`, `assets/villain/manifest.js`),
+  Codex가 고치는 파일은 그림 파일(`assets/` 아래 PNG 등), 그림 등록 파일(`assets/manifest.js`, `assets/villain/manifest.js`), 배경 격자 파일(`assets/villain/bg-grid.js`),
   `assets/generation.json`, Codex 세션 로그(`session_logs/YYYY-MM-DD-codex.md`)뿐이다. 그 밖의 파일은 Claude Code가 고치므로 손대지 않는다.
   이 범위 밖의 파일을 고쳐야 할 것 같으면 고치지 말고 세션 로그에 적는다.
 - 빌드 도구, npm 패키지, 프레임워크를 들이지 않는다. 파일을 그대로 열면 돌아가야 한다.

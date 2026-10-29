@@ -27,7 +27,7 @@ Codex는 `.git` 쓰기 권한을 요청하거나 커밋을 다시 시도하지 �
 5. 사용자가 플레이해 보고 의견을 낸다. 다음 바퀴의 1번으로 돌아간다.
 
 두 에이전트는 같은 폴더에서 동시에 일해도 된다. 서로 작업 중인지 묻지 않는 대신, 고치는 파일을 나눈다(2026-10-29 사용자 결정).
-Codex는 그림 파일, 그림 등록 파일(`assets/manifest.js`, `assets/villain/manifest.js`), `assets/generation.json`, Codex 세션 로그(`session_logs/YYYY-MM-DD-codex.md`)만 고친다.
+Codex는 그림 파일, 그림 등록 파일(`assets/manifest.js`, `assets/villain/manifest.js`), 배경 격자 파일(`assets/villain/bg-grid.js`), `assets/generation.json`, Codex 세션 로그(`session_logs/YYYY-MM-DD-codex.md`)만 고친다.
 Claude Code는 그 밖의 파일을 고치고, Codex 파일은 Codex의 커밋 대기 목록에 오른 뒤에 검토해서 커밋한다. Codex가 작업하는 동안 Codex 파일을 고치지 않는다.
 
 ## 공개 저장소에 올리지 않는 것
