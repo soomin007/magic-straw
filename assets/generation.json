@@ -6463,6 +6463,1045 @@
         "processing": "Pillow only resized complete output canvases, proportionally fit cutouts after alpha-margin trimming, aligned player soles at y288, and positioned villain forearms/content lower edge at y350 inside192x480 canvas so they lie on table surface. It did not draw lines, recolor pixels or warp background geometry.",
         "commit": "No staging, commit or push. Handoff to Claude Code for review and commit."
       }
+    },
+    {
+      "id": "villain-streamer-and-guidance-2026-10-29",
+      "date": "2026-10-29",
+      "tool": "built-in image_gen",
+      "sourceOfTruth": [
+        "AGENTS.md",
+        "docs/concept-villains.md",
+        "proto/villain/layout.js",
+        "docs/layout-guide/villain-streamer.png",
+        "docs/layout-guide/villain-encore.png"
+      ],
+      "referencePolicy": "Each original reference is supplied as its own file. Backgrounds also include their exact layout guide and same-theme first-level cafe background. B images derive from matching A images. No reference contact sheets.",
+      "processingPolicy": "Whole output canvas sizing and transparent alpha-margin fitting/placement only. No code linework, pixel recoloring or geometric warping.",
+      "assets": [
+        {
+          "key": "bg-streamer",
+          "theme": "a",
+          "file": "assets/villain/a/bg-streamer.png",
+          "width": 1920,
+          "height": 1080,
+          "transparent": false,
+          "prompt": "THEME A production game art. Match individually attached Helltaker references and existing A cafe art: FEW thick BLACK ink contours, LARGE solid black shadow masses, flat WHITE and NEUTRALGRAY. Everything grayscale except pushable trash GREEN#2f7a54 and player plug RED#c8302a. No other colored pixels, including plants, headband, clothes and lights. No texture, grain, hatching or fine detail. No text, letters,numbers,labels,logos,speechballoons or comicmarks. Transparent assets must have NO white stickerborder and NO groundshadow. Do not copy demons, horns, longhair or gender/bodytraits from style references.\nPAINT OVER image1 exact map guide, opaque1920x1080. Keep its tile boundaries, floor origin and room rectangle exactly. Images2/3 inkstyle only;image4 same cafe decor ONLY, its shifted grid is WRONG and must not be copied. RPG Maker orthographic view, square screen-aligned96px tiles, no vanishing point or isometric floor. FLOOR ONLY x384..1536,y240..912,12columns7rows. Topwall/counter y0..240, SIDEWALLS x0..384 and1536..1920 as straight vertical rectangularbands, no diagonals or triangular cut tiles. Bottom y912..1080 plain BLACK. Plain counter with two pendant lamps in topwall, samecafe as image4, minimaldetail. Guide greenblocks become small GRAY plants at zero-basedcells(4,0),(6,0),(0,1),(10,1). Browncell(5,0) becomes ONE fixedtable inside x864..960,y240..336. On this table, ONE small PHONE in VERTICAL portraitorientation on a tabletop tripod and ONE circular RING LIGHT, both pointing DOWN toward the seated streamer position. The phone screen/front faces screenBOTTOM, camera sees cafe behind streamer. Keep rig compact within the table cell, white neutral ring, no extra labels or props. Redcell(5,1) becomes one EMPTY GRAY chair inside x864..960,y336..432, no human. All pinkhatches become plain emptyfloor: do not draw player, movablechairs or trash. Cyan rectangle x864..960,y144..240 becomes plain wall, outlet is a separateasset. No streamer, otherpeople, movingobjects, coloredguide marks or camera viewoverlay. Keep table and plants within exactguide cells, no extraobjects anywhere. Every floor seam must stay on guide grid, NOT on image4 older grid.",
+          "references": [
+            "docs/layout-guide/villain-streamer.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/villain/a/bg-sleeper.png"
+          ],
+          "processing": {
+            "nativeSize": [
+              1672,
+              941
+            ],
+            "size": [
+              1920,
+              1080
+            ],
+            "mode": "RGB",
+            "processing": "whole-canvas output resize",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.0
+          }
+        },
+        {
+          "key": "bg-encore",
+          "theme": "a",
+          "file": "assets/villain/a/bg-encore.png",
+          "width": 1920,
+          "height": 1080,
+          "transparent": false,
+          "prompt": "THEME A production game art. Match individually attached Helltaker references and existing A cafe art: FEW thick BLACK ink contours, LARGE solid black shadow masses, flat WHITE and NEUTRALGRAY. Everything grayscale except pushable trash GREEN#2f7a54 and player plug RED#c8302a. No other colored pixels, including plants, headband, clothes and lights. No texture, grain, hatching or fine detail. No text, letters,numbers,labels,logos,speechballoons or comicmarks. Transparent assets must have NO white stickerborder and NO groundshadow. Do not copy demons, horns, longhair or gender/bodytraits from style references.\nPAINT image1 layout guide into same cafe as image2. Image1 exact grid/plant positions, image2 same cafe/table/camera rig appearance.1920x1080 opaque, NEUTRALGRAYSCALE ONLY, remove every blue tint. Floor x384..1536,y240..912,12x7 of96px squares, keep guide gridinplace, not image2 shiftedfloor. One SINGLECELL table(5,0), x864..960,y240..336. Put ONE COMBINED ringlightwithPHONE at its centre on ONE small tabletoptripod, exactly as image2; never split into two rigs or widen table. One emptychair in nextcell(5,1), x864..960,y336..432. SIX small grayplants in ZERO-BASEDcells(4,0),(6,0),(4,1),(6,1),(3,2),(7,2), each wholly in its owncell. No other furniture. Pinkstriped cells emptyfloor, cyanmark plainwall. Sides are straightverticalwalls, no diagonalwindowbars. Same blackcounter and twolamps uppertopband as image2 but y0..240. Bottomy912..1080 plainblack. No people, movingchairs,trash,outlet,viewoverlay,text or extraphone. AllRGBneutralgray. Images3/4 rawinkstyle.",
+          "references": [
+            "docs/layout-guide/villain-encore.png",
+            "assets/villain/a/bg-streamer.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg"
+          ],
+          "processing": {
+            "nativeSize": [
+              1672,
+              941
+            ],
+            "size": [
+              1920,
+              1080
+            ],
+            "mode": "RGB",
+            "processing": "whole-canvas output resize",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.0
+          },
+          "priorInstructions": [
+            {
+              "key": "bg-encore",
+              "theme": "a",
+              "prompt": "THEME A production game art. Match individually attached Helltaker references and existing A cafe art: FEW thick BLACK ink contours, LARGE solid black shadow masses, flat WHITE and NEUTRALGRAY. Everything grayscale except pushable trash GREEN#2f7a54 and player plug RED#c8302a. No other colored pixels, including plants, headband, clothes and lights. No texture, grain, hatching or fine detail. No text, letters,numbers,labels,logos,speechballoons or comicmarks. Transparent assets must have NO white stickerborder and NO groundshadow. Do not copy demons, horns, longhair or gender/bodytraits from style references.\nPAINT OVER image1 exact map guide, opaque1920x1080. Keep its tile boundaries, floor origin and room rectangle exactly. Images2/3 inkstyle only;image4 same cafe decor ONLY, its shifted grid is WRONG and must not be copied. RPG Maker orthographic view, square screen-aligned96px tiles, no vanishing point or isometric floor. FLOOR ONLY x384..1536,y240..912,12columns7rows. Topwall/counter y0..240, SIDEWALLS x0..384 and1536..1920 as straight vertical rectangularbands, no diagonals or triangular cut tiles. Bottom y912..1080 plain BLACK. Plain counter with two pendant lamps in topwall, samecafe as image4, minimaldetail. Guide greenblocks become small GRAY plants at zero-basedcells(4,0),(6,0),(4,1),(6,1),(3,2),(7,2). Browncell(5,0) becomes ONE fixedtable inside x864..960,y240..336. On this table, ONE small PHONE in VERTICAL portraitorientation on a tabletop tripod and ONE circular RING LIGHT, both pointing DOWN toward the seated streamer position. The phone screen/front faces screenBOTTOM, camera sees cafe behind streamer. Keep rig compact within the table cell, white neutral ring, no extra labels or props. Redcell(5,1) becomes one EMPTY GRAY chair inside x864..960,y336..432, no human. All pinkhatches become plain emptyfloor: do not draw player, movablechairs or trash. Cyan rectangle x864..960,y144..240 becomes plain wall, outlet is a separateasset. No streamer, otherpeople, movingobjects, coloredguide marks or camera viewoverlay. Keep table and plants within exactguide cells, no extraobjects anywhere. Every floor seam must stay on guide grid, NOT on image4 older grid.",
+              "references": [
+                "docs/layout-guide/villain-encore.png",
+                "references/portrait-helltaker-1.jpg",
+                "references/portrait-helltaker-2.jpg",
+                "assets/villain/a/bg-sleeper.png"
+              ]
+            }
+          ]
+        },
+        {
+          "key": "streamer-idle",
+          "theme": "a",
+          "file": "assets/villain/a/streamer-idle.png",
+          "width": 192,
+          "height": 288,
+          "transparent": true,
+          "prompt": "THEME A production game art. Match individually attached Helltaker references and existing A cafe art: FEW thick BLACK ink contours, LARGE solid black shadow masses, flat WHITE and NEUTRALGRAY. Everything grayscale except pushable trash GREEN#2f7a54 and player plug RED#c8302a. No other colored pixels, including plants, headband, clothes and lights. No texture, grain, hatching or fine detail. No text, letters,numbers,labels,logos,speechballoons or comicmarks. Transparent assets must have NO white stickerborder and NO groundshadow. Do not copy demons, horns, longhair or gender/bodytraits from style references.\nNEW streamer college student, visibly DIFFERENT from hooded sleeper: NOhood or hoodie, short cropped LIGHTGRAY hair, broad striped grayscale HEADBAND, very LARGE over-ear headset with tiny boom microphone, simple pocketed broadcasting VEST over blackshirt and darktrousers. Gender-neutral body and face, no gendered eyelashes or curves. Broad simple silhouettes, no tinybuttons, jewelry or logos.\nOne seated FULLBODY game sprite192x288 TRANSPARENT. BACK VIEW, back of head and vest toward viewer, face NOT visible, nose/eyes NOT turned sideways. Facing screenTOP toward phonecamera on table. Seated upright, ONE arm raised casually WAVING toward phone in front, back of hand visible. Feet at bottomcanvas, back/headset fullyinside, width~160,height270. No chair or table drawn, those are in background. Read immediately as a person streaming into a phone, not asleep or hiding. Match A production lineweight but do NOT copy firstvillain hood/face.",
+          "references": [
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/villain/a/bg-sleeper.png",
+            "assets/villain/a/villain-portrait.png"
+          ],
+          "processing": {
+            "nativeSize": [
+              1024,
+              1536
+            ],
+            "size": [
+              192,
+              288
+            ],
+            "mode": "RGBA",
+            "processing": "alpha-margin trim, proportional fit and bottom placement",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.0,
+            "sourceAlphaBox": [
+              148,
+              88,
+              994,
+              1452
+            ],
+            "contentBox": [
+              12,
+              18,
+              179,
+              288
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "placement": [
+              12,
+              18
+            ]
+          }
+        },
+        {
+          "key": "trash",
+          "theme": "a",
+          "file": "assets/villain/a/trash.png",
+          "width": 192,
+          "height": 192,
+          "transparent": true,
+          "prompt": "THEME A production game art. Match individually attached Helltaker references and existing A cafe art: FEW thick BLACK ink contours, LARGE solid black shadow masses, flat WHITE and NEUTRALGRAY. Everything grayscale except pushable trash GREEN#2f7a54 and player plug RED#c8302a. No other colored pixels, including plants, headband, clothes and lights. No texture, grain, hatching or fine detail. No text, letters,numbers,labels,logos,speechballoons or comicmarks. Transparent assets must have NO white stickerborder and NO groundshadow. Do not copy demons, horns, longhair or gender/bodytraits from style references.\nONE pushable cafe trash bin, transparent192x192. Object about134pxwide and140pxtall(~70%tile), centered. Simple roundedrectangular wastebin with GREEN#2f7a54 body and darkgreen single shadowplane, BLACK thickcontours, one open dark lidmouth with TWO large crumpled gray papers visible. No recycling glyphs, text, logos, wheels, foul smell lines or little litter outsidebin. Slightly visible top plus front in RPG Maker view, not isometric diamond. No groundshadow or stickerborder. Match green production chair/pager style; bin should read in small broadcastpreview.",
+          "references": [
+            "assets/villain/a/chair.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/villain/a/bg-sleeper.png"
+          ],
+          "processing": {
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "size": [
+              192,
+              192
+            ],
+            "mode": "RGBA",
+            "processing": "alpha-margin trim, proportional fit and center placement",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.64836,
+            "sourceAlphaBox": [
+              214,
+              222,
+              1041,
+              1084
+            ],
+            "contentBox": [
+              29,
+              26,
+              163,
+              166
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "placement": [
+              29,
+              26
+            ]
+          }
+        },
+        {
+          "key": "streamer-react",
+          "theme": "a",
+          "file": "assets/villain/a/streamer-react.png",
+          "width": 192,
+          "height": 288,
+          "transparent": true,
+          "prompt": "THEME A production game art. Match individually attached Helltaker references and existing A cafe art: FEW thick BLACK ink contours, LARGE solid black shadow masses, flat WHITE and NEUTRALGRAY. Everything grayscale except pushable trash GREEN#2f7a54 and player plug RED#c8302a. No other colored pixels, including plants, headband, clothes and lights. No texture, grain, hatching or fine detail. No text, letters,numbers,labels,logos,speechballoons or comicmarks. Transparent assets must have NO white stickerborder and NO groundshadow. Do not copy demons, horns, longhair or gender/bodytraits from style references.\nEDIT image1 seated streamer. NEW streamer college student, visibly DIFFERENT from hooded sleeper: NOhood or hoodie, short cropped LIGHTGRAY hair, broad striped grayscale HEADBAND, very LARGE over-ear headset with tiny boom microphone, simple pocketed broadcasting VEST over blackshirt and darktrousers. Gender-neutral body and face, no gendered eyelashes or curves. Broad simple silhouettes, no tinybuttons, jewelry or logos. SAME seatedbody and position, same canvas192x288 TRANSPARENT. At gameclear, turn HEAD and upper SHOULDERS BACK toward viewer over shoulder, startled wideeyes/openmouth, bothhands lifted in sudden surprise. Keep seatedlegs, outfit and headset same as idle. This is reaction AFTER broadcasting, no waving smile. Person only, no chair/table/phone/background. Full headset/hair/feet fit, soles at288, about270px bodyheight. No speech or comicmarks. Images2/3 rawinkstyle, image4 samegame.",
+          "references": [
+            "assets/villain/a/streamer-idle.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/villain/a/bg-sleeper.png"
+          ],
+          "processing": {
+            "nativeSize": [
+              1024,
+              1536
+            ],
+            "size": [
+              192,
+              288
+            ],
+            "mode": "RGBA",
+            "processing": "alpha-margin trim, proportional fit and bottom placement",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.0,
+            "sourceAlphaBox": [
+              30,
+              60,
+              999,
+              1503
+            ],
+            "contentBox": [
+              5,
+              18,
+              186,
+              288
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "placement": [
+              5,
+              18
+            ]
+          }
+        },
+        {
+          "key": "streamer-portrait",
+          "theme": "a",
+          "file": "assets/villain/a/streamer-portrait.png",
+          "width": 1024,
+          "height": 1024,
+          "transparent": true,
+          "prompt": "THEME A production game art. Match individually attached Helltaker references and existing A cafe art: FEW thick BLACK ink contours, LARGE solid black shadow masses, flat WHITE and NEUTRALGRAY. Everything grayscale except pushable trash GREEN#2f7a54 and player plug RED#c8302a. No other colored pixels, including plants, headband, clothes and lights. No texture, grain, hatching or fine detail. No text, letters,numbers,labels,logos,speechballoons or comicmarks. Transparent assets must have NO white stickerborder and NO groundshadow. Do not copy demons, horns, longhair or gender/bodytraits from style references.\nNEW large REACTION portrait of image1 seated streamer. NEW streamer college student, visibly DIFFERENT from hooded sleeper: NOhood or hoodie, short cropped LIGHTGRAY hair, broad striped grayscale HEADBAND, very LARGE over-ear headset with tiny boom microphone, simple pocketed broadcasting VEST over blackshirt and darktrousers. Gender-neutral body and face, no gendered eyelashes or curves. Broad simple silhouettes, no tinybuttons, jewelry or logos. Same person, now seen from FRONT in upperbody closeup, unexpectedly seeing trash in broadcast: startled hugeeyes, eyebrowsraised, mouthopen, palms held up near headset.1024x1024 TRANSPARENT, full headband/headset and shoulders/hands insideframe, lowerbustnaturallycut. No hood, no phone/charger/powerstrip. Few bold contours and large blackshadowplanes, grayscaleONLY. This must be recognizably the same headset/vest person as idle, not the hooded firstvillain. Images2/3 style, image4 samegame.",
+          "references": [
+            "assets/villain/a/streamer-idle.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/villain/a/bg-sleeper.png"
+          ],
+          "processing": {
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "size": [
+              1024,
+              1024
+            ],
+            "mode": "RGBA",
+            "processing": "alpha-margin trim, proportional fit and bottom placement",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.0,
+            "sourceAlphaBox": [
+              29,
+              12,
+              1238,
+              1240
+            ],
+            "contentBox": [
+              10,
+              4,
+              1014,
+              1024
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "placement": [
+              10,
+              4
+            ]
+          }
+        },
+        {
+          "key": "streamer-face",
+          "theme": "a",
+          "file": "assets/villain/a/streamer-face.png",
+          "width": 128,
+          "height": 128,
+          "transparent": true,
+          "prompt": "Use case: precise-object-edit. Edit image1 smiling headset streamer face. ONLY replace BOTH RED IRIS/pupil fills with NEUTRAL DARKGRAY or BLACK, no color. Keep absolutely same face, hair, headset, headband, expression, lineweight, shape, transparency and crop. Result must be fully BLACK/WHITE/GRAY with equalRGB, NO RED or any hue anywhere. The red iris is an unwanted reference artifact, not part of this human character. Image2 is the same character with correct GRAY eyes. Image3 cafe Astyle. Images4/5 originalinkstyle only, ignore their colored eyes. Transparent128x128 sprite, no new details, makeup, symbols or border.",
+          "references": [
+            "assets/villain/a/streamer-face.png",
+            "assets/villain/a/streamer-portrait.png",
+            "assets/villain/a/bg-sleeper.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg"
+          ],
+          "processing": {
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "size": [
+              128,
+              128
+            ],
+            "mode": "RGBA",
+            "processing": "alpha-margin trim, proportional fit and center placement",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.0,
+            "sourceAlphaBox": [
+              44,
+              23,
+              1208,
+              1172
+            ],
+            "contentBox": [
+              4,
+              5,
+              124,
+              123
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "placement": [
+              4,
+              5
+            ]
+          },
+          "priorInstructions": [
+            {
+              "key": "streamer-face",
+              "theme": "a",
+              "prompt": "THEME A production game art. Match individually attached Helltaker references and existing A cafe art: FEW thick BLACK ink contours, LARGE solid black shadow masses, flat WHITE and NEUTRALGRAY. Everything grayscale except pushable trash GREEN#2f7a54 and player plug RED#c8302a. No other colored pixels, including plants, headband, clothes and lights. No texture, grain, hatching or fine detail. No text, letters,numbers,labels,logos,speechballoons or comicmarks. Transparent assets must have NO white stickerborder and NO groundshadow. Do not copy demons, horns, longhair or gender/bodytraits from style references.\nNEW streamer college student, visibly DIFFERENT from hooded sleeper: NOhood or hoodie, short cropped LIGHTGRAY hair, broad striped grayscale HEADBAND, very LARGE over-ear headset with tiny boom microphone, simple pocketed broadcasting VEST over blackshirt and darktrousers. Gender-neutral body and face, no gendered eyelashes or curves. Broad simple silhouettes, no tinybuttons, jewelry or logos.\nONE smiling SELFIE FACE cutout128x128 TRANSPARENT, camera-front eyecontact, cheerful mouthsmile. Same lightgrayhair, striped broadheadband, largegrayheadset as image1, clearly NOT the hooded sleeper. HEAD and headset only, tinyneck allowed, no bust/hands. Bold fewlines and large highcontrastshapes, readable when displayed64px. All headband/headset visible inside square, no comicmarks or stickerborder. Place face high enough to remain readable when loweredge crops a smallamount in broadcastwindow. Images2/3 rawinkstyle, image4 samegame.",
+              "references": [
+                "assets/villain/a/streamer-idle.png",
+                "references/portrait-helltaker-1.jpg",
+                "references/portrait-helltaker-2.jpg",
+                "assets/villain/a/bg-sleeper.png"
+              ]
+            }
+          ]
+        },
+        {
+          "key": "stream-frame",
+          "theme": "a",
+          "file": "assets/villain/a/stream-frame.png",
+          "width": 380,
+          "height": 208,
+          "transparent": false,
+          "prompt": "THEME A production game art. Match individually attached Helltaker references and existing A cafe art: FEW thick BLACK ink contours, LARGE solid black shadow masses, flat WHITE and NEUTRALGRAY. Everything grayscale except pushable trash GREEN#2f7a54 and player plug RED#c8302a. No other colored pixels, including plants, headband, clothes and lights. No texture, grain, hatching or fine detail. No text, letters,numbers,labels,logos,speechballoons or comicmarks. Transparent assets must have NO white stickerborder and NO groundshadow. Do not copy demons, horns, longhair or gender/bodytraits from style references.\nONE landscape PHONE BROADCAST screen backing, opaque380x208, landscapeaspect1.827. Fill wholecanvas with a horizontal smartphone seen perfectlyFRONT-ON, straight parallel edges, thick BLACK/GRAY rounded bezel~12px, tiny physical camera lens and earpiece slit on LEFTbezel, narrowRIGHTbezel. Inside screen, only a softly out-of-focus monochrome cafe backwall and window/light silhouettes matching image1. Lowcontrast grayinterior leaves centre and lowercentre empty because game overlays three large seenobjects and streamerface. NO PEOPLE or chairs/trash painted into frame, no insetfacewindow, no extra UIicons atall, no text/numbers/REC/chat/comments/hearts/playtriangle or redlive-dot. It must immediately read as a landscape smartphone livecamera screen from its PHYSICAL PHONE silhouette, not a blank rectangularpanel. Blackwhite neutralgray ONLY. Image1 cafe, images2/3 rawinkstyle. No angled perspective or shadows outsidephone; canvas corners darkgrayopaque.",
+          "references": [
+            "assets/villain/a/bg-sleeper.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg"
+          ],
+          "processing": {
+            "nativeSize": [
+              1695,
+              928
+            ],
+            "size": [
+              380,
+              208
+            ],
+            "mode": "RGB",
+            "processing": "whole-canvas output resize",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.0
+          }
+        },
+        {
+          "key": "plug-mine",
+          "theme": "a",
+          "file": "assets/villain/a/plug-mine.png",
+          "width": 96,
+          "height": 96,
+          "transparent": true,
+          "prompt": "THEME A production game art. Match individually attached Helltaker references and existing A cafe art: FEW thick BLACK ink contours, LARGE solid black shadow masses, flat WHITE and NEUTRALGRAY. Everything grayscale except pushable trash GREEN#2f7a54 and player plug RED#c8302a. No other colored pixels, including plants, headband, clothes and lights. No texture, grain, hatching or fine detail. No text, letters,numbers,labels,logos,speechballoons or comicmarks. Transparent assets must have NO white stickerborder and NO groundshadow. Do not copy demons, horns, longhair or gender/bodytraits from style references.\nONE UNPLUGGED player charger icon, transparent96x96. Same squared RED#c8302a charger housing as image1, but remove wall socketplate completely. Show two clearly visible ROUND silvermetal220V prongs pointing upward and short darkcable stub exiting bottom. Slightfront/topview so bothpins visible. Redhousing dominates, graypins and blackoutline. Large simple shape filling~88x88px, centered, no stickerborder or shadow, no text, glow or pictograms. This icon appears above player to identify their unplugged charger.",
+          "references": [
+            "assets/villain/a/outlet-mine.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/villain/a/bg-sleeper.png"
+          ],
+          "processing": {
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "size": [
+              96,
+              96
+            ],
+            "mode": "RGBA",
+            "processing": "alpha-margin trim, proportional fit and center placement",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.74238,
+            "sourceAlphaBox": [
+              313,
+              88,
+              946,
+              1185
+            ],
+            "contentBox": [
+              22,
+              4,
+              73,
+              92
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "placement": [
+              22,
+              4
+            ]
+          }
+        },
+        {
+          "key": "bg-streamer",
+          "theme": "b",
+          "file": "assets/villain/b/bg-streamer.png",
+          "width": 1920,
+          "height": 1080,
+          "transparent": false,
+          "prompt": "THEME B game art. Thick even BLACK contours, FEW interiorlines, big simple FLAT color masses with ONLY one flatshadowplane, matching original Cult of the Lamb reference and same-game Bcafe. No texture,grain,hatching,gradients or3Drender. Background muted low-saturation beige/brown; streamer vest DARKGREEN#2f5e4a, warm skin, lightivory hair, gray/white stripedheadband and grayheadset, blackshirt/pants. Pushable trash ONLY VIVIDORANGE#e8833a. Player plug ONLY MINT#7fd3b8. Never paint orange on background or person. No text,letters,numbers,logos,comicmarks, speechballoons. All cutouts transparent, no white stickerborder and no groundshadow. Do not copy the lamb character.\nCreate opaque1920x1080 background. Image1 EXACT mapguide controls placement;image2 corresponding A scene supplies cafe/camera rig;image3 same Bcafe palette;image4 rawinkstyle. Preserve12x7 screenaligned SQUARE96px floor tiles, x384..1536,y240..912. Sidewalls straightvertical rectangularbands x0..384 and1536..1920, no slants, vanishingpoint, triangles or isometricfloor. Keepguidegridcoordinates, NOT the shifted y180floor from older reference. Bottom168px blankdarkbrown, top240px cafe backwall/counter and twolamps. Fixedtable ONE96pxcell(5,0) x864..960,y240..336, ONE combined ringlightwithverticalphone on small tabletoptripod, facingdown toward streamer. Emptychair ONLY at(5,1) x864..960,y336..432, mutedgraybrown notorange. Small subduedgraygreen plants ONLY atcells(4,0),(6,0),(0,1),(10,1). Do not add extra objects. Magentaguide cells EMPTYfloor, cyansocket guide EMPTYwall. No people,movablechairs,trash,outlets,cameraviewmarks. Neutralbeige tilefloor has faintstraight squaretile seams. Largeplain shapes, no woodgrain, no paintedshadows invading freecells. Samecamera and plantshapes as A, samewarmcafe as Bfirstlevel.",
+          "references": [
+            "docs/layout-guide/villain-streamer.png",
+            "assets/villain/a/bg-streamer.png",
+            "assets/villain/b/bg-sleeper.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "nativeSize": [
+              1672,
+              941
+            ],
+            "size": [
+              1920,
+              1080
+            ],
+            "mode": "RGB",
+            "processing": "whole-canvas output resize",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.95401
+          }
+        },
+        {
+          "key": "bg-encore",
+          "theme": "b",
+          "file": "assets/villain/b/bg-encore.png",
+          "width": 1920,
+          "height": 1080,
+          "transparent": false,
+          "prompt": "THEME B game art. Thick even BLACK contours, FEW interiorlines, big simple FLAT color masses with ONLY one flatshadowplane, matching original Cult of the Lamb reference and same-game Bcafe. No texture,grain,hatching,gradients or3Drender. Background muted low-saturation beige/brown; streamer vest DARKGREEN#2f5e4a, warm skin, lightivory hair, gray/white stripedheadband and grayheadset, blackshirt/pants. Pushable trash ONLY VIVIDORANGE#e8833a. Player plug ONLY MINT#7fd3b8. Never paint orange on background or person. No text,letters,numbers,logos,comicmarks, speechballoons. All cutouts transparent, no white stickerborder and no groundshadow. Do not copy the lamb character.\nCreate opaque1920x1080 background. Image1 EXACT mapguide controls placement;image2 corresponding A scene supplies cafe/camera rig;image3 same Bcafe palette;image4 rawinkstyle. Preserve12x7 screenaligned SQUARE96px floor tiles, x384..1536,y240..912. Sidewalls straightvertical rectangularbands x0..384 and1536..1920, no slants, vanishingpoint, triangles or isometricfloor. Keepguidegridcoordinates, NOT the shifted y180floor from older reference. Bottom168px blankdarkbrown, top240px cafe backwall/counter and twolamps. Fixedtable ONE96pxcell(5,0) x864..960,y240..336, ONE combined ringlightwithverticalphone on small tabletoptripod, facingdown toward streamer. Emptychair ONLY at(5,1) x864..960,y336..432, mutedgraybrown notorange. Small subduedgraygreen plants ONLY atcells(4,0),(6,0),(4,1),(6,1),(3,2),(7,2). Do not add extra objects. Magentaguide cells EMPTYfloor, cyansocket guide EMPTYwall. No people,movablechairs,trash,outlets,cameraviewmarks. Neutralbeige tilefloor has faintstraight squaretile seams. Largeplain shapes, no woodgrain, no paintedshadows invading freecells. Samecamera and plantshapes as A, samewarmcafe as Bfirstlevel.",
+          "references": [
+            "docs/layout-guide/villain-encore.png",
+            "assets/villain/a/bg-encore.png",
+            "assets/villain/b/bg-sleeper.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "nativeSize": [
+              1672,
+              941
+            ],
+            "size": [
+              1920,
+              1080
+            ],
+            "mode": "RGB",
+            "processing": "whole-canvas output resize",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.96465
+          }
+        },
+        {
+          "key": "streamer-idle",
+          "theme": "b",
+          "file": "assets/villain/b/streamer-idle.png",
+          "width": 192,
+          "height": 288,
+          "transparent": true,
+          "prompt": "THEME B game art. Thick even BLACK contours, FEW interiorlines, big simple FLAT color masses with ONLY one flatshadowplane, matching original Cult of the Lamb reference and same-game Bcafe. No texture,grain,hatching,gradients or3Drender. Background muted low-saturation beige/brown; streamer vest DARKGREEN#2f5e4a, warm skin, lightivory hair, gray/white stripedheadband and grayheadset, blackshirt/pants. Pushable trash ONLY VIVIDORANGE#e8833a. Player plug ONLY MINT#7fd3b8. Never paint orange on background or person. No text,letters,numbers,logos,comicmarks, speechballoons. All cutouts transparent, no white stickerborder and no groundshadow. Do not copy the lamb character.\nSTYLE TRANSFER image1 newstreamer to Bcartoon. Same seated BACK VIEW, face invisible, onehand WAVING toward phonecamera at screenTOP. Preserve exact headset/headband/vest silhouette, seatedbody and legs, crop and position. SAME gender-neutral shortlight-haired person as A. Vest DARKGREEN, skinwarm, hairlightivory, headsetgray, headbandwhite/graystriped, blackshirt and darkpants, no orange or mint. Transparent192x288 fullseatedbody, soles baseline288, bodyabout270pxhigh. No chair/table/phone/background. Keep geometry and pose, only shift palette/line simplification to B. Image2 samegame Bstyle;image3 rawstyle, do not copylamb.",
+          "references": [
+            "assets/villain/a/streamer-idle.png",
+            "assets/villain/b/bg-sleeper.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "nativeSize": [
+              1024,
+              1536
+            ],
+            "size": [
+              192,
+              288
+            ],
+            "mode": "RGBA",
+            "processing": "alpha-margin trim, proportional fit and bottom placement",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.31146,
+            "sourceAlphaBox": [
+              87,
+              110,
+              998,
+              1520
+            ],
+            "contentBox": [
+              9,
+              18,
+              183,
+              288
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "placement": [
+              9,
+              18
+            ]
+          }
+        },
+        {
+          "key": "streamer-react",
+          "theme": "b",
+          "file": "assets/villain/b/streamer-react.png",
+          "width": 192,
+          "height": 288,
+          "transparent": true,
+          "prompt": "THEME B game art. Thick even BLACK contours, FEW interiorlines, big simple FLAT color masses with ONLY one flatshadowplane, matching original Cult of the Lamb reference and same-game Bcafe. No texture,grain,hatching,gradients or3Drender. Background muted low-saturation beige/brown; streamer vest DARKGREEN#2f5e4a, warm skin, lightivory hair, gray/white stripedheadband and grayheadset, blackshirt/pants. Pushable trash ONLY VIVIDORANGE#e8833a. Player plug ONLY MINT#7fd3b8. Never paint orange on background or person. No text,letters,numbers,logos,comicmarks, speechballoons. All cutouts transparent, no white stickerborder and no groundshadow. Do not copy the lamb character.\nSTYLE TRANSFER image1 newstreamer to Bcartoon. Same seated pose, head and shoulders turn BACK over shoulder toward viewer, wideeyes and open surprisedmouth, palms lifted. Preserve exact startledpose and seat/footposition. Plainupper eyelids, no added eyelashes or makeup. SAME gender-neutral shortlight-haired person as A. Vest DARKGREEN, skinwarm, hairlightivory, headsetgray, headbandwhite/graystriped, blackshirt and darkpants, no orange or mint. Transparent192x288 fullseatedbody, soles baseline288, bodyabout270pxhigh. No chair/table/phone/background. Keep geometry and pose, only shift palette/line simplification to B. Image2 samegame Bstyle;image3 rawstyle, do not copylamb.",
+          "references": [
+            "assets/villain/a/streamer-react.png",
+            "assets/villain/b/bg-sleeper.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "nativeSize": [
+              1024,
+              1536
+            ],
+            "size": [
+              192,
+              288
+            ],
+            "mode": "RGBA",
+            "processing": "alpha-margin trim, proportional fit and bottom placement",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.31749,
+            "sourceAlphaBox": [
+              59,
+              62,
+              980,
+              1501
+            ],
+            "contentBox": [
+              9,
+              18,
+              182,
+              288
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "placement": [
+              9,
+              18
+            ]
+          }
+        },
+        {
+          "key": "streamer-portrait",
+          "theme": "b",
+          "file": "assets/villain/b/streamer-portrait.png",
+          "width": 1024,
+          "height": 1024,
+          "transparent": true,
+          "prompt": "THEME B game art. Thick even BLACK contours, FEW interiorlines, big simple FLAT color masses with ONLY one flatshadowplane, matching original Cult of the Lamb reference and same-game Bcafe. No texture,grain,hatching,gradients or3Drender. Background muted low-saturation beige/brown; streamer vest DARKGREEN#2f5e4a, warm skin, lightivory hair, gray/white stripedheadband and grayheadset, blackshirt/pants. Pushable trash ONLY VIVIDORANGE#e8833a. Player plug ONLY MINT#7fd3b8. Never paint orange on background or person. No text,letters,numbers,logos,comicmarks, speechballoons. All cutouts transparent, no white stickerborder and no groundshadow. Do not copy the lamb character.\nSTYLE TRANSFER image1 newstreamer to Bcartoon. Same FRONT upperbody closeup startledexpression, raised palms near headset, exact faceidentity and headset/headband/vest, not a hoodedperson. Plainupper eyelids, no added eyelashes, facehatching or makeup. SAME gender-neutral shortlight-haired person as A. Vest DARKGREEN, skinwarm, hairlightivory, headsetgray, headbandwhite/graystriped, blackshirt and darkpants, no orange or mint. Transparent1024x1024 upperbody. No chair/table/phone/background. Keep geometry and pose, only shift palette/line simplification to B. Image2 samegame Bstyle;image3 rawstyle, do not copylamb.",
+          "references": [
+            "assets/villain/a/streamer-portrait.png",
+            "assets/villain/b/bg-sleeper.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "size": [
+              1024,
+              1024
+            ],
+            "mode": "RGBA",
+            "processing": "alpha-margin trim, proportional fit and bottom placement",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.45685,
+            "sourceAlphaBox": [
+              9,
+              5,
+              1250,
+              1254
+            ],
+            "contentBox": [
+              5,
+              4,
+              1018,
+              1024
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "placement": [
+              5,
+              4
+            ]
+          }
+        },
+        {
+          "key": "trash",
+          "theme": "b",
+          "file": "assets/villain/b/trash.png",
+          "width": 192,
+          "height": 192,
+          "transparent": true,
+          "prompt": "THEME B game art. Thick even BLACK contours, FEW interiorlines, big simple FLAT color masses with ONLY one flatshadowplane, matching original Cult of the Lamb reference and same-game Bcafe. No texture,grain,hatching,gradients or3Drender. Background muted low-saturation beige/brown; streamer vest DARKGREEN#2f5e4a, warm skin, lightivory hair, gray/white stripedheadband and grayheadset, blackshirt/pants. Pushable trash ONLY VIVIDORANGE#e8833a. Player plug ONLY MINT#7fd3b8. Never paint orange on background or person. No text,letters,numbers,logos,comicmarks, speechballoons. All cutouts transparent, no white stickerborder and no groundshadow. Do not copy the lamb character.\nSTYLE TRANSFER image1 pushable wastebin and recolor body VIVIDORANGE#e8833a, oneflatdarkorange shadowplane, blackrim/line, two graycrumpled papers visible inside. Samebin silhouette and open darklidmouth.192x192alpha, object134pxwide(~70%tile), centred. Fewlines, no recyclingmarks, logos,text, outside litter, stinklines, groundshadow or stickerborder. Image2 samegameBstyle, image3 rawinkstyle.",
+          "references": [
+            "assets/villain/a/trash.png",
+            "assets/villain/b/bg-sleeper.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "size": [
+              192,
+              192
+            ],
+            "mode": "RGBA",
+            "processing": "alpha-margin trim, proportional fit and center placement",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.66744,
+            "sourceAlphaBox": [
+              184,
+              171,
+              1062,
+              1075
+            ],
+            "contentBox": [
+              29,
+              27,
+              163,
+              165
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "placement": [
+              29,
+              27
+            ]
+          }
+        },
+        {
+          "key": "plug-mine",
+          "theme": "b",
+          "file": "assets/villain/b/plug-mine.png",
+          "width": 96,
+          "height": 96,
+          "transparent": true,
+          "prompt": "THEME B game art. Thick even BLACK contours, FEW interiorlines, big simple FLAT color masses with ONLY one flatshadowplane, matching original Cult of the Lamb reference and same-game Bcafe. No texture,grain,hatching,gradients or3Drender. Background muted low-saturation beige/brown; streamer vest DARKGREEN#2f5e4a, warm skin, lightivory hair, gray/white stripedheadband and grayheadset, blackshirt/pants. Pushable trash ONLY VIVIDORANGE#e8833a. Player plug ONLY MINT#7fd3b8. Never paint orange on background or person. No text,letters,numbers,logos,comicmarks, speechballoons. All cutouts transparent, no white stickerborder and no groundshadow. Do not copy the lamb character.\nSTYLE TRANSFER image1 standalone unplugged charger icon to Bcartoon. Same shape and twoROUND metal220Vprongs pointingup, shortdarkcable stub bottom. Change REDhousing to PLAYER MINT#7fd3b8, matching plugged charger in image2. No wallplate or socket.96x96transparent, fill~88pxheight centered, thickblackcontour and oneflatshadowstep. No text,pictogram,stickerborder or groundshadow. Images3/4 Bstyle.",
+          "references": [
+            "assets/villain/a/plug-mine.png",
+            "assets/villain/b/outlet-mine.png",
+            "assets/villain/b/bg-sleeper.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "size": [
+              96,
+              96
+            ],
+            "mode": "RGBA",
+            "processing": "alpha-margin trim, proportional fit and center placement",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.68424,
+            "sourceAlphaBox": [
+              321,
+              109,
+              944,
+              1159
+            ],
+            "contentBox": [
+              22,
+              4,
+              74,
+              92
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "placement": [
+              22,
+              4
+            ]
+          }
+        },
+        {
+          "key": "stream-frame",
+          "theme": "b",
+          "file": "assets/villain/b/stream-frame.png",
+          "width": 380,
+          "height": 208,
+          "transparent": false,
+          "prompt": "THEME B game art. Thick even BLACK contours, FEW interiorlines, big simple FLAT color masses with ONLY one flatshadowplane, matching original Cult of the Lamb reference and same-game Bcafe. No texture,grain,hatching,gradients or3Drender. Background muted low-saturation beige/brown; streamer vest DARKGREEN#2f5e4a, warm skin, lightivory hair, gray/white stripedheadband and grayheadset, blackshirt/pants. Pushable trash ONLY VIVIDORANGE#e8833a. Player plug ONLY MINT#7fd3b8. Never paint orange on background or person. No text,letters,numbers,logos,comicmarks, speechballoons. All cutouts transparent, no white stickerborder and no groundshadow. Do not copy the lamb character.\nSTYLE TRANSFER image1 landscape smartphone broadcastframe to Bcartoon, same physical phone silhouette, blackgray bezel and physicalcamera/earpiece on leftbezel, exact frontview380x208opaque. Interior is softly muted BEIGE/BROWN cafe wall/window and ceilinglight shapes matching image2, lowcontrast. Keep central and lowercentral screenquiet because game overlays3seenobjects and a selfieface. No people, chairs,trash or UIwidgets paintedinside, no letters,numbers,chat,REC,redlive-dot,hearts,playtriangle or othericons. Keep phonebezelbig and clear so immediately reads horizontalphonecamera screen. Fewer roomdetails than image1, no sharp floorperspectivegrid, mainly blurry backwallshapes. Image3 rawstyle.",
+          "references": [
+            "assets/villain/a/stream-frame.png",
+            "assets/villain/b/bg-sleeper.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "nativeSize": [
+              1695,
+              928
+            ],
+            "size": [
+              380,
+              208
+            ],
+            "mode": "RGB",
+            "processing": "whole-canvas output resize",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.6396
+          }
+        },
+        {
+          "key": "streamer-face",
+          "theme": "b",
+          "file": "assets/villain/b/streamer-face.png",
+          "width": 128,
+          "height": 128,
+          "transparent": true,
+          "prompt": "THEME B game art. Thick even BLACK contours, FEW interiorlines, big simple FLAT color masses with ONLY one flatshadowplane, matching original Cult of the Lamb reference and same-game Bcafe. No texture,grain,hatching,gradients or3Drender. Background muted low-saturation beige/brown; streamer vest DARKGREEN#2f5e4a, warm skin, lightivory hair, gray/white stripedheadband and grayheadset, blackshirt/pants. Pushable trash ONLY VIVIDORANGE#e8833a. Player plug ONLY MINT#7fd3b8. Never paint orange on background or person. No text,letters,numbers,logos,comicmarks, speechballoons. All cutouts transparent, no white stickerborder and no groundshadow. Do not copy the lamb character.\nSTYLE TRANSFER image1 smilingSELFIEface to warm Bcartoon. Same gender-neutral shortlight-haired streamer as image2, gray/white stripedheadband, largegrayheadset. Facefront, eyecontact and friendlysmile. Warm skin, lightivoryhair, BLACK or darkbrown irises, no red eyes, no makeup or added eyelashes. HEAD ONLY128x128alpha, tinyneck allowed, all headset/headband visible, plainboldshapes readable64px. No body,hands,symbols,stickerborder or shadow. Preserve identity and expression. Image3 samegameBstyle, image4 rawreference.",
+          "references": [
+            "assets/villain/a/streamer-face.png",
+            "assets/villain/b/streamer-portrait.png",
+            "assets/villain/b/bg-sleeper.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "size": [
+              128,
+              128
+            ],
+            "mode": "RGBA",
+            "processing": "alpha-margin trim, proportional fit and center placement",
+            "pixelRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.49074,
+            "sourceAlphaBox": [
+              71,
+              96,
+              1182,
+              1137
+            ],
+            "contentBox": [
+              4,
+              8,
+              124,
+              120
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "placement": [
+              4,
+              8
+            ]
+          }
+        }
+      ],
+      "validation": {
+        "status": "18 assets saved and registered. Background spatial/readability review FAILED; four play backgrounds are not geometry-approved.",
+        "order": "A9 were generated before B generation began. Additional A background refinements were attempted during QA and rejected.",
+        "files": {
+          "count": 18,
+          "opaque": 6,
+          "transparent": 12,
+          "exactCanvasSizes": true,
+          "pngTextMetadataAbsent": true,
+          "oldAssetsPreserved": true,
+          "alphaPreserved": true
+        },
+        "runtime": {
+          "maps": [
+            "streamer",
+            "encore"
+          ],
+          "themes": [
+            "a",
+            "b"
+          ],
+          "desktopWidth": 1280,
+          "mobile": {
+            "width": 375,
+            "height": 812
+          },
+          "horizontalOverflow": false,
+          "allDisplayedImagesLoaded": true,
+          "themeSwitch": true,
+          "solved": {
+            "a": "encore,19moves",
+            "b": "streamer,17moves"
+          },
+          "broadcastSlotsChangeFromChairsToTrash": true,
+          "overShoulderReactionAndLargePortraitVisible": true,
+          "consoleErrorsOrWarnings": 0
+        },
+        "semanticReview": {
+          "idle": "Back of head and vest face viewer; streamer waves towards phone at screen top. No visible idle face.",
+          "identity": "Broad striped headband, large headset, short light hair and vest distinguish this gender-neutral streamer from the hooded sleeper.",
+          "streamFrame": "Physical landscape phone bezel/camera with cafe backing, separate live face and object sprites. Phone silhouette reads at desktop; mobile preview is only about66x36px and objects are small.",
+          "color": "A assets neutral grayscale except green trash and red plug-mine. B darkgreen vest, orange trash and mint plug-mine. A face's red-eye leak was corrected with imagegen, not pixel recoloring.",
+          "noTextOrStickerBordersInArt": true
+        },
+        "geometry": {
+          "expectedFloor": [
+            384,
+            240,
+            1536,
+            912
+          ],
+          "tile": 96,
+          "grid": [
+            12,
+            7
+          ],
+          "method": "Bright floor samples at y850 and x432, not a full certification of every seam.",
+          "aStreamer": {
+            "x": [
+              376,
+              1544
+            ],
+            "y": [
+              184,
+              874
+            ]
+          },
+          "aEncore": {
+            "x": [
+              375,
+              1544
+            ],
+            "y": [
+              183,
+              876
+            ]
+          },
+          "bStreamer": {
+            "x": [
+              375,
+              1545
+            ],
+            "y": [
+              185,
+              874
+            ]
+          },
+          "bEncore": {
+            "x": [
+              376,
+              1544
+            ],
+            "y": [
+              181,
+              875
+            ]
+          }
+        },
+        "unresolved": [
+          "Four play backgrounds start the floor about55..59px too high and end about36..38px too high; tile spacing is about98..99px instead of96. Starting player feet appear below the painted floor. Static props do not fully coincide with collision cells.",
+          "Table/camera rig height is wrong relative to separate wall outlet at x864..960,y144..240. The outlet overlaps/hides part of phone/ring light, especially level2. B level3 table is also wider than the requested one cell.",
+          "Attempts to move the whole group, use only the layout guide for composition, or shrink/lower only the camera unit failed to preserve the required geometry. Rejected candidates were not written over selected backgrounds.",
+          "Inner floor/wall borders are straight and no triangular floor tiles appear, but some outer window framing remains diagonal.",
+          "A stream-frame backing includes fairly sharp floor/plant details rather than only an out-of-focus wall. B backing is simpler.",
+          "Some fills retain subtle tonal variation rather than strictly one flat color plus one shadow plane.",
+          "Actual A runtime adds red live dot and chaos border from existing game code; these are not painted into new grayscale frame art."
+        ],
+        "processing": "Pillow only trimmed alpha margins, proportionally fitted cutouts and sized complete output canvases. Seated idle/react body height270, foot baseline288. Trash width134/192=69.8%. Face max120px in128px; plug max88px in96px. No code redrawing, recoloring or background geometry warping.",
+        "handoff": "No commit or push. Review background layout and phone visibility before accepting production backgrounds."
+      },
+      "unselectedCandidates": [
+        {
+          "key": "bg-streamer",
+          "theme": "a",
+          "prompt": "Use case: precise-object-edit. Edit image1 same cafe background,1920x1080. Keep all walls,floorgrid,plants,colors,lineweight and composition unchanged. ONLY move and resize central FIXED TABLE, CAMERA RIG and EMPTY CHAIR into the following game-aligned region. Current camera rig is too high and becomes COVERED by a separate game walloutlet at x864..960,y144..240, so image1 camera cannot be seen. REMOVE oldtable/rig/chair silhouettes and fill oldarea naturally with matching wall/floor, do NOT duplicate them. New table bounds x864..960,y240..336, onecellwide, never two. ONE compact combined ringlight with uprightPHONE in the ring on ONE smalltabletoptripod. Crucial: ENTIRE phone and roundlight BELOW y244 and ABOVE y294, centeredx912, ringdiameter about48px, phoneinside about18x30px. Tripodfeet down to y320 on tabletop. No camera/phone/light pixel may be above y244, because y144..240 is reserved for the game outlet and must stay plainbackground. Emptychair directlybelow table at x864..960,y336..432. It is behind separateperson sprite, no person in background. Same originalplantpositions and exactoldfloorgrid, do not shift otherthings. AllblackwhiteNEUTRALgray, no hue, text, symbols or newprops. Image2 guide explains table/chair cells, images3/4 rawinkstyle. Only fix centralthreeobjects, preserve everything else.",
+          "references": [
+            "assets/villain/a/bg-streamer.png",
+            "docs/layout-guide/villain-streamer.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg"
+          ],
+          "reason": "Table/chair/camera group moved too far down or still failed requested cell alignment. Not selected."
+        },
+        {
+          "key": "bg-encore",
+          "theme": "a",
+          "prompt": "Use case: precise-object-edit. Edit image1 same cafe background,1920x1080. Keep all walls,floorgrid,plants,colors,lineweight and composition unchanged. ONLY move and resize central FIXED TABLE, CAMERA RIG and EMPTY CHAIR into the following game-aligned region. Current camera rig is too high and becomes COVERED by a separate game walloutlet at x864..960,y144..240, so image1 camera cannot be seen. REMOVE oldtable/rig/chair silhouettes and fill oldarea naturally with matching wall/floor, do NOT duplicate them. New table bounds x864..960,y240..336, onecellwide, never two. ONE compact combined ringlight with uprightPHONE in the ring on ONE smalltabletoptripod. Crucial: ENTIRE phone and roundlight BELOW y244 and ABOVE y294, centeredx912, ringdiameter about48px, phoneinside about18x30px. Tripodfeet down to y320 on tabletop. No camera/phone/light pixel may be above y244, because y144..240 is reserved for the game outlet and must stay plainbackground. Emptychair directlybelow table at x864..960,y336..432. It is behind separateperson sprite, no person in background. Same originalplantpositions and exactoldfloorgrid, do not shift otherthings. AllblackwhiteNEUTRALgray, no hue, text, symbols or newprops. Image2 guide explains table/chair cells, images3/4 rawinkstyle. Only fix centralthreeobjects, preserve everything else.",
+          "references": [
+            "assets/villain/a/bg-encore.png",
+            "docs/layout-guide/villain-encore.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg"
+          ],
+          "reason": "Table/chair/camera group moved too far down or still failed requested cell alignment. Not selected."
+        },
+        {
+          "key": "bg-streamer",
+          "theme": "a",
+          "prompt": "THEME A production game art. Match individually attached Helltaker references and existing A cafe art: FEW thick BLACK ink contours, LARGE solid black shadow masses, flat WHITE and NEUTRALGRAY. Everything grayscale except pushable trash GREEN#2f7a54 and player plug RED#c8302a. No other colored pixels, including plants, headband, clothes and lights. No texture, grain, hatching or fine detail. No text, letters,numbers,labels,logos,speechballoons or comicmarks. Transparent assets must have NO white stickerborder and NO groundshadow. Do not copy demons, horns, longhair or gender/bodytraits from style references.\nImage1 and2 INK STYLE ONLY. IMAGE3 is the ONLY COMPOSITION reference: a pixel-aligned map to paint into a finishedcafe. Output1920x1080; reproduce image3 exact rectangularregions, do notinvent a newlayout. Inimage3 floor rectangle is x384..1536,y240..912,12x7 of96px SQUARE tiles. Preserve these exact tilelines. Upperwall/counter occupies TOP22.22%y0..240, sidewalls straightvertical20%width each, bottomblack168px. The room is same cafe as previousgame: plain blackcounter alongtop, TWO pendantlights, quietgray squarefloor, graywindows inside verticalsidewallstrips, no diagonals. Colored guide marks MUST become following GRAYSCALE objects: four/six greenblocks become smallGRAYplantpots at zero-basedcells(4,0),(6,0),(0,1),(10,1). The ONEbrowncell(5,0) becomes ONE96px table, x864..960,y240..336. ONECOMBINED ringlight with smalluprightPHONE inside it and tiny tabletoptripod ontable, rig centeredx912, ring about44pxwide, ALLring/phone above tabletop but no higher than y244; phone/ring occupy x890..934,y244..292, tripodfeet toy316. Empty chair ONLY in REDcell(5,1), x864..960,y336..432. Pinkhatches become EMPTYordinaryfloor, no people/movablechairs/trash. Cyanoutline x864..960,y144..240 becomes PLAINwall, noobjectthere. Its emptiness is crucial because game overlays an outlet in thatregion; phone must be BELOW thatregion and ABOVE the seatedperson whosehead startsaroundy297. Keepexactly one table and oneemptychair. Allplantobjects inside their own guidecells, no extrafurniture. No UI,text,letters,marks. Preserve image3 mapgeometry while replacing guidecolors with cafeart. Do NOT copy any character/body from references1/2.",
+          "references": [
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "docs/layout-guide/villain-streamer.png"
+          ],
+          "reason": "Guide-only composition retry still changed tile geometry and introduced red chairs/nonneutral wall hues. Not selected."
+        },
+        {
+          "key": "bg-encore",
+          "theme": "a",
+          "prompt": "THEME A production game art. Match individually attached Helltaker references and existing A cafe art: FEW thick BLACK ink contours, LARGE solid black shadow masses, flat WHITE and NEUTRALGRAY. Everything grayscale except pushable trash GREEN#2f7a54 and player plug RED#c8302a. No other colored pixels, including plants, headband, clothes and lights. No texture, grain, hatching or fine detail. No text, letters,numbers,labels,logos,speechballoons or comicmarks. Transparent assets must have NO white stickerborder and NO groundshadow. Do not copy demons, horns, longhair or gender/bodytraits from style references.\nImage1 and2 INK STYLE ONLY. IMAGE3 is the ONLY COMPOSITION reference: a pixel-aligned map to paint into a finishedcafe. Output1920x1080; reproduce image3 exact rectangularregions, do notinvent a newlayout. Inimage3 floor rectangle is x384..1536,y240..912,12x7 of96px SQUARE tiles. Preserve these exact tilelines. Upperwall/counter occupies TOP22.22%y0..240, sidewalls straightvertical20%width each, bottomblack168px. The room is same cafe as previousgame: plain blackcounter alongtop, TWO pendantlights, quietgray squarefloor, graywindows inside verticalsidewallstrips, no diagonals. Colored guide marks MUST become following GRAYSCALE objects: four/six greenblocks become smallGRAYplantpots at zero-basedcells(4,0),(6,0),(4,1),(6,1),(3,2),(7,2). The ONEbrowncell(5,0) becomes ONE96px table, x864..960,y240..336. ONECOMBINED ringlight with smalluprightPHONE inside it and tiny tabletoptripod ontable, rig centeredx912, ring about44pxwide, ALLring/phone above tabletop but no higher than y244; phone/ring occupy x890..934,y244..292, tripodfeet toy316. Empty chair ONLY in REDcell(5,1), x864..960,y336..432. Pinkhatches become EMPTYordinaryfloor, no people/movablechairs/trash. Cyanoutline x864..960,y144..240 becomes PLAINwall, noobjectthere. Its emptiness is crucial because game overlays an outlet in thatregion; phone must be BELOW thatregion and ABOVE the seatedperson whosehead startsaroundy297. Keepexactly one table and oneemptychair. Allplantobjects inside their own guidecells, no extrafurniture. No UI,text,letters,marks. Preserve image3 mapgeometry while replacing guidecolors with cafeart. Do NOT copy any character/body from references1/2.",
+          "references": [
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "docs/layout-guide/villain-encore.png"
+          ],
+          "reason": "Guide-only composition retry still changed tile geometry and introduced red chairs/nonneutral wall hues. Not selected."
+        },
+        {
+          "key": "bg-streamer",
+          "theme": "a",
+          "prompt": "THEME A production game art. Match individually attached Helltaker references and existing A cafe art: FEW thick BLACK ink contours, LARGE solid black shadow masses, flat WHITE and NEUTRALGRAY. Everything grayscale except pushable trash GREEN#2f7a54 and player plug RED#c8302a. No other colored pixels, including plants, headband, clothes and lights. No texture, grain, hatching or fine detail. No text, letters,numbers,labels,logos,speechballoons or comicmarks. Transparent assets must have NO white stickerborder and NO groundshadow. Do not copy demons, horns, longhair or gender/bodytraits from style references.\nPrecise object edit of IMAGE1: change ONLY the PHONE + RINGLIGHT + tinyTRIPOD unit. DO NOT move or resize table, chair, anyplant, walls, grid or anyotherpixel. Current cameraunit is tooHIGH and large and will be covered by a separately drawn walloutlet. Erase ONLY oldcameraunit, restore the same table/wall behind it. Draw a MUCH SMALLER singlecombined phone-ring-tripod sitting near the FRONT/LOWER part of EXISTING SAME table. ENTIRE newcameraunit inside x888..936,y244..292 on1920x1080 canvas (center47.5%width,24.8%height). Ringdiameter about32px, phone about12x22px inside ring; tinytripod belowring, feet at y292. NO white ring orphone pixel ABOVE y244; no tripod pixel BELOW y292. This is a tiny camera on the LOWEREDGE of existingtable, NOT a new table. The separate gameoutlet occupies y144..240 and personhead beginsy297, so unit must fit in the SMALL GAP y244..292. Keep table and chair at their EXACT image1 originalpositions, leavefloorandallpropsfixed. Nopeople, newobjects,text orsymbols. Outputsame1920x1080. Image2 matchingmapcontext only, remainingimages line style. No recoloring except preserve theme palette.",
+          "references": [
+            "assets/villain/a/bg-streamer.png",
+            "docs/layout-guide/villain-streamer.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg"
+          ],
+          "reason": "Smaller camera unit still failed requested y244..292 clear gap; no verified overlap improvement. Not selected."
+        },
+        {
+          "key": "bg-encore",
+          "theme": "a",
+          "prompt": "THEME A production game art. Match individually attached Helltaker references and existing A cafe art: FEW thick BLACK ink contours, LARGE solid black shadow masses, flat WHITE and NEUTRALGRAY. Everything grayscale except pushable trash GREEN#2f7a54 and player plug RED#c8302a. No other colored pixels, including plants, headband, clothes and lights. No texture, grain, hatching or fine detail. No text, letters,numbers,labels,logos,speechballoons or comicmarks. Transparent assets must have NO white stickerborder and NO groundshadow. Do not copy demons, horns, longhair or gender/bodytraits from style references.\nPrecise object edit of IMAGE1: change ONLY the PHONE + RINGLIGHT + tinyTRIPOD unit. DO NOT move or resize table, chair, anyplant, walls, grid or anyotherpixel. Current cameraunit is tooHIGH and large and will be covered by a separately drawn walloutlet. Erase ONLY oldcameraunit, restore the same table/wall behind it. Draw a MUCH SMALLER singlecombined phone-ring-tripod sitting near the FRONT/LOWER part of EXISTING SAME table. ENTIRE newcameraunit inside x888..936,y244..292 on1920x1080 canvas (center47.5%width,24.8%height). Ringdiameter about32px, phone about12x22px inside ring; tinytripod belowring, feet at y292. NO white ring orphone pixel ABOVE y244; no tripod pixel BELOW y292. This is a tiny camera on the LOWEREDGE of existingtable, NOT a new table. The separate gameoutlet occupies y144..240 and personhead beginsy297, so unit must fit in the SMALL GAP y244..292. Keep table and chair at their EXACT image1 originalpositions, leavefloorandallpropsfixed. Nopeople, newobjects,text orsymbols. Outputsame1920x1080. Image2 matchingmapcontext only, remainingimages line style. No recoloring except preserve theme palette.",
+          "references": [
+            "assets/villain/a/bg-encore.png",
+            "docs/layout-guide/villain-encore.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg"
+          ],
+          "reason": "Smaller camera unit still failed requested y244..292 clear gap; no verified overlap improvement. Not selected."
+        },
+        {
+          "key": "bg-streamer",
+          "theme": "b",
+          "prompt": "THEME B game art. Thick even BLACK contours, FEW interiorlines, big simple FLAT color masses with ONLY one flatshadowplane, matching original Cult of the Lamb reference and same-game Bcafe. No texture,grain,hatching,gradients or3Drender. Background muted low-saturation beige/brown; streamer vest DARKGREEN#2f5e4a, warm skin, lightivory hair, gray/white stripedheadband and grayheadset, blackshirt/pants. Pushable trash ONLY VIVIDORANGE#e8833a. Player plug ONLY MINT#7fd3b8. Never paint orange on background or person. No text,letters,numbers,logos,comicmarks, speechballoons. All cutouts transparent, no white stickerborder and no groundshadow. Do not copy the lamb character.\nPrecise object edit of IMAGE1: change ONLY the PHONE + RINGLIGHT + tinyTRIPOD unit. DO NOT move or resize table, chair, anyplant, walls, grid or anyotherpixel. Current cameraunit is tooHIGH and large and will be covered by a separately drawn walloutlet. Erase ONLY oldcameraunit, restore the same table/wall behind it. Draw a MUCH SMALLER singlecombined phone-ring-tripod sitting near the FRONT/LOWER part of EXISTING SAME table. ENTIRE newcameraunit inside x888..936,y244..292 on1920x1080 canvas (center47.5%width,24.8%height). Ringdiameter about32px, phone about12x22px inside ring; tinytripod belowring, feet at y292. NO white ring orphone pixel ABOVE y244; no tripod pixel BELOW y292. This is a tiny camera on the LOWEREDGE of existingtable, NOT a new table. The separate gameoutlet occupies y144..240 and personhead beginsy297, so unit must fit in the SMALL GAP y244..292. Keep table and chair at their EXACT image1 originalpositions, leavefloorandallpropsfixed. Nopeople, newobjects,text orsymbols. Outputsame1920x1080. Image2 matchingmapcontext only, remainingimages line style. No recoloring except preserve theme palette.",
+          "references": [
+            "assets/villain/b/bg-streamer.png",
+            "docs/layout-guide/villain-streamer.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "reason": "Smaller camera unit still failed requested y244..292 clear gap; no verified overlap improvement. Not selected."
+        },
+        {
+          "key": "bg-encore",
+          "theme": "b",
+          "prompt": "THEME B game art. Thick even BLACK contours, FEW interiorlines, big simple FLAT color masses with ONLY one flatshadowplane, matching original Cult of the Lamb reference and same-game Bcafe. No texture,grain,hatching,gradients or3Drender. Background muted low-saturation beige/brown; streamer vest DARKGREEN#2f5e4a, warm skin, lightivory hair, gray/white stripedheadband and grayheadset, blackshirt/pants. Pushable trash ONLY VIVIDORANGE#e8833a. Player plug ONLY MINT#7fd3b8. Never paint orange on background or person. No text,letters,numbers,logos,comicmarks, speechballoons. All cutouts transparent, no white stickerborder and no groundshadow. Do not copy the lamb character.\nPrecise object edit of IMAGE1: change ONLY the PHONE + RINGLIGHT + tinyTRIPOD unit. DO NOT move or resize table, chair, anyplant, walls, grid or anyotherpixel. Current cameraunit is tooHIGH and large and will be covered by a separately drawn walloutlet. Erase ONLY oldcameraunit, restore the same table/wall behind it. Draw a MUCH SMALLER singlecombined phone-ring-tripod sitting near the FRONT/LOWER part of EXISTING SAME table. ENTIRE newcameraunit inside x888..936,y244..292 on1920x1080 canvas (center47.5%width,24.8%height). Ringdiameter about32px, phone about12x22px inside ring; tinytripod belowring, feet at y292. NO white ring orphone pixel ABOVE y244; no tripod pixel BELOW y292. This is a tiny camera on the LOWEREDGE of existingtable, NOT a new table. The separate gameoutlet occupies y144..240 and personhead beginsy297, so unit must fit in the SMALL GAP y244..292. Keep table and chair at their EXACT image1 originalpositions, leavefloorandallpropsfixed. Nopeople, newobjects,text orsymbols. Outputsame1920x1080. Image2 matchingmapcontext only, remainingimages line style. No recoloring except preserve theme palette.",
+          "references": [
+            "assets/villain/b/bg-encore.png",
+            "docs/layout-guide/villain-encore.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "reason": "Smaller camera unit still failed requested y244..292 clear gap; no verified overlap improvement. Not selected."
+        }
+      ]
     }
   ]
 }
