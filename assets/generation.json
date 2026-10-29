@@ -4975,6 +4975,1494 @@
         "status": "Saved for user style choice; no runtime/UI changes or commit.",
         "protectedFiles": "All tracked files outside generation record and session log match baseline. Four new PNGs are the only new project files."
       }
+    },
+    {
+      "id": "villain-first-level-2026-10-29",
+      "date": "2026-10-29",
+      "tool": "built-in image_gen",
+      "sourceOfTruth": [
+        "AGENTS.md",
+        "docs/concept-villains.md",
+        "proto/villain/layout.js",
+        "docs/layout-guide/villain-sleeper.png"
+      ],
+      "referencePolicy": "Original references are supplied individually. Each production image uses its theme trial images; direction variants and theme B edits also use the corresponding generated production image. No reference contact sheets.",
+      "processingPolicy": "Only whole-canvas output sizing, proportional transparent-margin fitting, and shared four-direction player foot alignment. No code redrawing or recoloring.",
+      "assets": [
+        {
+          "key": "player-down",
+          "theme": "a",
+          "file": "assets/villain/a/player-down.png",
+          "width": 192,
+          "height": 288,
+          "transparent": true,
+          "prompt": "THEME A production art. Follow separately attached Helltaker/style-test references for bold SIMPLE black ink and LARGE black shadow masses ONLY. Few internal lines, no texture, hatching, grain, detailed folds or realistic/3D rendering. Strict semantic palette: background and villain only BLACK, WHITE and NEUTRAL GRAY (R=G=B). Player hoodie only RED near#c8302a, black hair/pants and white-gray skin/shoes. Pushable buzzer and pushable chair only GREEN near#2f7a54 plus black/white. NO green background plants, NO green villain, NO other colors. This palette communicates what moves. No letters, numbers, labels, logos, UI, balloons, comic symbols, white sticker outline or ground shadow. Do not copy demon girls' gender, faces, long hair, body type, horns or costumes. Use approved student identities only.\nPLAYER IDENTITY: same student as r2-portrait and lower-left student in A test screen, messy short black hair, sleepy/droopy eyes, hoodie hood DOWN, simple black pants and shoes. Change hoodie to RED for A, never green. No cup, straw, headset or item in hands. Full body neutral standing, hands resting in hoodie pockets, feet side-by-side, NOT a walking pose. Compact RPG Maker human sprite, small head/body same proportions as test player. Target file192x288, transparent background; occupy about x24-168,y12-288. Sole baseline at BOTTOM y288, body centered on x96. Head and shoes entirely visible. Same scale and soles for all four directions. View from slightly above with vertical body facing named direction, not a tilted isometric sprite.\nDirection DOWN: front of face and torso faces viewer/screen bottom. Match hero identity, RED hoodie only.",
+          "references": [
+            "assets/style-test/r2-portrait.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/style-test/v-a-screen.png"
+          ],
+          "processing": {
+            "id": "a/player-down",
+            "file": "assets/villain/a/player-down.png",
+            "nativeSize": [
+              1024,
+              1536
+            ],
+            "exportSize": [
+              192,
+              288
+            ],
+            "mode": "RGBA",
+            "processing": "User-authorized alpha-margin trim, uniform proportional scaling and same bottom-centre anchor for four directions",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.3798,
+            "alphaBoundingBox": [
+              36,
+              18,
+              156,
+              288
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "sourceAlphaBox": [
+              209,
+              96,
+              808,
+              1443
+            ],
+            "commonBodyHeight": 270,
+            "placement": [
+              36,
+              18
+            ],
+            "footBaseline": 288
+          }
+        },
+        {
+          "key": "bg-sleeper",
+          "theme": "a",
+          "file": "assets/villain/a/bg-sleeper.png",
+          "width": 1920,
+          "height": 1080,
+          "transparent": false,
+          "prompt": "Use case: precise-object-edit. Edit image1, keep the entire composition and every object/tile edge fixed. ONLY remove the blue-violet tint from the sidewall panels and dark structures: replace colored-looking grays with NEUTRAL GRAY, equal red green blue channels. This theme is strictly black white neutralgray, zero blue, green,red or other accents in background. Keep sparse bold ink, same96px-style squarefloor, sixgrayplants, two tables, oneemptychair, no people or movableprops. No text, no new items or sticker borders. Output1920x1080 opaque. Images2and3 raw inkstyle references;image4 approvedtheme;image5 layout context only, do not recompose current scene.",
+          "references": [
+            "assets/villain/a/bg-sleeper.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/style-test/v-a-screen.png",
+            "docs/layout-guide/villain-sleeper.png"
+          ],
+          "processing": {
+            "id": "a/bg-sleeper",
+            "file": "assets/villain/a/bg-sleeper.png",
+            "nativeSize": [
+              1672,
+              941
+            ],
+            "exportSize": [
+              1920,
+              1080
+            ],
+            "mode": "RGB",
+            "processing": "whole-canvas resize",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.0,
+            "gridScans": {
+              "verticalLinesAtRow864": [
+                {
+                  "expected": 384,
+                  "observedDarkCentre": 371,
+                  "offset": -13,
+                  "localContrast": 163.0
+                },
+                {
+                  "expected": 480,
+                  "observedDarkCentre": 472,
+                  "offset": -8,
+                  "localContrast": 89.0
+                },
+                {
+                  "expected": 576,
+                  "observedDarkCentre": 569,
+                  "offset": -7,
+                  "localContrast": 90.0
+                },
+                {
+                  "expected": 672,
+                  "observedDarkCentre": 667,
+                  "offset": -5,
+                  "localContrast": 93.0
+                },
+                {
+                  "expected": 768,
+                  "observedDarkCentre": 765,
+                  "offset": -3,
+                  "localContrast": 92.3
+                },
+                {
+                  "expected": 864,
+                  "observedDarkCentre": 862,
+                  "offset": -2,
+                  "localContrast": 105.0
+                },
+                {
+                  "expected": 960,
+                  "observedDarkCentre": 961,
+                  "offset": 1,
+                  "localContrast": 96.0
+                },
+                {
+                  "expected": 1056,
+                  "observedDarkCentre": 1058,
+                  "offset": 2,
+                  "localContrast": 98.0
+                },
+                {
+                  "expected": 1152,
+                  "observedDarkCentre": 1156,
+                  "offset": 4,
+                  "localContrast": 100.3
+                },
+                {
+                  "expected": 1248,
+                  "observedDarkCentre": 1255,
+                  "offset": 7,
+                  "localContrast": 92.7
+                },
+                {
+                  "expected": 1344,
+                  "observedDarkCentre": 1352,
+                  "offset": 8,
+                  "localContrast": 101.0
+                },
+                {
+                  "expected": 1440,
+                  "observedDarkCentre": 1450,
+                  "offset": 10,
+                  "localContrast": 100.7
+                },
+                {
+                  "expected": 1536,
+                  "observedDarkCentre": 1550,
+                  "offset": 14,
+                  "localContrast": 120.7
+                }
+              ],
+              "horizontalLinesAtColumn432": [
+                {
+                  "expected": 240,
+                  "observedDarkCentre": 240,
+                  "offset": 0,
+                  "localContrast": 1.0
+                },
+                {
+                  "expected": 336,
+                  "observedDarkCentre": 336,
+                  "offset": 0,
+                  "localContrast": 0.0
+                },
+                {
+                  "expected": 432,
+                  "observedDarkCentre": 432,
+                  "offset": 0,
+                  "localContrast": 0.7
+                },
+                {
+                  "expected": 528,
+                  "observedDarkCentre": 528,
+                  "offset": 0,
+                  "localContrast": 1.0
+                },
+                {
+                  "expected": 624,
+                  "observedDarkCentre": 624,
+                  "offset": 0,
+                  "localContrast": 0.7
+                },
+                {
+                  "expected": 720,
+                  "observedDarkCentre": 720,
+                  "offset": 0,
+                  "localContrast": 1.0
+                },
+                {
+                  "expected": 816,
+                  "observedDarkCentre": 816,
+                  "offset": 0,
+                  "localContrast": 1.3
+                },
+                {
+                  "expected": 912,
+                  "observedDarkCentre": 912,
+                  "offset": 0,
+                  "localContrast": 0.7
+                }
+              ]
+            }
+          },
+          "priorInstructions": [
+            {
+              "prompt": "THEME A production art. Follow separately attached Helltaker/style-test references for bold SIMPLE black ink and LARGE black shadow masses ONLY. Few internal lines, no texture, hatching, grain, detailed folds or realistic/3D rendering. Strict semantic palette: background and villain only BLACK, WHITE and NEUTRAL GRAY (R=G=B). Player hoodie only RED near#c8302a, black hair/pants and white-gray skin/shoes. Pushable buzzer and pushable chair only GREEN near#2f7a54 plus black/white. NO green background plants, NO green villain, NO other colors. This palette communicates what moves. No letters, numbers, labels, logos, UI, balloons, comic symbols, white sticker outline or ground shadow. Do not copy demon girls' gender, faces, long hair, body type, horns or costumes. Use approved student identities only.\nTRANSFORM IMAGE1 layout guide into final1920x1080 opaque cafe BACKGROUND. Image1 is the EXACT geometry to preserve, not a loose suggestion. Other inputs are STYLE ONLY, do NOT copy old9x6 room or its people/objects. RPG Maker MV/MZ orthographic map: floor tiles are SQUARE, screen-aligned horizontal/vertical edges, ZERO vanishing point. Left/right side walls are straight VERTICAL rectangular strips, never taper/slant. No diagonal or triangular floor tiles. Top wall/counter band y0-240; left wall x0-384 and right wall x1536-1920 between y240-912; blank BLACK UI strip y912-1080. Play floor EXACT rectangle x384-1536,y240-912,12COLUMNS by7ROWS of96x96 SQUARE tiles. Grid x=384,480,576,672,768,864,960,1056,1152,1248,1344,1440,1536; grid y=240,336,432,528,624,720,816,912. Keep all lines at these positions, slightly muted gray. Do NOT enlarge board to full width.\nTranslate guide colors into the following GRAYSCALE-only physical objects: six fixed potted plants, all gray leaves and gray pots, at ZERO-based cells(6,0),(7,0),(9,0),(8,1),(7,5),(8,5); each stays entirely inside its own96px cell, simple big leaf clump, no leaf vein detail. One fixed2x2 table fills cells x1-2,y3-4, exact bounds x480-672,y528-720. One single-cell small table at(10,1), exact x1344-1440,y336-432. One EMPTY fixed villain chair at(10,0), x1344-1440,y240-336, no person. Front faces of furniture visible a little, but floor footprint edges match guide cells. Keep faint grid visible on free tiles, no props casting painted ground shadows onto adjacent free cells.\nMagenta hatched guide cells(0,6),(2,1),(4,2),(8,2),(5,4) must be EMPTY FLOOR only: do NOT draw player, movable chairs or buzzer. Yellow hatched cell(9,1) also EMPTY FLOOR. Cyan outline above villain x1344-1440,y144-240 is EMPTY wall, do NOT paint socket, cord, blue line or fixture there. NO HUMANS, power strips, phones, chargers, movable green items or color-coded guide marks anywhere. Minimal grayscale counter and two large simplified pendant lamps in top band, keep cyan socket region empty. Only black/white/gray, no green, red, yellow, blue or warm wood colors. No extra plants or chairs, no textured materials. Match the sparse bold style of A test but preserve EXACT new map.",
+              "references": [
+                "docs/layout-guide/villain-sleeper.png",
+                "references/portrait-helltaker-1.jpg",
+                "references/portrait-helltaker-2.jpg",
+                "assets/style-test/v-a-screen.png"
+              ]
+            },
+            {
+              "prompt": "THEME A production art. Follow separately attached Helltaker/style-test references for bold SIMPLE black ink and LARGE black shadow masses ONLY. Few internal lines, no texture, hatching, grain, detailed folds or realistic/3D rendering. Strict semantic palette: background and villain only BLACK, WHITE and NEUTRAL GRAY (R=G=B). Player hoodie only RED near#c8302a, black hair/pants and white-gray skin/shoes. Pushable buzzer and pushable chair only GREEN near#2f7a54 plus black/white. NO green background plants, NO green villain, NO other colors. This palette communicates what moves. No letters, numbers, labels, logos, UI, balloons, comic symbols, white sticker outline or ground shadow. Do not copy demon girls' gender, faces, long hair, body type, horns or costumes. Use approved student identities only.\nImage1 is the exact layout to PAINT OVER, preserve its grid and rectangular regions pixel-aligned. Image2 is the style candidate with WRONG geometry: do NOT keep its lowered/widened floor or its extra lamp. Output1920x1080. Keep floor edges x384 and1536,y240 and912, twelve by seven96px squaretiles. Topwall exactly240px tall, bottom solidblack168px. Sidewalls384px wide, vertical edges and no diagonals. Keep guide tile seams IN PLACE. Six small gray plants replace green guideblocks in exactlysamecells. Brown guideblocks become one2x2 squaretable x480..672,y528..720, and one1x1table x1344..1440,y336..432. Emptychair replaces red guideblock x1344..1440,y240..336. Pink/yellow stripes disappear into plain lightgray tilefloor, cyanrectangle disappears into wall. No humans, no movablechairs, no pager, no outlet. No chairs around largetable. Plainminimal topcounterandTWOlamps only. Fullygrayscale. Other imagesstyleonly. The game collision map relies on exact guide geometry. Do not recompose or stretch the room. Keep the guide floor lower and narrower than image2.",
+              "references": [
+                "docs/layout-guide/villain-sleeper.png",
+                "previous generated bg-sleeper candidate",
+                "references/portrait-helltaker-1.jpg",
+                "references/portrait-helltaker-2.jpg",
+                "assets/style-test/v-a-screen.png"
+              ]
+            }
+          ]
+        },
+        {
+          "key": "buzzer",
+          "theme": "a",
+          "file": "assets/villain/a/buzzer.png",
+          "width": 192,
+          "height": 192,
+          "transparent": true,
+          "prompt": "THEME A production art. Follow separately attached Helltaker/style-test references for bold SIMPLE black ink and LARGE black shadow masses ONLY. Few internal lines, no texture, hatching, grain, detailed folds or realistic/3D rendering. Strict semantic palette: background and villain only BLACK, WHITE and NEUTRAL GRAY (R=G=B). Player hoodie only RED near#c8302a, black hair/pants and white-gray skin/shoes. Pushable buzzer and pushable chair only GREEN near#2f7a54 plus black/white. NO green background plants, NO green villain, NO other colors. This palette communicates what moves. No letters, numbers, labels, logos, UI, balloons, comic symbols, white sticker outline or ground shadow. Do not copy demon girls' gender, faces, long hair, body type, horns or costumes. Use approved student identities only.\nONE pushable cafe vibrating PAGER, transparent192x192 PNG. A rounded-square puck in slight top/front RPG Maker view, width about116px(60% of192) centered x96,y96; body bounds roughly x38-154,y40-152, with generous TRANSPARENT margin. Main housing and single raised blank round button GREEN#2f7a54, crisp thick black contours, one flat dark green shadow plane. No red LED, digits, words, bell glyph, motion rings or glow. No ground shadow, white sticker border, plate or other prop. Match A test pager shape; GREEN means player can push it.",
+          "references": [
+            "assets/style-test/v-a-screen.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg"
+          ],
+          "processing": {
+            "id": "a/buzzer",
+            "file": "assets/villain/a/buzzer.png",
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "exportSize": [
+              192,
+              192
+            ],
+            "mode": "RGBA",
+            "processing": "transparent-margin trim, proportional fit to116px and centre placement",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.78932,
+            "alphaBoundingBox": [
+              38,
+              47,
+              154,
+              144
+            ],
+            "alphaRange": [
+              0,
+              255
+            ]
+          }
+        },
+        {
+          "key": "player-up",
+          "theme": "a",
+          "file": "assets/villain/a/player-up.png",
+          "width": 192,
+          "height": 288,
+          "transparent": true,
+          "prompt": "THEME A production art. Follow separately attached Helltaker/style-test references for bold SIMPLE black ink and LARGE black shadow masses ONLY. Few internal lines, no texture, hatching, grain, detailed folds or realistic/3D rendering. Strict semantic palette: background and villain only BLACK, WHITE and NEUTRAL GRAY (R=G=B). Player hoodie only RED near#c8302a, black hair/pants and white-gray skin/shoes. Pushable buzzer and pushable chair only GREEN near#2f7a54 plus black/white. NO green background plants, NO green villain, NO other colors. This palette communicates what moves. No letters, numbers, labels, logos, UI, balloons, comic symbols, white sticker outline or ground shadow. Do not copy demon girls' gender, faces, long hair, body type, horns or costumes. Use approved student identities only.\nPLAYER IDENTITY: same student as r2-portrait and lower-left student in A test screen, messy short black hair, sleepy/droopy eyes, hoodie hood DOWN, simple black pants and shoes. Change hoodie to RED for A, never green. No cup, straw, headset or item in hands. Full body neutral standing, hands resting in hoodie pockets, feet side-by-side, NOT a walking pose. Compact RPG Maker human sprite, small head/body same proportions as test player. Target file192x288, transparent background; occupy about x24-168,y12-288. Sole baseline at BOTTOM y288, body centered on x96. Head and shoes entirely visible. Same scale and soles for all four directions. View from slightly above with vertical body facing named direction, not a tilted isometric sprite.\nEDIT image1 FRONT sprite to make BACK VIEW facing screen TOP. Show back of short black hair, hood DOWN resting on upper back, no face. Keep exactly same person, same proportions, red hoodie, shoe design, neutral pose hands in pockets, same full body scale and baseline. Do not add accessories. Image2 identity, image3/4 line style, image5 theme.",
+          "references": [
+            "assets/villain/a/player-down.png",
+            "assets/style-test/r2-portrait.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/style-test/v-a-screen.png"
+          ],
+          "processing": {
+            "id": "a/player-up",
+            "file": "assets/villain/a/player-up.png",
+            "nativeSize": [
+              1024,
+              1536
+            ],
+            "exportSize": [
+              192,
+              288
+            ],
+            "mode": "RGBA",
+            "processing": "User-authorized alpha-margin trim, uniform proportional scaling and same bottom-centre anchor for four directions",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.36302,
+            "alphaBoundingBox": [
+              40,
+              18,
+              151,
+              288
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "sourceAlphaBox": [
+              241,
+              121,
+              785,
+              1450
+            ],
+            "commonBodyHeight": 270,
+            "placement": [
+              40,
+              18
+            ],
+            "footBaseline": 288
+          }
+        },
+        {
+          "key": "player-left",
+          "theme": "a",
+          "file": "assets/villain/a/player-left.png",
+          "width": 192,
+          "height": 288,
+          "transparent": true,
+          "prompt": "THEME A production art. Follow separately attached Helltaker/style-test references for bold SIMPLE black ink and LARGE black shadow masses ONLY. Few internal lines, no texture, hatching, grain, detailed folds or realistic/3D rendering. Strict semantic palette: background and villain only BLACK, WHITE and NEUTRAL GRAY (R=G=B). Player hoodie only RED near#c8302a, black hair/pants and white-gray skin/shoes. Pushable buzzer and pushable chair only GREEN near#2f7a54 plus black/white. NO green background plants, NO green villain, NO other colors. This palette communicates what moves. No letters, numbers, labels, logos, UI, balloons, comic symbols, white sticker outline or ground shadow. Do not copy demon girls' gender, faces, long hair, body type, horns or costumes. Use approved student identities only.\nPLAYER IDENTITY: same student as r2-portrait and lower-left student in A test screen, messy short black hair, sleepy/droopy eyes, hoodie hood DOWN, simple black pants and shoes. Change hoodie to RED for A, never green. No cup, straw, headset or item in hands. Full body neutral standing, hands resting in hoodie pockets, feet side-by-side, NOT a walking pose. Compact RPG Maker human sprite, small head/body same proportions as test player. Target file192x288, transparent background; occupy about x24-168,y12-288. Sole baseline at BOTTOM y288, body centered on x96. Head and shoes entirely visible. Same scale and soles for all four directions. View from slightly above with vertical body facing named direction, not a tilted isometric sprite.\nEDIT image1 FRONT sprite to make True LEFT profile facing screen LEFT. Nose and toes point left. Keep exactly same person, same proportions, red hoodie, shoe design, neutral pose hands in pockets, same full body scale and baseline. Do not add accessories. Image2 identity, image3/4 line style, image5 theme.",
+          "references": [
+            "assets/villain/a/player-down.png",
+            "assets/style-test/r2-portrait.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/style-test/v-a-screen.png"
+          ],
+          "processing": {
+            "id": "a/player-left",
+            "file": "assets/villain/a/player-left.png",
+            "nativeSize": [
+              1024,
+              1536
+            ],
+            "exportSize": [
+              192,
+              288
+            ],
+            "mode": "RGBA",
+            "processing": "User-authorized alpha-margin trim, uniform proportional scaling and same bottom-centre anchor for four directions",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.30111,
+            "alphaBoundingBox": [
+              39,
+              18,
+              153,
+              288
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "sourceAlphaBox": [
+              201,
+              96,
+              788,
+              1488
+            ],
+            "commonBodyHeight": 270,
+            "placement": [
+              39,
+              18
+            ],
+            "footBaseline": 288
+          }
+        },
+        {
+          "key": "player-right",
+          "theme": "a",
+          "file": "assets/villain/a/player-right.png",
+          "width": 192,
+          "height": 288,
+          "transparent": true,
+          "prompt": "THEME A production art. Follow separately attached Helltaker/style-test references for bold SIMPLE black ink and LARGE black shadow masses ONLY. Few internal lines, no texture, hatching, grain, detailed folds or realistic/3D rendering. Strict semantic palette: background and villain only BLACK, WHITE and NEUTRAL GRAY (R=G=B). Player hoodie only RED near#c8302a, black hair/pants and white-gray skin/shoes. Pushable buzzer and pushable chair only GREEN near#2f7a54 plus black/white. NO green background plants, NO green villain, NO other colors. This palette communicates what moves. No letters, numbers, labels, logos, UI, balloons, comic symbols, white sticker outline or ground shadow. Do not copy demon girls' gender, faces, long hair, body type, horns or costumes. Use approved student identities only.\nPLAYER IDENTITY: same student as r2-portrait and lower-left student in A test screen, messy short black hair, sleepy/droopy eyes, hoodie hood DOWN, simple black pants and shoes. Change hoodie to RED for A, never green. No cup, straw, headset or item in hands. Full body neutral standing, hands resting in hoodie pockets, feet side-by-side, NOT a walking pose. Compact RPG Maker human sprite, small head/body same proportions as test player. Target file192x288, transparent background; occupy about x24-168,y12-288. Sole baseline at BOTTOM y288, body centered on x96. Head and shoes entirely visible. Same scale and soles for all four directions. View from slightly above with vertical body facing named direction, not a tilted isometric sprite.\nEDIT image1 FRONT sprite to make True RIGHT profile facing screen RIGHT. Nose and toes point right. Keep exactly same person, same proportions, red hoodie, shoe design, neutral pose hands in pockets, same full body scale and baseline. Do not add accessories. Image2 identity, image3/4 line style, image5 theme.",
+          "references": [
+            "assets/villain/a/player-down.png",
+            "assets/style-test/r2-portrait.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/style-test/v-a-screen.png"
+          ],
+          "processing": {
+            "id": "a/player-right",
+            "file": "assets/villain/a/player-right.png",
+            "nativeSize": [
+              1024,
+              1536
+            ],
+            "exportSize": [
+              192,
+              288
+            ],
+            "mode": "RGBA",
+            "processing": "User-authorized alpha-margin trim, uniform proportional scaling and same bottom-centre anchor for four directions",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.32093,
+            "alphaBoundingBox": [
+              43,
+              18,
+              149,
+              288
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "sourceAlphaBox": [
+              269,
+              116,
+              800,
+              1466
+            ],
+            "commonBodyHeight": 270,
+            "placement": [
+              43,
+              18
+            ],
+            "footBaseline": 288
+          }
+        },
+        {
+          "key": "outlet-theirs",
+          "theme": "a",
+          "file": "assets/villain/a/outlet-theirs.png",
+          "width": 192,
+          "height": 192,
+          "transparent": true,
+          "prompt": "THEME A production art. Follow separately attached Helltaker/style-test references for bold SIMPLE black ink and LARGE black shadow masses ONLY. Few internal lines, no texture, hatching, grain, detailed folds or realistic/3D rendering. Strict semantic palette: background and villain only BLACK, WHITE and NEUTRAL GRAY (R=G=B). Player hoodie only RED near#c8302a, black hair/pants and white-gray skin/shoes. Pushable buzzer and pushable chair only GREEN near#2f7a54 plus black/white. NO green background plants, NO green villain, NO other colors. This palette communicates what moves. No letters, numbers, labels, logos, UI, balloons, comic symbols, white sticker outline or ground shadow. Do not copy demon girls' gender, faces, long hair, body type, horns or costumes. Use approved student identities only.\nTransparent192x192 single wall socket plate with ONE GRAY phone adapter inserted, neutral gray cable exiting bottom. Simple front view, large bold shape. White rectangular plate rounded corners, one Korean220V circular socket with charging adapter covering its holes, pins hidden naturally. Entire plate and charger neutral gray, black and white only. No green/red, no text/symbol, no floating pins. Fill canvas about176x176 centered; no wall/background or shadow.",
+          "references": [
+            "assets/style-test/v-a-screen.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg"
+          ],
+          "processing": {
+            "id": "a/outlet-theirs",
+            "file": "assets/villain/a/outlet-theirs.png",
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "exportSize": [
+              192,
+              192
+            ],
+            "mode": "RGBA",
+            "processing": "transparent-margin trim, proportional fit and bottom-centre placement",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.0,
+            "alphaBoundingBox": [
+              36,
+              4,
+              156,
+              192
+            ],
+            "alphaRange": [
+              0,
+              255
+            ]
+          }
+        },
+        {
+          "key": "villain-sleep",
+          "theme": "a",
+          "file": "assets/villain/a/villain-sleep.png",
+          "width": 192,
+          "height": 480,
+          "transparent": true,
+          "prompt": "Use case: stylized-concept. Transparent game character sprite192x480. Same hooded college student as image1, neutral gender, grayscale hoodie. Cozy comic scene: peacefully asleep at cafe, chin lowered, eyes closed, mouth slightly open and a tiny drool bead. Both forearms rest across a white cafe powerstrip, gray phone charging adapter inserted in it, small gray phone beside hands. Seated upper body only, no table or chair. Head upper half, torso centre, forearms and objects lower third. Thick sparse black lines and broad flat black/gray shadows matching images2and3 and theme image4. Everything black,white,neutralgray. No green,red, letters, symbols, horns, sticker border or ground shadow. Full silhouette fits narrow192x480 canvas with transparent background.",
+          "references": [
+            "assets/style-test/v-a-villain.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/style-test/v-a-screen.png"
+          ],
+          "processing": {
+            "id": "a/villain-sleep",
+            "file": "assets/villain/a/villain-sleep.png",
+            "nativeSize": [
+              793,
+              1983
+            ],
+            "exportSize": [
+              192,
+              480
+            ],
+            "mode": "RGBA",
+            "processing": "transparent-margin trim, proportional fit, forearms anchored at canvas y350 to rest on table surface",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.0,
+            "alphaBoundingBox": [
+              4,
+              124,
+              188,
+              350
+            ],
+            "alphaRange": [
+              0,
+              255
+            ]
+          }
+        },
+        {
+          "key": "chair",
+          "theme": "a",
+          "file": "assets/villain/a/chair.png",
+          "width": 192,
+          "height": 240,
+          "transparent": true,
+          "prompt": "THEME A production art. Follow separately attached Helltaker/style-test references for bold SIMPLE black ink and LARGE black shadow masses ONLY. Few internal lines, no texture, hatching, grain, detailed folds or realistic/3D rendering. Strict semantic palette: background and villain only BLACK, WHITE and NEUTRAL GRAY (R=G=B). Player hoodie only RED near#c8302a, black hair/pants and white-gray skin/shoes. Pushable buzzer and pushable chair only GREEN near#2f7a54 plus black/white. NO green background plants, NO green villain, NO other colors. This palette communicates what moves. No letters, numbers, labels, logos, UI, balloons, comic symbols, white sticker outline or ground shadow. Do not copy demon girls' gender, faces, long hair, body type, horns or costumes. Use approved student identities only.\nONE pushable cafe chair, transparent192x240 canvas. Match the angular simple chair shape in theme test. Chair is GREEN#2f7a54 with black contour and one darkgreen shadow plane, no brown upholstery. Front view with a little seat top visible, RPG Maker view without perspective vanishing. Entire chair fits about x12..180,y8..240; feet along bottom240; chairback rises into top48px, lower192px corresponds to floor tile. Few thick straight frame lines, no fine woodgrain, no groundshadow, no whiteborder, no text or other objects.",
+          "references": [
+            "assets/style-test/v-a-screen.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg"
+          ],
+          "processing": {
+            "id": "a/chair",
+            "file": "assets/villain/a/chair.png",
+            "nativeSize": [
+              1122,
+              1402
+            ],
+            "exportSize": [
+              192,
+              240
+            ],
+            "mode": "RGBA",
+            "processing": "transparent-margin trim, proportional fit and bottom-centre placement",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.66819,
+            "alphaBoundingBox": [
+              19,
+              4,
+              173,
+              240
+            ],
+            "alphaRange": [
+              0,
+              255
+            ]
+          }
+        },
+        {
+          "key": "villain-wake",
+          "theme": "a",
+          "file": "assets/villain/a/villain-wake.png",
+          "width": 192,
+          "height": 480,
+          "transparent": true,
+          "prompt": "THEME A production art. Follow separately attached Helltaker/style-test references for bold SIMPLE black ink and LARGE black shadow masses ONLY. Few internal lines, no texture, hatching, grain, detailed folds or realistic/3D rendering. Strict semantic palette: background and villain only BLACK, WHITE and NEUTRAL GRAY (R=G=B). Player hoodie only RED near#c8302a, black hair/pants and white-gray skin/shoes. Pushable buzzer and pushable chair only GREEN near#2f7a54 plus black/white. NO green background plants, NO green villain, NO other colors. This palette communicates what moves. No letters, numbers, labels, logos, UI, balloons, comic symbols, white sticker outline or ground shadow. Do not copy demon girls' gender, faces, long hair, body type, horns or costumes. Use approved student identities only.\nEDIT image1 sleeping student into same character startled awake in SAME seated slot. Hood up, sleepy gender-ambiguous college student, all GRAYSCALE. Big wide eyes and open surprised mouth, shoulders lifted. Both hands clutch the gray charger with two round pins visibly unplugged; white powerstrip still near lower forearms. Transparent192x480, seated upperbody only, no chair/table/background. Keep overall shoulder width and forearm/powerstrip baseline like image1. No horns, symbols, sticker border, groundshadow. Image2 same identity and reaction reference; images3/4 line style;image5 theme. Face expressive but few thick lines.",
+          "references": [
+            "assets/villain/a/villain-sleep.png",
+            "assets/style-test/v-a-villain.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/style-test/v-a-screen.png"
+          ],
+          "processing": {
+            "id": "a/villain-wake",
+            "file": "assets/villain/a/villain-wake.png",
+            "nativeSize": [
+              793,
+              1983
+            ],
+            "exportSize": [
+              192,
+              480
+            ],
+            "mode": "RGBA",
+            "processing": "transparent-margin trim, proportional fit, forearms anchored at canvas y350 to rest on table surface",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.0,
+            "alphaBoundingBox": [
+              4,
+              121,
+              188,
+              350
+            ],
+            "alphaRange": [
+              0,
+              255
+            ]
+          }
+        },
+        {
+          "key": "villain-portrait",
+          "theme": "a",
+          "file": "assets/villain/a/villain-portrait.png",
+          "width": 1024,
+          "height": 1024,
+          "transparent": true,
+          "prompt": "THEME A production art. Follow separately attached Helltaker/style-test references for bold SIMPLE black ink and LARGE black shadow masses ONLY. Few internal lines, no texture, hatching, grain, detailed folds or realistic/3D rendering. Strict semantic palette: background and villain only BLACK, WHITE and NEUTRAL GRAY (R=G=B). Player hoodie only RED near#c8302a, black hair/pants and white-gray skin/shoes. Pushable buzzer and pushable chair only GREEN near#2f7a54 plus black/white. NO green background plants, NO green villain, NO other colors. This palette communicates what moves. No letters, numbers, labels, logos, UI, balloons, comic symbols, white sticker outline or ground shadow. Do not copy demon girls' gender, faces, long hair, body type, horns or costumes. Use approved student identities only.\nEDIT image1 approved villain reaction portrait. Keep same gender-ambiguous short-blackhair hood-up college student and startled expression holding a gray charger in both hands. Change hoodie and every green surface to NEUTRALGRAY. Black white gray ONLY. Large upperbody reaction illustration1024x1024 alpha background, face wide eyes, eyebrows raised, mouth open; strong startled silhouette. Simplify to few bold contourlines and broad black shadow masses. Keep complete hood/shoulders/hands and charger inside canvas; natural lower torso cut. No whiteborder, groundshadow, balloons, text, horns or comic symbols. Images2/3 style;image4 production identity.",
+          "references": [
+            "assets/style-test/v-a-villain.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/villain/a/villain-sleep.png"
+          ],
+          "processing": {
+            "id": "a/villain-portrait",
+            "file": "assets/villain/a/villain-portrait.png",
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "exportSize": [
+              1024,
+              1024
+            ],
+            "mode": "RGBA",
+            "processing": "transparent-margin trim, proportional fit and bottom-centre placement",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.0,
+            "alphaBoundingBox": [
+              119,
+              4,
+              905,
+              1024
+            ],
+            "alphaRange": [
+              0,
+              255
+            ]
+          }
+        },
+        {
+          "key": "outlet-mine",
+          "theme": "a",
+          "file": "assets/villain/a/outlet-mine.png",
+          "width": 192,
+          "height": 192,
+          "transparent": true,
+          "prompt": "THEME A production art. Follow separately attached Helltaker/style-test references for bold SIMPLE black ink and LARGE black shadow masses ONLY. Few internal lines, no texture, hatching, grain, detailed folds or realistic/3D rendering. Strict semantic palette: background and villain only BLACK, WHITE and NEUTRAL GRAY (R=G=B). Player hoodie only RED near#c8302a, black hair/pants and white-gray skin/shoes. Pushable buzzer and pushable chair only GREEN near#2f7a54 plus black/white. NO green background plants, NO green villain, NO other colors. This palette communicates what moves. No letters, numbers, labels, logos, UI, balloons, comic symbols, white sticker outline or ground shadow. Do not copy demon girls' gender, faces, long hair, body type, horns or costumes. Use approved student identities only.\nEDIT image1 wall outlet. Exact same plate, socket, adapter shape, cable, size, position and front view. Only change plugged adapter housing to PLAYER RED#c8302a. Wall plate remains white neutralgray with black contours, cable neutralgray. No green. Transparent192x192, no background or groundshadow or white stickerborder, no text. Images2/3 inkstyle, image4 theme.",
+          "references": [
+            "assets/villain/a/outlet-theirs.png",
+            "references/portrait-helltaker-1.jpg",
+            "references/portrait-helltaker-2.jpg",
+            "assets/style-test/v-a-screen.png"
+          ],
+          "processing": {
+            "id": "a/outlet-mine",
+            "file": "assets/villain/a/outlet-mine.png",
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "exportSize": [
+              192,
+              192
+            ],
+            "mode": "RGBA",
+            "processing": "transparent-margin trim, proportional fit and bottom-centre placement",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.24864,
+            "alphaBoundingBox": [
+              36,
+              4,
+              156,
+              192
+            ],
+            "alphaRange": [
+              0,
+              255
+            ]
+          }
+        },
+        {
+          "key": "bg-sleeper",
+          "theme": "b",
+          "file": "assets/villain/b/bg-sleeper.png",
+          "width": 1920,
+          "height": 1080,
+          "transparent": false,
+          "prompt": "THEME B production cartoon art. Match the individually supplied Cult of the Lamb and approved B trial for THICK EVEN BLACK outlines, few internal lines, big simple flat shapes and ONLY one flat shadow step. No texture, grain, hatching, realistic shading or3D. Do not copy the lamb character. Preserve approved human students. Strict role palette: background muted low-saturation BEIGE/BROWN and subdued gray-green foliage; player hoodie MINT#7fd3b8; villain hoodie DARKGREEN#2f5e4a; PUSHABLE pager and chair VIVIDORANGE#e8833a. Orange ONLY means pushable, never backgroundprops. All sprites genuinely transparent, no white stickerborder or groundshadow. No words, numbers, labels, logos, balloons, motion symbols or UI.\nPAINT OVER image1 layout guide into warm cafe BACKGROUND1920x1080, opaque. Image1 EXACT geometry;image2 same cafe furnishings but its floor starts too HIGH, so image1 overrides it. Image3 theme colorstyle ONLY, do not copy its oldlayout. Image4 rawline reference. Floor rectangle x384..1536,y240..912, twelve columns seven rows of96px SQUARE tiles. KEEP guide tile boundaries IN PLACE; faint warmgray tile seams visible. Sidewalls384px-wide straight vertical rectangular bands; no slants, no triangular tiles, no vanishingpoint. Top240px backwall/counter and two minimal pendantlamps. Bottom168px blank darkbrown. Six small low-saturation graygreen plants replace SIX green guideblocks in exact samecells. One2x2fixed mutedbrown table replaces fourjoined browncells at x480..672,y528..720, NO chairs around it. One1x1table x1344..1440,y336..432. EMPTY mutedbrown villainchair replaces redcell x1344..1440,y240..336. Pink and yellow stripedcells become ordinary emptyfloor, cyanmark becomes emptywall. No people, pagers, movablechairs, chargers, phones, symbols or guidecolors. Background mutedBEIGE/BROWN, lowcontrast compared to orange pushables. Do not use vivid orange, mint or saturatedgreen in background. No extra small props, texture or painted shadows invading freecells.",
+          "references": [
+            "docs/layout-guide/villain-sleeper.png",
+            "assets/villain/a/bg-sleeper.png",
+            "assets/style-test/v-b-screen.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "id": "b/bg-sleeper",
+            "file": "assets/villain/b/bg-sleeper.png",
+            "nativeSize": [
+              1672,
+              941
+            ],
+            "exportSize": [
+              1920,
+              1080
+            ],
+            "mode": "RGB",
+            "processing": "whole-canvas resize",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.95585,
+            "gridScans": {
+              "verticalLinesAtRow864": [
+                {
+                  "expected": 384,
+                  "observedDarkCentre": 371,
+                  "offset": -13,
+                  "localContrast": 137.0
+                },
+                {
+                  "expected": 480,
+                  "observedDarkCentre": 472,
+                  "offset": -8,
+                  "localContrast": 54.7
+                },
+                {
+                  "expected": 576,
+                  "observedDarkCentre": 569,
+                  "offset": -7,
+                  "localContrast": 59.3
+                },
+                {
+                  "expected": 672,
+                  "observedDarkCentre": 667,
+                  "offset": -5,
+                  "localContrast": 56.7
+                },
+                {
+                  "expected": 768,
+                  "observedDarkCentre": 766,
+                  "offset": -2,
+                  "localContrast": 57.0
+                },
+                {
+                  "expected": 864,
+                  "observedDarkCentre": 863,
+                  "offset": -1,
+                  "localContrast": 63.3
+                },
+                {
+                  "expected": 960,
+                  "observedDarkCentre": 961,
+                  "offset": 1,
+                  "localContrast": 53.0
+                },
+                {
+                  "expected": 1056,
+                  "observedDarkCentre": 1058,
+                  "offset": 2,
+                  "localContrast": 57.3
+                },
+                {
+                  "expected": 1152,
+                  "observedDarkCentre": 1156,
+                  "offset": 4,
+                  "localContrast": 54.7
+                },
+                {
+                  "expected": 1248,
+                  "observedDarkCentre": 1253,
+                  "offset": 5,
+                  "localContrast": 58.0
+                },
+                {
+                  "expected": 1344,
+                  "observedDarkCentre": 1351,
+                  "offset": 7,
+                  "localContrast": 57.0
+                },
+                {
+                  "expected": 1440,
+                  "observedDarkCentre": 1449,
+                  "offset": 9,
+                  "localContrast": 53.3
+                },
+                {
+                  "expected": 1536,
+                  "observedDarkCentre": 1547,
+                  "offset": 11,
+                  "localContrast": 136.3
+                }
+              ],
+              "horizontalLinesAtColumn432": [
+                {
+                  "expected": 240,
+                  "observedDarkCentre": 240,
+                  "offset": 0,
+                  "localContrast": 1.0
+                },
+                {
+                  "expected": 336,
+                  "observedDarkCentre": 336,
+                  "offset": 0,
+                  "localContrast": 0.3
+                },
+                {
+                  "expected": 432,
+                  "observedDarkCentre": 432,
+                  "offset": 0,
+                  "localContrast": 1.0
+                },
+                {
+                  "expected": 528,
+                  "observedDarkCentre": 528,
+                  "offset": 0,
+                  "localContrast": 1.0
+                },
+                {
+                  "expected": 624,
+                  "observedDarkCentre": 624,
+                  "offset": 0,
+                  "localContrast": 0.7
+                },
+                {
+                  "expected": 720,
+                  "observedDarkCentre": 720,
+                  "offset": 0,
+                  "localContrast": 1.7
+                },
+                {
+                  "expected": 816,
+                  "observedDarkCentre": 816,
+                  "offset": 0,
+                  "localContrast": 0.7
+                },
+                {
+                  "expected": 912,
+                  "observedDarkCentre": 911,
+                  "offset": -1,
+                  "localContrast": 0.7
+                }
+              ]
+            }
+          }
+        },
+        {
+          "key": "player-down",
+          "theme": "b",
+          "file": "assets/villain/b/player-down.png",
+          "width": 192,
+          "height": 288,
+          "transparent": true,
+          "prompt": "THEME B production cartoon art. Match the individually supplied Cult of the Lamb and approved B trial for THICK EVEN BLACK outlines, few internal lines, big simple flat shapes and ONLY one flat shadow step. No texture, grain, hatching, realistic shading or3D. Do not copy the lamb character. Preserve approved human students. Strict role palette: background muted low-saturation BEIGE/BROWN and subdued gray-green foliage; player hoodie MINT#7fd3b8; villain hoodie DARKGREEN#2f5e4a; PUSHABLE pager and chair VIVIDORANGE#e8833a. Orange ONLY means pushable, never backgroundprops. All sprites genuinely transparent, no white stickerborder or groundshadow. No words, numbers, labels, logos, balloons, motion symbols or UI.\nSTYLE TRANSFER image1 production hero to warm Bcartoon. Same student as image2 and Btrial image3: short messy BLACK hair, sleepy eyes, hoodDOWN, hands in hoodie pockets, black pants/shoes with white soles. Hoodie MINT#7fd3b8, warm light skin. Front view facing DOWN, exact same neutral fullbody pose and proportions as image1, no walkingpose.192x288alpha, centred, soles baseline288, head and shoes intact. Simplify hair/cloth interiorlines; oneflatshadowstep. No cup/straw/headset. Image4 rawstyle only, do not copylamb.",
+          "references": [
+            "assets/villain/a/player-down.png",
+            "assets/style-test/r2-portrait.png",
+            "assets/style-test/v-b-screen.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "id": "b/player-down",
+            "file": "assets/villain/b/player-down.png",
+            "nativeSize": [
+              1024,
+              1536
+            ],
+            "exportSize": [
+              192,
+              288
+            ],
+            "mode": "RGBA",
+            "processing": "User-authorized alpha-margin trim, uniform proportional scaling and same bottom-centre anchor for four directions",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.37722,
+            "alphaBoundingBox": [
+              35,
+              18,
+              157,
+              288
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "sourceAlphaBox": [
+              220,
+              114,
+              849,
+              1505
+            ],
+            "commonBodyHeight": 270,
+            "placement": [
+              35,
+              18
+            ],
+            "footBaseline": 288
+          }
+        },
+        {
+          "key": "villain-sleep",
+          "theme": "b",
+          "file": "assets/villain/b/villain-sleep.png",
+          "width": 192,
+          "height": 480,
+          "transparent": true,
+          "prompt": "THEME B production cartoon art. Match the individually supplied Cult of the Lamb and approved B trial for THICK EVEN BLACK outlines, few internal lines, big simple flat shapes and ONLY one flat shadow step. No texture, grain, hatching, realistic shading or3D. Do not copy the lamb character. Preserve approved human students. Strict role palette: background muted low-saturation BEIGE/BROWN and subdued gray-green foliage; player hoodie MINT#7fd3b8; villain hoodie DARKGREEN#2f5e4a; PUSHABLE pager and chair VIVIDORANGE#e8833a. Orange ONLY means pushable, never backgroundprops. All sprites genuinely transparent, no white stickerborder or groundshadow. No words, numbers, labels, logos, balloons, motion symbols or UI.\nSTYLE TRANSFER image1 production sleeper to Bcartoon, same pose/silhouette and transparent192x480 canvas. Same hood-up gender-ambiguous college student as image2, DARKGREEN hoodie, warm light skin, shortblackhair. Peacefully asleep chinlowered, eyesclosed, mouthopen with tinydroolbead, bothforearms cradle whitepowerstrip, one whitegrayadapter inserted in socket, phonebesidehands. No chair/table/background. Keep image1 objectgroup and its position WITHIN canvas exactly, including generous transparent top/bottom margin. Very fewlines, bigflatshadowplanes. Images3/4 style only.",
+          "references": [
+            "assets/villain/a/villain-sleep.png",
+            "assets/style-test/v-b-villain.png",
+            "assets/style-test/v-b-screen.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "id": "b/villain-sleep",
+            "file": "assets/villain/b/villain-sleep.png",
+            "nativeSize": [
+              793,
+              1983
+            ],
+            "exportSize": [
+              192,
+              480
+            ],
+            "mode": "RGBA",
+            "processing": "transparent-margin trim, proportional fit, forearms anchored at canvas y350 to rest on table surface",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.59177,
+            "alphaBoundingBox": [
+              4,
+              122,
+              188,
+              350
+            ],
+            "alphaRange": [
+              0,
+              255
+            ]
+          }
+        },
+        {
+          "key": "buzzer",
+          "theme": "b",
+          "file": "assets/villain/b/buzzer.png",
+          "width": 192,
+          "height": 192,
+          "transparent": true,
+          "prompt": "THEME B production cartoon art. Match the individually supplied Cult of the Lamb and approved B trial for THICK EVEN BLACK outlines, few internal lines, big simple flat shapes and ONLY one flat shadow step. No texture, grain, hatching, realistic shading or3D. Do not copy the lamb character. Preserve approved human students. Strict role palette: background muted low-saturation BEIGE/BROWN and subdued gray-green foliage; player hoodie MINT#7fd3b8; villain hoodie DARKGREEN#2f5e4a; PUSHABLE pager and chair VIVIDORANGE#e8833a. Orange ONLY means pushable, never backgroundprops. All sprites genuinely transparent, no white stickerborder or groundshadow. No words, numbers, labels, logos, balloons, motion symbols or UI.\nSTYLE TRANSFER image1 pager to Bcartoon and recolor its housing and bigblankbutton VIVIDORANGE#e8833a. Keep exact simple rounded-squarepuck shape and slightlyvisible front/topplanes, singleblackcontour, oneflat darkorange shadowstep.192x192alpha, object about116pxwide centered with transparentmargins. No words, LEDdigits, symbols, motionrings, glow, groundshadow or whiteborder. Image2 Btheme, image3 rawline reference.",
+          "references": [
+            "assets/villain/a/buzzer.png",
+            "assets/style-test/v-b-screen.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "id": "b/buzzer",
+            "file": "assets/villain/b/buzzer.png",
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "exportSize": [
+              192,
+              192
+            ],
+            "mode": "RGBA",
+            "processing": "transparent-margin trim, proportional fit to116px and centre placement",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.79321,
+            "alphaBoundingBox": [
+              38,
+              48,
+              154,
+              143
+            ],
+            "alphaRange": [
+              0,
+              255
+            ]
+          }
+        },
+        {
+          "key": "chair",
+          "theme": "b",
+          "file": "assets/villain/b/chair.png",
+          "width": 192,
+          "height": 240,
+          "transparent": true,
+          "prompt": "THEME B production cartoon art. Match the individually supplied Cult of the Lamb and approved B trial for THICK EVEN BLACK outlines, few internal lines, big simple flat shapes and ONLY one flat shadow step. No texture, grain, hatching, realistic shading or3D. Do not copy the lamb character. Preserve approved human students. Strict role palette: background muted low-saturation BEIGE/BROWN and subdued gray-green foliage; player hoodie MINT#7fd3b8; villain hoodie DARKGREEN#2f5e4a; PUSHABLE pager and chair VIVIDORANGE#e8833a. Orange ONLY means pushable, never backgroundprops. All sprites genuinely transparent, no white stickerborder or groundshadow. No words, numbers, labels, logos, balloons, motion symbols or UI.\nSTYLE TRANSFER image1 pushablechair to Bcartoon. Same frontview shape/pose, seat top slightlyvisible, no vanishingpoint. Main seat/back/frame VIVIDORANGE#e8833a plus blackcontours and oneflat darkorange shadowstep. This wholechair is pushable, orange housing must dominate; no mutedbrown upholstery.192x240alpha, legs bottom240, back rises into top48px, lower192px is floorcell. No shadows, stickerborder, woodgrain, textures, extraobjects. Image2 Btheme, image3 rawstyle.",
+          "references": [
+            "assets/villain/a/chair.png",
+            "assets/style-test/v-b-screen.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "id": "b/chair",
+            "file": "assets/villain/b/chair.png",
+            "nativeSize": [
+              1122,
+              1402
+            ],
+            "exportSize": [
+              192,
+              240
+            ],
+            "mode": "RGBA",
+            "processing": "transparent-margin trim, proportional fit and bottom-centre placement",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.77322,
+            "alphaBoundingBox": [
+              16,
+              4,
+              176,
+              240
+            ],
+            "alphaRange": [
+              0,
+              255
+            ]
+          }
+        },
+        {
+          "key": "outlet-theirs",
+          "theme": "b",
+          "file": "assets/villain/b/outlet-theirs.png",
+          "width": 192,
+          "height": 192,
+          "transparent": true,
+          "prompt": "THEME B production cartoon art. Match the individually supplied Cult of the Lamb and approved B trial for THICK EVEN BLACK outlines, few internal lines, big simple flat shapes and ONLY one flat shadow step. No texture, grain, hatching, realistic shading or3D. Do not copy the lamb character. Preserve approved human students. Strict role palette: background muted low-saturation BEIGE/BROWN and subdued gray-green foliage; player hoodie MINT#7fd3b8; villain hoodie DARKGREEN#2f5e4a; PUSHABLE pager and chair VIVIDORANGE#e8833a. Orange ONLY means pushable, never backgroundprops. All sprites genuinely transparent, no white stickerborder or groundshadow. No words, numbers, labels, logos, balloons, motion symbols or UI.\nSTYLE TRANSFER image1 walloutlet to warm Bcartoon: same plate/socket/charger shape, same frontview and cable exitingbottom. Plate warmivory, plugged phoneadapter DARKGREEN#2f5e4a to match villain. Cable neutraldarkgray.192x192alpha, preserve object placement; no wall/background, text or symbols. Metalpins concealed inside socket, no groundshadow or stickerborder. Images2/3 Bstyle.",
+          "references": [
+            "assets/villain/a/outlet-theirs.png",
+            "assets/style-test/v-b-screen.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "id": "b/outlet-theirs",
+            "file": "assets/villain/b/outlet-theirs.png",
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "exportSize": [
+              192,
+              192
+            ],
+            "mode": "RGBA",
+            "processing": "transparent-margin trim, proportional fit and bottom-centre placement",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.7458,
+            "alphaBoundingBox": [
+              32,
+              4,
+              160,
+              192
+            ],
+            "alphaRange": [
+              0,
+              255
+            ]
+          }
+        },
+        {
+          "key": "villain-wake",
+          "theme": "b",
+          "file": "assets/villain/b/villain-wake.png",
+          "width": 192,
+          "height": 480,
+          "transparent": true,
+          "prompt": "THEME B production cartoon art. Match the individually supplied Cult of the Lamb and approved B trial for THICK EVEN BLACK outlines, few internal lines, big simple flat shapes and ONLY one flat shadow step. No texture, grain, hatching, realistic shading or3D. Do not copy the lamb character. Preserve approved human students. Strict role palette: background muted low-saturation BEIGE/BROWN and subdued gray-green foliage; player hoodie MINT#7fd3b8; villain hoodie DARKGREEN#2f5e4a; PUSHABLE pager and chair VIVIDORANGE#e8833a. Orange ONLY means pushable, never backgroundprops. All sprites genuinely transparent, no white stickerborder or groundshadow. No words, numbers, labels, logos, balloons, motion symbols or UI.\nSTYLE TRANSFER image1 production wake sprite to warm Bcartoon. Same hooded student as image2, DARKGREENhoodie, warm light skin, blackhair. Same startled wideeyes/openmouth and seated pose holding unplugged whitecharger with two roundpins, same lower powerstrip and phone.192x480alpha; preserve exact narrow silhouette and position WITHIN canvas with generous transparent top/bottom margin, no chair/table. Bigsimple flatshapes, fewlines and one shadowstep. No symbols/stickerborder/shadow. Images3/4 Bstyle.",
+          "references": [
+            "assets/villain/a/villain-wake.png",
+            "assets/style-test/v-b-villain.png",
+            "assets/style-test/v-b-screen.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "id": "b/villain-wake",
+            "file": "assets/villain/b/villain-wake.png",
+            "nativeSize": [
+              793,
+              1983
+            ],
+            "exportSize": [
+              192,
+              480
+            ],
+            "mode": "RGBA",
+            "processing": "transparent-margin trim, proportional fit, forearms anchored at canvas y350 to rest on table surface",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.62292,
+            "alphaBoundingBox": [
+              4,
+              110,
+              188,
+              350
+            ],
+            "alphaRange": [
+              0,
+              255
+            ]
+          }
+        },
+        {
+          "key": "villain-portrait",
+          "theme": "b",
+          "file": "assets/villain/b/villain-portrait.png",
+          "width": 1024,
+          "height": 1024,
+          "transparent": true,
+          "prompt": "THEME B production cartoon art. Match the individually supplied Cult of the Lamb and approved B trial for THICK EVEN BLACK outlines, few internal lines, big simple flat shapes and ONLY one flat shadow step. No texture, grain, hatching, realistic shading or3D. Do not copy the lamb character. Preserve approved human students. Strict role palette: background muted low-saturation BEIGE/BROWN and subdued gray-green foliage; player hoodie MINT#7fd3b8; villain hoodie DARKGREEN#2f5e4a; PUSHABLE pager and chair VIVIDORANGE#e8833a. Orange ONLY means pushable, never backgroundprops. All sprites genuinely transparent, no white stickerborder or groundshadow. No words, numbers, labels, logos, balloons, motion symbols or UI.\nEDIT image1 approved Bvillain portrait into cleaner flat Bcartoon, same identity, exact strong startled expression, hoodup gender-ambiguous shortblackhair student, DARKGREENhoodie, warm light skin, whitephonecharger clutched in bothhands with twovisible roundpins.1024x1024alpha upperbody. Keep samecomplete hood/shoulders/hands, natural lowerbodycrop. Fewer internalclothlines, flatcolors and exactlyoneflat shadowstep, no gradients/texture. Image2 same Aidentity reaction for pose only, image3 theme,image4 rawstyle. No speechballoons,comicmarks,logos,whiteborder or groundshadow.",
+          "references": [
+            "assets/style-test/v-b-villain.png",
+            "assets/villain/a/villain-portrait.png",
+            "assets/style-test/v-b-screen.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "id": "b/villain-portrait",
+            "file": "assets/villain/b/villain-portrait.png",
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "exportSize": [
+              1024,
+              1024
+            ],
+            "mode": "RGBA",
+            "processing": "transparent-margin trim, proportional fit and bottom-centre placement",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.69208,
+            "alphaBoundingBox": [
+              107,
+              4,
+              917,
+              1024
+            ],
+            "alphaRange": [
+              0,
+              255
+            ]
+          }
+        },
+        {
+          "key": "player-up",
+          "theme": "b",
+          "file": "assets/villain/b/player-up.png",
+          "width": 192,
+          "height": 288,
+          "transparent": true,
+          "prompt": "THEME B production cartoon art. Match the individually supplied Cult of the Lamb and approved B trial for THICK EVEN BLACK outlines, few internal lines, big simple flat shapes and ONLY one flat shadow step. No texture, grain, hatching, realistic shading or3D. Do not copy the lamb character. Preserve approved human students. Strict role palette: background muted low-saturation BEIGE/BROWN and subdued gray-green foliage; player hoodie MINT#7fd3b8; villain hoodie DARKGREEN#2f5e4a; PUSHABLE pager and chair VIVIDORANGE#e8833a. Orange ONLY means pushable, never backgroundprops. All sprites genuinely transparent, no white stickerborder or groundshadow. No words, numbers, labels, logos, balloons, motion symbols or UI.\nSTYLE TRANSFER image1 matching direction sprite to warm Bcartoon, BACK VIEW facing screen TOP, back of shortblackhair, hoodDOWN on upperback, noface. Same student as image2 and Btrial image3, same shortmessyblackhair silhouette, sleepyeyes wherevisible, hands in hoodiepockets, blackpants, black/white shoes. Hoodie MINT#7fd3b8, skin warm light. Keep exactbodypose, head/bodyproportion and footwear of image1. Neutral standing, not walking, feet sidebyside.192x288alpha, centered fullbody, soles baseline288, topmargin18px. Fewlines and oneflatshadowstep, no cup/straw/accessory or groundshadow. Image4 styleonly, do notcopylamb.",
+          "references": [
+            "assets/villain/a/player-up.png",
+            "assets/style-test/r2-portrait.png",
+            "assets/style-test/v-b-screen.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "id": "b/player-up",
+            "file": "assets/villain/b/player-up.png",
+            "nativeSize": [
+              1024,
+              1536
+            ],
+            "exportSize": [
+              192,
+              288
+            ],
+            "mode": "RGBA",
+            "processing": "User-authorized alpha-margin trim, uniform proportional scaling and same bottom-centre anchor for four directions",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.35821,
+            "alphaBoundingBox": [
+              40,
+              18,
+              151,
+              288
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "sourceAlphaBox": [
+              244,
+              158,
+              782,
+              1470
+            ],
+            "commonBodyHeight": 270,
+            "placement": [
+              40,
+              18
+            ],
+            "footBaseline": 288
+          }
+        },
+        {
+          "key": "player-left",
+          "theme": "b",
+          "file": "assets/villain/b/player-left.png",
+          "width": 192,
+          "height": 288,
+          "transparent": true,
+          "prompt": "THEME B production cartoon art. Match the individually supplied Cult of the Lamb and approved B trial for THICK EVEN BLACK outlines, few internal lines, big simple flat shapes and ONLY one flat shadow step. No texture, grain, hatching, realistic shading or3D. Do not copy the lamb character. Preserve approved human students. Strict role palette: background muted low-saturation BEIGE/BROWN and subdued gray-green foliage; player hoodie MINT#7fd3b8; villain hoodie DARKGREEN#2f5e4a; PUSHABLE pager and chair VIVIDORANGE#e8833a. Orange ONLY means pushable, never backgroundprops. All sprites genuinely transparent, no white stickerborder or groundshadow. No words, numbers, labels, logos, balloons, motion symbols or UI.\nSTYLE TRANSFER image1 matching direction sprite to warm Bcartoon, LEFT PROFILE facing screen LEFT, nose and shoes pointleft. Same student as image2 and Btrial image3, same shortmessyblackhair silhouette, sleepyeyes wherevisible, hands in hoodiepockets, blackpants, black/white shoes. Hoodie MINT#7fd3b8, skin warm light. Keep exactbodypose, head/bodyproportion and footwear of image1. Neutral standing, not walking, feet sidebyside.192x288alpha, centered fullbody, soles baseline288, topmargin18px. Fewlines and oneflatshadowstep, no cup/straw/accessory or groundshadow. Image4 styleonly, do notcopylamb.",
+          "references": [
+            "assets/villain/a/player-left.png",
+            "assets/style-test/r2-portrait.png",
+            "assets/style-test/v-b-screen.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "id": "b/player-left",
+            "file": "assets/villain/b/player-left.png",
+            "nativeSize": [
+              1024,
+              1536
+            ],
+            "exportSize": [
+              192,
+              288
+            ],
+            "mode": "RGBA",
+            "processing": "User-authorized alpha-margin trim, uniform proportional scaling and same bottom-centre anchor for four directions",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.30217,
+            "alphaBoundingBox": [
+              41,
+              18,
+              150,
+              288
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "sourceAlphaBox": [
+              261,
+              140,
+              799,
+              1474
+            ],
+            "commonBodyHeight": 270,
+            "placement": [
+              41,
+              18
+            ],
+            "footBaseline": 288
+          }
+        },
+        {
+          "key": "player-right",
+          "theme": "b",
+          "file": "assets/villain/b/player-right.png",
+          "width": 192,
+          "height": 288,
+          "transparent": true,
+          "prompt": "THEME B production cartoon art. Match the individually supplied Cult of the Lamb and approved B trial for THICK EVEN BLACK outlines, few internal lines, big simple flat shapes and ONLY one flat shadow step. No texture, grain, hatching, realistic shading or3D. Do not copy the lamb character. Preserve approved human students. Strict role palette: background muted low-saturation BEIGE/BROWN and subdued gray-green foliage; player hoodie MINT#7fd3b8; villain hoodie DARKGREEN#2f5e4a; PUSHABLE pager and chair VIVIDORANGE#e8833a. Orange ONLY means pushable, never backgroundprops. All sprites genuinely transparent, no white stickerborder or groundshadow. No words, numbers, labels, logos, balloons, motion symbols or UI.\nSTYLE TRANSFER image1 matching direction sprite to warm Bcartoon, RIGHT PROFILE facing screen RIGHT, nose and shoes pointright. Same student as image2 and Btrial image3, same shortmessyblackhair silhouette, sleepyeyes wherevisible, hands in hoodiepockets, blackpants, black/white shoes. Hoodie MINT#7fd3b8, skin warm light. Keep exactbodypose, head/bodyproportion and footwear of image1. Neutral standing, not walking, feet sidebyside.192x288alpha, centered fullbody, soles baseline288, topmargin18px. Fewlines and oneflatshadowstep, no cup/straw/accessory or groundshadow. Image4 styleonly, do notcopylamb.",
+          "references": [
+            "assets/villain/a/player-right.png",
+            "assets/style-test/r2-portrait.png",
+            "assets/style-test/v-b-screen.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "id": "b/player-right",
+            "file": "assets/villain/b/player-right.png",
+            "nativeSize": [
+              1024,
+              1536
+            ],
+            "exportSize": [
+              192,
+              288
+            ],
+            "mode": "RGBA",
+            "processing": "User-authorized alpha-margin trim, uniform proportional scaling and same bottom-centre anchor for four directions",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.31231,
+            "alphaBoundingBox": [
+              43,
+              18,
+              149,
+              288
+            ],
+            "alphaRange": [
+              0,
+              255
+            ],
+            "sourceAlphaBox": [
+              272,
+              165,
+              786,
+              1476
+            ],
+            "commonBodyHeight": 270,
+            "placement": [
+              43,
+              18
+            ],
+            "footBaseline": 288
+          }
+        },
+        {
+          "key": "outlet-mine",
+          "theme": "b",
+          "file": "assets/villain/b/outlet-mine.png",
+          "width": 192,
+          "height": 192,
+          "transparent": true,
+          "prompt": "THEME B production cartoon art. Match the individually supplied Cult of the Lamb and approved B trial for THICK EVEN BLACK outlines, few internal lines, big simple flat shapes and ONLY one flat shadow step. No texture, grain, hatching, realistic shading or3D. Do not copy the lamb character. Preserve approved human students. Strict role palette: background muted low-saturation BEIGE/BROWN and subdued gray-green foliage; player hoodie MINT#7fd3b8; villain hoodie DARKGREEN#2f5e4a; PUSHABLE pager and chair VIVIDORANGE#e8833a. Orange ONLY means pushable, never backgroundprops. All sprites genuinely transparent, no white stickerborder or groundshadow. No words, numbers, labels, logos, balloons, motion symbols or UI.\nSTYLE TRANSFER image1 player walloutlet to Bcartoon, same plate/socket/adapter shape and cable exitingbottom. Change RED charger housing to MINT#7fd3b8. Plate warmivory, cable neutralgray. Same simple frontview,192x192alpha, shape and placement preserved. No wall/background, words or symbols; pins hidden in socket. No groundshadow or stickerborder. Image2 Btheme,image3 rawline style.",
+          "references": [
+            "assets/villain/a/outlet-mine.png",
+            "assets/style-test/v-b-screen.png",
+            "references/character-cultofthelamb-1.jpg"
+          ],
+          "processing": {
+            "id": "b/outlet-mine",
+            "file": "assets/villain/b/outlet-mine.png",
+            "nativeSize": [
+              1254,
+              1254
+            ],
+            "exportSize": [
+              192,
+              192
+            ],
+            "mode": "RGBA",
+            "processing": "transparent-margin trim, proportional fit and bottom-centre placement",
+            "pixelContentRedraw": false,
+            "colorRemap": false,
+            "textMetadata": [],
+            "coloredVisibleFraction": 0.7114,
+            "alphaBoundingBox": [
+              34,
+              4,
+              158,
+              192
+            ],
+            "alphaRange": [
+              0,
+              255
+            ]
+          }
+        }
+      ],
+      "validation": {
+        "status": "All24 first-level assets saved and registered. Background geometry deviations remain and must be reviewed before accepting final art.",
+        "checks": {
+          "themes": [
+            "a",
+            "b"
+          ],
+          "assets": 24,
+          "opaqueBackgrounds": 2,
+          "transparentSprites": 22,
+          "exactCanvasSizes": true,
+          "alphaPreserved": true,
+          "pngTextMetadataRemoved": true,
+          "originalReferencesSuppliedIndividually": true,
+          "codeRedrawOrRecolor": false,
+          "playerCommonBodyHeight": 270,
+          "playerFootBaseline": 288,
+          "desktop": {
+            "width": 1280,
+            "horizontalOverflow": false,
+            "allDisplayedImagesLoaded": true
+          },
+          "mobile": {
+            "width": 375,
+            "height": 812,
+            "horizontalOverflow": false,
+            "allDisplayedImagesLoaded": true
+          },
+          "runtime": {
+            "themeSwitch": true,
+            "firstLevelSolvedInBothThemes": true,
+            "villainReactionVisibleInBothThemes": true,
+            "outletSwapsToPlayer": true,
+            "ruleVerificationPagePasses": 8
+          }
+        },
+        "paletteReview": "A background and villain sprites have no visible chromatic pixels above18 RGB spread; player red and pushable items green. B player mint, villain darkgreen, pushable items vivid orange, background muted beige/brown. No text, sticker borders or groundshadows painted into transparent sprites.",
+        "geometry": {
+          "expectedFloor": [
+            384,
+            240,
+            1536,
+            912
+          ],
+          "expectedTile": 96,
+          "expectedGrid": [
+            12,
+            7
+          ],
+          "sampleMethod": "Bright floor interval at art row850 and column432. These are sample bounds, not a certification of every edge.",
+          "a": {
+            "xInterval": [
+              373,
+              1549
+            ],
+            "yInterval": [
+              185,
+              874
+            ]
+          },
+          "b": {
+            "xInterval": [
+              374,
+              1546
+            ],
+            "yInterval": [
+              185,
+              873
+            ]
+          }
+        },
+        "remainingIssues": [
+          "Both backgrounds retain about98px tile spacing instead of96px and start the floor roughly55px above the requested y240. Bottom floor is roughly38px above y912. Player starting feet appear below the painted floor and static props are vertically displaced relative to collision cells.",
+          "The large table's visible bounds are approximately x480..670,y473..665 rather than x480..672,y528..720. Plants and villain furniture follow the shifted painted grid. Do not treat these as geometry-approved backgrounds.",
+          "Inner floor borders are straight and no triangular floor tiles remain, but some outer left-window framing still has diagonal lines.",
+          "B has soft tonal variation in several fills rather than completely uniform flat fills plus one shadow plane.",
+          "Portraits and standing sprites retain more hair and fold lines than the simplest trial shapes; no additional simplification was applied by code.",
+          "Current prototype adds a plug-mine intro bubble outside the requested12 keys. This key and the second-villain level art were not part of this asset batch and remain unregistered."
+        ],
+        "processing": "Pillow only resized complete output canvases, proportionally fit cutouts after alpha-margin trimming, aligned player soles at y288, and positioned villain forearms/content lower edge at y350 inside192x480 canvas so they lie on table surface. It did not draw lines, recolor pixels or warp background geometry.",
+        "commit": "No staging, commit or push. Handoff to Claude Code for review and commit."
+      }
     }
   ]
 }
