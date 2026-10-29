@@ -27,6 +27,9 @@
       const result = VillainEngine.solve(level);
       expect(result.moves === definition.optimal && result.pushes === definition.pushes,
         `${definition.id}: 최소 ${result.moves}걸음, 밀기 ${result.pushes}번 (기록된 값 ${definition.optimal}걸음, ${definition.pushes}번) [${(result.path || []).join(' ')}]`);
+      if (level.view) {
+        expect(!VillainEngine.viewOf(level, level.start).hits.includes('player'), definition.id + ': 시작하자마자 화각에 잡히지 않음');
+      }
       const columns = window.VILLAIN_LAYOUT.art.columns;
       const rows = window.VILLAIN_LAYOUT.art.rows;
       expect(definition.map.length === rows && definition.map.every((line) => line.length === columns),

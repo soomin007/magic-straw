@@ -83,8 +83,9 @@ def draw_level(art, level):
                 fill(image, px + 12, py + 12, tile - 24, tile - 24, PLANT)
             elif char == 'V':
                 fill(image, px, py, tile, tile, VILLAIN)
-                fill(image, px + tile // 2 - 9, py - tile, 18, tile, OUTLET)
-                outline(image, px, py - tile, tile, tile, OUTLET, 4)
+                # 콘센트는 언제나 판 밖 -1번 줄의 벽, 빌런과 같은 열에 붙는다.
+                fill(image, px + tile // 2 - 9, top - tile, 18, tile, OUTLET)
+                outline(image, px, top - tile, tile, tile, OUTLET, 4)
             elif char == '*':
                 hatch(image, px, py, tile, tile, GOAL)
             elif char in 'Pbc':

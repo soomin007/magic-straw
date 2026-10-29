@@ -128,6 +128,13 @@
 
     .gbox.round { border-radius: 50% 50% 40% 40%; }
 
+    /* 그림이 없을 때 쓰레기통은 좁고 위가 둥근 통으로 그려 의자(네모)와 진동벨(동그라미)과 구분한다. */
+    .kind-trash .gbox {
+      width: 64%;
+      margin-left: 18%;
+      border-radius: 40% 40% 8px 8px;
+    }
+
     .sprite.hop .art {
       animation: hop 130ms ease;
     }
@@ -146,6 +153,37 @@
     }
 
     .sprite.gone { opacity: 0; }
+
+    /* 카메라 화각. 방송 화면에 비치는 칸이다. 들킬 뻔하면 잠깐 붉어진다. */
+    .view-cell {
+      position: absolute;
+      background: rgba(255, 210, 60, 0.32);
+      box-shadow: inset 0 0 0 1px rgba(255, 210, 60, 0.55);
+      z-index: 5;
+      transition: background 0.15s ease;
+    }
+
+    .scene.seen .view-cell { background: rgba(217, 60, 50, 0.45); }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+      margin-right: auto;
+      align-items: center;
+    }
+
+    .dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid #eee;
+      background: transparent;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .dot.current { background: #eee; color: #111; }
+    .dot.cleared { border-color: #7fd3b8; }
 
     .scene.bump { animation: bump 0.12s ease; }
 
@@ -205,6 +243,8 @@
 <body>
   <main class="wrap">
     <div class="bar">
+      <nav id="dots" class="dots" aria-label="판 고르기"></nav>
+      <button id="next" class="btn" type="button" aria-label="다음 판" hidden>▶</button>
       <button id="theme" class="btn" type="button" aria-label="그림체 바꾸기">◐</button>
       <button id="sound" class="btn" type="button" aria-label="소리 켜고 끄기">♪</button>
       <button id="undo" class="btn" type="button" aria-label="되돌리기">↶</button>
@@ -213,6 +253,7 @@
     <div id="viewport" class="viewport">
       <div id="scene" class="scene">
         <div id="backdrop" class="layer backdrop"></div>
+        <div id="view" class="layer"></div>
         <div id="actors" class="layer"></div>
         <div id="flash" class="flash"></div>
         <div id="portrait" class="portrait"></div>
@@ -255,6 +296,9 @@
         scene: document.getElementById('scene'),
         backdrop: document.getElementById('backdrop'),
         actors: document.getElementById('actors'),
+        view: document.getElementById('view'),
+        dots: document.getElementById('dots'),
+        next: document.getElementById('next'),
         flash: document.getElementById('flash'),
         portrait: document.getElementById('portrait'),
         theme: document.getElementById('theme'),
@@ -264,7 +308,7 @@
       };
 
       const settings = loadSettings();
-      const game = { level: null, state: null, history: [], busy: false, won: false, sprites: {} };
+      const game = { index: 0, level: null, state: null, history: [], busy: false, won: false, sprites: {}, cleared: new Set() };
 
       function loadSettings() {
         try {
@@ -358,8 +402,9 @@
         element.innerHTML = art(key, color, round);
       }
 
-      function startLevel() {
-        game.level = Engine.parseLevel(LAYOUT.levels[0]);
+      function startLevel(index = game.index) {
+        game.index = index;
+        game.level = Engine.parseLevel(LAYOUT.levels[index]);
         game.state = game.level.start;
         game.history = [];
         game.won = false;
@@ -373,29 +418,65 @@
         drawBackdrop();
         ui.actors.innerHTML = '';
         ui.portrait.classList.remove('show');
-        ui.portrait.innerHTML = art('villain-portrait', colors.villain, true);
+        const villain = level.villain;
+        const look = LAYOUT.levels[game.index].villain;
+        ui.portrait.innerHTML = art(look.portrait, colors.villain, true);
 
-        // 빌런 자리 위 벽의 콘센트
+        // 콘센트는 빌런과 같은 열, 판 밖 -1번 줄의 벽에 붙는다.
         game.sprites.outlet = addSprite('outlet-theirs', TILE, TILE, colors.outletTheirs, { round: true });
-        placeOnTile(game.sprites.outlet, level.villain.x, level.villain.y - 1, TILE, TILE);
+        placeOnTile(game.sprites.outlet, villain.x, -1, TILE, TILE);
 
-        // 빌런은 의자 칸과 그 아래 테이블 칸에 걸쳐 엎드려 있다. 그림 아래쪽이 테이블 칸 아래쪽에 맞는다.
-        game.sprites.villain = addSprite('villain-sleep', TILE, TILE * 2.5, colors.villain, { round: true });
-        placeOnTile(game.sprites.villain, level.villain.x, level.villain.y + 1, TILE, TILE * 2.5);
+        // 빌런 그림의 크기와 아래쪽이 닿는 칸은 판마다 다르다(잠든 빌런은 테이블 칸까지 엎드려 있다). layout.js가 기준이다.
+        game.sprites.villain = addSprite(look.idle, TILE, TILE * look.heightTiles, colors.villain, { round: true });
+        placeOnTile(game.sprites.villain, villain.x, villain.y + look.anchorRow, TILE, TILE * look.heightTiles);
 
         game.sprites.items = state.items.map((item) => {
           const size = item.kind === 'chair' ? [TILE, TILE * 1.25] : [TILE, TILE];
           const element = addSprite(item.kind, size[0], size[1], colors.item, { sticker: true, round: item.kind === 'buzzer' });
           element.dataset.kind = item.kind;
+          element.classList.add('kind-' + item.kind);
           return element;
         });
         game.sprites.player = addSprite(`player-${state.facing}`, TILE, TILE * 1.5, colors.player, { sticker: true, round: true });
         placeAll();
+        drawView();
+        drawDots();
         ui.undo.disabled = game.history.length === 0;
+        ui.next.hidden = true;
       }
 
-      function placeAll() {
-        const { state } = game;
+      // 카메라 화각을 칸마다 노랗게 칠한다. 의자 같은 물건에 막히면 그 뒤는 칠하지 않는다.
+      function drawView(state = game.state) {
+        ui.view.innerHTML = '';
+        if (game.won) return;
+        for (const cell of Engine.viewOf(game.level, state).cells) {
+          const element = document.createElement('div');
+          element.className = 'view-cell';
+          element.style.left = `${tileLeft(cell.x)}px`;
+          element.style.top = `${tileTop(cell.y)}px`;
+          element.style.width = `${TILE}px`;
+          element.style.height = `${TILE}px`;
+          ui.view.appendChild(element);
+        }
+      }
+
+      function drawDots() {
+        ui.dots.innerHTML = '';
+        LAYOUT.levels.forEach((level, index) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'dot';
+          dot.textContent = String(index + 1);
+          dot.classList.toggle('current', index === game.index);
+          dot.classList.toggle('cleared', game.cleared.has(level.id));
+          dot.addEventListener('click', () => {
+            if (!game.busy) startLevel(index);
+          });
+          ui.dots.appendChild(dot);
+        });
+      }
+
+      function placeAll(state = game.state) {
         state.items.forEach((item, index) => {
           const element = game.sprites.items[index];
           placeOnTile(element, item.x, item.y, TILE, element.dataset.kind === 'chair' ? TILE * 1.25 : TILE);
@@ -416,6 +497,20 @@
         if (result.state.facing !== game.state.facing) {
           setArt(game.sprites.player, `player-${result.state.facing}`, colors.player, true);
         }
+        if (result.seen) {
+          // 화각에 들어가는 걸음: 내디딘 모습을 잠깐 보여 주고 화각이 붉어진 뒤 제자리로 돌아온다. 기록은 남기지 않는다.
+          game.busy = true;
+          placeAll(result.attempted);
+          drawView(result.attempted);
+          ui.scene.classList.add('seen');
+          await wait(380);
+          ui.scene.classList.remove('seen');
+          game.state = result.state;
+          placeAll();
+          drawView();
+          game.busy = false;
+          return;
+        }
         if (!result.moved) {
           game.state = result.state;
           ui.scene.classList.remove('bump');
@@ -429,20 +524,31 @@
         void game.sprites.player.offsetWidth;
         game.sprites.player.classList.add('hop');
         placeAll();
+        drawView();
         ui.undo.disabled = false;
         if (result.won) await win();
       }
 
-      // 진동벨이 울리고, 빌런이 깨어나 반응 일러스트가 뜬 뒤, 빌런이 충전기를 챙겨 떠나고 내 충전기가 꽂힌다.
+      // 빌런의 약점이 건드려지면(진동벨이 울리거나 쓰레기통이 방송에 비치면) 빌런이 반응하고, 반응 일러스트가 뜬 뒤,
+      // 빌런이 충전기를 챙겨 떠나고 내 충전기가 꽂힌다.
       async function win() {
         game.won = true;
         game.busy = true;
         const colors = THEMES[settings.theme];
-        const buzzer = game.sprites.items[game.state.items.findIndex((item) => item.kind === 'buzzer')];
+        const look = LAYOUT.levels[game.index].villain;
+        const triggerKind = game.level.view ? 'trash' : 'buzzer';
+        const trigger = game.sprites.items[game.state.items.findIndex((item) => item.kind === triggerKind)];
         await wait(180);
-        buzzer.classList.add('ringing');
+        if (game.level.view) {
+          // 방송 화면에 쓰레기통이 비친 순간: 화각이 한 번 깜빡인다.
+          ui.scene.classList.add('seen');
+          await wait(250);
+          ui.scene.classList.remove('seen');
+        }
+        trigger.classList.add('ringing');
         await wait(800);
-        setArt(game.sprites.villain, 'villain-wake', colors.villain, true);
+        drawView();
+        setArt(game.sprites.villain, look.react, colors.villain, true);
         ui.flash.classList.remove('go');
         void ui.flash.offsetWidth;
         ui.flash.classList.add('go');
@@ -453,6 +559,9 @@
         game.sprites.villain.classList.add('gone');
         await wait(500);
         setArt(game.sprites.outlet, 'outlet-mine', colors.outletMine, true);
+        game.cleared.add(game.level.id);
+        drawDots();
+        ui.next.hidden = game.index >= LAYOUT.levels.length - 1;
         game.busy = false;
       }
 
@@ -546,12 +655,18 @@
           undo();
         } else if (key === 'r') {
           if (!game.busy) startLevel();
+        } else if ((key === 'enter' || key === ' ') && !ui.next.hidden) {
+          event.preventDefault();
+          ui.next.click();
         }
       });
       document.querySelectorAll('#pad [data-dir]').forEach((button) => {
         button.addEventListener('click', () => move(button.dataset.dir));
       });
       ui.undo.addEventListener('click', undo);
+      ui.next.addEventListener('click', () => {
+        if (!game.busy && game.index < LAYOUT.levels.length - 1) startLevel(game.index + 1);
+      });
       ui.restart.addEventListener('click', () => {
         if (!game.busy) startLevel();
       });
@@ -572,7 +687,7 @@
       new ResizeObserver(fitScene).observe(ui.viewport);
 
       applyButtons();
-      startLevel();
+      startLevel(0);
       fitScene();
     })();
   </script>

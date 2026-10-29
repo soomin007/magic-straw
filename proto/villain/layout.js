@@ -6,6 +6,8 @@
 // 판은 가로 12칸, 세로 7칸(1152 x 672px)이고 왼쪽 위 모서리가 (384, 240)이다. 판 위쪽 0~240px은 카페 안쪽 벽과 카운터,
 // 판 아래쪽 912~1080px은 버튼 줄 자리, 판 좌우 0~384px과 1536~1920px은 카페 옆벽과 창이다.
 // 사람 그림은 칸 하나 너비에 칸 하나 반 높이(96 x 144px)이고, 발이 칸 아래쪽에 닿는다. 그림 파일은 그 두 배로 그린다.
+// 판마다 villain은 빌런 그림 key 세 가지(평소, 반응, 반응 일러스트)와 그림 크기(heightTiles), 그림 아래쪽이 닿는 칸(anchorRow, 빌런 칸 기준)이다.
+// 콘센트는 언제나 빌런 칸 바로 위 줄의 벽(판 밖 -1번 줄)에 붙는다. view가 있는 판은 카메라 화각 규칙을 쓴다(engine.js 머리말).
 window.VILLAIN_LAYOUT = {
   "art": { "width": 1920, "height": 1080, "tile": 96, "originX": 384, "originY": 240, "columns": 12, "rows": 7, "uiTop": 912 },
   "sprite": { "personWidthTiles": 1, "personHeightTiles": 1.5 },
@@ -14,6 +16,7 @@ window.VILLAIN_LAYOUT = {
       "id": "sleeper",
       "optimal": 17,
       "pushes": 7,
+      "villain": { "idle": "villain-sleep", "react": "villain-wake", "portrait": "villain-portrait", "heightTiles": 2.5, "anchorRow": 1 },
       "map": [
         "......LL.LV.",
         "..c.....L*T.",
@@ -21,6 +24,38 @@ window.VILLAIN_LAYOUT = {
         ".TT.........",
         ".TT..b......",
         ".......LL...",
+        "P..........."
+      ]
+    },
+    {
+      "id": "streamer",
+      "optimal": 17,
+      "pushes": 6,
+      "view": { "dir": "down", "width": 3 },
+      "villain": { "idle": "streamer-idle", "react": "streamer-react", "portrait": "streamer-portrait", "heightTiles": 1.5, "anchorRow": 0 },
+      "map": [
+        "....LTL.....",
+        "L....V....L.",
+        "............",
+        "....ccc.....",
+        "............",
+        ".........t..",
+        "P..........."
+      ]
+    },
+    {
+      "id": "encore",
+      "optimal": 19,
+      "pushes": 7,
+      "view": { "dir": "down", "width": 3 },
+      "villain": { "idle": "streamer-idle", "react": "streamer-react", "portrait": "streamer-portrait", "heightTiles": 1.5, "anchorRow": 0 },
+      "map": [
+        "....LTL.....",
+        "....LVL.....",
+        "...L...L....",
+        "....c.c.....",
+        ".....c......",
+        ".....t......",
         "P..........."
       ]
     }
