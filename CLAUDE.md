@@ -8,7 +8,8 @@
 
 1. `git pull`로 다른 컴퓨터에서 올린 작업을 받아 온다.
 2. `known-issues.md`와 가장 최근의 `session_logs/` 파일을 읽는다.
-3. `git status`로 커밋하지 않은 파일을 본다. Codex가 남긴 파일이면 세션 로그의 "커밋 대기" 목록과 맞춰 보고, 사용자가 요청하면 검토해서 커밋한다.
+3. `git status`로 커밋하지 않은 파일을 본다. Codex가 남긴 파일이면 Codex 세션 로그(`session_logs/YYYY-MM-DD-codex.md`)의 "커밋 대기" 목록과 맞춰 보고, 사용자가 요청하면 검토해서 커밋한다.
+   Codex는 Claude Code가 작업 중인지 묻지 않고 일하므로, Codex 파일(그림, 그림 등록, generation.json, Codex 세션 로그)은 Codex가 작업하는 동안 고치지 않는다(2026-10-29).
    누구 것인지 모르는 파일은 커밋하지 말고 사용자에게 묻는다.
 
 ## 공통 규칙

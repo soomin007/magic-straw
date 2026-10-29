@@ -22,12 +22,13 @@ Codex는 `.git` 쓰기 권한을 요청하거나 커밋을 다시 시도하지 �
 
 1. 사용자가 방향을 정한다. 시점, 그림체, 화면 구성, 첫 진입 흐름처럼 되돌리기 비싼 결정은 Claude Code가 회색 상자 목업으로 먼저 보여 주고 확인받는다.
 2. Claude Code가 규칙, 레벨, 화면을 만들고 검증 도구를 통과시킨다. 그림이 필요하면 `assets/asset-list.js`와 `docs/art-brief.md`를 고친다. 커밋하고 push한다.
-3. 사용자가 Codex에게 그림을 맡긴다. Codex는 그림을 만들어 등록하고, 세션 로그의 "커밋 대기" 목록에 바꾼 파일을 적은 다음 멈춘다.
+3. 사용자가 Codex에게 그림을 맡긴다. Codex는 그림을 만들어 등록하고, Codex 세션 로그(`session_logs/YYYY-MM-DD-codex.md`)의 "커밋 대기" 목록에 바꾼 파일을 적은 다음 멈춘다.
 4. 사용자가 Claude Code에게 "Codex 작업 검토하고 올려 줘"라고 말한다. Claude Code는 그림을 확인 페이지와 실제 화면에서 보고, 로컬 경로나 개인 정보 같은 공개하면 안 되는 내용을 걸러서 커밋하고 push한다. 고쳐야 할 그림이 있으면 목록으로 정리해 사용자에게 알린다.
 5. 사용자가 플레이해 보고 의견을 낸다. 다음 바퀴의 1번으로 돌아간다.
 
-같은 폴더에서는 한 번에 한 에이전트만 파일을 고친다. Codex가 작업하는 동안 Claude Code는 파일을 읽기만 하고, 고치거나 커밋하지 않는다.
-반대로 Claude Code가 작업하는 동안에는 Codex를 돌리지 않는다.
+두 에이전트는 같은 폴더에서 동시에 일해도 된다. 서로 작업 중인지 묻지 않는 대신, 고치는 파일을 나눈다(2026-10-29 사용자 결정).
+Codex는 그림 파일, 그림 등록 파일(`assets/manifest.js`, `assets/villain/manifest.js`), `assets/generation.json`, Codex 세션 로그(`session_logs/YYYY-MM-DD-codex.md`)만 고친다.
+Claude Code는 그 밖의 파일을 고치고, Codex 파일은 Codex의 커밋 대기 목록에 오른 뒤에 검토해서 커밋한다. Codex가 작업하는 동안 Codex 파일을 고치지 않는다.
 
 ## 공개 저장소에 올리지 않는 것
 
